@@ -1,0 +1,267 @@
+import React, {useState, Component } from 'react'
+import {
+  Container, Col, Form,
+  FormGroup, Label, Input,
+  Button, FormFeedback, 
+} from 'reactstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
+export class SignUp extends Component {
+
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       FullName: '',
+       EmailId: '',
+       UserName: '',
+       Mobile: '',
+       DOB: '' ,
+       Country: '',
+       Password: '',
+       ConfirmPassword: '',
+       touched: {
+        FullName: false,
+        EmailId: false,
+        UserName: false,
+        Mobile: false,
+        DOB: false ,
+        Country: false,
+        Password: false,
+        ConfirmPassword: false,
+       }
+
+    }
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
+
+
+
+  }
+  
+  handleInputChange =(event) => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+  }
+
+  handleBlur = (field) => {
+    this.setState({
+      touched: {...this.state.touched, [field]: true}
+    });
+  }
+
+  validate = (
+       FullName,
+       EmailId,
+       UserName,
+       Mobile,
+       DOB ,
+       Country,
+       Password,
+       ConfirmPassword,
+  ) => {
+    const errors = {
+       FullName: '',
+       EmailId: '',
+       UserName: '',
+       Mobile: '',
+       DOB: '' ,
+       Country: '',
+       Password: '',
+       ConfirmPassword: '',
+    }
+    const reg_num = "[+][0-9]{2}[0-9]{10}"
+    const reg_dob = "[0-9]{2}/[0-9]{2}/[0-9]{4}"
+    const reg_password = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
+
+    if (this.state.touched.FullName && FullName.length < 2)
+       errors.FullName = 'Name should be greater than 2 characters';
+    if (this.state.touched.EmailId && EmailId.split('').filter(x => x === '@').length !== 1)
+       errors.EmailId = 'Name should be greater than 2 characters';
+    if (this.state.touched.Mobile && !reg_num.test(Mobile) )
+       errors.Mobile = 'Number not Valid';
+    
+    if (this.state.touched.DOB && !reg_dob.test(DOB))
+       errors.DOB = 'Name should be greater than 2 characters';
+    if (this.state.touched.Country && Country.length < 4)
+      errors.Country = 'Enter Valid Country Name';
+    if (this.state.touched.Password && !reg_password.test(Password) ){
+        errors.Password = 'Password must be a minimum of 8 characters including number, Upper, Lower And one special character.'
+        if(this.state.touched.ConfirmPassword && Password != ConfirmPassword)
+        errors.ConfirmPassword = 'Password didn\'t matched! '
+      }
+
+    
+    return errors;
+    }
+
+  render() {
+
+    const errors = this.validate(
+       this.state.FullName,
+       this.state.EmailId,
+       this.state.UserName,
+       this.state.Mobile,
+       this.state.DOB ,
+       this.state.Country,
+       this.state.Password,
+       this.state.ConfirmPassword,
+    );
+   
+    return (
+      <div>
+        <Container className="SignUp">
+            <h2>Register</h2>
+            <Form className="Sign-Up-Form" onSubmit={this.handleSubmit} >
+            <Col mg={6}>
+                <FormGroup>
+                  <Label >Name</Label>
+                  <Input type="text" name="FullName" id="User-FullName"
+                    value={this.state.FullName}
+                    onChange={this.handleInputChange} valid={errors.FullName === ''} invalid={errors.FullName !=''} //onBlur={this.handleBlur('FullName')}
+                    placeholder="Full Name"
+                    required
+                  />
+                  <FormFeedback>{errors.FullName}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col mg={6}>
+                <FormGroup>
+                  <Label >Email</Label>
+                  <Input //type='email'
+                    type="email"
+                    name="EmailId"
+                    id="User-Email"
+                    value={this.state.EmailId}
+                    onChange={this.handleInputChange} valid={errors.EmailId === ''} invalid={errors.EmailId !=''}// onBlur={this.handleBlur('FullName')}
+                    placeholder="youremail@email.com"
+                    required
+                  />
+                  <FormFeedback>{errors.EmailId}</FormFeedback>
+                </FormGroup>
+              </Col>
+              {/* <Col>
+                <FormGroup>
+                  <Label>Username</Label>
+                  <Input
+                    type="text"
+                    name="username"
+                    id="User-Username"
+                    value={this.state.UserName}
+                    onChange={this.handleInputChange} valid={errors.UserName === ''} invalid={errors.UserName !=''}// onBlur={this.handleBlur('FullName')}
+                    placeholder="Username"
+                    required
+                  />
+                  <FormFeedback>{errors.UserName}</FormFeedback>
+                </FormGroup>
+              </Col> */}
+              <Col>
+                <FormGroup>
+                  <Label>Phone Number</Label>
+                  <Input
+                    type="text"
+                    name="Mobile"
+                    id="User-Phone"
+                    value={this.state.Mobile}
+                    onChange={this.handleInputChange} valid={errors.Mobile === ''} invalid={errors.Mobile !=''}// onBlur={this.handleBlur('FullName')}
+                    placeholder="+91 9999999999"
+                    // pattern="[+][0-9]{2}(| )[0-9]{10}"
+                    required
+                  />
+                  <FormFeedback>{errors.Mobile}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label>DOB</Label>
+                  <Input
+                    type="date"
+                    name="DOB"
+                    id="User-DOB"
+                    value={this.state.DOB}
+                    onChange={this.handleInputChange} valid={errors.DOB === ''} invalid={errors.DOB !=''} // onBlur={this.handleBlur('FullName')}
+                    placeholder="DD/MM/YYYY"
+                    required
+                  />
+                  <FormFeedback>{errors.DOB}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label>Country</Label>
+                  <Input
+                    type="text"
+                    name="Country"
+                    id="User-Country"
+                    value={this.state.Country}
+                    onChange={this.handleInputChange} valid={errors.Country=== ''} invalid={errors.Country !=''}// onBlur={this.handleBlur('FullName')}
+                    placeholder="India"
+                    required
+                  />
+                  <FormFeedback>{errors.Country}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label >Password</Label>
+                  <div>
+                  <Input
+                    type='password'
+                    // type={passwordShown? "text" : "password"}
+                    name="Password"
+                    id="loginPassword"
+                    value={this.state.Password}
+                    onChange={this.handleInputChange} valid={errors.Password === ''} invalid={errors.Password !=''}// onBlur={this.handleBlur('FullName')}
+                    placeholder="********"
+                    required
+                  />
+                  {/* Add Eye */}
+                  </div>
+                  <FormFeedback>{errors.Password}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Col>
+                <FormGroup>
+                  <Label >Confirm Password</Label>
+                  <Input
+                    type="password"
+                    name="ConfirmPassword"
+                    id="Confirm-Password"
+                    value={this.state.ConfirmPassword}
+                    onChange={this.handleInputChange} valid={errors.ConfirmPassword === ''} invalid={errors.ConfirmPassword !=''}// onBlur={this.handleBlur('FullName')}
+                    placeholder="********"
+                    required
+                  />
+                  <FormFeedback>{errors.ConfirmPassword}</FormFeedback>
+                </FormGroup>
+              </Col>
+              <Button type="submit" color="primary" >Submit</Button>
+              <div>Already Registered? <a href='#' >Sign In </a></div>
+            </Form>
+          </Container>
+      </div>
+    )
+  }
+}
+
+export default SignUp
+
+// Name
+// UserName
+// Email
+// Phone No.
+// Country/Origin
+// DOB
