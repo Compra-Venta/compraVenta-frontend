@@ -16,7 +16,7 @@ export class SignUp extends Component {
        FullName: '',
        EmailId: '',
        UserName: '',
-       Mobile: '',
+       PhoneNo: '',
        DOB: '' ,
        Country: '',
        Password: '',
@@ -25,7 +25,7 @@ export class SignUp extends Component {
         FullName: false,
         EmailId: false,
         UserName: false,
-        Mobile: false,
+        PhoneNo: false,
         DOB: false ,
         Country: false,
         Password: false,
@@ -67,7 +67,7 @@ export class SignUp extends Component {
        FullName,
        EmailId,
        UserName,
-       Mobile,
+       PhoneNo,
        DOB ,
        Country,
        Password,
@@ -77,7 +77,7 @@ export class SignUp extends Component {
        FullName: '',
        EmailId: '',
        UserName: '',
-       Mobile: '',
+       PhoneNo: '',
        DOB: '' ,
        Country: '',
        Password: '',
@@ -91,8 +91,8 @@ export class SignUp extends Component {
        errors.FullName = 'Name should be greater than 2 characters';
     if (this.state.touched.EmailId && EmailId.split('').filter(x => x === '@').length !== 1)
        errors.EmailId = 'Name should be greater than 2 characters';
-    if (this.state.touched.Mobile && !reg_num.test(Mobile) )
-       errors.Mobile = 'Number not Valid';
+    if (this.state.touched.PhoneNo && !reg_num.test(PhoneNo) )
+       errors.PhoneNo = 'Number not Valid';
     
     if (this.state.touched.DOB && !reg_dob.test(DOB))
        errors.DOB = 'Name should be greater than 2 characters';
@@ -114,7 +114,7 @@ export class SignUp extends Component {
        this.state.FullName,
        this.state.EmailId,
        this.state.UserName,
-       this.state.Mobile,
+       this.state.PhoneNo,
        this.state.DOB ,
        this.state.Country,
        this.state.Password,
@@ -173,15 +173,15 @@ export class SignUp extends Component {
                   <Label>Phone Number</Label>
                   <Input
                     type="text"
-                    name="Mobile"
+                    name="PhoneNo"
                     id="User-Phone"
-                    value={this.state.Mobile}
-                    onChange={this.handleInputChange} valid={errors.Mobile === ''} invalid={errors.Mobile !=''}// onBlur={this.handleBlur('FullName')}
+                    value={this.state.PhoneNo}
+                    onChange={this.handleInputChange} valid={errors.PhoneNo === ''} invalid={errors.PhoneNo !=''}// onBlur={this.handleBlur('FullName')}
                     placeholder="+91 9999999999"
                     // pattern="[+][0-9]{2}(| )[0-9]{10}"
                     required
                   />
-                  <FormFeedback>{errors.Mobile}</FormFeedback>
+                  <FormFeedback>{errors.PhoneNo}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col>
