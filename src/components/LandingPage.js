@@ -9,7 +9,7 @@ class LandingPage extends Component {
                 <div className="row landing" style={{paddingLeft:0,marginLeft:0}}   >
                     <div className="col-sm-5" style={{justifyContent:'left', }}>
                         <div className='row' style={{justifyContent:'center' }}>
-                        <img src='/assets/images/Screenshot__305_-removebg-preview.png' alt="logo" className='logo-img img-fluid'/>
+                        <img src='/assets/images/Compra venta.png' alt="logo" className='logo-img img-fluid'/>
                         </div>
                         
                     </div>
