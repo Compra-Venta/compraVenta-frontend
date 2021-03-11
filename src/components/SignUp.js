@@ -249,7 +249,7 @@ export class SignUp extends Component {
                 </FormGroup>
               </Col>
               <Button type="submit" color="primary" >Submit</Button>
-              <div>Already Registered? <a href='#' >Sign In </a></div>
+              <div>Already Registered? <a href='#'className="links" >Sign In </a></div>
             </Form>
           </Container>
       </div>
