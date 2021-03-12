@@ -19,8 +19,8 @@ class SignIn extends Component {
 
     render() {
         return (
-          <Container className="SignIn">
-            <h2>Sign In</h2>
+          <Container className="SignIn" style={{backgroundColor:'whitesmoke',borderRadius:`50px 20px`,width:'500px'}}>
+            <h2 style={{textAlign:'center'}} >Sign In</h2>
             <Form className="Sign-In-Form">
               <Col>
                 <FormGroup>
@@ -44,10 +44,10 @@ class SignIn extends Component {
                   />
                 </FormGroup>
               </Col>
-              <Button color="primary">Submit</Button>
-              <div>
+              <Button color="primary" className='offset-5' >Submit</Button>
+              <div style={{textAlign:'center'}}>
               <div><a href='#'>Forget Password?</a></div>
-              <div>New to Compra Venta?<a href='#'>Sign In</a></div>
+              <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={this.props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>&nbsp;Register Here</button></div>
               </div>
             </Form>
           </Container>
