@@ -13,15 +13,34 @@ class SignIn extends Component {
         this.state = {
              EmailId: '',
              Password: '',
+             touched: {
+              EmailId: false,
+              Password: false,
+            }
         }
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     
+    handleInputChange = (event) =>{
+      const target = event.target;
+      const value = target.value;
+      const name = target.name;
+
+      this.setState({
+        [name]: value
+      });
+    }
+
+    handleSubmit =(event) => {
+      event.preventDefault();
+    }
 
     render() {
         return (
           <Container className="SignIn" style={{backgroundColor:'whitesmoke',borderRadius:`50px 20px`,width:'500px'}}>
             <h2 style={{textAlign:'center'}} >Sign In</h2>
-            <Form className="Sign-In-Form">
+            <Form className="Sign-In-Form" onSubmit={this.handleSubmit} >
               <Col>
                 <FormGroup>
                   <Label>Email</Label>
@@ -29,7 +48,10 @@ class SignIn extends Component {
                     type="email"
                     name="email"
                     id="Sign-In-Email"
-                    placeholder="myemail@email.com"
+                    value={this.state.EmailId}
+                    onChange={this.handleInputChange} 
+                    placeholder="youremail@email.com"
+                    required
                   />
                 </FormGroup>
               </Col>
@@ -39,8 +61,11 @@ class SignIn extends Component {
                   <Input
                     type="password"
                     name="password"
+                    value={this.state.Password}
+                    onChange={this.handleInputChange}
                     id="Sign-In-Password"
                     placeholder="********"
+                    required
                   />
                 </FormGroup>
               </Col>

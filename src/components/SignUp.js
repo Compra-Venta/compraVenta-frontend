@@ -100,7 +100,7 @@ export class SignUp extends Component {
       errors.Country = 'Enter Valid Country Name';
     if (this.state.touched.Password && !reg_password.test(Password) ){
         errors.Password = 'Password must be a minimum of 8 characters including number, Upper, Lower And one special character.'
-        if(this.state.touched.ConfirmPassword && Password != ConfirmPassword)
+        if(this.state.touched.ConfirmPassword && Password !== ConfirmPassword)
         errors.ConfirmPassword = 'Password didn\'t matched! '
       }
 
@@ -131,7 +131,7 @@ export class SignUp extends Component {
                   <Label >Name</Label>
                   <Input type="text" name="FullName" id="User-FullName"
                     value={this.state.FullName}
-                    onChange={this.handleInputChange} valid={errors.FullName === ''} invalid={errors.FullName !=''} //onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.FullName === ''} invalid={errors.FullName !==''} //onBlur={this.handleBlur('FullName')}
                     placeholder="Full Name"
                     required
                   />
@@ -146,7 +146,7 @@ export class SignUp extends Component {
                     name="EmailId"
                     id="User-Email"
                     value={this.state.EmailId}
-                    onChange={this.handleInputChange} valid={errors.EmailId === ''} invalid={errors.EmailId !=''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.EmailId === ''} invalid={errors.EmailId !==''}// onBlur={this.handleBlur('FullName')}
                     placeholder="youremail@email.com"
                     required
                   />
@@ -161,7 +161,7 @@ export class SignUp extends Component {
                     name="username"
                     id="User-Username"
                     value={this.state.UserName}
-                    onChange={this.handleInputChange} valid={errors.UserName === ''} invalid={errors.UserName !=''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.UserName === ''} invalid={errors.UserName !==''}// onBlur={this.handleBlur('FullName')}
                     placeholder="Username"
                     required
                   />
@@ -176,7 +176,7 @@ export class SignUp extends Component {
                     name="PhoneNo"
                     id="User-Phone"
                     value={this.state.PhoneNo}
-                    onChange={this.handleInputChange} valid={errors.PhoneNo === ''} invalid={errors.PhoneNo !=''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.PhoneNo === ''} invalid={errors.PhoneNo !==''}// onBlur={this.handleBlur('FullName')}
                     placeholder="+91 9999999999"
                     // pattern="[+][0-9]{2}(| )[0-9]{10}"
                     required
@@ -192,7 +192,7 @@ export class SignUp extends Component {
                     name="DOB"
                     id="User-DOB"
                     value={this.state.DOB}
-                    onChange={this.handleInputChange} valid={errors.DOB === ''} invalid={errors.DOB !=''} // onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.DOB === ''} invalid={errors.DOB !==''} // onBlur={this.handleBlur('FullName')}
                     placeholder="DD/MM/YYYY"
                     required
                   />
@@ -207,7 +207,7 @@ export class SignUp extends Component {
                     name="Country"
                     id="User-Country"
                     value={this.state.Country}
-                    onChange={this.handleInputChange} valid={errors.Country=== ''} invalid={errors.Country !=''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.Country=== ''} invalid={errors.Country !==''}// onBlur={this.handleBlur('FullName')}
                     placeholder="India"
                     required
                   />
@@ -224,7 +224,7 @@ export class SignUp extends Component {
                     name="Password"
                     id="loginPassword"
                     value={this.state.Password}
-                    onChange={this.handleInputChange} valid={errors.Password === ''} invalid={errors.Password !=''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.Password === ''} invalid={errors.Password !==''}// onBlur={this.handleBlur('FullName')}
                     placeholder="********"
                     required
                   />
@@ -241,7 +241,7 @@ export class SignUp extends Component {
                     name="ConfirmPassword"
                     id="Confirm-Password"
                     value={this.state.ConfirmPassword}
-                    onChange={this.handleInputChange} valid={errors.ConfirmPassword === ''} invalid={errors.ConfirmPassword !=''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.ConfirmPassword === ''} invalid={errors.ConfirmPassword !==''}// onBlur={this.handleBlur('FullName')}
                     placeholder="********"
                     required
                   />
