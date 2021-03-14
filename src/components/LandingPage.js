@@ -38,7 +38,7 @@ class LandingPage extends Component {
         }
         console.log('opensignup', OpenSignup)
         return (
-            <div className="container-fluid" style={{backgroundImage:`url('/assets/images/bg2.jpg')`,backgroundRepeat:'no-repeat',backgroundSize:'cover',height:'100%',overflow:'hidden',width:'100%'}}>
+            <div className="container-fluid" style={{height:'100%',overflow:'hidden',width:'100%'}}>
                 <div className="row landing" style={{paddingLeft:0,marginLeft:0}}   >
                     <div className="col-sm-5" style={{justifyContent:'left', }}>
                         <div className='row' style={{justifyContent:'center' }}>
@@ -69,20 +69,7 @@ having any fear of losing anything.</div>
 budding investors a platform to dive into the trading of cryptocurrencies without<br/>
 having any fear of losing anything.</p>
             </div>
-            <div className="feature container-fluid col-12">
-                <h2 className="feature-heading">Features</h2>
-                <hr className="feature-line" />
-                <div className="row offset-1 col-10">
-                    <ul className="feature-content">
-                        <li>User authentication</li>
-                        <li>Virtual Trading</li>
-                        <li>Real-time price updation</li>
-                        <li>Price Prediction of Cryptocurrency</li>
-                        <li>Latest News</li>
-                        <li>User Support</li>
-                    </ul>
-                </div>
-            </div>
+            
                 <hr/>
                 
             </div>

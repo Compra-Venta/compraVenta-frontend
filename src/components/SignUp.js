@@ -123,7 +123,7 @@ class SignUp extends Component {
    
     return (
       <div>
-        <Container className="SignUp" style={{backgroundColor:'whitesmoke',borderRadius:`50px 20px`,width:'500px'}}>
+        <Container className="SignUp" style={{backgroundColor:'whitesmoke',width:'500px'}}>
             <h2 style={{textAlign:'center'}}>Register</h2>
             <Form className="Sign-Up-Form" onSubmit={this.handleSubmit} >
             <Col mg={6}>
