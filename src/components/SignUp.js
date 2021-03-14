@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-export class SignUp extends Component {
+class SignUp extends Component {
 
   constructor(props) {
     super(props)
@@ -222,7 +222,7 @@ export class SignUp extends Component {
                     type='password'
                     // type={passwordShown? "text" : "password"}
                     name="Password"
-                    id="loginPassword"
+                    id="Sign-Up-Password"
                     value={this.state.Password}
                     onChange={this.handleInputChange} valid={errors.Password === ''} invalid={errors.Password !==''}// onBlur={this.handleBlur('FullName')}
                     placeholder="********"

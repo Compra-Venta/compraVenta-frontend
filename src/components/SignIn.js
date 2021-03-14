@@ -3,6 +3,7 @@ import {
     Container, Col, Form,
     FormGroup, Label, Input,
     Button,
+    FormFeedback,
   } from 'reactstrap';
 
 class SignIn extends Component {
@@ -36,7 +37,27 @@ class SignIn extends Component {
       event.preventDefault();
     }
 
+    validate = ( EmailId, Password, ) => {
+
+      const errors = {
+        EmailId: '',
+        Password: '',
+      }
+
+      
+       // validation need to be done
+
+      return errors;
+
+    }
+
     render() {
+
+        const errors = this.validate(
+          this.state.EmailId,
+          this.state.Password,
+        );
+
         return (
           <Container className="SignIn" style={{backgroundColor:'whitesmoke',borderRadius:`50px 20px`,width:'500px'}}>
             <h2 style={{textAlign:'center'}} >Sign In</h2>
@@ -50,9 +71,11 @@ class SignIn extends Component {
                     id="Sign-In-Email"
                     value={this.state.EmailId}
                     onChange={this.handleInputChange} 
+                    valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
                     placeholder="youremail@email.com"
                     required
                   />
+                  <FormFeedback>{errors.EmailId}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col>
@@ -63,13 +86,15 @@ class SignIn extends Component {
                     name="Password"
                     value={this.state.Password}
                     onChange={this.handleInputChange}
+                    valid={errors.Password === ''} invalid={errors.Password !== ''}
                     id="Sign-In-Password"
                     placeholder="********"
                     required
                   />
+                  <FormFeedback>{errors.Password}</FormFeedback>
                 </FormGroup>
               </Col>
-              <Button color="primary" className='offset-5' >Submit</Button>
+              <Button type="submit" color="primary" className='offset-5' >Submit</Button>
               <div style={{textAlign:'center'}}>
               <div><a href='#'>Forget Password?</a></div>
               <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={this.props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>&nbsp;Register Here</button></div>
