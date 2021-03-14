@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <footer className="container-fluid mt-auto wrapper flex-grow-1" id="footer">
+        <footer className="container-fluid mt-auto wrapper flex-grow-1" id="footer"style={{backgroundImage:`url('/assets/images/bg3.jpg')`}} >
             <div className="row contactF">
                 <div className="row mr-auto ml-auto " style={{display:'flex',flexDirection:'column'}}>
 

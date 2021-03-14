@@ -22,7 +22,7 @@ class SignIn extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    handleInputChange = (event) =>{
+    handleInputChange =(event) =>{
       const target = event.target;
       const value = target.value;
       const name = target.name;
@@ -32,7 +32,7 @@ class SignIn extends Component {
       });
     }
 
-    handleSubmit =(event) => {
+    handleSubmit = (event) => {
       event.preventDefault();
     }
 
@@ -46,7 +46,7 @@ class SignIn extends Component {
                   <Label>Email</Label>
                   <Input
                     type="email"
-                    name="email"
+                    name="EmailId"
                     id="Sign-In-Email"
                     value={this.state.EmailId}
                     onChange={this.handleInputChange} 
@@ -60,7 +60,7 @@ class SignIn extends Component {
                   <Label for="examplePassword">Password</Label>
                   <Input
                     type="password"
-                    name="password"
+                    name="Password"
                     value={this.state.Password}
                     onChange={this.handleInputChange}
                     id="Sign-In-Password"
