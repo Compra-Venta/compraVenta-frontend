@@ -23,7 +23,7 @@ class SignIn extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    handleInputChange = (event) =>{
+    handleInputChange =(event) =>{
       const target = event.target;
       const value = target.value;
       const name = target.name;
@@ -33,7 +33,7 @@ class SignIn extends Component {
       });
     }
 
-    handleSubmit =(event) => {
+    handleSubmit = (event) => {
       event.preventDefault();
     }
 
@@ -59,7 +59,7 @@ class SignIn extends Component {
         );
 
         return (
-          <Container className="SignIn" style={{backgroundColor:'whitesmoke',borderRadius:`50px 20px`,width:'500px'}}>
+          <Container className="SignIn" style={{backgroundColor:'whitesmoke',width:'500px'}}>
             <h2 style={{textAlign:'center'}} >Sign In</h2>
             <Form className="Sign-In-Form" onSubmit={this.handleSubmit} >
               <Col>
