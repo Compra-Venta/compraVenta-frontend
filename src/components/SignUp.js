@@ -2,7 +2,7 @@ import React, {useState, Component } from 'react'
 import {
   Container, Col, Form,
   FormGroup, Label, Input,
-  Button, FormFeedback, 
+  Button, FormFeedback,
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
@@ -54,10 +54,16 @@ class SignUp extends Component {
   }
 
   handleSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
+    alert(`
+    UserData:
+    Name: ${this.state.FullName}
+    EmailId: ${this.state.EmailId}
+    PhoneNo: ${this.state.PhoneNo}
+    `)
   }
 
-  handleBlur = (field) => {
+  handleBlur = (field) => (event) => {
     this.setState({
       touched: {...this.state.touched, [field]: true}
     });
@@ -83,9 +89,10 @@ class SignUp extends Component {
        Password: '',
        ConfirmPassword: '',
     }
-    const reg_num = "[+][0-9]{2}[0-9]{10}"
-    const reg_dob = "[0-9]{2}/[0-9]{2}/[0-9]{4}"
-    const reg_password = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
+    
+    const reg_num = /^[+][0-9]{2}\s*[0-9]{5}\s*[0-9]{5}/ ;
+    const reg_dob = /^[0-9]{2}[-][0-9]{2}[-][0-9]{4}/ ;
+    const reg_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
     if (this.state.touched.FullName && FullName.length < 2)
        errors.FullName = 'Name should be greater than 2 characters';
@@ -94,15 +101,14 @@ class SignUp extends Component {
     if (this.state.touched.PhoneNo && !reg_num.test(PhoneNo) )
        errors.PhoneNo = 'Number not Valid';
     
-    if (this.state.touched.DOB && !reg_dob.test(DOB))
-       errors.DOB = 'Name should be greater than 2 characters';
+    
     if (this.state.touched.Country && Country.length < 4)
       errors.Country = 'Enter Valid Country Name';
-    if (this.state.touched.Password && !reg_password.test(Password) ){
-        errors.Password = 'Password must be a minimum of 8 characters including number, Upper, Lower And one special character.'
-        if(this.state.touched.ConfirmPassword && Password !== ConfirmPassword)
-        errors.ConfirmPassword = 'Password didn\'t matched! '
-      }
+    if (this.state.touched.Password && !reg_password.test(Password) )
+      errors.Password = 'Password must be a minimum of 8 characters including number, Upper, Lower And one special character.'
+    if(this.state.touched.Password && this.state.touched.ConfirmPassword && Password !== ConfirmPassword)
+      errors.ConfirmPassword = 'Password didn\'t matched! '
+        
 
     
     return errors;
@@ -131,7 +137,7 @@ class SignUp extends Component {
                   <Label >Name</Label>
                   <Input type="text" name="FullName" id="User-FullName"
                     value={this.state.FullName}
-                    onChange={this.handleInputChange} valid={errors.FullName === ''} invalid={errors.FullName !==''} //onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.FullName === ''} invalid={errors.FullName !==''} onBlur={this.handleBlur('FullName')}
                     placeholder="Full Name"
                     required
                   />
@@ -141,12 +147,12 @@ class SignUp extends Component {
               <Col mg={6}>
                 <FormGroup>
                   <Label >Email</Label>
-                  <Input //type='email'
+                  <Input 
                     type="email"
                     name="EmailId"
                     id="User-Email"
                     value={this.state.EmailId}
-                    onChange={this.handleInputChange} valid={errors.EmailId === ''} invalid={errors.EmailId !==''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.EmailId === ''} invalid={errors.EmailId !==''} onBlur={this.handleBlur('EmailId')}
                     placeholder="youremail@email.com"
                     required
                   />
@@ -176,7 +182,7 @@ class SignUp extends Component {
                     name="PhoneNo"
                     id="User-Phone"
                     value={this.state.PhoneNo}
-                    onChange={this.handleInputChange} valid={errors.PhoneNo === ''} invalid={errors.PhoneNo !==''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.PhoneNo === ''} invalid={errors.PhoneNo !==''} onBlur={this.handleBlur('PhoneNo')}
                     placeholder="+91 9999999999"
                     // pattern="[+][0-9]{2}(| )[0-9]{10}"
                     required
@@ -192,7 +198,7 @@ class SignUp extends Component {
                     name="DOB"
                     id="User-DOB"
                     value={this.state.DOB}
-                    onChange={this.handleInputChange} valid={errors.DOB === ''} invalid={errors.DOB !==''} // onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.DOB === ''} invalid={errors.DOB !==''}  onBlur={this.handleBlur('DOB')}
                     placeholder="DD/MM/YYYY"
                     required
                   />
@@ -207,7 +213,7 @@ class SignUp extends Component {
                     name="Country"
                     id="User-Country"
                     value={this.state.Country}
-                    onChange={this.handleInputChange} valid={errors.Country=== ''} invalid={errors.Country !==''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.Country=== ''} invalid={errors.Country !==''} onBlur={this.handleBlur('Country')}
                     placeholder="India"
                     required
                   />
@@ -217,19 +223,16 @@ class SignUp extends Component {
               <Col>
                 <FormGroup>
                   <Label >Password</Label>
-                  <div>
                   <Input
                     type='password'
                     // type={passwordShown? "text" : "password"}
                     name="Password"
                     id="Sign-Up-Password"
                     value={this.state.Password}
-                    onChange={this.handleInputChange} valid={errors.Password === ''} invalid={errors.Password !==''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.Password === ''} invalid={errors.Password} onBlur={this.handleBlur('Password')}
                     placeholder="********"
-                    required
+                    required 
                   />
-                  {/* Add Eye */}
-                  </div>
                   <FormFeedback>{errors.Password}</FormFeedback>
                 </FormGroup>
               </Col>
@@ -241,7 +244,7 @@ class SignUp extends Component {
                     name="ConfirmPassword"
                     id="Confirm-Password"
                     value={this.state.ConfirmPassword}
-                    onChange={this.handleInputChange} valid={errors.ConfirmPassword === ''} invalid={errors.ConfirmPassword !==''}// onBlur={this.handleBlur('FullName')}
+                    onChange={this.handleInputChange} valid={errors.ConfirmPassword === ''} invalid={errors.ConfirmPassword !==''} onBlur={this.handleBlur('ConfirmPassword')}
                     placeholder="********"
                     required
                   />
