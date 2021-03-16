@@ -36,17 +36,17 @@ class LandingPage extends Component {
         else if(this.state.isLogging==true && this.state.isSigning==false){
             OpenSignup=false;
         }
-        console.log('opensignup', OpenSignup)
+        //console.log('opensignup', OpenSignup)
         return (
-            <div className="container-fluid" style={{height:'100%',overflow:'hidden',width:'100%'}}>
-                <div className="row landing" style={{paddingLeft:0,marginLeft:0}}   >
-                    <div className="col-sm-6" style={{justifyContent:'center',}}>
+            <div className="container-fluid" style={{height:'100%',overflow:'hidden',width:'100%',marginTop:'10px'}}>
+                <div className="row">
+                    <div className="col-sm-6 text-center" >
                         
-                        <img src='/assets/images/BodyLogo.png' alt="logo" className='logo-img img-fluid' style={{width:'auto'}}/>
+                        <img src='/assets/images/BodyLogo.png' alt="logo" className='img-fluid' style={{width:'auto'}}/>
                         
                         
                     </div>
-                    <div className='col-sm-6' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>{OpenSignup ? <SignUp onClick={this.handleSignIn}/> : <SignIn onClick={this.handleRegister}/>}</div>
+                    <div className='col-sm-6 text-center' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>{OpenSignup ? <SignUp onClick={this.handleSignIn}/> : <SignIn onClick={this.handleRegister}/>}</div>
                 </div>
                
                 {/*<div className="row" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -62,6 +62,7 @@ having any fear of losing anything.</div>
                     <div></div>
 
         </div>*/}
+        <div className='container' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>
         <div className='container-fluid col-12 text-center'>
                 <h1 >Why Compra Venta?</h1>
                
@@ -71,7 +72,7 @@ having any fear of losing anything.</p>
             </div>
             
               
-                
+            </div>
             </div>
         );
     }

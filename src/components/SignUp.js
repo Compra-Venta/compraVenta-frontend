@@ -129,7 +129,7 @@ class SignUp extends Component {
    
     return (
       
-        <Container className="SignUp border border-primary me" style={{backgroundColor:'white',width:'500px',maxWidth:'100%',borderRadius:'20px',borderWidth:'200px'}}>
+        <Container className="SignUp border border-primary me border-3" style={{backgroundColor:'white',width:'500px',maxWidth:'100%',borderRadius:'20px',borderWidth:'200px'}}>
             <h2 style={{textAlign:'center'}}>Register</h2>
             <Form className="Sign-Up-Form" onSubmit={this.handleSubmit} >
             <Col>

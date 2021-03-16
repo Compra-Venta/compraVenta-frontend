@@ -59,7 +59,7 @@ class SignIn extends Component {
         );
 
         return (
-          <Container className="SignIn border border-primary " style={{backgroundColor:'white',width:'500px',borderRadius:'20px'}}>
+          <Container className="SignIn border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
             <h2 style={{textAlign:'center'}} >Sign In</h2>
             <Form className="Sign-In-Form" onSubmit={this.handleSubmit} >
               <Col>

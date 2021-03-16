@@ -152,9 +152,7 @@ html{
   text-align: center;
 }
 
-.landing{
-  border-bottom: 3px solid seashell;
-}
+
 
 .regB:hover{
   transform: scale(1.5);
@@ -205,4 +203,7 @@ html{
       width: 40%;
   }
   
+}
+.border-3 {
+  border-width:3px !important;
 }
