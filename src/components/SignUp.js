@@ -128,11 +128,11 @@ class SignUp extends Component {
     );
    
     return (
-      <div>
-        <Container className="SignUp" style={{backgroundColor:'whitesmoke',width:'500px'}}>
+      
+        <Container className="SignUp border border-primary me" style={{backgroundColor:'white',width:'500px',maxWidth:'100%',borderRadius:'20px',borderWidth:'200px'}}>
             <h2 style={{textAlign:'center'}}>Register</h2>
             <Form className="Sign-Up-Form" onSubmit={this.handleSubmit} >
-            <Col mg={6}>
+            <Col>
                 <FormGroup>
                   <Label >Name</Label>
                   <Input type="text" name="FullName" id="User-FullName"
@@ -144,7 +144,7 @@ class SignUp extends Component {
                   <FormFeedback>{errors.FullName}</FormFeedback>
                 </FormGroup>
               </Col>
-              <Col mg={6}>
+              <Col>
                 <FormGroup>
                   <Label >Email</Label>
                   <Input 
@@ -255,7 +255,7 @@ class SignUp extends Component {
               <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' onClick={this.props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
             </Form>
           </Container>
-      </div>
+      
     )
   }
 }
