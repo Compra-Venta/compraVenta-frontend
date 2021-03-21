@@ -34,10 +34,10 @@ class LandingPage extends Component {
             console.log(event.data);
         }*/
         var OpenSignup;
-        if (this.state.isLogging==false && this.state.isSigning==true){
+        if (this.state.isLogging === false && this.state.isSigning === true){
             OpenSignup=true;
         }
-        else if(this.state.isLogging==true && this.state.isSigning==false){
+        else if(this.state.isLogging === true && this.state.isSigning === false){
             OpenSignup=false;
         }
         //console.log('opensignup', OpenSignup)
