@@ -29,6 +29,10 @@ class LandingPage extends Component {
     }
     
     render() {
+        /*var binanceSocket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade");
+        binanceSocket.onmessage = function (event) {
+            console.log(event.data);
+        }*/
         var OpenSignup;
         if (this.state.isLogging==false && this.state.isSigning==true){
             OpenSignup=true;
@@ -73,6 +77,7 @@ having any fear of losing anything.</p>
             
               
             </div>
+            
             </div>
         );
     }
