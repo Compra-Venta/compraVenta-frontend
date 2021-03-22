@@ -36,3 +36,174 @@
     transform: rotate(360deg);
   }
 }
+
+#top{
+  /* font-family: 'Lucida Handwriting', cursive; */
+  font-family: 'Arvo', 'bold';
+  font-weight: bold;
+  font-size:'4vw';
+  color:teal ;
+  
+}
+head{
+  background-image: linear-gradient( 111.5deg, rgba(20,100,196,1) 0.4%, rgba(33,152,214,1) 100.2% );
+  background-color: aquamarine;
+}
+/*body{
+  background-image:url("https://cgx3j41r03fwkmmdtoy3l6aq-wpengine.netdna-ssl.com/wp-content/uploads/2018/07/cryptocurrency-768x512.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}*/
+
+.jumbotron{
+  margin-top: 0%;
+ /* background-image: linear-gradient(to right,green,blue) ;*/
+ /*background-image: linear-gradient( 111.5deg, rgba(20,100,196,1) 0.4%, rgba(33,152,214,1) 100.2% );*/
+  
+  background-color:
+  linear-gradient(
+    to right bottom,
+    rgba( #7ed56f, 0.8),
+    rgba(#28b485, 0.8)),
+;
+  width: 100%;
+}
+
+#footer{
+  /*background-image: linear-gradient( 111.5deg, rgba(20,100,196,1) 0.4%, rgba(33,152,214,1) 100.2% );*/
+  padding: 3% 0%;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+  /*position: fixed;*/
+ /* left: 0;*/
+  bottom: 0;
+  width: 100%;
+  
+}
+
+.copyright{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/*Contact*/
+
+
+  
+
+
+.links{
+  color: blue;
+  
+}
+body{
+  overflow-x: hidden; width: 100vw;
+  /*background:linear-gradient(
+    to right bottom,
+    rgba( #7ed56f, 0.8),
+    rgba(#28b485, 0.8)),
+url(./images/ezgif.com-gif-maker.jpg); /* url(./images/ezgif.com-gif-maker.jpg) no-repeat center center fixed rgba(255,255,255,0.3);*/ 
+  /*-webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  
+  background-blend-mode: soft-light;
+  height: 100%;
+  background-attachment: fixed;*/
+  
+  ;
+  
+}
+html{
+  height: 100%;
+}
+/*html{
+  background: url(./images/ezgif.com-gif-maker.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}*/
+.logo-img{
+ 
+  margin: 70px;
+ height: 600px;
+ width: fit-content;
+
+  padding: 10px;
+  
+  /*background-color: rgba(255,250,240, 0.7);*/
+  background-color: white;
+  
+}
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  /*position: absolute;*/
+  /*top: 50%;
+  left: 50%;*/
+  /*transform: translate(-50%, -50%);*/
+  z-index: 2;
+  /*width: 80%;*/
+  padding: 20px;
+  text-align: center;
+}
+
+
+
+.regB:hover{
+  transform: scale(1.5);
+  transition-duration: 0.5s;
+}
+
+.content{
+  text-align: center;
+  line-height: 2rem;
+  font-size: 1.2rem;
+  color:midnightblue;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 500;
+}
+.feature{
+  
+  padding-top: 2%;
+  padding-bottom: 5%;
+}
+.feature-heading{
+  color: rgba(20,100,196,1);
+  font-family: 'Ubuntu', sans-serif;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+.feature-line{
+  border-color: rgba(20,100,196,1);
+}
+
+.feature-sub{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.feature-content{
+  line-height: 2rem;
+  font-size: 1.2rem;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.describe{
+  background-image: linear-gradient( 111.5deg, rgba(20,100,196,1) 0.4%, rgba(33,152,214,1) 100.2% );
+  padding-bottom: 30px;}
+
+@media (max-width: 768px){
+  .hl{
+      height: 40%;
+      width: 40%;
+  }
+  
+}
+.border-3 {
+  border-width:3px !important;
+}
