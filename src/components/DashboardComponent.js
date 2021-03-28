@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import NavDash from './NavDashboard';
 import {LightweightChart} from './Chart';
 import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
@@ -33,7 +35,8 @@ class DashboardComponent extends Component {
             return (
                 <option key={k} value={k}>{k}</option>
             )
-        }, this);                 
+        }, this);   
+              
         return (
             
             <div>
@@ -42,9 +45,9 @@ class DashboardComponent extends Component {
                 </div>
                 <div className='container-fluid'>
                     <div className='row'>
-                    <div className='col-3'>
+                    <div className='col-12 col-md-2 border-right'>
                         <div className='row' style={{margin:'10px'}} >
-                        <select className="form-control col-8" name="crypto" id="crypto" required onChange={this.selectValue}>
+                        <select className="form-control " name="crypto" id="crypto" required onChange={this.selectValue}>
                                         {/*<option defaultValue>Select</option>
                                         <option value="LTCBTC">LTCBTC</option>
                                         <option value="BTCUSD">BTCUSD</option>
@@ -60,21 +63,42 @@ class DashboardComponent extends Component {
                                         <option value="BTCUSD">BTCUSD</option>*/}
                                         {pairList}
                                     </select>
+                                    </div>
                                     <div className='container'>
-                                    <div className='row' style={{padding:'10px', fontSize:'1.5vw'}}>
-                            {`Quote Asset : ${currencies[this.state.selectedValue].qa} `} 
-                            </div>
-                            <div className='row' style={{padding:'10px',fontSize:'1.5vw'}}>
-                           {`Base Asset : ${currencies[this.state.selectedValue].ba}`}
+                                    <div className='row' style={{padding:'10px'}}>
+                                <div className='col-5 col-md-5 my-auto' style={{padding:'0px'}}>
+                                    Quote Asset : 
+                                </div>
+                                <div className='col-7 col-md-7 my-auto' style={{margin:'0px',fontSize:'1.7vw',verticalAlign:'center',padding:'0px'}}>
+                                {`${currencies[this.state.selectedValue].qa}`} 
+                                </div>
+                                </div>
+                            <div className='row' style={{padding:'10px'}}>
+                                <div className='col-5 col-md-5 my-auto' style={{padding:'0px'}}>
+                                    Base Asset : 
+                                </div>
+                                <div className='col-7 col-md-7 my-auto' style={{margin:'0px',fontSize:'1.7vw',verticalAlign:'center',padding:'0px'}}>
+                                {`${currencies[this.state.selectedValue].ba}`} 
+                                </div>
+                           
                            </div>  
-                           <div className='row' style={{padding:'10px', fontSize:'1.5vw'}}>
-                            {`Price`}
+                           <div className='row' style={{padding:'10px'}}>
+                                <div className='col-12 col-md-3 my-auto' style={{padding:'0px'}}>
+                                    Price : 
+                                </div>
+                                <div className='col-12 col-md-9  ml-auto' style={{margin:'0px',fontSize:'1.7vw',verticalAlign:'center',padding:'0px',color:'blue'}}>
+                                0.0003514 &nbsp;<FontAwesomeIcon icon={faChevronUp} color='green' size='sm'/>
+                                </div>
+                                </div>
+                                <div className='row mx-auto'>
+                                <Button color="primary" size='md' className='mx-auto' >Add to Watchlist</Button>{' '}
+                                </div>
                             </div>  
-                            </div>   
-                        </div>
+                         
                         <div className='row' style={{verticalAlign:'bottom'}}>Market Trades</div>
+                    
                     </div>
-                    <div className='col-6'>
+                    <div className='col col-md-6'>
                         <div className='container' style={{padding:'10px'}}>
                             <div className='row'>
                                 <div className='col-3'>24 Change</div>
@@ -90,10 +114,11 @@ class DashboardComponent extends Component {
                         </div>
                         </div>
                         </div>
-                    <div className='col-3'>News</div>
+                    <div className='col col-md-4'>News</div>
                     </div>
                 </div>
-            </div>
+                </div>
+           
         );
     }
 }
