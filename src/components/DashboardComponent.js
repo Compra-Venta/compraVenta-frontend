@@ -47,9 +47,9 @@ class DashboardComponent extends Component {
         };
         let watchList = Object.keys(watchListArray).map((c) => {
             return(
-                <div className='row' style={{color:watchListArray[c].color}}>
-                    <div className='col-md-3'>{c}</div>
-                    <div className='col-md-3 offset-1'>{watchListArray[c].price}</div>
+                <div className='row' style={{color:watchListArray[c].color,fontSize:'1.2rem'}}>
+                    <div className='col col-md-3'>{c}</div>
+                    <div className='col col-md-3 offset-1'>{watchListArray[c].price}</div>
                 </div>
             )
         },this);
@@ -64,6 +64,7 @@ class DashboardComponent extends Component {
                     <div className='row mx-auto'>
                     <div className='col-12 col-lg-3 col-md-2 border-right'>
                         <div className='row mx-auto' style={{margin:'10px'}} >
+                            <div className="col-11">
                         <select className="form-control " name="crypto" id="crypto" required onChange={this.selectValue} style={{height:'3rem',fontSize:'1.4rem'}}>
                                         {/*<option defaultValue>Select</option>
                                         <option value="LTCBTC">LTCBTC</option>
@@ -81,8 +82,9 @@ class DashboardComponent extends Component {
                                         {pairList}
                                     </select>
                                     </div>
-                                    <div className='container'>
-                                    <div className='row' style={{padding:'0px 10px 0px 10px'}}>
+                                    </div>
+                                    <div className='container' style={{objectFit:'cover'}}>
+                                    <div className='row' style={{padding:'0px 10px 0px 10px',objectFit:'cover'}}>
                                 <div className='col-5 col-md-5 my-auto' style={{padding:'0px',fontSize:'1.1rem'}}>
                                     Quote Asset : 
                                 </div>
@@ -103,7 +105,7 @@ class DashboardComponent extends Component {
                                 <div className='col-5 col-md-3 my-auto' style={{padding:'0px',fontSize:'1.1rem'}}>
                                     Price : 
                                 </div>
-                                <div className='col-6 col-md-7 text-right ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:'blue'}}>
+                                <div className='col-6 col-md-7 text-right ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:'blue',objectFit:'fill'}}>
                                 0.0003514 
                                 </div>
                                 <div className='col-1 col-md-1 my-auto mx-auto text-right' style={{margin:'0px'}}>
@@ -112,7 +114,7 @@ class DashboardComponent extends Component {
                             </div>
                                 
                                 <div className='row mx-auto'>
-                                <Button color="primary" size='lg' className='mx-auto' >Add to Watchlist</Button>{' '}
+                                <Button color="primary" size='md' className='mx-auto' >Add to Watchlist</Button>{' '}
                                 </div>
                             </div>  
                             <div className='row' style={{paddingTop:'10px'}} >
@@ -128,19 +130,30 @@ class DashboardComponent extends Component {
                             </div>
                     
                     </div>
-                    <div className='col col-md-6 col-lg-5'>
+                    <div className='col col-md-6 col-lg-5 border-right'>
                         <div className='container' style={{padding:'10px'}}>
                             <div className='row'>
-                                <div className='col-3'>24 Change</div>
-                                <div className='col-3'>24 High</div>
-                                <div className='col-3'>24 Low</div>
-                                <div className='col-3'>24 Volume</div>
+                                <div className='col-3'>
+                                    <div className='row mx-auto' style={{color:'gray'}}>24 Change</div>
+                                    <div className='row ' style={{color:'#E40000',fontSize:'1.5rem'}}>-0.000121</div>
+                                    </div>
+                                <div className='col-3'>
+                                <div className='row mx-auto' style={{color:'gray'}}>24 High</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>0.003692</div>
+                                </div>
+                                <div className='col-3'>
+                                <div className='row mx-auto' style={{color:'gray'}}>24 Low</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>0.003528</div>
+                                </div>
+                                <div className='col-3'>
+                                    <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>229006.23</div></div>
                             </div>
-                            <div className='row'>
+                            <div className='row' style={{overflow:'hidden'}}>
                         <LightweightChart/>
                         </div>
                         <div className='row' style={{paddingRight:'20px'}}>
-                        <Button color="primary" size='lg' className='ml-auto'>Predict</Button>{' '}
+                        <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
                         </div>
                         </div>
                         </div>
