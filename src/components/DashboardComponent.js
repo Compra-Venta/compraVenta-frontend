@@ -35,7 +35,24 @@ class DashboardComponent extends Component {
             return (
                 <option key={k} value={k}>{k}</option>
             )
-        }, this);   
+        }, this);  
+        
+        const watchListArray = {ETHBTC:{price: '0.003', color:'red'},
+                                BTCUSDT:{price:'0.0022', color:'green'},
+                                ETHUSDT:{price:'1.5326', color:'green'},
+                                ADABTC:{price:'0.123', color:'red'},
+                                DOGEBTC:{price:'0.786', color:'green'},
+                                XRPBTC:{price:'0.0053', color:'red'}
+
+        };
+        let watchList = Object.keys(watchListArray).map((c) => {
+            return(
+                <div className='row' style={{color:watchListArray[c].color}}>
+                    <div className='col-md-3'>{c}</div>
+                    <div className='col-md-3 offset-1'>{watchListArray[c].price}</div>
+                </div>
+            )
+        },this);
               
         return (
             
@@ -44,10 +61,10 @@ class DashboardComponent extends Component {
                 <NavDash/>
                 </div>
                 <div className='container-fluid'>
-                    <div className='row'>
-                    <div className='col-12 col-md-2 border-right'>
-                        <div className='row' style={{margin:'10px'}} >
-                        <select className="form-control " name="crypto" id="crypto" required onChange={this.selectValue}>
+                    <div className='row mx-auto'>
+                    <div className='col-12 col-lg-3 col-md-2 border-right'>
+                        <div className='row mx-auto' style={{margin:'10px'}} >
+                        <select className="form-control " name="crypto" id="crypto" required onChange={this.selectValue} style={{height:'3rem',fontSize:'1.4rem'}}>
                                         {/*<option defaultValue>Select</option>
                                         <option value="LTCBTC">LTCBTC</option>
                                         <option value="BTCUSD">BTCUSD</option>
@@ -65,40 +82,53 @@ class DashboardComponent extends Component {
                                     </select>
                                     </div>
                                     <div className='container'>
-                                    <div className='row' style={{padding:'10px'}}>
-                                <div className='col-5 col-md-5 my-auto' style={{padding:'0px'}}>
+                                    <div className='row' style={{padding:'0px 10px 0px 10px'}}>
+                                <div className='col-5 col-md-5 my-auto' style={{padding:'0px',fontSize:'1.1rem'}}>
                                     Quote Asset : 
                                 </div>
-                                <div className='col-7 col-md-7 my-auto' style={{margin:'0px',fontSize:'1.7vw',verticalAlign:'center',padding:'0px'}}>
+                                <div className='col-7 col-md-7 text-center my-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px', justifyItems:'self-end'}}>
                                 {`${currencies[this.state.selectedValue].qa}`} 
                                 </div>
                                 </div>
-                            <div className='row' style={{padding:'10px'}}>
-                                <div className='col-5 col-md-5 my-auto' style={{padding:'0px'}}>
+                            <div className='row' style={{padding:'0px 10px 0px 10px'}}>
+                                <div className='col-5 col-md-5 my-auto' style={{padding:'0px',fontSize:'1.1rem'}}>
                                     Base Asset : 
                                 </div>
-                                <div className='col-7 col-md-7 my-auto' style={{margin:'0px',fontSize:'1.7vw',verticalAlign:'center',padding:'0px'}}>
+                                <div className='col-7 col-md-7 text-center my-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px'}}>
                                 {`${currencies[this.state.selectedValue].ba}`} 
                                 </div>
                            
                            </div>  
-                           <div className='row' style={{padding:'10px'}}>
-                                <div className='col-12 col-md-3 my-auto' style={{padding:'0px'}}>
+                           <div className='row' style={{padding:'0px 10px 0px 10px'}}>
+                                <div className='col-5 col-md-3 my-auto' style={{padding:'0px',fontSize:'1.1rem'}}>
                                     Price : 
                                 </div>
-                                <div className='col-12 col-md-9  ml-auto' style={{margin:'0px',fontSize:'1.7vw',verticalAlign:'center',padding:'0px',color:'blue'}}>
-                                0.0003514 &nbsp;<FontAwesomeIcon icon={faChevronUp} color='green' size='sm'/>
+                                <div className='col-6 col-md-7 text-right ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:'blue'}}>
+                                0.0003514 
                                 </div>
+                                <div className='col-1 col-md-1 my-auto mx-auto text-right' style={{margin:'0px'}}>
+                                <FontAwesomeIcon icon={faChevronUp} color='green' size='md'/>
                                 </div>
+                            </div>
+                                
                                 <div className='row mx-auto'>
-                                <Button color="primary" size='md' className='mx-auto' >Add to Watchlist</Button>{' '}
+                                <Button color="primary" size='lg' className='mx-auto' >Add to Watchlist</Button>{' '}
                                 </div>
                             </div>  
+                            <div className='row' style={{paddingTop:'10px'}} >
+                                <p style={{color:'blue',fontSize:'1.5rem'}}>Watch List</p>
+                                <div className='container'>
+                                    {watchList}
+                                </div>
+                            </div>
                          
-                        <div className='row' style={{verticalAlign:'bottom'}}>Market Trades</div>
+                            <div className='row' style={{paddingTop:'10px'}} >
+                                <p style={{color:'blue',fontSize:'1.5rem'}}>Market Trades</p>
+                        
+                            </div>
                     
                     </div>
-                    <div className='col col-md-6'>
+                    <div className='col col-md-6 col-lg-5'>
                         <div className='container' style={{padding:'10px'}}>
                             <div className='row'>
                                 <div className='col-3'>24 Change</div>
@@ -114,7 +144,7 @@ class DashboardComponent extends Component {
                         </div>
                         </div>
                         </div>
-                    <div className='col col-md-4'>News</div>
+                    <div className='col col-md-4 col-lg-4'>News</div>
                     </div>
                 </div>
                 </div>
