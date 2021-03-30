@@ -139,7 +139,14 @@ class DashboardComponent extends Component {
                             <div className='row'>
                                 <div className='col-3'>
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Change</div>
-                                    <div className='row ' style={{color:'#E40000',fontSize:'1.5rem'}}>-0.000121</div>
+                                    <div className='row ' style={{color:'#E40000'}}>
+                                        <div className='col' style={{fontSize:'1.5rem'}}>
+                                        -0.000121
+                                        </div>
+                                        <div className='col'>
+                                            1.45%
+                                    </div>
+                                        </div>
                                     </div>
                                 <div className='col-3'>
                                 <div className='row mx-auto' style={{color:'gray'}}>24 High</div>
