@@ -5,6 +5,7 @@ const NavComp = (props) => {
  const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
+  const loggedIn = true;
 
   return (
     <div>

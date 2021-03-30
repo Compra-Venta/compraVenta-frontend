@@ -11,7 +11,8 @@ class CryptoNewsFeed extends Component {
     
         this.state = {
              newsList: [],
-             category: 'BTC'
+             category: 'BTC',
+             count: 3
         }
     }
     
@@ -52,19 +53,37 @@ class CryptoNewsFeed extends Component {
     render() {
 
         const {newsList, category} =this.state;
+        var MyC=0;
 
         return (
             <div>
                 {
-                   newsList.map( news=>
-                    news.categories.includes(category, 0) ?
-                    <div>
-                        <img src={news.imageurl} />
-                        <a href = {news.url} > <p>{news.body}</p> </a>               
-                    </div> :
-                    null
-                    )
-                }
+                   newsList.map( news=>{
+                      
+                       if (MyC<this.state.count){
+                           
+                        
+                            if (news.categories.includes(category, 0)) {
+                                MyC=MyC+1;
+                                return(
+                        
+                            <div>
+                                {/*<img src={news.imageurl} />*/}
+                                <a href = {news.url} > <p style={{color:'gray'}}>{news.body}</p> </a>               
+                            </div>
+                            )
+                            }
+                            
+                            else{
+                                return null;
+                            }
+                           
+                       }
+                    }
+                   )
+                   }
+                   
+                
             </div>
         )
     }

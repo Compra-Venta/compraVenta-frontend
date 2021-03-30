@@ -3,14 +3,18 @@ import Header from './Header';
 import LandingPage from './LandingPage'
 import Footer from './Footer';
 import { LightweightChart } from './Chart';
+import CryptoNewsFeed from './CryptoNewsFeed';
+import DashboardComponent from './DashboardComponent';
 class MainComponent extends Component {
     render() {
         return (
             <div className="container-full-bg" >
-              <Header/>  
+              {/*<Header/>  
               <LandingPage/>
-              {/*<LightweightChart/>*/}
-              <Footer/>
+              {/*<LightweightChart/>
+              /*<CryptoNewsFeed/>
+              <Footer/>*/}
+              <DashboardComponent/>
             </div>
         );
     }
