@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ShowMoreText from 'react-show-more-text'
 // global.fetch = require('node-fetch')
 const cc = require('cryptocompare') 
 cc.setApiKey(process.env.loREACT_APP_Crypto_Compare_API)
@@ -11,7 +12,7 @@ class CryptoNewsFeed extends Component {
     
         this.state = {
              newsList: [],
-             category: 'BTC',
+             /*category: this.props.category,*/
              count: 3
         }
     }
@@ -52,11 +53,13 @@ class CryptoNewsFeed extends Component {
 
     render() {
 
-        const {newsList, category} =this.state;
+        const {newsList}=this.state;
+        const {category}=this.props ;
+        console.log(category);
         var MyC=0;
 
         return (
-            <div>
+            <>
                 {
                    newsList.map( news=>{
                       
@@ -67,9 +70,10 @@ class CryptoNewsFeed extends Component {
                                 MyC=MyC+1;
                                 return(
                         
-                            <div>
+                            <div className="container" style={{marginTop:'20px'}}>
                                 {/*<img src={news.imageurl} />*/}
-                                <a href = {news.url} > <p style={{color:'gray'}}>{news.body}</p> </a>               
+                                <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.body}</p></ShowMoreText> </a>    
+                                           
                             </div>
                             )
                             }
@@ -81,10 +85,39 @@ class CryptoNewsFeed extends Component {
                        }
                     }
                    )
+                   
+                   }
+                   {
+                        newsList.map( news=>{
+                      
+                            if (MyC<this.state.count){
+                                
+                             
+                                 if (news.categories.includes(category, 0)) {
+                                    return null;
+                                 
+                                 }
+                                 
+                                 else{
+                                    MyC=MyC+1;
+                                    return(
+                            
+                                <div className="container" style={{marginTop:'20px'}}>
+                                    {/*<img src={news.imageurl} />*/}
+                                    <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.body}</p></ShowMoreText> </a>    
+                                               
+                                </div>
+                                    )
+                                     
+                                 }
+                                
+                            }
+                         }
+                        )
                    }
                    
                 
-            </div>
+            </>
         )
     }
 }

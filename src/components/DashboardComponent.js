@@ -17,7 +17,9 @@ class DashboardComponent extends Component {
     selectValue = (event) => {
         this.setState({
             selectedValue: event.target.value
+            
         })
+        
     }
     render() {
         const currencies={BTCUSDT:{qa:'BTC',ba:'USDT',qp:'',bp:''},
@@ -51,7 +53,7 @@ class DashboardComponent extends Component {
             return(
                 <div className='row' style={{color:watchListArray[c].color,fontSize:'1.2rem'}}>
                     <div className='col col-md-3'>{c}</div>
-                    <div className='col col-md-3 offset-1'>{watchListArray[c].price}</div>
+                    <div className='col col-md-3 offset-2'>{watchListArray[c].price}</div>
                 </div>
             )
         },this);
@@ -64,7 +66,7 @@ class DashboardComponent extends Component {
                 </div>
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
-                    <div className='col-12 col-lg-3 col-md-2 border-right'>
+                    <div className='col-12 col-lg-3 col-md-4 border-right'>
                         <div className='row mx-auto' style={{margin:'10px'}} >
                             <div className="col-11">
                         <select className="form-control " name="crypto" id="crypto" required onChange={this.selectValue} style={{height:'3rem',fontSize:'1.4rem'}}>
@@ -107,12 +109,12 @@ class DashboardComponent extends Component {
                                 <div className='col-5 col-md-3 my-auto' style={{padding:'0px',fontSize:'1.1rem'}}>
                                     Price : 
                                 </div>
-                                <div className='col-6 col-md-7 text-right ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:'blue',objectFit:'fill'}}>
+                                <div className='col-6 col-md-9 text-center ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:'green',objectFit:'fill'}}>
                                 0.0003514 
                                 </div>
-                                <div className='col-1 col-md-1 my-auto mx-auto text-right' style={{margin:'0px'}}>
-                                <FontAwesomeIcon icon={faChevronUp} color='green' size='md'/>
-                                </div>
+                                {/*<div className='col-1 col-md-1 my-auto mx-auto text-right' style={{margin:'0px'}}>
+                                <FontAwesomeIcon icon={faChevronUp} color='green' size='sm'/>
+                                    </div>*/}
                             </div>
                                 
                                 <div className='row mx-auto'>
@@ -134,7 +136,7 @@ class DashboardComponent extends Component {
                             </div>
                     
                     </div>
-                    <div className='col col-md-6 col-lg-6 border-right'>
+                    <div className='col col-md-5 col-lg-6 border-right'>
                         <div className='container' style={{padding:'10px'}}>
                             <div className='row'>
                                 <div className='col-3'>
@@ -168,10 +170,10 @@ class DashboardComponent extends Component {
                         </div>
                         </div>
                         </div>
-                    <div className='col col-md-4 col-lg-3' >
+                    <div className='col col-md-3 col-lg-3' >
                         <div className='container'>
                         <div className='row' style={{fontSize:'1.5rem',paddingTop:'10px'}}>News</div>
-                        <div className='row'><CryptoNewsFeed/></div>
+                        <div className='row'><CryptoNewsFeed category={`${currencies[this.state.selectedValue].qa}`} /></div>
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '}
                         </div>
