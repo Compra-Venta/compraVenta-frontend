@@ -4,6 +4,8 @@ import {LightweightChart} from './Chart';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import MarketTrades from './MarketTrades';
+import CryptoNewsFeed from './CryptoNewsFeed';
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
@@ -125,12 +127,14 @@ class DashboardComponent extends Component {
                             </div>
                          
                             <div className='row' style={{paddingTop:'10px'}} >
-                                <p style={{color:'blue',fontSize:'1.5rem'}}>Market Trades</p>
+                                <p style={{color:'blue',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
+                                <div className='container'><MarketTrades/></div>
+                                
                         
                             </div>
                     
                     </div>
-                    <div className='col col-md-6 col-lg-5 border-right'>
+                    <div className='col col-md-6 col-lg-6 border-right'>
                         <div className='container' style={{padding:'10px'}}>
                             <div className='row'>
                                 <div className='col-3'>
@@ -157,7 +161,15 @@ class DashboardComponent extends Component {
                         </div>
                         </div>
                         </div>
-                    <div className='col col-md-4 col-lg-4'>News</div>
+                    <div className='col col-md-4 col-lg-3' >
+                        <div className='container'>
+                        <div className='row' style={{fontSize:'1.5rem',paddingTop:'10px'}}>News</div>
+                        <div className='row'><CryptoNewsFeed/></div>
+                        <div className='row' style={{paddingRight:'20px'}}>
+                        <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '}
+                        </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 </div>

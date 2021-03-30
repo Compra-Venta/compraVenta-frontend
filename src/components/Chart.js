@@ -13,7 +13,7 @@ export class LightweightChart extends React.PureComponent {
     componentDidMount() {
 
         const chart = createChart(this.props.containerId, {
-	width: 670,
+	width: 820,
   height: 380,
 	layout: {
 		backgroundColor: 'white',
