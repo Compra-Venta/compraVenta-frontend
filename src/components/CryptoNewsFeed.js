@@ -3,7 +3,7 @@ import ShowMoreText from 'react-show-more-text'
 // global.fetch = require('node-fetch')
 const cc = require('cryptocompare') 
 cc.setApiKey(process.env.loREACT_APP_Crypto_Compare_API)
-// cc.setApiKey('b2eb473a23a76d4d420cf88bb8c580e5c34b39af7591808ad6fa612796e95bcd')
+
 
 class CryptoNewsFeed extends Component {
 

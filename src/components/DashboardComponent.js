@@ -12,8 +12,13 @@ class DashboardComponent extends Component {
         super(props);
         this.state = {
             selectedValue: 'BTCUSDT',
+            current_price: '55505',
             price:'0.002',
+            h_high: '0.001',
+            h_low: '0.00001',
             color: 'green',
+            bs_volume: '000',
+            change: '',
             ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker')
             
         }
@@ -47,7 +52,8 @@ class DashboardComponent extends Component {
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage = (event) => {
             ob = JSON.parse(event.data) ;
-            console.log(ob.p);
+            // console.log(ob.p);
+            console.log(ob);
             if (ob.p>=0.000){
                 this.setState({
                     ws: binanceSocket,
@@ -62,6 +68,13 @@ class DashboardComponent extends Component {
                     color:'red'
                 })
             }
+            this.setState({
+                h_high: ob.h,
+                h_low: ob.l,
+                bs_volume: ob.v,
+                change: ob.P,
+                current_price: ob.c,
+            })
             /*console.log(ob.p);
             /*this.setState({
             price: ob.p
@@ -214,7 +227,7 @@ class DashboardComponent extends Component {
                                     Price : 
                                 </div>
                                 <div className='col-6 col-md-9 text-center ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:`${this.state.color}`,objectFit:'fill'}}>
-                                {this.state.price} 
+                                {parseFloat(this.state.current_price).toPrecision(8)} 
                                 </div>
                                 {/*<div className='col-1 col-md-1 my-auto mx-auto text-right' style={{margin:'0px'}}>
                                 <FontAwesomeIcon icon={faChevronUp} color='green' size='sm'/>
@@ -247,27 +260,27 @@ class DashboardComponent extends Component {
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Change</div>
                                     <div className='row ' style={{color:'#E40000'}}>
                                         <div className='col' style={{fontSize:'1.5rem'}}>
-                                        -0.000121
+                                        {this.state.price}
                                         </div>
                                         <div className='col'>
-                                            1.45%
+                                        {this.state.change}%
                                     </div>
                                         </div>
                                     </div>
                                 <div className='col-3'>
                                 <div className='row mx-auto' style={{color:'gray'}}>24 High</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>0.003692</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.h_high).toPrecision(8)}</div>
                                 </div>
                                 <div className='col-3'>
                                 <div className='row mx-auto' style={{color:'gray'}}>24 Low</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>0.003528</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.h_low).toPrecision(8)}</div>
                                 </div>
                                 <div className='col-3'>
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>229006.23</div></div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.bs_volume).toPrecision(8)}</div></div>
                             </div>
                             <div className='row' style={{overflow:'hidden'}}>
-                        <LightweightChart/>
+                        {/* <LightweightChart/> */}
                         </div>
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
@@ -277,7 +290,7 @@ class DashboardComponent extends Component {
                     <div className='col col-md-3 col-lg-3' >
                         <div className='container'>
                         <div className='row' style={{fontSize:'1.5rem',paddingTop:'10px'}}>News</div>
-                        <div className='row'><CryptoNewsFeed category={`${currencies[this.state.selectedValue].qa}`} /></div>
+                        {/* <div className='row'><CryptoNewsFeed category={`${currencies[this.state.selectedValue].qa}`} /></div> */}
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '}
                         </div>
