@@ -55,7 +55,7 @@ class CryptoNewsFeed extends Component {
 
         const {newsList}=this.state;
         const {category}=this.props ;
-        console.log(category);
+        /*console.log(category);*/
         var MyC=0;
 
         return (
@@ -66,13 +66,15 @@ class CryptoNewsFeed extends Component {
                        if (MyC<this.state.count){
                            
                         
-                            if (news.categories.includes(category, 0)) {
+                            if (news.categories.includes(category, 0) && news.body.length>0) {
                                 MyC=MyC+1;
+                                
                                 return(
                         
                             <div className="container" style={{marginTop:'20px'}}>
                                 {/*<img src={news.imageurl} />*/}
-                                <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.body}</p></ShowMoreText> </a>    
+                                <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.body}</p></ShowMoreText> </a>  
+                                {/*console.log(news.body.length)*/} 
                                            
                             </div>
                             )
@@ -100,6 +102,7 @@ class CryptoNewsFeed extends Component {
                                  
                                  else{
                                     MyC=MyC+1;
+                                    /*console.log('2nd Try',MyC)*/
                                     return(
                             
                                 <div className="container" style={{marginTop:'20px'}}>
@@ -114,6 +117,9 @@ class CryptoNewsFeed extends Component {
                             }
                          }
                         )
+                   }
+                   {
+                       /*console.log(MyC)*/
                    }
                    
                 

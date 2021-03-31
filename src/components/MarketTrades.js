@@ -15,13 +15,13 @@ class MarketTrades extends Component {
         let tradeView = tradesArray.map((trade => {
             return (
                 <div className='row'>
-                    <div className='col-md-4'>
+                    <div className='col-4 col-md-4'>
                         {trade.price}
                     </div>
-                    <div className='col-md-4'>
+                    <div className='col-4 col-md-4'>
                         {trade.amount}
                     </div>
-                    <div className='col-md-4'>
+                    <div className='col-4 col-md-4'>
                         {trade.time}
                     </div>
                 </div>
@@ -81,13 +81,13 @@ class MarketTrades extends Component {
                     </tr>
                     </tbody>
         </table>*/}
-        <div className='col-md-4'>
+        <div className='col-4 col-md-4'>
                         Price
         </div>
-        <div className='col-md-4'>
+        <div className='col-4 col-md-4'>
             Amount
         </div>
-        <div className='col-md-4'>
+        <div className='col-4 col-md-4'>
             Time
         </div>
 

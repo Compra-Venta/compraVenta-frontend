@@ -6,15 +6,113 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import MarketTrades from './MarketTrades';
 import CryptoNewsFeed from './CryptoNewsFeed';
+import BinancePrice from './BinancePrice';
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selectedValue: 'BTCUSDT'
+            selectedValue: 'BTCUSDT',
+            price:'0.002',
+            color: 'green',
+            ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker')
+            
         }
-        this.selectValue=this.selectValue.bind(this)
+        
+        
+        this.selectValue=this.selectValue.bind(this);
+        this.priceChange=this.priceChange.bind(this);
+        this.setUpSocket=this.setUpSocket.bind(this);
+        this.check=this.check.bind(this);
+    }
+    /*socketUrl = 'wss://stream.binance.com:9443/ws/btcusdt@ticker';
+
+         
+    /*socketUrl = "wss://stream.binance.com:9443/ws/" + `${this.state.selectedValue.toLowerCase()}` + "@ticker"
+       
+    binanceSocket = new WebSocket(this.socketUrl);*/
+    priceChange =(value) =>{
+        this.setState({
+            price: value
+            
+        })
+    }
+    setUpSocket = (category) => {
+        this.check();
+        var ob =[];
+       /* var category = this.state.selectedValue;*/
+        var symbol = category.toLowerCase();
+         
+        var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@ticker"
+        console.log(socketUrl);
+        var binanceSocket = new WebSocket(socketUrl);
+        binanceSocket.onmessage = (event) => {
+            ob = JSON.parse(event.data) ;
+            console.log(ob.p);
+            if (ob.p>=0.000){
+                this.setState({
+                    ws: binanceSocket,
+                    price: ob.p,
+                    color:'green'
+                })
+            }
+            else{
+                this.setState({
+                    ws: binanceSocket,
+                    price: -1*ob.p,
+                    color:'red'
+                })
+            }
+            /*console.log(ob.p);
+            /*this.setState({
+            price: ob.p
+        })*/
+            
+            
+        }
+    }
+    check = () => {
+        const ws  = this.state.ws;
+        if (ws || ws.readyState == WebSocket.OPEN) {
+            console.log('connection closed');
+            ws.close();} 
+    };
+    componentDidMount(){
+        /*var ob =[];
+        var category = this.state.selectedValue;
+        var symbol = category.toLowerCase();
+         
+        var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@ticker"
+        console.log(socketUrl);
+        var binanceSocket = new WebSocket(socketUrl);
+        binanceSocket.onmessage = (event) => {
+            ob = JSON.parse(event.data) ;
+            if (ob.p>=0){
+                this.setState({
+                    price: ob.p,
+                    color:'green'
+                })
+            }
+            else{
+                this.setState({
+                    price: -1*ob.p,
+                    color:'red'
+                })
+            }
+            console.log(ob.p);
+            this.setState({
+            price: ob.p
+        })
+            
+            
+        }*/
+        
+        this.setUpSocket(this.state.selectedValue);
+
     }
     selectValue = (event) => {
+
+        this.setUpSocket(event.target.value);
+
         this.setState({
             selectedValue: event.target.value
             
@@ -22,18 +120,18 @@ class DashboardComponent extends Component {
         
     }
     render() {
-        const currencies={BTCUSDT:{qa:'BTC',ba:'USDT',qp:'',bp:''},
-                          ETHUSDT:{qa:'ETH',ba:'USDT',qp:'',bp:''},
-                          ETHBTC:{qa:'ETH',ba:'BTC',qp:'',bp:''},
-                          LTCBTC:{qa:'LTC',ba:'BTC',qp:'',bp:''},
-                          LTCUSDT:{qa:'LTC',ba:'USDT',qp:'',bp:''},
-                          ADABTC:{qa:'ADA',ba:'BTC',qp:'',bp:''},
-                          ADAETH:{qa:'ADA',ba:'ETH',qp:'',bp:''},
-                          ADAUSDT:{qa:'ADA',ba:'USDT',qp:'',bp:''},
-                          DOGEBTC:{qa:'DOGE',ba:'BTC',qp:'',bp:''},
-                          XRPBTC:{qa:'XRP',ba:'BTC',qp:'',bp:''},
-                          XRPUSDC:{qa:'XRP',ba:'USDC',qp:'',bp:''},
-                          XRPETH:{qa:'XRP',ba:'ETH',qp:'',bp:''}}
+        const currencies={BTCUSDT:{ba:'BTC',qa:'USDT',qp:'',bp:''},
+                          ETHUSDT:{ba:'ETH',qa:'USDT',qp:'',bp:''},
+                          ETHBTC:{ba:'ETH',qa:'BTC',qp:'',bp:''},
+                          LTCBTC:{ba:'LTC',qa:'BTC',qp:'',bp:''},
+                          LTCUSDT:{ba:'LTC',qa:'USDT',qp:'',bp:''},
+                          ADABTC:{ba:'ADA',qa:'BTC',qp:'',bp:''},
+                          ADAETH:{ba:'ADA',qa:'ETH',qp:'',bp:''},
+                          ADAUSDT:{ba:'ADA',qa:'USDT',qp:'',bp:''},
+                          DOGEBTC:{ba:'DOGE',qa:'BTC',qp:'',bp:''},
+                          XRPBTC:{ba:'XRP',qa:'BTC',qp:'',bp:''},
+                          XRPUSDC:{ba:'XRP',qa:'USDC',qp:'',bp:''},
+                          XRPETH:{ba:'XRP',qa:'ETH',qp:'',bp:''}}
                             
         let pairList = Object.keys(currencies).map((k) => {
             return (
@@ -64,6 +162,7 @@ class DashboardComponent extends Component {
                 <div>
                 <NavDash/>
                 </div>
+                {/*<BinancePrice category={this.state.selectedValue}/>*/}
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
                     <div className='col-12 col-lg-3 col-md-4 border-right'>
@@ -109,8 +208,8 @@ class DashboardComponent extends Component {
                                 <div className='col-5 col-md-3 my-auto' style={{padding:'0px',fontSize:'1.1rem'}}>
                                     Price : 
                                 </div>
-                                <div className='col-6 col-md-9 text-center ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:'green',objectFit:'fill'}}>
-                                0.0003514 
+                                <div className='col-6 col-md-9 text-center ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:`${this.state.color}`,objectFit:'fill'}}>
+                                {this.state.price} 
                                 </div>
                                 {/*<div className='col-1 col-md-1 my-auto mx-auto text-right' style={{margin:'0px'}}>
                                 <FontAwesomeIcon icon={faChevronUp} color='green' size='sm'/>
