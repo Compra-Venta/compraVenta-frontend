@@ -73,8 +73,13 @@ class DashboardComponent extends Component {
     check = () => {
         const ws  = this.state.ws;
         if (ws || ws.readyState == WebSocket.OPEN) {
-            console.log('connection closed');
-            ws.close();} 
+            console.log('connection check');
+
+            ws.close();
+        if(!ws|| ws.readyState == WebSocket.CLOSED){
+            console.log('connection close');
+        }
+        } 
     };
     componentDidMount(){
         /*var ob =[];
