@@ -13,7 +13,7 @@ class CryptoNewsFeed extends Component {
         this.state = {
              newsList: [],
              /*category: this.props.category,*/
-             count: 3
+             count: 5
         }
     }
     
@@ -73,7 +73,7 @@ class CryptoNewsFeed extends Component {
                         
                             <div className="container" style={{marginTop:'20px'}}>
                                 {/*<img src={news.imageurl} />*/}
-                                <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.body}</p></ShowMoreText> </a>  
+                                <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.title}</p></ShowMoreText> </a>  
                                 {/*console.log(news.body.length)*/} 
                                            
                             </div>
@@ -107,7 +107,7 @@ class CryptoNewsFeed extends Component {
                             
                                 <div className="container" style={{marginTop:'20px'}}>
                                     {/*<img src={news.imageurl} />*/}
-                                    <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.body}</p></ShowMoreText> </a>    
+                                    <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.title}</p></ShowMoreText> </a>    
                                                
                                 </div>
                                     )
