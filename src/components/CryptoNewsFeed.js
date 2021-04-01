@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import ShowMoreText from 'react-show-more-text'
 // global.fetch = require('node-fetch')
 const cc = require('cryptocompare') 
 cc.setApiKey(process.env.loREACT_APP_Crypto_Compare_API)
-// cc.setApiKey('b2eb473a23a76d4d420cf88bb8c580e5c34b39af7591808ad6fa612796e95bcd')
+
 
 class CryptoNewsFeed extends Component {
 
@@ -11,8 +12,8 @@ class CryptoNewsFeed extends Component {
     
         this.state = {
              newsList: [],
-             category: 'BTC',
-             count: 3
+             /*category: this.props.category,*/
+             count: 5
         }
     }
     
@@ -52,24 +53,29 @@ class CryptoNewsFeed extends Component {
 
     render() {
 
-        const {newsList, category} =this.state;
+        const {newsList}=this.state;
+        const {category}=this.props ;
+        /*console.log(category);*/
         var MyC=0;
 
         return (
-            <div>
+            <>
                 {
                    newsList.map( news=>{
                       
                        if (MyC<this.state.count){
                            
                         
-                            if (news.categories.includes(category, 0)) {
+                            if (news.categories.includes(category, 0) && news.body.length>0) {
                                 MyC=MyC+1;
+                                
                                 return(
                         
-                            <div>
+                            <div className="container" style={{marginTop:'20px'}}>
                                 {/*<img src={news.imageurl} />*/}
-                                <a href = {news.url} > <p style={{color:'gray'}}>{news.body}</p> </a>               
+                                <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.title}</p></ShowMoreText> </a>  
+                                {/*console.log(news.body.length)*/} 
+                                           
                             </div>
                             )
                             }
@@ -81,10 +87,43 @@ class CryptoNewsFeed extends Component {
                        }
                     }
                    )
+                   
+                   }
+                   {
+                        newsList.map( news=>{
+                      
+                            if (MyC<this.state.count){
+                                
+                             
+                                 if (news.categories.includes(category, 0)) {
+                                    return null;
+                                 
+                                 }
+                                 
+                                 else{
+                                    MyC=MyC+1;
+                                    /*console.log('2nd Try',MyC)*/
+                                    return(
+                            
+                                <div className="container" style={{marginTop:'20px'}}>
+                                    {/*<img src={news.imageurl} />*/}
+                                    <a href = {news.url} style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.title}</p></ShowMoreText> </a>    
+                                               
+                                </div>
+                                    )
+                                     
+                                 }
+                                
+                            }
+                         }
+                        )
+                   }
+                   {
+                       /*console.log(MyC)*/
                    }
                    
                 
-            </div>
+            </>
         )
     }
 }

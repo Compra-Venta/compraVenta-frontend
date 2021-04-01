@@ -5,19 +5,20 @@ class BinancePrice extends Component {
     constructor(props) {
         super(props)
     
-        this.state = {
-             curency : ['btc', 'eth'],
-             price: 0
-        }
+        
     }
     
     componentDidMount(){
         var ob =[];
-        const socketUrl = "wss://stream.binance.com:9443/ws/" + this.state.curency[0] + "usdt@trade"
+        var category = this.props.category;
+        var symbol = category.toLowerCase();
+         
+        const socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@ticker"
+        console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage = function (event) {
-            ob = event.data;
-            console.log(ob);
+            ob = JSON.parse(event.data) ;
+            console.log(ob.p);
             
         }
 
