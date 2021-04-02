@@ -19,6 +19,8 @@ class DashboardComponent extends Component {
             color: 'green',
             bs_volume: '000',
             change: '',
+            change_color: 'red',
+            prev_val : '3334',
             ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker')
             
         }
@@ -54,27 +56,34 @@ class DashboardComponent extends Component {
             ob = JSON.parse(event.data) ;
             // console.log(ob.p);
             console.log(ob);
-            if (ob.p>=0.000){
-                this.setState({
-                    ws: binanceSocket,
-                    price: ob.p,
-                    color:'green'
-                })
-            }
-            else{
-                this.setState({
-                    ws: binanceSocket,
-                    price: -1*ob.p,
-                    color:'red'
-                })
-            }
+            // if (ob.p>=0.000){
+            //     this.setState({
+                
+            //         price: ob.p,
+            //         color:'green'
+            //     })
+            // }
+            // else{
+            //     this.setState({
+                   
+                
+            //         color:'red'
+            //     })
+            // }
             this.setState({
+                ws: binanceSocket,
                 h_high: ob.h,
                 h_low: ob.l,
                 bs_volume: ob.v,
+                price: ob.p,
                 change: ob.P,
                 current_price: ob.c,
+                change_color: ob.P >= 0 ? 'rgb(2, 192, 118)' : 'rgb(248, 73, 96)',
+                color: ob.c > this.state.prev_val ? 'rgb(2, 192, 118)' : 'rgb(248, 73, 96)',
+                // color: ob.c > this.state.prev_val ? 'green' : 'red',
+                prev_val : ob.c
             })
+
             /*console.log(ob.p);
             /*this.setState({
             price: ob.p
@@ -227,7 +236,7 @@ class DashboardComponent extends Component {
                                     Price : 
                                 </div>
                                 <div className='col-6 col-md-9 text-center ml-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px',color:`${this.state.color}`,objectFit:'fill'}}>
-                                {parseFloat(this.state.current_price).toPrecision(8)} 
+                                {parseFloat(this.state.current_price).toPrecision()} 
                                 </div>
                                 {/*<div className='col-1 col-md-1 my-auto mx-auto text-right' style={{margin:'0px'}}>
                                 <FontAwesomeIcon icon={faChevronUp} color='green' size='sm'/>
@@ -258,22 +267,22 @@ class DashboardComponent extends Component {
                             <div className='row' >
                                 <div className='col-3'>
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Change</div>
-                                    <div className='row ' style={{color:'#E40000'}}>
+                                    <div className='row ' style={{color:`${this.state.change_color}`}}>
                                         <div className='col' style={{fontSize:'1.5rem'}}>
-                                        {parseFloat(this.state.price).toPrecision(8)}
+                                        {parseFloat(this.state.price).toPrecision()}
                                         </div>
                                         <div className='col'>
-                                        {this.state.change}%
+                                        {parseFloat(this.state.change).toPrecision(2)}%
                                     </div>
                                         </div>
                                     </div>
                                 <div className='col-3'>
                                 <div className='row mx-auto' style={{color:'gray'}}>24 High</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.h_high).toPrecision(8)}</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.h_high).toPrecision()}</div>
                                 </div>
                                 <div className='col-3'>
                                 <div className='row mx-auto' style={{color:'gray'}}>24 Low</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.h_low).toPrecision(8)}</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.h_low).toPrecision()}</div>
                                 </div>
                                 <div className='col-3'>
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>

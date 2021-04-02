@@ -60,7 +60,8 @@ class MarketTrades extends Component {
                 }
             )               
             this.setState({
-                ledger: ledger
+                ledger: ledger,
+                ws: binanceSocket
             })
         }
 
