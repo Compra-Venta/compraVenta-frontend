@@ -10,6 +10,22 @@ export class LightweightChart extends React.PureComponent {
 
     chart = null;
 
+	 calculateSMA = (data, count) =>{
+		var avg = function(data) {
+		  var sum = 0;
+		  for (var i = 0; i < data.length; i++) {
+			 sum += data[i].close;
+		  }
+		  return sum / data.length;
+		};
+		var result = [];
+		for (var i=count - 1, len=data.length; i < len; i++){
+		  var val = avg(data.slice(i - count + 1, i));
+		  result.push({ time: data[i].time, value: val});
+		}
+		return result;
+	  }
+
     componentDidMount() {
 
         const chart = createChart(this.props.containerId, {
@@ -47,7 +63,7 @@ var candleSeries = chart.addCandlestickSeries({
 wickUpColor: 'green',
 });
 
-candleSeries.setData([
+var data = [
 	{ time: '2018-10-19', open: 180.34, high: 180.99, low: 178.57, close: 179.85 },
 	{ time: '2018-10-22', open: 180.82, high: 181.40, low: 177.56, close: 178.75 },
 	{ time: '2018-10-23', open: 175.77, high: 179.49, low: 175.44, close: 178.53 },
@@ -197,7 +213,40 @@ candleSeries.setData([
 	{ time: '2019-05-22', open: 190.49, high: 192.22, low: 188.05, close: 188.91 },
 	{ time: '2019-05-23', open: 188.45, high: 192.54, low: 186.27, close: 192.00 },
 	{ time: '2019-05-24', open: 192.54, high: 193.86, low: 190.41, close: 193.59 },
-]);}
+];
+
+candleSeries.setData(data);
+
+var smaData = this.calculateSMA(data, 10);
+var smaLine = chart.addLineSeries({
+	color: 'rgba(4, 111, 232, 1)',
+	lineWidth: 2,
+});
+smaLine.setData(smaData);
+
+
+	var ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@klines_1m_1498793709_1498999436')
+	ws.onmessage = (event)=>{
+		
+		var message  = JSON.parse(event.data);
+
+		var candlestick = message.k;
+		console.log(candlestick)
+		// candleSeries.update({
+		// 	time: candlestick.t,
+		// 	open: candlestick.h,
+		// 	low: candlestick.l,
+		// 	close: candlestick.c
+		// });
+		// smaLine.update({
+		// 	time: candlestick.t,
+		// 	open: candlestick.h,
+		// 	low: candlestick.l,
+		// 	close: candlestick.c
+		// })
+	}
+
+}
 
 	componentWillUnmount() {
 		if (this.chart !== null) {
