@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createChart,CrosshairMode } from 'lightweight-charts';
-
+import axios from 'axios'
 
 export class LightweightChart extends React.PureComponent {
     
@@ -26,11 +26,71 @@ export class LightweightChart extends React.PureComponent {
 		return result;
 	  }
 
+	  convertUnixDate = (Date) =>{
+        return new Intl.DateTimeFormat(
+            'en-US', { year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            // hour: '2-digit',
+            // minute: '2-digit', 
+            // second: '2-digit'
+		 }).format(Date);
+    }
+
+	createData = ()=>{
+		var data = [{
+			time:
+				{day: 28,
+				month: 3,
+				year: 2020},
+			open: "6260.3",
+			close: "6292.59",
+			high: "6300",
+			low: "6259.9",
+			// time: "2020-03-28"
+		}];
+          
+        axios.get('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=30m&startTime=1585393143000&endTime=1616929143000')
+        .then( res=>{
+            var candle = res.data;
+             for ( let i =0; i< 500 ;i++)
+			 {
+				 var date = this.convertUnixDate(candle[i][0]);
+				//  var time = `${date.slice(6,10)}-${date.slice(0,2)}-${date.slice(3,5)}`
+				var time =
+				{day: parseInt(date.slice(3,5)) ,
+				month: parseInt(date.slice(0,2)),
+				year: parseInt(date.slice(6,10))}
+				data.push(
+					{
+						time: time,
+						// time:candle[0][0],
+						// time: this.convertUnixDate(candle[i][0]), 
+						open:  parseFloat(candle[i][1]).toPrecision(), 
+						 high: parseFloat(candle[i][2]).toPrecision(), 
+						 low:  parseFloat(candle[i][3]).toPrecision(), 
+						 close:parseFloat(candle[i][4]).toPrecision()
+					})
+			 };
+			console.log(this.convertUnixDate(1585393200000))
+            console.log(candle)
+        } )
+        .catch(error =>{
+            alert(error)
+            this.setState({errormsg:'Error Retreiving Data'})
+      
+          })
+        console.log('Data' ,data)
+		return data;
+
+	}
+ 
     componentDidMount() {
 
+		// this.createData();
         const chart = createChart(this.props.containerId, {
-	width: 820,
-  height: 380,
+		width: 820,
+  		height: 380,
 	layout: {
 		backgroundColor: 'white',
 		textColor: 'lightgray',
@@ -63,7 +123,10 @@ var candleSeries = chart.addCandlestickSeries({
 wickUpColor: 'green',
 });
 
-var data = [
+var data = this.createData();
+console.log('rxdxdx', data);
+
+var sampledata = [
 	{ time: '2018-10-19', open: 180.34, high: 180.99, low: 178.57, close: 179.85 },
 	{ time: '2018-10-22', open: 180.82, high: 181.40, low: 177.56, close: 178.75 },
 	{ time: '2018-10-23', open: 175.77, high: 179.49, low: 175.44, close: 178.53 },
@@ -230,8 +293,8 @@ smaLine.setData(smaData);
 		
 		var message  = JSON.parse(event.data);
 
-		var candlestick = message.k;
-		console.log(candlestick)
+		// var candlestick = message.k;
+		// console.log(candlestick)
 		// candleSeries.update({
 		// 	time: candlestick.t,
 		// 	open: candlestick.h,
