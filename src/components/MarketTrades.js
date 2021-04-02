@@ -37,7 +37,7 @@ class MarketTrades extends Component {
     setupSocket = (category) =>{
         this.check();
         var symbol = category.toLowerCase();
-        console.log('vvvvvvvvvvvvvvvvvvvvvvnnnnnn',category);
+        console.log('Category',category);
         var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@trade";
         console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
