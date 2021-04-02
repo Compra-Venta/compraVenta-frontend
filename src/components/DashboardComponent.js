@@ -247,7 +247,7 @@ class DashboardComponent extends Component {
                          
                             <div className='row' style={{paddingTop:'10px'}} >
                                 <p style={{color:'blue',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
-                                <div className='container'><MarketTrades/></div>
+                                <div className='container'><MarketTrades  category={`${this.state.selectedValue}`} /></div>
                                 
                         
                             </div>
@@ -255,12 +255,12 @@ class DashboardComponent extends Component {
                     </div>
                     <div className='col col-md-5 col-lg-6 border-right'>
                         <div className='container' style={{padding:'10px'}}>
-                            <div className='row'>
+                            <div className='row' >
                                 <div className='col-3'>
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Change</div>
                                     <div className='row ' style={{color:'#E40000'}}>
                                         <div className='col' style={{fontSize:'1.5rem'}}>
-                                        {this.state.price}
+                                        {parseFloat(this.state.price).toPrecision(8)}
                                         </div>
                                         <div className='col'>
                                         {this.state.change}%
@@ -280,7 +280,7 @@ class DashboardComponent extends Component {
                                     <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.bs_volume).toPrecision(8)}</div></div>
                             </div>
                             <div className='row' style={{overflow:'hidden'}}>
-                        <LightweightChart/>
+                        {/* <LightweightChart/> */}
                         </div>
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
