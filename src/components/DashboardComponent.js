@@ -25,11 +25,12 @@ class DashboardComponent extends Component {
             
         }
         
-        
+        this.childRef = React.createRef();
         this.selectValue=this.selectValue.bind(this);
         this.priceChange=this.priceChange.bind(this);
         this.setUpSocket=this.setUpSocket.bind(this);
         this.check=this.check.bind(this);
+
     }
     /*socketUrl = 'wss://stream.binance.com:9443/ws/btcusdt@ticker';
 
@@ -138,12 +139,14 @@ class DashboardComponent extends Component {
     }
     selectValue = (event) => {
 
+        
         this.setUpSocket(event.target.value);
-
+        /**/
         this.setState({
             selectedValue: event.target.value
             
         })
+        this.childRef.current.check(event.target.value);
         
     }
     render() {
@@ -256,7 +259,7 @@ class DashboardComponent extends Component {
                          
                             <div className='row' style={{paddingTop:'10px'}} >
                                 <p style={{color:'blue',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
-                                <div className='container'><MarketTrades  category={`${this.state.selectedValue}`} /></div>
+                                <div className='container'><MarketTrades  category={`${this.state.selectedValue}`} ref={this.childRef} /></div>
                                 
                         
                             </div>
