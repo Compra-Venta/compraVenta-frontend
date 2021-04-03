@@ -7,6 +7,7 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import MarketTrades from './MarketTrades';
 import CryptoNewsFeed from './CryptoNewsFeed';
 import BinancePrice from './BinancePrice';
+import Watchlist from './Watchlist';
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
@@ -250,7 +251,8 @@ class DashboardComponent extends Component {
                             <div className='row' style={{paddingTop:'10px'}} >
                                 <p style={{color:'blue',fontSize:'1.5rem'}}>Watch List</p>
                                 <div className='container'>
-                                    {watchList}
+                                    <Watchlist/>
+                                    {/* {watchList} */}
                                 </div>
                             </div>
                          

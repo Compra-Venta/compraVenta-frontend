@@ -11,29 +11,34 @@ export class Watchlist extends Component {
                  price: 555555,
                  color: 'red',
              }
-             }
+             },
+             ws: new WebSocket('wss://stream.binance.com:9443/ws/!miniTicker@arr')
         }
+        this.createwatchlist = this.createwatchlist.bind(this);
+        this.check = this.check.bind(this);
     }
     
-    createwatchlist = () => {
-        var symbol =['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC'];
-        var ws = new WebSocket('wss://stream.binance.com:9443/ws/!miniTicker@arr')
-	    ws.onmessage = (event)=>{
+    createwatchlist = (symbol) => {
+        this.check();
+        var socketUrl = 'wss://stream.binance.com:9443/ws/!miniTicker@arr';
+        console.log(socketUrl)
+        var binanceSocket= new WebSocket(socketUrl)
+	    binanceSocket.onmessage = (event)=>{
 		var res = JSON.parse(event.data)
-		// console.log(res)
+		console.log(res)
        res.filter((ticker)=> {
             if(symbol.find(sym => sym == ticker.s))
            {
             //    console.log(ticker.c)
             var prices = this.state.prices;
             var prev_price;
-            console.log(prices)
+            // console.log(prices)
             if(Object.keys(prices).find( (label, value) => label == ticker.s ))
             prev_price = prices[ticker.s].price;
             else
             prev_price = 0;
             prices[ticker.s] = {
-                price: ticker.c,
+                price: parseFloat(ticker.c).toPrecision(),
                 color: ticker.c < prev_price? 'red' : 'green'
             }
             this.setState({
@@ -44,15 +49,23 @@ export class Watchlist extends Component {
 	}
     }
 
+    check = () => {
+        const ws  = this.state.ws;
+        if (ws || ws.readyState == WebSocket.OPEN) {
+            console.log('connection check');
+        } 
+    };
+
     componentDidMount(){
-        this.createwatchlist();
+        var symbol =['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC'];
+        this.createwatchlist(symbol);
     }
 
     render() {
 
         const prices  = this.state.prices;
 
-        console.log(prices);
+        // console.log(prices);
         let watchlists = Object.keys(prices).map(( (label, value) => {
             console.log(label, prices[label]);
             return (
