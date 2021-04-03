@@ -20,7 +20,7 @@ class MarketTrades extends Component {
         }
         // this.selectValue=this.selectValue.bind(this);
         // this.priceChange=this.priceChange.bind(this);
-        this.setupSocket=this.setupSocket.bind(this);
+        this.setupTradeSocket=this.setupTradeSocket.bind(this);
         this.check=this.check.bind(this);
     }
     
@@ -34,8 +34,12 @@ class MarketTrades extends Component {
             second: '2-digit' }).format(Date);
     }
 
-    setupSocket = (category) =>{
-        this.check();
+    setAlert = () => {
+        alert(`${this.state.selectedValue}`)
+    }
+
+    setupTradeSocket = (category) =>{
+        //this.check();
         var symbol = category.toLowerCase();
         console.log('Category',category);
         var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@trade";
@@ -66,28 +70,32 @@ class MarketTrades extends Component {
         }
 
     }
-    check = () => {
+    check = (category) => {
         const ws  = this.state.ws;
+        console.log(ws);
         if (ws || ws.readyState == WebSocket.OPEN) {
-            console.log('connection check');
+            console.log('connection check trade');
 
             ws.close();
         if(!ws|| ws.readyState == WebSocket.CLOSED){
-            console.log('connection close');
+            console.log('connection close trade');
         }
-        } 
+    }
+    this.setupTradeSocket(category);
     };
     componentDidMount()
     {
-        this.setupSocket(this.props.category)
-        this.setState({
+       console.log(this.props.category);
+        this.setupTradeSocket("BTCUSDT");
+        /*this.setState({
             selectedValue: this.props.category
-        })
+        })*/
     }
-
+   
 
 
     render() {
+        //this.setupTradeSocket(this.props.category);
         // const tradesArray = [
         //     {"price": 0.003551, "amount":0.98, "time":"12:05:42"},
         //     {"price": 0.003552, "amount":0.10, "time":"12:05:42"},
