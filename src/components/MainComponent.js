@@ -5,16 +5,26 @@ import Footer from './Footer';
 import { LightweightChart } from './Chart';
 import CryptoNewsFeed from './CryptoNewsFeed';
 import DashboardComponent from './DashboardComponent';
+import BinancePrice from './BinancePrice';
+import Trading from './Trading';
+import Watchlist from './Watchlist';
+import Transaction from './Trade/Transaction';
+
+
 class MainComponent extends Component {
     render() {
         return (
             <div className="container-full-bg" >
               {/*<Header/>  
               <LandingPage/>
-              {/*<LightweightChart/>
               /*<CryptoNewsFeed/>
               <Footer/>*/}
-              <DashboardComponent/>
+              <Transaction />
+              {/* <DashboardComponent/> */}
+              {/* <BinancePrice/> */}
+              {/* <Trading/> */}
+             {/* <LightweightChart/> */}
+             {/* <Watchlist/> */}
             </div>
         );
     }
