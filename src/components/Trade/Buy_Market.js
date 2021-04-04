@@ -17,14 +17,24 @@ export class Buy_Market extends Component {
              amount: '0.0',
              total: '0.0'
         }
+        this.handleChange = this.handleChange.bind(this);
     }
     
+    handleChange =(event) =>{
+      const target = event.target;
+      const value = target.value;
+      const name = target.name;
+
+      this.setState({
+        [name]: value
+      });
+    }
 
     render() {
         return (
             <div>
 
-<Container className="SignIn border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
+<Container className="Buy_Market border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
             <h2 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h2>
             <Form className="Buy-Market" onSubmit={this.handleSubmit} >
               <Col>
@@ -35,7 +45,7 @@ export class Buy_Market extends Component {
                     name="coinprice"
                     id="Coin-Price"
                     // value={this.state.price}
-                    onChange={this.handleInputChange} 
+                    onChange={this.handleChange} 
                     disabled
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
                     placeholder={`Market | ${this.state.coin_pair.slice(3)}`}
@@ -53,7 +63,7 @@ export class Buy_Market extends Component {
                     type="text"
                     name="amount"
                     // value={this.state.amount}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleChange}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
                     id="Buy-Market-Amount"
                     min="0.00000100" step="0.00000100"
@@ -64,7 +74,7 @@ export class Buy_Market extends Component {
                     type="text"
                     name="total"
                     value={this.state.total}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleChange}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
                     id="Buy-Market-Amount"
                     placeholder={`${this.state.coin_pair.slice(3)}`}

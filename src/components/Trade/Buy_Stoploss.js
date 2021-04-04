@@ -18,14 +18,24 @@ export class Buy_Stoploss extends Component {
              amount: '0.0',
              total: '0.0'
         }
+        this.handleChange = this.handleChange.bind(this);
     }
     
+    handleChange =(event) =>{
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+  
+        this.setState({
+          [name]: value
+        });
+      }
 
     render() {
         return (
             <div>
 
-<Container className="SignIn border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
+<Container className="Buy_Stoploss border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
             <h2 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h2>
             <Form className="Buy-Stoploss" onSubmit={this.handleSubmit} >
               <Col>
@@ -36,7 +46,7 @@ export class Buy_Stoploss extends Component {
                     name="stopprice"
                     id="Stop-Price"
                     // value={this.state.stop}
-                    onChange={this.handleInputChange} 
+                    onChange={this.handleChange} 
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
                     placeholder={`Stop | ${this.state.coin_pair.slice(3)}`}
                     required
@@ -52,7 +62,7 @@ export class Buy_Stoploss extends Component {
                     name="limitprice"
                     id="Limit-Price"
                     // value={this.state.limit}
-                    onChange={this.handleInputChange} 
+                    onChange={this.handleChange} 
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
                     placeholder={`Limit | ${this.state.coin_pair.slice(3)}`}
                     required
@@ -70,7 +80,7 @@ export class Buy_Stoploss extends Component {
                     type="text"
                     name="amount"
                     // value={this.state.amount}
-                    onChange={this.handleInputChange}
+                    onChange={this.handleChange}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
                     id="Buy-Stoploss-Amount"
                     min="0.00000100" step="0.00000100"
@@ -88,7 +98,7 @@ export class Buy_Stoploss extends Component {
                     name="total"
                     id="Total"
                     // value={this.state.total}
-                    onChange={this.handleInputChange} 
+                    onChange={this.handleChange} 
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
                     placeholder={`${this.state.coin_pair.slice(3)}`}
                     required

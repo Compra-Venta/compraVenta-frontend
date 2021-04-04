@@ -19,8 +19,8 @@ class MainComponent extends Component {
               <LandingPage/>
               /*<CryptoNewsFeed/>
               <Footer/>*/}
-              <Transaction />
-              {/* <DashboardComponent/> */}
+              {/* <Transaction /> */}
+              <DashboardComponent/>
               {/* <BinancePrice/> */}
               {/* <Trading/> */}
              {/* <LightweightChart/> */}
