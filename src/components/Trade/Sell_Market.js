@@ -32,10 +32,10 @@ export class Sell_Market extends Component {
 
     render() {
         return (
-            <div>
+            
 
-<Container className="Sell_Market border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
-            <h2 style={{textAlign:'left'}} >{`Sell ${this.state.coin_pair.slice(0,3)}`} </h2>
+<Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
+            {/*<h2 style={{textAlign:'left'}} >{`Sell ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
             <Form className="Sell-Market" onSubmit={this.handleSubmit} >
               <Col>
                 <FormGroup>
@@ -48,7 +48,7 @@ export class Sell_Market extends Component {
                     onChange={this.handleChange} 
                     disabled
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
-                    placeholder={`Market | ${this.state.coin_pair.slice(3)}`}
+                    placeholder={`Market | ${this.props.qa}`}
                     required
                   />
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
@@ -67,7 +67,7 @@ export class Sell_Market extends Component {
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
                     id="Sell-Market-Amount"
                     min="0.00000100" step="0.00000100"
-                    placeholder={`${this.state.coin_pair.slice(0,3)}`}
+                    placeholder={`${this.props.ba}`}
                     required
                   />
                 {/* <Input
@@ -83,11 +83,11 @@ export class Sell_Market extends Component {
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
-              <Button type="submit" color="primary" className='offset-5' >Sell</Button>
+              <Button type="submit" color="danger" className='offset-5' >Sell</Button>
               
             </Form>
           </Container>
-            </div>
+            
         )
     }
 }

@@ -35,8 +35,8 @@ export class Sell_Stoploss extends Component {
         return (
             <div>
 
-<Container className="Sell_Stoploss border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
-            <h2 style={{textAlign:'left'}} >{`Sell ${this.state.coin_pair.slice(0,3)}`} </h2>
+<Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
+            {/*<h2 style={{textAlign:'left'}} >{`Sell ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
             <Form className="Sell-Stoploss" onSubmit={this.handleSubmit} >
               <Col>
                 <FormGroup>
@@ -48,7 +48,7 @@ export class Sell_Stoploss extends Component {
                     // value={this.state.stop}
                     onChange={this.handleChange} 
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
-                    placeholder={`Stop | ${this.state.coin_pair.slice(3)}`}
+                    placeholder={`Stop | ${this.props.qa}`}
                     required
                   />
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
@@ -64,7 +64,7 @@ export class Sell_Stoploss extends Component {
                     // value={this.state.limit}
                     onChange={this.handleChange} 
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
-                    placeholder={`Limit | ${this.state.coin_pair.slice(3)}`}
+                    placeholder={`Limit | ${this.props.qa}`}
                     required
                   />
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
@@ -84,7 +84,7 @@ export class Sell_Stoploss extends Component {
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
                     id="Sell-Stoploss-Amount"
                     min="0.00000100" step="0.00000100"
-                    placeholder={`${this.state.coin_pair.slice(0,3)}`}
+                    placeholder={`${this.props.ba}`}
                     required
                   />
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
@@ -100,14 +100,14 @@ export class Sell_Stoploss extends Component {
                     // value={this.state.total}
                     onChange={this.handleChange} 
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
-                    placeholder={`${this.state.coin_pair.slice(3)}`}
+                    placeholder={`${this.props.qa}`}
                     required
                   />
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
                 </FormGroup>
               </Col>
               
-              <Button type="submit" color="primary" className='offset-5' >Sell</Button>
+              <Button type="submit" color="danger" className='offset-5' >Sell</Button>
               
             </Form>
           </Container>

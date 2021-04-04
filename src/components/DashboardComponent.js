@@ -8,7 +8,7 @@ import MarketTrades from './MarketTrades';
 import CryptoNewsFeed from './CryptoNewsFeed';
 import BinancePrice from './BinancePrice';
 import Watchlist from './Watchlist';
-import Transaction from './Trade/Transaction';
+import MyTabs from './Tab';
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
@@ -300,8 +300,8 @@ class DashboardComponent extends Component {
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
                         </div>
-                        <div className='row' id='transaction' >
-                            <Transaction />
+                        <div className="row">
+                            <MyTabs qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`}/>
                         </div>
                         </div>
                         </div>

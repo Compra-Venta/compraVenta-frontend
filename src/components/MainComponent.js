@@ -9,6 +9,7 @@ import BinancePrice from './BinancePrice';
 import Trading from './Trading';
 import Watchlist from './Watchlist';
 import Transaction from './Trade/Transaction';
+import MyTabs from './Tab';
 
 
 class MainComponent extends Component {
@@ -19,8 +20,9 @@ class MainComponent extends Component {
               <LandingPage/>
               /*<CryptoNewsFeed/>
               <Footer/>*/}
-              {/* <Transaction /> */}
-              <DashboardComponent/>
+              {/*<Transaction />*/}
+              {/*<MyTabs/>*/}
+               <DashboardComponent/> 
               {/* <BinancePrice/> */}
               {/* <Trading/> */}
              {/* <LightweightChart/> */}
