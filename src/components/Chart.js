@@ -38,23 +38,12 @@ export class LightweightChart extends React.PureComponent {
     }
 
 	createData = ()=>{
-		var data = [{
-			// time:
-			// 	{day: 28,
-			// 	month: 3,
-			// 	year: 2020},
-			time: 1617317640000,
-			open: "6260.3",
-			close: "6292.59",
-			high: "6300",
-			low: "6259.9",
-			// time: "2020-03-28"
-		}];
+		var data = [];
           
-        axios.get('https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&startTime=1617317621000&limit=10000')//&endTime=1614725621000
+        axios.get(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&endTime=${Date.now()}&limit=10000`)//&endTime=1614725621000
         .then( res=>{
             var candle = res.data;
-             for ( let i =0; i< 500 ;i++)
+             for ( let i =0; i< 1000 ;i++)
 			 {
 				 var date = this.convertUnixDate(candle[i][0]);
 				//  var time = `${date.slice(6,10)}-${date.slice(0,2)}-${date.slice(3,5)}`
@@ -65,15 +54,14 @@ export class LightweightChart extends React.PureComponent {
 				data.push(
 					{
 						// time: time,
-						time:candle[0][0],
+						time:candle[0][0]/1000,
 						// time: this.convertUnixDate(candle[i][0]), 
-						open:  parseFloat(candle[i][1]).toPrecision(), 
-						 high: parseFloat(candle[i][2]).toPrecision(), 
-						 low:  parseFloat(candle[i][3]).toPrecision(), 
-						 close:parseFloat(candle[i][4]).toPrecision()
+						open:  candle[i][1], 
+						 high: candle[i][2], 
+						 low:  candle[i][3], 
+						 close:candle[i][4]
 					})
 			 };
-			console.log(this.convertUnixDate(1585393200000))
             console.log(candle)
         } )
         .catch(error =>{
@@ -81,6 +69,7 @@ export class LightweightChart extends React.PureComponent {
             this.setState({errormsg:'Error Retreiving Data'})
       
           })
+		  console.log(Date.now())
         console.log('Data' ,data)
 		return data;
 
@@ -278,7 +267,7 @@ var sampledata = [
 	{ time: '2019-05-23', open: 188.45, high: 192.54, low: 186.27, close: 192.00 },
 	{ time: '2019-05-24', open: 192.54, high: 193.86, low: 190.41, close: 193.59 },
 ];
-
+// console.log(sampledata)
 candleSeries.setData(data);
 
 var smaData = this.calculateSMA(data, 10);
@@ -297,8 +286,8 @@ smaLine.setData(smaData);
 		var candlestick = message.k;
 		console.log(candlestick);
 		candleSeries.update({
-			// time: candlestick.T,
-			time: Date.now(),
+			time: candlestick.t /1000,
+			// time: Date.now(),
 			open: candlestick.o,
 			high: candlestick.h,
 			low: candlestick.l,

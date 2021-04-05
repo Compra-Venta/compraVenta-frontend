@@ -8,7 +8,6 @@ import DashboardComponent from './DashboardComponent';
 import BinancePrice from './BinancePrice';
 import Trading from './Trading';
 import Watchlist from './Watchlist';
-import Transaction from './Trade/Transaction';
 import MyTabs from './Tab';
 
 
@@ -16,10 +15,10 @@ class MainComponent extends Component {
     render() {
         return (
             <div className="container-full-bg" >
-              {/*<Header/>  
+              {/* <Header/>  
               <LandingPage/>
-              /*<CryptoNewsFeed/>
-              <Footer/>*/}
+              <CryptoNewsFeed/>
+              <Footer/> */}
               {/*<Transaction />*/}
               {/*<MyTabs/>*/}
                <DashboardComponent/> 
