@@ -2,8 +2,16 @@ import * as React from 'react';
 import { createChart,CrosshairMode } from 'lightweight-charts';
 import axios from 'axios'
 
-export class LightweightChart extends React.PureComponent {
+export class LightweightChart extends React.Component {
     
+	constructor(props) {
+		super(props);
+		this.state = {
+			ws: new WebSocket(`wss://stream.binance.com:9443/ws/BTCUSDT@kline_1m`)
+		}
+		this.makeChart=this.makeChart.bind(this);
+	}
+	
     static defaultProps = {
 		containerId: 'lightweight_chart_container',
 	};
@@ -11,6 +19,7 @@ export class LightweightChart extends React.PureComponent {
     chart = null;
 
 	 calculateSMA = (data, count) =>{
+		 console.log("sma")
 		var avg = (data) => {
 		  var sum = 0;
 		  for (var i = 0; i < data.length; i++) {
@@ -64,8 +73,24 @@ export class LightweightChart extends React.PureComponent {
 	// 	return data;
 
 	// };
+	check = () => {
+        const ws  = this.state.ws;
+        if (ws || ws.readyState == WebSocket.OPEN) {
+            console.log('connection check');
+
+            ws.close();
+        if(!ws|| ws.readyState == WebSocket.CLOSED){
+            console.log('connection close');
+        }
+        } 
+    };
  
-    componentDidMount = async () =>{
+    makeChart = async (symbol) =>{
+		console.log(this.chart !== null)
+		if (this.chart !== null) {
+			this.chart.remove();
+			this.chart = null;
+		}
 
 		const props = this.props;
 
@@ -111,7 +136,7 @@ wickUpColor: 'green',
 // var data = this.createData();
 var data = [];
 
-		var symbol = props.coinpair;
+		//var symbol = props.coinpair;
         await axios.get(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1m&endTime=${Date.now()}&limit=10000`)//&endTime=1614725621000
         .then( res=>{
             var candle = res.data;
@@ -144,15 +169,18 @@ var smaLine = chart.addLineSeries({
 	lineWidth: 2,
 });
 smaLine.setData(smaData);
-
-
-	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol}@kline_1m`)
+	this.check();
+	//var category= symbol.toLowerCase()
+	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_1m`)
 	ws.onmessage = (event)=>{
 		
 		var message  = JSON.parse(event.data);
 
 		var candlestick = message.k;
 		console.log(candlestick);
+		this.setState({
+			ws:ws
+		})
 		candleSeries.update({
 			time: candlestick.t /1000,
 			// time: Date.now(),
@@ -170,8 +198,13 @@ smaLine.setData(smaData);
 		// 	close: candlestick.c
 		// },10))
 	}
-	
+if (true)	{
+this.chart=chart;
+}
+}
 
+componentDidMount() {
+	this.makeChart('BTCUSDT');
 }
 
 	componentWillUnmount() {

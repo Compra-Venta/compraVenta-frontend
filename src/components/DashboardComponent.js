@@ -28,6 +28,7 @@ class DashboardComponent extends Component {
         }
         
         this.childRef = React.createRef();
+        this.childRefChart = React.createRef();
         this.selectValue=this.selectValue.bind(this);
         this.priceChange=this.priceChange.bind(this);
         this.setUpSocket=this.setUpSocket.bind(this);
@@ -149,6 +150,7 @@ class DashboardComponent extends Component {
             
         })
         this.childRef.current.check(event.target.value);
+        this.childRefChart.current.makeChart(event.target.value);
         
     }
     render() {
@@ -295,7 +297,7 @@ class DashboardComponent extends Component {
                                     <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.bs_volume).toPrecision(8)}</div></div>
                             </div>
                             <div className='row' style={{overflow:'hidden'}}>
-                        <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.state.childRef} />
+                        <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
                         </div>
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
