@@ -26,16 +26,6 @@ export class LightweightChart extends React.PureComponent {
 		return result;
 	  }
 
-	  convertUnixDate = (Date) =>{
-        return new Intl.DateTimeFormat(
-            'en-US', { year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            // hour: '2-digit',
-            // minute: '2-digit', 
-            // second: '2-digit'
-		 }).format(Date);
-    }
 
 	// createData = async () => {
 	// 	var data = [];
@@ -76,6 +66,8 @@ export class LightweightChart extends React.PureComponent {
 	// };
  
     componentDidMount = async () =>{
+
+		const props = this.props;
 
         const chart = createChart(this.props.containerId, {
 		width: 820,
@@ -118,8 +110,9 @@ wickUpColor: 'green',
 // // ];
 // var data = this.createData();
 var data = [];
-          
-        await axios.get(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&endTime=${Date.now()}&limit=10000`)//&endTime=1614725621000
+
+		var symbol = props.coinpair;
+        await axios.get(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1m&endTime=${Date.now()}&limit=10000`)//&endTime=1614725621000
         .then( res=>{
             var candle = res.data;
              for ( let i =0; i< 1000 ;i++)
@@ -153,30 +146,30 @@ var smaLine = chart.addLineSeries({
 smaLine.setData(smaData);
 
 
-	// var ws = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@kline_1m')
-	// ws.onmessage = (event)=>{
+	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol}@kline_1m`)
+	ws.onmessage = (event)=>{
 		
-	// 	var message  = JSON.parse(event.data);
+		var message  = JSON.parse(event.data);
 
-	// 	var candlestick = message.k;
-	// 	console.log(candlestick);
-	// 	candleSeries.update({
-	// 		time: candlestick.t /1000,
-	// 		// time: Date.now(),
-	// 		open: candlestick.o,
-	// 		high: candlestick.h,
-	// 		low: candlestick.l,
-	// 		close: candlestick.c
-	// 	});
-	// 	// smaLine.update(this.calculateSMA({
-	// 	// 	// time: candlestick.t,
-	// 	// 	time: Date.now(),
-	// 	// 	open: candlestick.o,
-	// 	// 	high: candlestick.h,
-	// 	// 	low: candlestick.l,
-	// 	// 	close: candlestick.c
-	// 	// },10))
-	// }
+		var candlestick = message.k;
+		console.log(candlestick);
+		candleSeries.update({
+			time: candlestick.t /1000,
+			// time: Date.now(),
+			open: candlestick.o,
+			high: candlestick.h,
+			low: candlestick.l,
+			close: candlestick.c
+		});
+		// smaLine.update(this.calculateSMA({
+		// 	// time: candlestick.t,
+		// 	time: Date.now(),
+		// 	open: candlestick.o,
+		// 	high: candlestick.h,
+		// 	low: candlestick.l,
+		// 	close: candlestick.c
+		// },10))
+	}
 	
 
 }

@@ -295,7 +295,7 @@ class DashboardComponent extends Component {
                                     <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.bs_volume).toPrecision(8)}</div></div>
                             </div>
                             <div className='row' style={{overflow:'hidden'}}>
-                        <LightweightChart/>
+                        <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.state.childRef} />
                         </div>
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
