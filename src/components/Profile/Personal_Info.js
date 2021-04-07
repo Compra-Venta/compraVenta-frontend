@@ -24,13 +24,19 @@ export class Personal_Info extends Component {
         // var person = Object.keys(personal_data).map()
 
         return (
-            <div>
-                <div>
-                    {`Name: ${personal_data.name}`}
-                    {`Country: ${personal_data.country}`}
-                    {`Phone no: ${personal_data.phone}`}
-                    {`DOB: ${personal_data.dob}`}
-                    {`Email ID: ${personal_data.email}`}
+            <div className='container-fluid'>
+                <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
+                    <div className='col-6'>{`Name: ${personal_data.name}`}</div>
+                    <div className='col-6'>{`Country: ${personal_data.country}`}</div>
+                 </div>   
+                 <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
+                     <div className='col-6'>{`Email ID: ${personal_data.email}`}</div>
+                     <div className='col-6'>{`DOB: ${personal_data.dob}`}</div>
+                  </div>
+                  <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
+                      <div className='col-6'>{`Phone no: ${personal_data.phone}`}</div>  
+                    
+                    
                 </div>
             </div>
         )

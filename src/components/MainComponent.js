@@ -9,6 +9,7 @@ import BinancePrice from './BinancePrice';
 import Trading from './Trading';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
+import Profile from './Profile/Profile';
 
 
 class MainComponent extends Component {
@@ -21,7 +22,8 @@ class MainComponent extends Component {
               <Footer/> */}
               {/*<Transaction />*/}
               {/*<MyTabs/>*/}
-               <DashboardComponent/> 
+               {/*<DashboardComponent/> */}
+               <Profile/>
               {/* <BinancePrice/> */}
               {/* <Trading/> */}
              {/* <LightweightChart/> */}
