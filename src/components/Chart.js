@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createChart,CrosshairMode } from 'lightweight-charts';
+import { createChart,CrosshairMode, PriceScaleMode } from 'lightweight-charts';
 import axios from 'axios'
 
 export class LightweightChart extends React.Component {
@@ -110,7 +110,7 @@ export class LightweightChart extends React.Component {
 		},
 	},
 	crosshair: {
-		mode: CrosshairMode.Normal,
+		mode: CrosshairMode.Magnet,
 	},
 	rightPriceScale: {
 		borderColor: 'rgba(197, 203, 206, 0.8)',
@@ -119,7 +119,27 @@ export class LightweightChart extends React.Component {
 		borderColor: 'rgba(197, 203, 206, 0.8)',
 	},
 });
-
+/*chart.applyOptions({
+    priceScale: {
+        position: 'right',
+        mode: PriceScaleMode.Normal,
+        autoScale: true,
+        invertScale: false,
+        alignLabels: false,
+        borderVisible: false,
+        borderColor: '#555ffd',
+        scaleMargins: {
+            top: 0.30,
+            bottom: 0.25,
+        },
+    },
+	priceFormat: {
+        precision:6,
+        minMove: 0.000001,
+    },
+	
+});*/
+//chart.resize(450,380);
 var candleSeries = chart.addCandlestickSeries({
   upColor: 'green',
   downColor: 'red',
@@ -204,7 +224,7 @@ this.chart=chart;
 }
 
 componentDidMount() {
-	this.makeChart('BTCUSDT');
+	this.makeChart(`${this.props.coinpair}`);
 }
 
 	componentWillUnmount() {

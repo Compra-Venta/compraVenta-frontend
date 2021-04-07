@@ -271,32 +271,32 @@ class DashboardComponent extends Component {
                     
                     </div>
                     <div className='col col-md-5 col-lg-6 border-right'>
-                        <div className='container' style={{padding:'10px'}}>
+                        <div className='container-fluid' style={{padding:'10px'}}>
                             <div className='row' >
-                                <div className='col-3'>
+                                <div className='col-sm-6 col-lg-3'>
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Change</div>
                                     <div className='row ' style={{color:`${this.state.change_color}`}}>
-                                        <div className='col' style={{fontSize:'1.5rem'}}>
-                                        {parseFloat(this.state.price).toPrecision()}
+                                        <div className='col-12' style={{fontSize:'1.5rem'}}>
+                                        {this.state.price.substring(0,9)}
                                         </div>
-                                        <div className='col'>
+                                        <div className='col-12'>
                                         {parseFloat(this.state.change).toPrecision(2)}%
                                     </div>
                                         </div>
                                     </div>
-                                <div className='col-3'>
+                                <div className='col-sm-6 col-lg-3'>
                                 <div className='row mx-auto' style={{color:'gray'}}>24 High</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.h_high).toPrecision()}</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>{this.state.h_high.substring(0,9)}</div>
                                 </div>
-                                <div className='col-3'>
+                                <div className='col-sm-6 col-lg-3'>
                                 <div className='row mx-auto' style={{color:'gray'}}>24 Low</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.h_low).toPrecision()}</div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>{this.state.h_low.substring(0,9)}</div>
                                 </div>
-                                <div className='col-3'>
+                                <div className='col-sm-6 col-lg-3'>
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>{parseFloat(this.state.bs_volume).toPrecision(8)}</div></div>
+                                    <div className='row' style={{fontSize:'1.5rem'}}>{this.state.bs_volume.substring(0,12)}</div></div>
                             </div>
-                            <div className='row' style={{overflow:'hidden'}}>
+                            <div className='row' style={{overflow:'hidden',display:'grid'}}>
                         <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
                         </div>
                         <div className='row' style={{paddingRight:'20px'}}>

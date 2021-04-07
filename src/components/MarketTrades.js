@@ -111,10 +111,10 @@ class MarketTrades extends Component {
             return (
                 <div className='row'>
                     <div className='col-4 col-md-4' style={{color:trade.color}}>
-                        {parseFloat(trade.price).toPrecision(8)}
+                        {trade.price.substring(0,10)}
                     </div>
                     <div className='col-4 col-md-4'>
-                        {parseFloat(trade.amount).toPrecision(6)}
+                        {parseFloat(trade.amount).toFixed(6)}
                     </div>
                     <div className='col-4 col-md-4'>
                         {trade.time}
