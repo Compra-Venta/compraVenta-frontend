@@ -16,16 +16,16 @@ const NavDash = (props) => {
         <Collapse  isOpen={!collapsed} navbar>
           <Nav className='ml-auto col-md-7 justify-content-end' navbar style={{paddingRight:'0px',justifyItems:'right'}} >
             <NavItem>
-              <NavLink style={{color:'blue',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="/mywallet/"><span color='violet' >My Wallet</span></NavLink>
+              <NavLink style={{color:'blue',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="/profile"><span color='violet' >My Wallet</span></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/faqs/">FAQs </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/faqs">FAQs </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/profile/">Profile </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/profile">Profile </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/home/">Logout </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/home">Logout </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
