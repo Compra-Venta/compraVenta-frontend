@@ -10,7 +10,7 @@ import Trading from './Trading';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
 import Profile from './Profile/Profile';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 
 
 class MainComponent extends Component {
@@ -18,6 +18,9 @@ class MainComponent extends Component {
         return (
             <div className="container-full-bg" >
                 <Switch>
+                <Route exact path="/">
+                 <Redirect to="/home" />
+                </Route>
                     <Route path='/home'>
                         <Header/>
                         <LandingPage/>
