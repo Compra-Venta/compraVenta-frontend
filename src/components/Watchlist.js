@@ -12,7 +12,8 @@ export class Watchlist extends Component {
                  color: 'red',
              }
              },
-             ws: new WebSocket('wss://stream.binance.com:9443/ws/!miniTicker@arr')
+             ws: new WebSocket('wss://stream.binance.com:9443/ws/!miniTicker@arr'),
+             //symbol : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
         }
         this.createwatchlist = this.createwatchlist.bind(this);
         this.check = this.check.bind(this);
@@ -57,8 +58,8 @@ export class Watchlist extends Component {
     };
 
     componentDidMount(){
-        var symbol =['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC'];
-        this.createwatchlist(symbol);
+         
+        this.createwatchlist(this.props.array);
     }
 
     render() {

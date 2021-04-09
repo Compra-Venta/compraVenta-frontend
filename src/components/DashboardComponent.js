@@ -23,16 +23,19 @@ class DashboardComponent extends Component {
             change: '',
             change_color: 'red',
             prev_val : '3334',
-            ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker')
+            ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker'),
+            watchArray : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
             
         }
         
         this.childRef = React.createRef();
         this.childRefChart = React.createRef();
+        this.childRefWatchList=React.createRef();
         this.selectValue=this.selectValue.bind(this);
         this.priceChange=this.priceChange.bind(this);
         this.setUpSocket=this.setUpSocket.bind(this);
         this.check=this.check.bind(this);
+        this.addToWatcharray=this.addToWatcharray.bind(this);
 
     }
     /*socketUrl = 'wss://stream.binance.com:9443/ws/btcusdt@ticker';
@@ -41,6 +44,14 @@ class DashboardComponent extends Component {
     /*socketUrl = "wss://stream.binance.com:9443/ws/" + `${this.state.selectedValue.toLowerCase()}` + "@ticker"
        
     binanceSocket = new WebSocket(this.socketUrl);*/
+    addToWatcharray = () => {
+        var array = this.state.watchArray
+        var newItem = this.state.selectedValue
+        array.indexOf(newItem) === -1 && array.push(newItem)
+        this.setState({
+            watchArray: array
+        }, () => {this.childRefWatchList.current.createwatchlist(this.state.watchArray)})
+    }
     priceChange =(value) =>{
         this.setState({
             price: value
@@ -251,13 +262,13 @@ class DashboardComponent extends Component {
                             </div>
                                 
                                 <div className='row mx-auto'>
-                                <Button color="primary" size='md' className='mx-auto' >Add to Watchlist</Button>{' '}
+                                <Button color="primary" size='md' className='mx-auto' onClick={this.addToWatcharray} >Add to Watchlist</Button>{' '}
                                 </div>
                             </div>  
                             <div className='row' style={{paddingTop:'10px'}} >
                                 <p style={{color:'blue',fontSize:'1.5rem'}}>Watch List</p>
                                 <div className='container'>
-                                    <Watchlist/>
+                                    <Watchlist array={this.state.watchArray} ref={this.childRefWatchList}/>
                                     {/* {watchList} */}
                                 </div>
                             </div>
