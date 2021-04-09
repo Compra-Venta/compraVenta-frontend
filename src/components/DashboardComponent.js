@@ -36,6 +36,7 @@ class DashboardComponent extends Component {
         this.setUpSocket=this.setUpSocket.bind(this);
         this.check=this.check.bind(this);
         this.addToWatcharray=this.addToWatcharray.bind(this);
+        this.removeFromWatcharray=this.removeFromWatcharray.bind(this);
 
     }
     /*socketUrl = 'wss://stream.binance.com:9443/ws/btcusdt@ticker';
@@ -50,6 +51,15 @@ class DashboardComponent extends Component {
         array.indexOf(newItem) === -1 && array.push(newItem)
         this.setState({
             watchArray: array
+        }, () => {this.childRefWatchList.current.createwatchlist(this.state.watchArray)})
+    }
+    removeFromWatcharray = () => {
+        var array = this.state.watchArray
+        var element = this.state.selectedValue
+        var result = array.filter(el => el !== element)
+        console.log('array',result)
+        this.setState({
+            watchArray: result
         }, () => {this.childRefWatchList.current.createwatchlist(this.state.watchArray)})
     }
     priceChange =(value) =>{
@@ -165,6 +175,8 @@ class DashboardComponent extends Component {
         
     }
     render() {
+        var addButton = <Button color="primary" size='md' className='mx-auto' onClick={this.addToWatcharray} >Add to Watchlist</Button>;
+        var removeButton = <Button color="danger" size='md' className='mx-auto' onClick={this.removeFromWatcharray} >Remove from Watchlist</Button>;
         const currencies={BTCUSDT:{ba:'BTC',qa:'USDT',qp:'',bp:''},
                           ETHUSDT:{ba:'ETH',qa:'USDT',qp:'',bp:''},
                           ETHBTC:{ba:'ETH',qa:'BTC',qp:'',bp:''},
@@ -262,7 +274,9 @@ class DashboardComponent extends Component {
                             </div>
                                 
                                 <div className='row mx-auto'>
-                                <Button color="primary" size='md' className='mx-auto' onClick={this.addToWatcharray} >Add to Watchlist</Button>{' '}
+                                    {(this.state.watchArray.indexOf(this.state.selectedValue)===-1)? addButton : removeButton}
+                                
+                                {' '}
                                 </div>
                             </div>  
                             <div className='row' style={{paddingTop:'10px'}} >
