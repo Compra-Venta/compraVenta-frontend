@@ -26,7 +26,8 @@ class Account extends Component {
             <div className='container-fluid'>
                 <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
                     <div className='col-6'>{`Balance: ${account_details.balance}`}</div>
-                    <div className='col-6' style={{display:'inline-flex'}}>Rating: &nbsp;<div className='my-auto'> <ReactStars count={account_details.rating} color="#ffd700" size={28} edit={false}/></div> </div>
+                    <div className='col-6' style={{display:'inline-flex'}}>Rating: &nbsp;<div className='my-auto'> 
+                    <ReactStars count={account_details.rating} color="#ffd700" size={28} edit={false}/></div> </div>
                  </div>   
                  <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
                      <div className='col-6' style={{color:'green'}}>{`Profit: ${account_details.profit}`}</div>

@@ -296,7 +296,7 @@ class DashboardComponent extends Component {
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
                                     <div className='row' style={{fontSize:'1.5rem'}}>{this.state.bs_volume.substring(0,12)}</div></div>
                             </div>
-                            <div className='row' style={{overflow:'hidden',display:'grid'}}>
+                            <div className='row' style={{overflow:'auto',display:'grid'}}>
                         <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
                         </div>
                         <div className='row' style={{paddingRight:'20px'}}>
