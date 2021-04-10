@@ -26,7 +26,7 @@ class DashboardComponent extends Component {
             prev_val : '3334',
             ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker'),
             watchArray: ['BTCUSDT'],
-            interval: ['5m', '15m'],
+            interval: ['15m', '1h', '12h', '1d', '1w'],
             activeTab: '1',
             selected_interval: '5m'
             // watchArray : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
@@ -212,11 +212,13 @@ class DashboardComponent extends Component {
         let i=1;
         let chartTab = Object.keys(interval).map( () =>{
             return(
-            <NavItem>
+           <nav tabs>
+                <NavItem>
           <NavLink className={this.state.activeTab == `{${i}}` ? 'active' : ''} onClick={() => this.setActiveTab(`${i}`)}>
             {interval[i++ -1]}
           </NavLink>
         </NavItem>
+           </nav>
             )
         } )
 
@@ -332,19 +334,34 @@ class DashboardComponent extends Component {
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
                                     <div className='row' style={{fontSize:'1.5rem'}}>{this.state.bs_volume.substring(0,12)}</div></div>
                             </div>
-{/*                            
-                            <nav tabs>
+                           {/* {chartTab} */}
+                            {/* <nav tabs>
                                 {chartTab}
                             </nav> */}
                             <Nav tabs> 
              <NavItem>
           <NavLink className={this.state.activeTab == '1' ? 'active' : ''} onClick={() => this.setActiveTab('1')}>
-            5m
+            15m
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink className={this.state.activeTab == '2' ? 'active' : ''} onClick={() =>this.setActiveTab('2')}>
-            15m
+            1h
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className={this.state.activeTab == '3' ? 'active' : ''} onClick={() =>this.setActiveTab('3')}>
+            12h
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className={this.state.activeTab == '4' ? 'active' : ''} onClick={() =>this.setActiveTab('4')}>
+            1d
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className={this.state.activeTab == '5' ? 'active' : ''} onClick={() =>this.setActiveTab('5')}>
+            1w
           </NavLink>
         </NavItem>
       </Nav>
