@@ -86,6 +86,7 @@ export class LightweightChart extends React.Component {
     };
  
     makeChart = async (symbol, interval) =>{
+		console.log('symbol',symbol,'interval',interval)
 		console.log(this.chart !== null)
 		if (this.chart !== null) {
 			this.chart.remove();

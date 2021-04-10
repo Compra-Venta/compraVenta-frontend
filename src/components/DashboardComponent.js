@@ -10,7 +10,7 @@ import BinancePrice from './BinancePrice';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
 import ChartTab from './ChartTab';
-import ChartTabC from './ChartTabC';
+//import ChartTabC from './ChartTabC';
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
@@ -167,7 +167,7 @@ class DashboardComponent extends Component {
         this.setState({
             activeTab: newTab,
             selected_interval: interval[newTab - 1]
-        })
+        },() => {this.childRefChart.current.makeChart(this.state.selectedValue, this.state.selected_interval)})
     }
 
     render() {
