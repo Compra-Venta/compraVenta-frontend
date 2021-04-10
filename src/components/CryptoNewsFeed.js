@@ -13,7 +13,7 @@ class CryptoNewsFeed extends Component {
         this.state = {
              newsList: [],
              /*category: this.props.category,*/
-             count: 10
+             count: 13
         }
     }
     

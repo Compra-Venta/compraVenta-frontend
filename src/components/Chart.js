@@ -85,7 +85,7 @@ export class LightweightChart extends React.Component {
         } 
     };
  
-    makeChart = async (symbol) =>{
+    makeChart = async (symbol, interval) =>{
 		console.log(this.chart !== null)
 		if (this.chart !== null) {
 			this.chart.remove();
@@ -157,7 +157,7 @@ wickUpColor: 'green',
 var data = [];
 
 		//var symbol = props.coinpair;
-        await axios.get(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1m&endTime=${Date.now()}&limit=10000`)//&endTime=1614725621000
+        await axios.get(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&endTime=${Date.now()}&limit=10000`)//&endTime=1614725621000
         .then( res=>{
             var candle = res.data;
              for ( let i =0; i< 1000 ;i++)
@@ -191,7 +191,7 @@ var smaLine = chart.addLineSeries({
 smaLine.setData(smaData);
 	this.check();
 	//var category= symbol.toLowerCase()
-	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_1m`)
+	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_${interval}`)
 	ws.onmessage = (event)=>{
 		
 		var message  = JSON.parse(event.data);
@@ -224,7 +224,7 @@ this.chart=chart;
 }
 
 componentDidMount() {
-	this.makeChart(`${this.props.coinpair}`);
+	this.makeChart(`${this.props.coinpair}`, `${this.props.interval}`);
 }
 
 	componentWillUnmount() {

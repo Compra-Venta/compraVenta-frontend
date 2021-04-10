@@ -9,6 +9,7 @@ import CryptoNewsFeed from './CryptoNewsFeed';
 import BinancePrice from './BinancePrice';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
+import ChartTab from './ChartTab';
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
@@ -24,7 +25,8 @@ class DashboardComponent extends Component {
             change_color: 'red',
             prev_val : '3334',
             ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker'),
-            watchArray : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
+            watchArray: ['BTCUSDT'],
+            // watchArray : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
             
         }
         
@@ -81,20 +83,6 @@ class DashboardComponent extends Component {
             ob = JSON.parse(event.data) ;
             // console.log(ob.p);
             console.log(ob);
-            // if (ob.p>=0.000){
-            //     this.setState({
-                
-            //         price: ob.p,
-            //         color:'green'
-            //     })
-            // }
-            // else{
-            //     this.setState({
-                   
-                
-            //         color:'red'
-            //     })
-            // }
             this.setState({
                 ws: binanceSocket,
                 h_high: ob.h,
@@ -108,12 +96,7 @@ class DashboardComponent extends Component {
                 // color: ob.c > this.state.prev_val ? 'green' : 'red',
                 prev_val : ob.c
             })
-
-            /*console.log(ob.p);
-            /*this.setState({
-            price: ob.p
-        })*/
-            
+           
             
         }
     }
@@ -321,9 +304,10 @@ class DashboardComponent extends Component {
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
                                     <div className='row' style={{fontSize:'1.5rem'}}>{this.state.bs_volume.substring(0,12)}</div></div>
                             </div>
-                            <div className='row' style={{overflow:'auto',display:'grid'}}>
+                            <ChartTab coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
+                            {/* <div className='row' style={{overflow:'auto',display:'grid'}}>
                         <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
-                        </div>
+                        </div> */}
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
                         </div>
