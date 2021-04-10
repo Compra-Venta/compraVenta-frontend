@@ -50,7 +50,7 @@ class MarketTrades extends Component {
             // console.log(j)
             var ledger = this.state.ledger;
             var color = 'red';
-            if(Object.keys(ledger).length > 8)
+            if(Object.keys(ledger).length > 15)
             {
                 ledger.shift();
                 color = ledger[7].price > j.p ? 'red' : 'green' 

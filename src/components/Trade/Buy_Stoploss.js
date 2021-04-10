@@ -14,7 +14,6 @@ export class Buy_Stoploss extends Component {
         this.state = {
              coin_pair: 'BTCUSDT',
              stop: '',
-             limit: '',
              amount: '0.0',
              total: '0.0'
         }
@@ -54,23 +53,6 @@ export class Buy_Stoploss extends Component {
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
                 </FormGroup>
               </Col>
-              <Col>
-                <FormGroup>
-                  <Label for='Limit-Price'>Limit</Label>
-                  <Input
-                    type="text"
-                    name="limitprice"
-                    id="Limit-Price"
-                    // value={this.state.limit}
-                    onChange={this.handleChange} 
-                    // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
-                    placeholder={`Limit | ${this.props.qa}`}
-                    required
-                  />
-                  {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
-                </FormGroup>
-              </Col>
-              
               <Col>
                 <FormGroup>
                 <label data-bn-type="text" for="Buy-Stoploss-Amount" class="css-ef8yc4" style={{display: 'inline-block', textAlign: 'right' }}>

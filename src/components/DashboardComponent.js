@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavDash from './NavDashboard';
 import {LightweightChart} from './Chart';
-import { Button } from 'reactstrap';
+import { Button, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import MarketTrades from './MarketTrades';
@@ -10,6 +10,7 @@ import BinancePrice from './BinancePrice';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
 import ChartTab from './ChartTab';
+import ChartTabC from './ChartTabC';
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
@@ -26,6 +27,9 @@ class DashboardComponent extends Component {
             prev_val : '3334',
             ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker'),
             watchArray: ['BTCUSDT'],
+            interval: ['5m', '15m'],
+            activeTab: '1',
+            selected_interval: '5m'
             // watchArray : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
             
         }
@@ -154,9 +158,18 @@ class DashboardComponent extends Component {
             
         })
         this.childRef.current.check(event.target.value);
-        this.childRefChart.current.makeChart(event.target.value);
+        this.childRefChart.current.makeChart(event.target.value, this.state.selected_interval);
         
     }
+
+    setActiveTab(newTab){
+        let interval = this.state.interval
+        this.setState({
+            activeTab: newTab,
+            selected_interval: interval[newTab - 1]
+        })
+    }
+
     render() {
         var addButton = <Button color="primary" size='md' className='mx-auto' onClick={this.addToWatcharray} >Add to Watchlist</Button>;
         var removeButton = <Button color="danger" size='md' className='mx-auto' onClick={this.removeFromWatcharray} >Remove from Watchlist</Button>;
@@ -179,23 +192,39 @@ class DashboardComponent extends Component {
             )
         }, this);  
         
-        const watchListArray = {ETHBTC:{price: '0.003', color:'red'},
-                                BTCUSDT:{price:'0.0022', color:'green'},
-                                ETHUSDT:{price:'1.5326', color:'green'},
-                                ADABTC:{price:'0.123', color:'red'},
-                                DOGEBTC:{price:'0.786', color:'green'},
-                                XRPBTC:{price:'0.0053', color:'red'}
+        // const watchListArray = {ETHBTC:{price: '0.003', color:'red'},
+        //                         BTCUSDT:{price:'0.0022', color:'green'},
+        //                         ETHUSDT:{price:'1.5326', color:'green'},
+        //                         ADABTC:{price:'0.123', color:'red'},
+        //                         DOGEBTC:{price:'0.786', color:'green'},
+        //                         XRPBTC:{price:'0.0053', color:'red'}
 
-        };
-        let watchList = Object.keys(watchListArray).map((c) => {
+        // };
+        // let watchList = Object.keys(watchListArray).map((c) => {
+        //     return(
+        //         <div className='row' style={{color:watchListArray[c].color,fontSize:'1.2rem'}}>
+        //             <div className='col col-md-3'>{c}</div>
+        //             <div className='col col-md-3 offset-2'>{watchListArray[c].price}</div>
+        //         </div>
+        //     )
+        // },this);
+
+        const interval = this.state.interval;
+        let i=1;
+        let chartTab = Object.keys(interval).map( () =>{
             return(
-                <div className='row' style={{color:watchListArray[c].color,fontSize:'1.2rem'}}>
-                    <div className='col col-md-3'>{c}</div>
-                    <div className='col col-md-3 offset-2'>{watchListArray[c].price}</div>
-                </div>
+            <NavItem>
+          <NavLink className={this.state.activeTab == `{${i}}` ? 'active' : ''} onClick={() => this.setActiveTab(`${i}`)}>
+            {interval[i++ -1]}
+          </NavLink>
+        </NavItem>
             )
-        },this);
-              
+        } )
+
+        // <div className='row' style={{overflow:'auto',display:'grid'}}>
+        //         <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
+        //     </div>
+        
         return (
             
             <div>
@@ -304,10 +333,43 @@ class DashboardComponent extends Component {
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
                                     <div className='row' style={{fontSize:'1.5rem'}}>{this.state.bs_volume.substring(0,12)}</div></div>
                             </div>
-                            <ChartTab coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
+{/*                            
+                            <nav tabs>
+                                {chartTab}
+                            </nav> */}
+                            <Nav tabs> 
+             <NavItem>
+          <NavLink className={this.state.activeTab == '1' ? 'active' : ''} onClick={() => this.setActiveTab('1')}>
+            5m
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink className={this.state.activeTab == '2' ? 'active' : ''} onClick={() =>this.setActiveTab('2')}>
+            15m
+          </NavLink>
+        </NavItem>
+      </Nav>
+      <div className='row' style={{overflow:'auto',display:'grid'}}>
+                <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
+            </div>
+      {/* <TabContent activeTab={this.state.activeTab}>
+        <TabPane tabId="1">
+            <div className='row' style={{overflow:'auto',display:'grid'}}>
+                <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
+            </div>
+        </TabPane>
+        <TabPane tabId="2">
+            <div className='row' style={{overflow:'auto',display:'grid'}}>
+                <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
+            </div>
+        </TabPane>
+      </TabContent> */}
                             {/* <div className='row' style={{overflow:'auto',display:'grid'}}>
-                        <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
+                        // <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
                         </div> */}
+                        <div className='row' style={{overflow:'auto',display:'grid'}}>
+                        {/* <LightweightChart coinpair={`${this.state.selectedValue}`} interval={`5m`} ref={this.childRefChart} /> */}
+                        </div>
                         <div className='row' style={{paddingRight:'20px'}}>
                         <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
                         </div>
