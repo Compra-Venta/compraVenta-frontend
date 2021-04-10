@@ -9,8 +9,7 @@ import CryptoNewsFeed from './CryptoNewsFeed';
 import BinancePrice from './BinancePrice';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
-import ChartTab from './ChartTab';
-//import ChartTabC from './ChartTabC';
+
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
