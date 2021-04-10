@@ -20,18 +20,34 @@ export class Watchlist extends Component {
     }
     
     createwatchlist = (symbol) => {
+        //console.log('my',symbol)
+        var checkP = this.state.prices
+        //var newP = Object.keys(checkP).filter(symb => symbol.indexOf(symb)!==-1);
+        for (const item of Object.keys(checkP)){
+            //console.log('item',item)
+            if (symbol.indexOf(item)===-1){
+                //console.log('delete',item)
+                delete checkP[item]
+            }
+        }
+        this.setState({
+            prices : checkP
+        })
+        //console.log('checkP',checkP);
         this.check();
-        var socketUrl = 'wss://stream.binance.com:9443/ws/!miniTicker@arr';
-        console.log(socketUrl)
-        var binanceSocket= new WebSocket(socketUrl)
+       /* var socketUrl = 'wss://stream.binance.com:9443/ws/!miniTicker@arr';
+        console.log(socketUrl)*/
+        var binanceSocket=this.state.ws;
 	    binanceSocket.onmessage = (event)=>{
 		var res = JSON.parse(event.data)
-		// console.log(res)
+		//console.log(res)
        res.filter((ticker)=> {
             if(symbol.find(sym => sym === ticker.s))
            {
+               //console.log('sym',symbol)
             //    console.log(ticker.c)
             var prices = this.state.prices;
+            //console.log('pp',prices)
             var prev_price;
             // console.log(prices)
             if(Object.keys(prices).find( (label, value) => label === ticker.s ))
@@ -66,7 +82,7 @@ export class Watchlist extends Component {
 
         const prices  = this.state.prices;
 
-        // console.log(prices);
+         console.log('prices',prices);
         let watchlists = Object.keys(prices).map(( (label, value) => {
             // console.log(label, prices[label]);
             return (
