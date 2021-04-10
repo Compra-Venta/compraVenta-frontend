@@ -9,14 +9,14 @@ export class Wallet extends Component {
         this.state = {
              wallet: {
                 'BTC': {
-                    amount: '0.569',
-                    total_investment: `465.432`,
+                    balance: '0.56900000',
+                    fixed_balance: `0.46543200`,
                     total_profit: `103.4554`,
                     color: 'red'
                 },
                 'ETH': {
-                    amount: '2.45549',
-                    total_investment: `10695.432`,
+                    balance: '2.45549000',
+                    fixed_balance: `0.10695432`,
                     total_profit: `145.4554`,
                     color: 'green'
                 }
@@ -36,10 +36,10 @@ export class Wallet extends Component {
                         {`${label}`}
                     </div>
                     <div className='col'>
-                        {`${wallet[label].amount}`}
+                        {`${wallet[label].balance}`}
                     </div>
                     <div className='col'>
-                        {`${wallet[label].total_investment}`}
+                        {`${wallet[label].fixed_balance}`}
                     </div>
                     <div className='col' style={{color:wallet[label].color}}>
                         {`${wallet[label].total_profit}`}
@@ -56,10 +56,10 @@ export class Wallet extends Component {
                     Coin
                 </div>
                 <div className='col'>
-                    Amount
+                    Balance
                 </div>
                 <div className='col'>
-                   Invested
+                   Fixed Balance
                 </div>
                 <div className='col'>
                    Profit Earned

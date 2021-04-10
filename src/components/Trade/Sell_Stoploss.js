@@ -56,23 +56,6 @@ export class Sell_Stoploss extends Component {
               </Col>
               <Col>
                 <FormGroup>
-                  <Label for='Limit-Price'>Limit</Label>
-                  <Input
-                    type="text"
-                    name="limitprice"
-                    id="Limit-Price"
-                    // value={this.state.limit}
-                    onChange={this.handleChange} 
-                    // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
-                    placeholder={`Limit | ${this.props.qa}`}
-                    required
-                  />
-                  {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
-                </FormGroup>
-              </Col>
-              
-              <Col>
-                <FormGroup>
                 <label data-bn-type="text" for="Sell-Stoploss-Amount" class="css-ef8yc4" style={{display: 'inline-block', textAlign: 'right' }}>
                     Amount
                 </label>
