@@ -339,54 +339,37 @@ class DashboardComponent extends Component {
                             {/* <nav tabs>
                                 {chartTab}
                             </nav> */}
-                            <Nav tabs> 
-             <NavItem>
-          <NavLink className={this.state.activeTab == '1' ? 'active' : ''} onClick={() => this.setActiveTab('1')}>
-            15m
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink className={this.state.activeTab == '2' ? 'active' : ''} onClick={() =>this.setActiveTab('2')}>
-            1h
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink className={this.state.activeTab == '3' ? 'active' : ''} onClick={() =>this.setActiveTab('3')}>
-            12h
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink className={this.state.activeTab == '4' ? 'active' : ''} onClick={() =>this.setActiveTab('4')}>
-            1d
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink className={this.state.activeTab == '5' ? 'active' : ''} onClick={() =>this.setActiveTab('5')}>
-            1w
-          </NavLink>
-        </NavItem>
-      </Nav>
-      <div className='row' style={{overflow:'auto',display:'grid'}}>
-                <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
-            </div>
-      {/* <TabContent activeTab={this.state.activeTab}>
-        <TabPane tabId="1">
-            <div className='row' style={{overflow:'auto',display:'grid'}}>
-                <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
-            </div>
-        </TabPane>
-        <TabPane tabId="2">
-            <div className='row' style={{overflow:'auto',display:'grid'}}>
-                <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
-            </div>
-        </TabPane>
-      </TabContent> */}
-                            {/* <div className='row' style={{overflow:'auto',display:'grid'}}>
-                        // <LightweightChart coinpair={`${this.state.selectedValue}`} ref={this.childRefChart} />
-                        </div> */}
-                        <div className='row' style={{overflow:'auto',display:'grid'}}>
-                        {/* <LightweightChart coinpair={`${this.state.selectedValue}`} interval={`5m`} ref={this.childRefChart} /> */}
-                        </div>
+                            <Nav tabs>
+                            <NavItem>
+                                <NavLink className={this.state.activeTab == '1' ? 'active' : ''} onClick={() => this.setActiveTab('1')}>
+                                    15m
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className={this.state.activeTab == '2' ? 'active' : ''} onClick={() =>this.setActiveTab('2')}>
+                                    1h
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className={this.state.activeTab == '3' ? 'active' : ''} onClick={() =>this.setActiveTab('3')}>
+                                    12h
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className={this.state.activeTab == '4' ? 'active' : ''} onClick={() =>this.setActiveTab('4')}>
+                                    1d
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink className={this.state.activeTab == '5' ? 'active' : ''} onClick={() =>this.setActiveTab('5')}>
+                                    1w
+                                </NavLink>
+                            </NavItem>
+                            </Nav>
+                            <div className='row' style={{overflow:'auto',display:'grid'}}>
+                                <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
+                            </div>
+                           
                         <Predict/>
                         <div className="row">
                             <MyTabs qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`}/>
