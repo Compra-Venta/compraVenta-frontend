@@ -9,6 +9,7 @@ import CryptoNewsFeed from './CryptoNewsFeed';
 import BinancePrice from './BinancePrice';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
+import Predict from './Predict';
 
 class DashboardComponent extends Component {
     constructor(props){
@@ -386,9 +387,7 @@ class DashboardComponent extends Component {
                         <div className='row' style={{overflow:'auto',display:'grid'}}>
                         {/* <LightweightChart coinpair={`${this.state.selectedValue}`} interval={`5m`} ref={this.childRefChart} /> */}
                         </div>
-                        <div className='row' style={{paddingRight:'20px'}}>
-                        <Button color="primary" size='md' className='ml-auto' style={{width:'7rem',fontSize:'1.2rem'}}>Predict</Button>{' '}
-                        </div>
+                        <Predict/>
                         <div className="row">
                             <MyTabs qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`}/>
                         </div>
