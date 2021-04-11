@@ -177,7 +177,7 @@ var data = [];
             console.log(candle)
         } )
         .catch(error =>{
-            alert(error)
+            // alert(error)
             this.setState({errormsg:'Error Retreiving Data'})
       
           })
