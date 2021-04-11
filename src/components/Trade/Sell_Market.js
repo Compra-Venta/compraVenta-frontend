@@ -6,7 +6,7 @@ import {
     FormFeedback,
   } from 'reactstrap';
 
-export class Buy_Market extends Component {
+export class Sell_Market extends Component {
 
     constructor(props) {
         super(props)
@@ -21,22 +21,22 @@ export class Buy_Market extends Component {
     }
     
     handleChange =(event) =>{
-      const target = event.target;
-      const value = target.value;
-      const name = target.name;
-
-      this.setState({
-        [name]: value
-      });
-    }
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+  
+        this.setState({
+          [name]: value
+        });
+      }
 
     render() {
         return (
             
 
 <Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
-            {/*<h2 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
-            <Form className="Buy-Market" onSubmit={this.handleSubmit} >
+            {/*<h2 style={{textAlign:'left'}} >{`Sell ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
+            <Form className="Sell-Market" onSubmit={this.handleSubmit} >
               <Col>
                 <FormGroup>
                   <Label for='Coin-Price'>Price</Label>
@@ -56,7 +56,7 @@ export class Buy_Market extends Component {
               </Col>
               <Col>
                 <FormGroup>
-                <label data-bn-type="text" for="Buy-Market-Amount" class="css-ef8yc4" style={{display: 'inline-block', textAlign: 'right' }}>
+                <label data-bn-type="text" for="Sell-Market-Amount" class="css-ef8yc4" style={{display: 'inline-block', textAlign: 'right' }}>
                     Amount
                 </label>
                 <Input
@@ -65,7 +65,7 @@ export class Buy_Market extends Component {
                     // value={this.state.amount}
                     onChange={this.handleChange}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Buy-Market-Amount"
+                    id="Sell-Market-Amount"
                     min="0.00000100" step="0.00000100"
                     placeholder={`${this.props.ba}`}
                     required
@@ -76,14 +76,14 @@ export class Buy_Market extends Component {
                     value={this.state.total}
                     onChange={this.handleChange}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Buy-Market-Amount"
+                    id="Sell-Market-Amount"
                     placeholder={`${this.state.coin_pair.slice(3)}`}
                     required
                   />  */}
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
-              <Button type="submit" color="success" className='offset-5' >Buy</Button>
+              <Button type="submit" color="danger" className='offset-5' >Sell</Button>
               
             </Form>
           </Container>
@@ -92,4 +92,4 @@ export class Buy_Market extends Component {
     }
 }
 
-export default Buy_Market
+export default Sell_Market

@@ -94,7 +94,7 @@ class SignIn extends Component {
                   <FormFeedback>{errors.Password}</FormFeedback>
                 </FormGroup>
               </Col>
-              <Button type="submit" color="primary" className='offset-5' >Submit</Button>
+              <Button type="submit" color="primary" >Submit</Button>
               <div style={{textAlign:'center'}}>
               <div><a href='#'>Forget Password?</a></div>
               <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={this.props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>&nbsp;Register Here</button></div>

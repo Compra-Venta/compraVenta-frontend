@@ -16,16 +16,16 @@ const NavComp = (props) => {
         <Collapse  isOpen={!collapsed} navbar>
           <Nav className='ml-auto mr-2 col-sm-7' navbar >
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}} className='me' href="/aboutus/"><span color='violet' >About us</span></NavLink>
+              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}} className='me' href="/aboutus"><span color='violet' >About us</span></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/contactus/">Contact Us </NavLink>
+              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/contactus">Contact Us </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/Collaborators/">Collaborators </NavLink>
+              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/Collaborators">Collaborators </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/faqs/">FAQs </NavLink>
+              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/faqs">FAQs </NavLink>
             </NavItem>
           </Nav>
         </Collapse>

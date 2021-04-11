@@ -251,7 +251,7 @@ class SignUp extends Component {
                   <FormFeedback>{errors.ConfirmPassword}</FormFeedback>
                 </FormGroup>
               </Col>
-              <Button type="submit" color="primary" className='offset-5' >Submit</Button>
+              <Button type="submit" color="primary" >Submit</Button>
               <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' onClick={this.props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
             </Form>
           </Container>
