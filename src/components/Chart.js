@@ -166,6 +166,12 @@ export class LightweightChart extends React.Component {
 			// 	bottom: 0.25,
 			// },
 		},
+		timeScale: {
+			secondsVisible:true,
+			visible:true,
+			timeVisible:true,
+			fixLeftEdge:true
+		}
 	});
 
 // var sampledata = [
