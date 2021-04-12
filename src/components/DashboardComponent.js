@@ -183,7 +183,7 @@ class DashboardComponent extends Component {
                           ADAUSDT:{ba:'ADA',qa:'USDT',qp:'',bp:''},
                           DOGEBTC:{ba:'DOGE',qa:'BTC',qp:'',bp:''},
                           XRPBTC:{ba:'XRP',qa:'BTC',qp:'',bp:''},
-                          XRPUSDC:{ba:'XRP',qa:'USDC',qp:'',bp:''},
+                          XRPUSDT:{ba:'XRP',qa:'USDT',qp:'',bp:''},
                           XRPETH:{ba:'XRP',qa:'ETH',qp:'',bp:''}}
                             
         let pairList = Object.keys(currencies).map((k) => {
