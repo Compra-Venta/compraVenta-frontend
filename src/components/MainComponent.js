@@ -11,6 +11,7 @@ import Watchlist from './Watchlist';
 import MyTabs from './Tab';
 import Profile from './Profile/Profile';
 import { Route, Switch, Redirect } from 'react-router';
+import LearnCrypto from './LearnCrypto';
 
 
 class MainComponent extends Component {
@@ -31,6 +32,9 @@ class MainComponent extends Component {
                     </Route>
                     <Route path='/profile'>
                         <Profile/>
+                    </Route>
+                    <Route path='/learn'>
+                        <LearnCrypto/>
                     </Route>
                 </Switch>
               {/* <Header/>  
