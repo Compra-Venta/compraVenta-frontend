@@ -173,18 +173,21 @@ class DashboardComponent extends Component {
     render() {
         var addButton = <Button color="primary" size='md' className='mx-auto' onClick={this.addToWatcharray} >Add to Watchlist</Button>;
         var removeButton = <Button color="danger" size='md' className='mx-auto' onClick={this.removeFromWatcharray} >Remove from Watchlist</Button>;
-        const currencies={BTCUSDT:{ba:'BTC',qa:'USDT',qp:'',bp:''},
-                          ETHUSDT:{ba:'ETH',qa:'USDT',qp:'',bp:''},
-                          ETHBTC:{ba:'ETH',qa:'BTC',qp:'',bp:''},
-                          LTCBTC:{ba:'LTC',qa:'BTC',qp:'',bp:''},
-                          LTCUSDT:{ba:'LTC',qa:'USDT',qp:'',bp:''},
-                          ADABTC:{ba:'ADA',qa:'BTC',qp:'',bp:''},
-                          ADAETH:{ba:'ADA',qa:'ETH',qp:'',bp:''},
-                          ADAUSDT:{ba:'ADA',qa:'USDT',qp:'',bp:''},
-                          DOGEBTC:{ba:'DOGE',qa:'BTC',qp:'',bp:''},
-                          XRPBTC:{ba:'XRP',qa:'BTC',qp:'',bp:''},
-                          XRPUSDT:{ba:'XRP',qa:'USDT',qp:'',bp:''},
-                          XRPETH:{ba:'XRP',qa:'ETH',qp:'',bp:''}}
+        const currencies={BTCUSDT:{ba:'BTC',qa:'USDT',qp:'0.00000001',bp:'0.000001'},
+                          ETHUSDT:{ba:'ETH',qa:'USDT',qp:'0.0000001',bp:'0.00001'},
+                          ETHBTC:{ba:'ETH',qa:'BTC',qp:'0.00000001',bp:'0.001'},
+                          LTCBTC:{ba:'LTC',qa:'BTC',qp:'0.00000001',bp:'0.01'},
+                          LTCUSDT:{ba:'LTC',qa:'USDT',qp:'0.0000001',bp:'0.00001'},
+                          LTCBNB:{ba:'LTC',qa:'BNB',qp:'0.000001',bp:'0.001'},
+                          LTCETH:{ba:'LTC',qa:'ETH',qp:'0.00000001',bp:'0.001'},
+                          XRPBTC:{ba:'XRP',qa:'BTC',qp:'0.00000001',bp:'1'},
+                          XRPUSDT:{ba:'XRP',qa:'USDT',qp:'0.000001',bp:'0.1'},
+                          XRPETH:{ba:'XRP',qa:'ETH',qp:'0.00000001',bp:'1'},
+                          XRPBNB:{ba:'XRP',qa:'BNB',qp:'0.000001',bp:'0.1'},
+                          BNBBTC:{ba:'BNB',qa:'BTC',qp:'0.00000001',bp:'0.01'},
+                          BNBETH:{ba:'BNB',qa:'ETH',qp:'0.00000001',bp:'0.01'},
+                          BNBUSDT:{ba:'BNB',qa:'USDT',qp:'0.0000001',bp:'0.001'},  
+                        }
                             
         let pairList = Object.keys(currencies).map((k) => {
             return (
@@ -372,7 +375,7 @@ class DashboardComponent extends Component {
                            
                         <Predict/>
                         <div className="row">
-                            <MyTabs qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`}/>
+                            <MyTabs qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`} qp={`${currencies[this.state.selectedValue].qp}`} bp={`${currencies[this.state.selectedValue].bp}`}/>
                         </div>
                         </div>
                         </div>

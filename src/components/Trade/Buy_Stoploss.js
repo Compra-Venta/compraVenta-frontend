@@ -41,11 +41,12 @@ export class Buy_Stoploss extends Component {
                 <FormGroup>
                   <Label for='Stop-Price'>Stop</Label>
                   <Input
-                    type="text"
+                    type="number"
                     name="stopprice"
                     id="Stop-Price"
                     // value={this.state.stop}
-                    onChange={this.handleChange} 
+                    onChange={this.handleChange}
+                    min={this.props.qp} step={this.props.qp}
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
                     placeholder={`Stop | ${this.props.qa}`}
                     required
@@ -59,13 +60,13 @@ export class Buy_Stoploss extends Component {
                     Amount
                 </label>
                 <Input
-                    type="text"
+                    type="number"
                     name="amount"
                     // value={this.state.amount}
                     onChange={this.handleChange}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
                     id="Buy-Stoploss-Amount"
-                    min="0.00000100" step="0.00000100"
+                    min={this.props.bp} step={this.props.bp}
                     placeholder={`${this.props.ba}`}
                     required
                   />
@@ -76,11 +77,12 @@ export class Buy_Stoploss extends Component {
                 <FormGroup>
                   <Label for='Total'>Total</Label>
                   <Input
-                    type="text"
+                    type="number"
                     name="total"
                     id="Total"
                     // value={this.state.total}
                     onChange={this.handleChange} 
+                    min={this.props.qp} step={this.props.qp}
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
                     placeholder={`${this.props.qa}`}
                     required

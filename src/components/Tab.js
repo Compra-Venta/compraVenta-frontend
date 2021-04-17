@@ -27,10 +27,10 @@ export default function MyTabs(props) {
             <div className="container">
                 <div className="row">
                     <div className="col-6">
-                        <Buy_Market qa={props.qa} ba={props.ba}/>
+                        <Buy_Market qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp} />
                     </div>
                     <div className="col-6">
-                        <Sell_Market qa={props.qa} ba={props.ba}/>
+                        <Sell_Market qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}/>
                     </div>
                 </div>
             </div>
@@ -39,10 +39,10 @@ export default function MyTabs(props) {
         <div className="container-fluid">
                 <div className="row">
                     <div className="col-6">
-                        <Buy_Stoploss qa={props.qa} ba={props.ba}/>
+                        <Buy_Stoploss qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}/>
                     </div>
                     <div className="col-6">
-                        <Sell_Stoploss qa={props.qa} ba={props.ba}/>
+                        <Sell_Stoploss qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}/>
                     </div>
                 </div>
             </div>
