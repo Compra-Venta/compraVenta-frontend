@@ -210,3 +210,49 @@ html{
 .border-3 {
   border-width:3px !important;
 }
+.getStarted{
+  background-color: #0abcf9;
+background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
+border-radius: '50px';
+
+-webkit-box-align: center;
+    align-items: center;
+    border: 0px solid transparent;
+    border-radius: 4px;
+    display: inline-flex;
+    font-weight: 500;
+    -webkit-box-pack: center;
+    justify-content: center;
+    white-space: nowrap;
+    outline: 0px;
+    font-size: 14px;
+    
+    line-height: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
+    
+    
+}
+.quicklink{
+  -webkit-box-align: center;
+    align-items: center;
+    background-color: #0abcf9;
+background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    justify-content: center;
+    
+}
+.qlinks{
+  -webkit-box-align: center;
+    align-items: center;
+    background-color: #0abcf9;
+
+    border-radius: 8px;
+    color: rgb(255, 255, 255);
+    display: inline-flex;
+    margin-bottom: 16px;
+    margin-left: 16px;
+    
+}
