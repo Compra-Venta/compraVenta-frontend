@@ -17,7 +17,7 @@ export default function MyTabs(props) {
         </NavItem>
         <NavItem>
           <NavLink className={activeTab == '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-            Stoploss
+            Stop
           </NavLink>
         </NavItem>
       </Nav>

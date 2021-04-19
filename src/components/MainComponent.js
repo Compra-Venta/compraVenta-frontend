@@ -12,6 +12,7 @@ import MyTabs from './Tab';
 import Profile from './Profile/Profile';
 import { Route, Switch, Redirect } from 'react-router';
 import LearnCrypto from './LearnCrypto';
+import Collaborators from './Collaborators';
 
 
 class MainComponent extends Component {
@@ -35,6 +36,9 @@ class MainComponent extends Component {
                     </Route>
                     <Route path='/learn'>
                         <LearnCrypto/>
+                    </Route>
+                    <Route path='/collaborators'>
+                        <Collaborators/>
                     </Route>
                 </Switch>
               {/* <Header/>  
