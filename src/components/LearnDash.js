@@ -12,7 +12,7 @@ const LearnDash = (props) => {
       <Navbar light='false' expand='md' /*style={{marginBottom:'0px',marginTop:'0px',borderWidth:'medium'}}*/ className=' mr-0' style={{ padding:'0px'}} >
         {/*{<div className='container'> }*/}
         <NavbarBrand  href="/" className="mr-auto" ><div className='col-sm-2'><img src='/assets/images/HeadLogoLearn.png'height='40vh' width='40vh' style={{display:'inline-block',float:'left',maxHeight:'100%',width:'4vw',height:'4vw'}} /> </div><div style={{width:'100%',textAlign:'center',justifyContent:'center',verticalAlign:'center',marginTop:'auto'}} className='col-sm-3'> <h1 id='top' style={{fontSize:'3vw',alignContent:'center',color:'gold'}}>Compra Venta</h1></div></NavbarBrand>
-        <NavbarToggler /*style={{backgroundColor: 'blue',marginRight:'40px',width:'7vw',height:'7vw'}}*/ onClick={toggleNavbar} className="me-0"/>
+        <NavbarToggler style={{backgroundColor: 'white'}} onClick={toggleNavbar} className="me-0"/>
         <Collapse  isOpen={!collapsed} navbar>
           <Nav className='ml-auto col-md-7 justify-content-end' navbar style={{paddingRight:'0px',justifyItems:'right'}} >
             <NavItem>

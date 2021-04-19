@@ -36,7 +36,7 @@ export class LearnCrypto extends Component {
                         </NavbarBrand>
                 
                 <Nav className='ml-auto col-md-7 justify-content-end' navbar style={{paddingRight:'0px',justifyItems:'right'}} >
-                    <NavItem className='qlinks'>
+                    <NavItem className='qlinks text-center'>
                         <NavLink style={{color:'white',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="#cryptocurrency"><span color='violet' >CryptoCurrency</span></NavLink>
                     </NavItem>
                     <NavItem className='qlinks'>
@@ -49,7 +49,8 @@ export class LearnCrypto extends Component {
                         <NavLink style={{color:'white',fontSize:'1.4rem',paddingRight:'2vw'}}  href="#">CompraVenta </NavLink>
                     </NavItem>
                 </Nav>
-                </Navbar>
+        </Navbar>
+                    
                 </div>
                 <div id='cryptocurrency'>
                     <h3 style={{fontFamily:'cursive'}}>What is CryptoCurrency?</h3>
