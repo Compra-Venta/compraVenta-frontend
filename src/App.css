@@ -257,3 +257,42 @@ background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
     justify-content: center;
     
 }
+.handlebox{
+  opacity: 0;
+  transition: .5s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+#collaborator{
+  float: left;
+  margin-bottom: auto;
+  padding: 0 8px;
+  margin: 10%;
+  text-align: center;
+  width: 30%
+}
+.card{
+  width: 250px; 
+  height:250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.colab-name{
+  text-align: center;
+}
+#collaborator:hover .collaborator-pic{
+  opacity: 0.3;
+}
+#collaborator:hover .handlebox{
+  opacity: 1;
+}
+.socialhandles{
+  display:'grid'; 
+  padding:32%;
+  margin: 'auto';
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
