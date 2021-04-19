@@ -42,6 +42,7 @@ export class Collaborators extends Component {
     
     render() {
         const AseemMangla = 'Aseem Mangla'
+        const imgUrl = `assets/images/collaborators/${AseemMangla}.png`
         return (
             <div>
                 <div>
@@ -50,11 +51,12 @@ export class Collaborators extends Component {
                 <div 
                 style={{
                     
-                    backgroundImage: `url(/assets/images/collaborators/${AseemMangla}.png)`,
+                    backgroundImage: `url("${imgUrl}")`,
                     width: '400px',
                     height: '500px'
                     }}>
                         hihh
+                        
                 </div>
                 <img src={`assets/images/collaborators/` + `Aseem Mangla` + `.png`} width='250px'/>
 
