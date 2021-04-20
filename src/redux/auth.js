@@ -47,6 +47,15 @@ export const Auth = (state = {
                 user: null,
                 
             };
+            case ActionTypes.REFRESH_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                isAuthenticated: true,
+                errMess: '',
+                token: action.token,
+                
+            };
         default:
             return state
     }
