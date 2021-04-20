@@ -4,6 +4,7 @@ import Account from './Account'
 import Personal_Info from './Personal_Info'
 import ProfileNav from './ProfileNav'
 import Wallet from './Wallet'
+import ChangePassword from './ChangePassword'
 
 export class Profile extends Component {
     render() {
@@ -19,9 +20,7 @@ export class Profile extends Component {
                     </div>
                     
                     <Personal_Info/>
-                    <div>
-                    <Button color="primary" size='md' style={{marginLeft:'30px'}}>Change Password</Button>{' '}
-                    </div>
+                    <ChangePassword/>
                 </div>
                
                 <div className="row" style={{marginLeft:'40px',padding:'20px',paddingLeft:'0px',marginTop:'40px'}}>

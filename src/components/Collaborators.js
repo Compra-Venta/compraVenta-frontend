@@ -74,7 +74,7 @@ export class Collaborators extends Component {
                 <div>
                     <NavDash/>
                 </div>
-                <div className='row'>
+                <div className='row' style={{background: 'rgb(0, 191, 255, 0.85)', margin:'5%'}}>
                     {collaboratorsData}
                 </div>
             </div>
@@ -83,48 +83,3 @@ export class Collaborators extends Component {
 }
 
 export default Collaborators
-
-/*
-<h1>
-  <img src="../../assets/website team/website-team.png" class="heading" />
-</h1>
-<div class="d-flex team-grid mx-5">
-  <div
-    *ngFor="let member of websiteTeam; index as i"
-    class="image rounded card border-0 shadow"
-  >
-    <img
-      *ngIf="member.event == true"
-      src="..//..//assets/website team/{{ member.gif }}"
-      class="card-img-top"
-      alt="{{ member.name }}"
-    />
-    <img
-      src="..//..//assets/website team/{{ member.image }}"
-      class="card-img-top"
-      alt="{{ member.name }}"
-    />
-    <div class="overlay d-flex">
-      <a *ngIf="member.fb" class="fa fa-facebook" href="{{ member.fb }}"></a>
-      <a
-        *ngIf="member.linked"
-        class="fa fa-linkedin"
-        href="{{ member.linked }}"
-      ></a>
-      <a
-        *ngIf="member.insta"
-        class="fa fa-instagram"
-        href="{{ member.insta }}"
-      ></a>
-    </div>
-    <div class="card-body text-center">
-      <h4>
-        {{ member.name }}
-      </h4>
-      <p>
-        <b>{{ member.post }}</b>
-      </p>
-    </div>
-  </div>
-</div>
-*/
