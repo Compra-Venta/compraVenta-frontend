@@ -119,6 +119,7 @@ export class LightweightChart extends React.Component {
 	timeScale: {
 		borderColor: 'rgba(197, 203, 206, 0.8)',
 	},
+	
 });
 /*chart.applyOptions({
     priceScale: {
@@ -140,21 +141,43 @@ export class LightweightChart extends React.Component {
     },
 	
 });*/
-//chart.resize(450,380);
-var candleSeries = chart.addCandlestickSeries({
-  upColor: 'green',
-  downColor: 'red',
-  /*borderDownColor: 'rgba(255, 144, 0, 1)',
-  borderUpColor: 'rgba(255, 144, 0, 1)',*/
-  wickDownColor: 'red',
-wickUpColor: 'green',
-});
+	chart.resize(730,390);
+	var candleSeries = chart.addCandlestickSeries({
+  		upColor: 'green',
+  		downColor: 'red',
+  		// borderDownColor: 'rgba(255, 144, 0, 1)',
+  		// borderUpColor: 'rgba(255, 144, 0, 1)',
+  		wickDownColor: 'red',
+		wickUpColor: 'green',
+
+	});
+
+	chart.applyOptions({
+		priceScale: {
+			position: 'right',
+			mode: symbol.slice(-1) == 'T' ? 1:2,
+			autoScale: true,
+			invertScale: false,
+			alignLabels: true,
+			borderVisible: true,
+			borderColor: 'black',
+			// scaleMargins: {
+			// 	top: 0.30,
+			// 	bottom: 0.25,
+			// },
+		},
+		timeScale: {
+			secondsVisible:true,
+			visible:true,
+			timeVisible:true,
+			fixLeftEdge:true
+		}
+	});
 
 // var sampledata = [
 // 	{ time: '2018-10-19', open: 180.34, high: 180.99, low: 178.57, close: 179.85 },
 // 	{ time: '2019-05-24', open: 192.54, high: 193.86, low: 190.41, close: 193.59 },
 // // ];
-// var data = this.createData();
 var data = [];
 
 		//var symbol = props.coinpair;

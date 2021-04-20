@@ -5,6 +5,7 @@ import {
     Button,
     FormFeedback,
   } from 'reactstrap';
+import ForgetPassword from './ForgetPassword';
 
 class SignIn extends Component {
    
@@ -96,7 +97,7 @@ class SignIn extends Component {
               </Col>
               <Button type="submit" color="primary" >Submit</Button>
               <div style={{textAlign:'center'}}>
-              <div><a href='#'>Forget Password?</a></div>
+              <div><ForgetPassword/></div>
               <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={this.props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>&nbsp;Register Here</button></div>
               </div>
             </Form>

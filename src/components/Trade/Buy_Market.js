@@ -60,13 +60,13 @@ export class Buy_Market extends Component {
                     Amount
                 </label>
                 <Input
-                    type="text"
+                    type="number"
                     name="amount"
                     // value={this.state.amount}
                     onChange={this.handleChange}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
                     id="Buy-Market-Amount"
-                    min="0.00000100" step="0.00000100"
+                    min={this.props.bp} step={this.props.bp}
                     placeholder={`${this.props.ba}`}
                     required
                   />

@@ -1,30 +1,46 @@
-import React, {useState} from 'react'
-import Modal from 'react-modal'
-import { Button } from 'reactstrap'
+import React, { useState } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-function Predict() {
-    const [modalIsOpen, setmodalIsOpen] =  useState(false)
-    
-    return (
-        <div>
-            <div className='row' style={{paddingRight:'20px'}}>
+const Predict = (props) => {
+ /* const {
+    buttonLabel,
+    className
+  } = props;*/
+
+  const [modal, setModal] = useState(false);
+  const [interval] =useState([ '1d', '7d', '15d' ]);
+    const [selectedInterval, changeInterval] = useState('1d')
+    const intervallist = interval.map( (time) =>{ 
+        return(<option>{`${time}`}</option>
+
+    ) } )
+  const toggle = () => setModal(!modal);
+
+  return (
+    <div>
+     <div className='row' style={{paddingRight:'20px'}}>
                 <Button color="primary" size='md' className='ml-auto' 
                 style={{width:'7rem',fontSize:'1.2rem'}}
-                onClick={() => setmodalIsOpen(true)}>
+                onClick={toggle}>
                 Predict</Button>{' '}
             </div>
-            <Modal isOpen={modalIsOpen} shouldCloseOnOverlayClick={false} onRequestClose={() =>{setmodalIsOpen(false)}}>
-            
-                Predict Modal
-                <div className='row' style={{paddingRight:'20px'}}>
-                    <Button color="primary" size='md' className='ml-auto' 
-                        style={{width:'7rem',fontSize:'1.2rem'}}
-                        onClick={() => setmodalIsOpen(false)}>
-                    Close</Button>{' '}
-                </div>
-            </Modal>
-        </div>
-    )
+      <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Predict...</ModalHeader>
+        <ModalBody className='text-center'>
+            Select the time:-
+        <select 
+                    style={{height:'3rem',fontSize:'1.4rem'}}
+                >
+                    {intervallist}
+         </select>           
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={toggle}>Predict</Button>{' '}
+          <Button color="secondary" onClick={toggle}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
+    </div>
+  );
 }
 
-export default Predict
+export default Predict;

@@ -30,7 +30,7 @@ export class Personal_Info extends Component {
                     <div className='col-6'>{`Country: ${personal_data.country}`}</div>
                  </div>   
                  <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
-                     <div className='col-6'>{`Email ID: ${personal_data.email}`}</div>
+                     <div className='col-6' style={{overflowWrap:'break-word'}}>{`Email ID: ${personal_data.email}`}</div>
                      <div className='col-6'>{`DOB: ${personal_data.dob}`}</div>
                   </div>
                   <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
