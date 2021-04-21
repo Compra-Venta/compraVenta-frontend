@@ -6,9 +6,9 @@ function Footer() {
             <div className="row contactF">
                 <div className="row mr-auto ml-auto " style={{display:'flex',flexDirection:'column'}}>
 
-                    <a href="#" style={{color:'white'}} target="_blank" rel="noopener noreferrer">Contact Us</a>
+                    <a href="mailto:teamcompraventa@gmail.com" style={{color:'white'}} target="_blank" rel="noopener noreferrer">Contact Us</a>
 
-                    <a href="#" style={{color:'white'}} target="_blank" rel="noopener noreferrer">Meet the Collaborators</a>
+                    <a href="/collaborators" style={{color:'white'}} target="_blank" rel="noopener noreferrer">Meet the Collaborators</a>
 
                 </div>
             </div>

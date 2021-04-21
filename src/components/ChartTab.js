@@ -4,8 +4,7 @@ import { LightweightChart } from './Chart';
 
 export default function ChartTab(props) {
     const [activeTab, setActiveTab] = useState('1');
-    // childRef.current.check(event.target.value);
-    // childRefChart.current.makeChart(event.target.value);
+    
   return (
     <div>
       <Nav tabs>
