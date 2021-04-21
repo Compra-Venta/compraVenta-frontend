@@ -63,7 +63,7 @@ function Profile() {
                         </div>
                      </TabPane>
                     <TabPane tabId="2">
-                        <div>
+                        <div className='row'>
                             <ClosedTransaction/>
                         </div>
                     </TabPane>
