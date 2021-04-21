@@ -1,5 +1,5 @@
 import * as ActionTypes from './actionTypes';
-const baseUrl='http://localhost:3000'
+const baseUrl='http://127.0.0.1:5000'
 
 export const watchlistLoading = () => ({
     type: ActionTypes.WATCHLIST_LOADING
@@ -14,6 +14,109 @@ export const watchlistSuccess = (watchlist) => ({
     type: ActionTypes.WATCHLIST_SUCCESS,
     payload: watchlist
 });
+
+export const addSymbol = (symbol) => ({
+    type: ActionTypes.ADD_SYMBOL,
+    payload: symbol
+});
+
+export const addToWatchlist = (symbol) => (dispatch) => {
+
+    
+    console.log('Symbol: ', symbol);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+
+    return fetch(baseUrl + '/watchlist'+`/${symbol}`, {
+        method: 'POST',
+        body: {'email' :JSON.stringify(email)},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(response => { alert(response); dispatch(addSymbol(symbol)); dispatch(fetchNotices()); })
+        .catch(error => {
+            console.log('Add symbol ', error.message);
+            alert('Requested Symbol could not be added\nError: ' + error.message);
+        })
+}
+
+export const fetchWatchlist = () => (dispatch) => {
+    dispatch(watchlistLoading(true));
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+
+    return fetch(baseUrl + 'watchlist', {
+        headers: {
+            'method': 'GET',
+            'Authorization': bearer
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(watchlist => dispatch(watchlistSuccess(watchlist)))
+        .catch(error => dispatch(watchlistFailed(error.message)));
+}
+
+export const removeFromWatchlist = (symbol) => (dispatch) => {
+    console.log('Symbol: ', symbol);
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    return fetch(baseUrl + '/watchlist/' + symbol, {
+        method: "DELETE",
+        body: {'email' :JSON.stringify(email)},
+        headers: {
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            console.log(response);
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(watchlist => { console.log('removed from watchlist', watchlist); dispatch(fetchWatchlist()); })
+        .catch(error => dispatch(watchlistFailed(error.message)));
+};
+
 export const requestLogin = (creds) => {
     return {
         type: ActionTypes.LOGIN_REQUEST,
@@ -92,15 +195,57 @@ export const receiveLogout = () => {
         type: ActionTypes.LOGOUT_SUCCESS
     }
 }
+export const logoutError = (message) => {
+    return {
+        type: ActionTypes.LOGOUT_FAILURE,
+        message
+    }
+}
 
 // Logs the user out
 export const logoutUser = () => (dispatch) => {
     dispatch(requestLogout())
-    localStorage.removeItem('token');
-    localStorage.removeItem('creds');
+    
+    
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    return fetch(baseUrl + '/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        body: {'email' :JSON.stringify(email)}
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(response => {
+            if (response.success) {
+                // If login was successful, set the token in local storage
+                localStorage.removeItem('token');
+                localStorage.removeItem('creds');
     
    
-    dispatch(receiveLogout())
+                dispatch(receiveLogout())
+            }
+            else {
+                var error = new Error('Error ' + response.status);
+                error.response = response;
+                throw error;
+            }
+        })
+        .catch(error => dispatch(logoutError(error.message)))
 }
 
 export const requestRefresh = (token) => {
@@ -128,12 +273,12 @@ export const refreshError = (message) => {
 export const refreshToken = (token) => (dispatch) => {
     // We dispatch requestRefresh to kickoff the call to the API
     dispatch(requestRefresh(token))
-    return fetch(baseUrl + '/reauth', {
+    return fetch(baseUrl + '/reauth'+ `?"${token}"`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(token)
+        
     })
         .then(response => {
             if (response.ok) {
