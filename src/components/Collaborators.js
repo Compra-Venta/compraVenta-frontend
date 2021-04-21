@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLinkedin,
-    faChrome,
-    faGithub
+    faGithub,
   } from "@fortawesome/free-brands-svg-icons";
+import {
+    faEnvelopeSquare,
+    faEnvelope
+  } from '@fortawesome/free-solid-svg-icons';
 import NavDash from './NavDashboard'
 import Footer from './Footer'
 
@@ -51,7 +54,7 @@ export class Collaborators extends Component {
                         <div className='handlebox'>
                         <div className='socialhandles' >
                             <a href={`mailto:${person.mail}`} target="_blank">
-                                <FontAwesomeIcon icon={faChrome} size="3x" />
+                                <FontAwesomeIcon icon={faEnvelopeSquare} size="3x" />
                             </a>
                             <a href={`${person.linkedln}`} target="_blank">
                                 <FontAwesomeIcon icon={faLinkedin} size="3x" />
@@ -73,11 +76,13 @@ export class Collaborators extends Component {
                 <div>
                     <NavDash/>
                 </div>
-                <div style={{textAlign:'center', margin:'5%',fontFamily:'wonderbar', background: '#ffa529', padding: '2%'}}>
+                <div style={{backgroundColor:'aliceblue'}}>
+                <div style={{textAlign:'center', margin:'2%',fontFamily:'wonderbar', background: '#ffa529', padding: '1.5%'}}>
                     <h2>Meet the Team</h2>
                 </div>
-                <div className='row' style={{background: 'rgb(0, 191, 255, 0.85)', margin:'3%'}}>
+                <div className='row' style={{ margin:'3%'}}>
                     {collaboratorsData}
+                </div>
                 </div>
                 <Footer/>
             </div>
