@@ -54,13 +54,13 @@ export class Collaborators extends Component {
                         <div className='handlebox'>
                         <div className='socialhandles' >
                             <a href={`mailto:${person.mail}`} target="_blank">
-                                <FontAwesomeIcon icon={faEnvelopeSquare} size="3x" />
+                                <FontAwesomeIcon icon={faEnvelopeSquare} className='faEnvelope' size="3x" />
                             </a>
                             <a href={`${person.linkedln}`} target="_blank">
-                                <FontAwesomeIcon icon={faLinkedin} size="3x" />
+                                <FontAwesomeIcon icon={faLinkedin} className='faLinkedln' size="3x" />
                             </a>
                             <a href={`${person.github}`} target="_blank">
-                                <FontAwesomeIcon icon={faGithub} size="3x" />
+                                <FontAwesomeIcon icon={faGithub} className='faGithub' size="3x" />
                             </a>
                         </div>
                         </div>

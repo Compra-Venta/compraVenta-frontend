@@ -298,7 +298,18 @@ background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
 .socialhandles{
   display:'grid'; 
   padding:32%;
-  /* margin: 'auto'; */
+  margin: 'auto';
+  color: #ad36360a;
   transition: .5s ease;
-  /* backface-visibility: hidden; */
+  backface-visibility: hidden;
+  
 }
+.faEnvelope:hover{
+ color: rgba(235, 20, 20, 0.849);
+}
+.faGithub:hover{
+  color: black;
+ }
+.faLinkedln:hover{
+  color: blue;
+ }
