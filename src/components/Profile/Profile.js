@@ -43,7 +43,7 @@ function Profile() {
                <h3>Transactions</h3>
                 <hr/>
                 </div>
-                <div>
+                <div style={{width:'90%'}}>
                 <Nav tabs>
                     <NavItem>
                         <NavLink className={activeTab == '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
