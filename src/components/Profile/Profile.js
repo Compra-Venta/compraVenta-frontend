@@ -5,6 +5,7 @@ import Personal_Info from './Personal_Info'
 import ProfileNav from './ProfileNav'
 import Wallet from './Wallet'
 import ChangePassword from './ChangePassword'
+import Footer from '../Footer'
 
 export class Profile extends Component {
     render() {
@@ -44,6 +45,7 @@ export class Profile extends Component {
                     <Button color="danger" size='md' style={{marginLeft:'30px'}}>Trade More Coins</Button>{' '}
                     </div>
                 </div>
+                <Footer/>
             </div>
             </>
         )

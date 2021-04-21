@@ -6,6 +6,7 @@ import {
     faGithub
   } from "@fortawesome/free-brands-svg-icons";
 import NavDash from './NavDashboard'
+import Footer from './Footer'
 
 export class Collaborators extends Component {
     constructor(props) {
@@ -42,8 +43,6 @@ export class Collaborators extends Component {
     }
     
     render() {
-        const AseemMangla = 'Aseem Mangla'
-        const imgUrl = `assets/images/collaborators/${AseemMangla}.png`
         const collaboratorsData = this.state.data.map( person => {
             return(
                     <div className='column' id='collaborator'>
@@ -52,19 +51,19 @@ export class Collaborators extends Component {
                         <div className='handlebox'>
                         <div className='socialhandles' >
                             <a href={`mailto:${person.mail}`} target="_blank">
-                                <FontAwesomeIcon icon={faChrome} size="4x" />
+                                <FontAwesomeIcon icon={faChrome} size="3x" />
                             </a>
                             <a href={`${person.linkedln}`} target="_blank">
-                                <FontAwesomeIcon icon={faLinkedin} size="4x" />
+                                <FontAwesomeIcon icon={faLinkedin} size="3x" />
                             </a>
                             <a href={`${person.github}`} target="_blank">
-                                <FontAwesomeIcon icon={faGithub} size="4x" />
+                                <FontAwesomeIcon icon={faGithub} size="3x" />
                             </a>
                         </div>
                         </div>
-                    </div>
-                    <div className='colab-name'>
-                        <h2>{`${person.name}`}</h2>
+                        <div className='colab-name'>
+                            <h2>{`${person.name}`}</h2>
+                        </div>
                     </div>
                     </div>
             )
@@ -74,9 +73,13 @@ export class Collaborators extends Component {
                 <div>
                     <NavDash/>
                 </div>
-                <div className='row' style={{background: 'rgb(0, 191, 255, 0.85)', margin:'5%'}}>
+                <div style={{textAlign:'center', margin:'5%',fontFamily:'wonderbar', background: '#ffa529', padding: '2%'}}>
+                    <h2>Meet the Team</h2>
+                </div>
+                <div className='row' style={{background: 'rgb(0, 191, 255, 0.85)', margin:'3%'}}>
                     {collaboratorsData}
                 </div>
+                <Footer/>
             </div>
         )
     }
