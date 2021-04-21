@@ -261,8 +261,8 @@ background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
   opacity: 0;
   transition: .5s ease;
   position: absolute;
-  /* top: 50%;
-  left: 50%; */
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   text-align: center;
