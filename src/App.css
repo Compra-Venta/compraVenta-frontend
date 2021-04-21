@@ -313,3 +313,11 @@ background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
 .faLinkedln:hover{
   color: blue;
  }
+ .table-container{
+   max-height: 30rem;
+   overflow: auto;
+ }
+ th{
+   position: sticky;
+   top: 0;
+ }
