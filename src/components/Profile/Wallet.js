@@ -41,9 +41,9 @@ export class Wallet extends Component {
                     <div className='col'>
                         {`${wallet[label].fixed_balance}`}
                     </div>
-                    <div className='col' style={{color:wallet[label].color}}>
+                    {/* <div className='col' style={{color:wallet[label].color}}>
                         {`${wallet[label].total_profit}`}
-                    </div>
+                    </div> */}
         </div>
         </div>
             )
@@ -61,9 +61,9 @@ export class Wallet extends Component {
                 <div className='col'>
                    Fixed Balance
                 </div>
-                <div className='col'>
+                {/* <div className='col'>
                    Profit Earned
-                </div>
+                </div> */}
             </div>
             {wallet_info}
             </div>

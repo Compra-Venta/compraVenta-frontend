@@ -125,9 +125,6 @@ class ClosedTransaction extends Component {
 
         return (
             <div className='container-fluid'>
-                <div>
-                <Button color="danger" size='md' style={{marginRight:'30px'}}>Refresh</Button>{' '}
-                </div>
                 <div className='table-container'>
                 <Table hover responsive >
                     <thead>
@@ -146,6 +143,9 @@ class ClosedTransaction extends Component {
                         {orderTable}
                     </tbody>
                 </Table>
+                </div>
+                <div>
+                <Button color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
                 </div>
             </div>
         )
