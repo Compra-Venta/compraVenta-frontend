@@ -61,6 +61,8 @@ class SignUp extends Component {
     EmailId: ${this.state.EmailId}
     PhoneNo: ${this.state.PhoneNo}
     `)
+    this.props.registerUser({ name: this.state.UserName, password: this.state.Password, email:this.state.EmailId ,age : '20' ,country: this.state.Country ,PhoneNo: '9501028037' });
+    this.props.onClick();
   }
 
   handleBlur = (field) => (event) => {

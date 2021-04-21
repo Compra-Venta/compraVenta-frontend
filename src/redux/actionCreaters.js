@@ -51,7 +51,7 @@ export const addToWatchlist = (symbol) => (dispatch) => {
                 throw errmess;
             })
         .then(response => response.json())
-        .then(response => { alert(response); dispatch(addSymbol(symbol)); dispatch(fetchNotices()); })
+        .then(response => { alert(response); dispatch(addSymbol(symbol)); dispatch(fetchWatchlist()); })
         .catch(error => {
             console.log('Add symbol ', error.message);
             alert('Requested Symbol could not be added\nError: ' + error.message);
@@ -334,7 +334,7 @@ export const registerError = (message) => {
     }
 }
 
-export const RegisterUser = (creds) => (dispatch) => {
+export const registerUser = (creds) => (dispatch) => {
     // We dispatch requestRegister to kickoff the call to the API
     dispatch(requestRegister(creds))
 
@@ -346,6 +346,7 @@ export const RegisterUser = (creds) => (dispatch) => {
         body: JSON.stringify(creds)
     })
         .then(response => {
+            console.log(response)
             if (response.ok) {
                 return response;
             } else {
