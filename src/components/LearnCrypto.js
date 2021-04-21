@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
+import Footer from './Footer';
 import  LearnDash  from "./LearnDash";
 
 
@@ -75,6 +76,7 @@ export class LearnCrypto extends Component {
                     <br/>You must be dying to get started right away. And technically, you could. It's that easy! But, like most things worth pursuing, trading is hard! It would take us a long time to talk about all that you need to keep in mind.
                     </p>
                 </div>
+                <Footer/>
             </div>
         )
     }

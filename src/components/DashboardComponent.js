@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import MarketTrades from './MarketTrades';
 import CryptoNewsFeed from './CryptoNewsFeed';
-import BinancePrice from './BinancePrice';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
 import Predict from './Predict';
+import Footer from './Footer';
 
 class DashboardComponent extends Component {
     constructor(props){
@@ -390,6 +390,7 @@ class DashboardComponent extends Component {
                     </div>
                     </div>
                 </div>
+                <Footer/>
                 </div>
            
         );
