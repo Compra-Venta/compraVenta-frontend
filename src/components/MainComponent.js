@@ -10,12 +10,25 @@ import Trading from './Trading';
 import Watchlist from './Watchlist';
 import MyTabs from './Tab';
 import Profile from './Profile/Profile';
-import { Route, Switch, Redirect } from 'react-router';
+import { Route, Switch, Redirect ,withRouter} from 'react-router';
+import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
 import Collaborators from './Collaborators';
+import { registerUser } from "../redux/actionCreaters";
 
+const mapDispatchToProps = (dispatch) => ({
+    registerUser: (creds) => dispatch(registerUser(creds))
+
+})
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth
+    }
+}
 
 class MainComponent extends Component {
+    
     render() {
         return (
             <div className="container-full-bg" >
@@ -25,7 +38,7 @@ class MainComponent extends Component {
                 </Route>
                     <Route path='/home'>
                         <Header/>
-                        <LandingPage/>
+                        <LandingPage auth={this.props.auth} registerUser={this.props.registerUser}/>
                         <Footer/>
                     </Route>
                     <Route path='/dashboard'>
@@ -58,4 +71,4 @@ class MainComponent extends Component {
     }
 }
 
-export default MainComponent;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MainComponent));
