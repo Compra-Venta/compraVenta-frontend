@@ -2,7 +2,6 @@
 
 A Virtual Crypto Currency Trading Platform (frontend)
 
-Clone using Command: git clone https://github.com/Compra-Venta/compraVenta-backend.git
 
 ## Installation
 
