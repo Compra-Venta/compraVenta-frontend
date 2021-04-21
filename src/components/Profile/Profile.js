@@ -6,8 +6,9 @@ import ProfileNav from './ProfileNav'
 import Wallet from './Wallet'
 import ChangePassword from './ChangePassword'
 import Footer from '../Footer'
-import ClosedTransaction from './ClosedTransaction';
 import OpenTransaction from './OpenTransaction';
+import ClosedTransaction from './ClosedTransaction';
+
 
 function Profile() {
     const [activeTab, setActiveTab] = useState('1');
@@ -42,6 +43,7 @@ function Profile() {
                <h3>Transactions</h3>
                 <hr/>
                 </div>
+                <div>
                 <Nav tabs>
                     <NavItem>
                         <NavLink className={activeTab == '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
@@ -56,16 +58,17 @@ function Profile() {
                 </Nav>
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="1">
-                        <div className='row' style={{overflow:'auto',display:'grid'}}>
-                        <OpenTransaction/>
+                        <div className='row'>
+                            <OpenTransaction/>
                         </div>
                      </TabPane>
                     <TabPane tabId="2">
-                        <div className='row' style={{overflow:'auto',display:'grid'}}>
-                        <ClosedTransaction/>
+                        <div>
+                            <ClosedTransaction/>
                         </div>
                     </TabPane>
                 </TabContent>
+                </div>
             </div>
 
             <div className="row" style={{marginLeft:'40px',padding:'20px',paddingLeft:'0px',marginTop:'40px'}}>
