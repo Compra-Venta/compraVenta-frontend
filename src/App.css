@@ -37,15 +37,15 @@
   }
 }
 body{
-  font-family: 'Roboto',sans-serif;
+  /* font-family: 'Roboto',sans-serif; */
 }
 
 #top{
-  /* font-family: 'Lucida Handwriting', cursive; */
-  font-family: 'Arvo', 'bold';
-  font-weight: bold;
+  
+  font-family:'intro inline';
+  /* font-weight: bold; */
   font-size:'4vw';
-  color:teal ;
+  color:deepskyblue ;
   
 }
 head{
