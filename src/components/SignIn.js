@@ -6,6 +6,8 @@ import {
     FormFeedback,
   } from 'reactstrap';
 import ForgetPassword from './ForgetPassword';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 class SignIn extends Component {
    
@@ -15,6 +17,7 @@ class SignIn extends Component {
         this.state = {
              EmailId: '',
              Password: '',
+             showPassword: false,
              touched: {
               EmailId: false,
               Password: false,
@@ -58,6 +61,7 @@ class SignIn extends Component {
           this.state.EmailId,
           this.state.Password,
         );
+        const showPassword = this.state.showPassword
 
         return (
           <Container className="SignIn border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
@@ -82,8 +86,9 @@ class SignIn extends Component {
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Password</Label>
+                  <div style={{display:'flex'}}>
                   <Input
-                    type="password"
+                    type={showPassword?'text':'password'}
                     name="Password"
                     value={this.state.Password}
                     onChange={this.handleInputChange}
@@ -92,6 +97,14 @@ class SignIn extends Component {
                     placeholder="********"
                     required
                   />
+                  <Button color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
+                    {
+                      showPassword?
+                      <FontAwesomeIcon icon={faEyeSlash} />:
+                      <FontAwesomeIcon icon={faEye} /> 
+                    }
+                  </Button>
+                  </div>
                   <FormFeedback>{errors.Password}</FormFeedback>
                 </FormGroup>
               </Col>

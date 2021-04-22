@@ -1,11 +1,11 @@
-import React, {useState, Component } from 'react'
+import React, { Component } from 'react'
 import {
   Container, Col, Form,
   FormGroup, Label, Input,
   Button, FormFeedback,
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 class SignUp extends Component {
 
@@ -20,6 +20,7 @@ class SignUp extends Component {
        DOB: '' ,
        Country: '',
        Password: '',
+       showPassword: false,
        ConfirmPassword: '',
        touched: {
         FullName: false,
@@ -39,7 +40,6 @@ class SignUp extends Component {
     this.handleBlur = this.handleBlur.bind(this);
 
 
-
   }
   
   handleInputChange =(event) => {
@@ -55,12 +55,12 @@ class SignUp extends Component {
 
   handleSubmit = (event) => {
     // event.preventDefault();
-    alert(`
-    UserData:
-    Name: ${this.state.FullName}
-    EmailId: ${this.state.EmailId}
-    PhoneNo: ${this.state.PhoneNo}
-    `)
+    // alert(`
+    // UserData:
+    // Name: ${this.state.FullName}
+    // EmailId: ${this.state.EmailId}
+    // PhoneNo: ${this.state.PhoneNo}
+    // `)
     this.props.registerUser({ name: this.state.UserName, password: this.state.Password, email:this.state.EmailId ,age : '20' ,country: this.state.Country ,PhoneNo: '9501028037' });
     this.props.onClick();
   }
@@ -128,7 +128,8 @@ class SignUp extends Component {
        this.state.Password,
        this.state.ConfirmPassword,
     );
-   
+   const showPassword = this.state.showPassword;
+
     return (
       
         <Container className="SignUp border border-primary me border-3" style={{backgroundColor:'white',width:'500px',maxWidth:'100%',borderRadius:'20px',borderWidth:'200px'}}>
@@ -161,21 +162,6 @@ class SignUp extends Component {
                   <FormFeedback>{errors.EmailId}</FormFeedback>
                 </FormGroup>
               </Col>
-              {/* <Col>
-                <FormGroup>
-                  <Label>Username</Label>
-                  <Input
-                    type="text"
-                    name="username"
-                    id="User-Username"
-                    value={this.state.UserName}
-                    onChange={this.handleInputChange} valid={errors.UserName === ''} invalid={errors.UserName !==''}// onBlur={this.handleBlur('FullName')}
-                    placeholder="Username"
-                    required
-                  />
-                  <FormFeedback>{errors.UserName}</FormFeedback>
-                </FormGroup>
-              </Col> */}
               <Col>
                 <FormGroup>
                   <Label>Phone Number</Label>
@@ -225,9 +211,9 @@ class SignUp extends Component {
               <Col>
                 <FormGroup>
                   <Label >Password</Label>
+                  <div style={{display:'flex'}}>
                   <Input
-                    type='password'
-                    // type={passwordShown? "text" : "password"}
+                    type={showPassword ?'text':'password'}
                     name="Password"
                     id="Sign-Up-Password"
                     value={this.state.Password}
@@ -235,14 +221,23 @@ class SignUp extends Component {
                     placeholder="********"
                     required 
                   />
+                  <Button color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
+                    {
+                      showPassword?
+                      <FontAwesomeIcon icon={faEyeSlash} />:
+                      <FontAwesomeIcon icon={faEye} /> 
+                    }
+                  </Button>
+                  </div>
                   <FormFeedback>{errors.Password}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
                   <Label >Confirm Password</Label>
+                  <div style={{display:'flex'}}>
                   <Input
-                    type="password"
+                    type={showPassword?'text':'password'}
                     name="ConfirmPassword"
                     id="Confirm-Password"
                     value={this.state.ConfirmPassword}
@@ -250,6 +245,14 @@ class SignUp extends Component {
                     placeholder="********"
                     required
                   />
+                  <Button color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
+                    {
+                      showPassword?
+                      <FontAwesomeIcon icon={faEyeSlash} />:
+                      <FontAwesomeIcon icon={faEye} /> 
+                    }
+                  </Button>
+                  </div>
                   <FormFeedback>{errors.ConfirmPassword}</FormFeedback>
                 </FormGroup>
               </Col>
@@ -264,9 +267,3 @@ class SignUp extends Component {
 
 export default SignUp
 
-// Name
-// UserName
-// Email
-// Phone No.
-// Country/Origin
-// DOB

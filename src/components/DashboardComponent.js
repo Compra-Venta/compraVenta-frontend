@@ -384,7 +384,7 @@ class DashboardComponent extends Component {
                         <div className='row' style={{fontSize:'1.5rem',paddingTop:'10px'}}>News</div>
                         <div className='row'><CryptoNewsFeed category={`${currencies[this.state.selectedValue].qa}`} /></div>
                         <div className='row' style={{paddingRight:'20px'}}>
-                        <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '}
+                        {/* <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '} */}
                         </div>
                         </div>
                     </div>

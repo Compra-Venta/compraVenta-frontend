@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ShowMoreText from 'react-show-more-text'
 // global.fetch = require('node-fetch')
 const cc = require('cryptocompare') 
-cc.setApiKey(process.env.loREACT_APP_Crypto_Compare_API)
+// cc.setApiKey(process.env.REACT_APP_Crypto_Compare_API)
 
 
 class CryptoNewsFeed extends Component {
@@ -13,7 +13,7 @@ class CryptoNewsFeed extends Component {
         this.state = {
              newsList: [],
              /*category: this.props.category,*/
-             count: 13
+             count: 11
         }
     }
     
