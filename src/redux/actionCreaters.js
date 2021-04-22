@@ -20,9 +20,9 @@ export const addSymbol = (symbol) => ({
     payload: symbol
 });
 
-export const predictSuccess = (predict) => ({
+export const predictSuccess = (prediction) => ({
     type: ActionTypes.PREDICT_SUCCESS,
-    payload: predict
+    payload: prediction
 });
 
 export const predictFailed = (errmess) => ({
@@ -30,16 +30,17 @@ export const predictFailed = (errmess) => ({
     payload: errmess
 });
 
-export const predictLoading = (predict) => ({
+export const predictLoading = () => ({
     type: ActionTypes.PREDICT_LOADING
 });
 
-export const getPrediction = (symbol, time) => (dispatch) => {
-
+export const getPrediction = async (info) => async (dispatch) => {
+    dispatch(predictLoading(true))
+    const [symbol, time] = [info.symbol, info.time]
     console.log('Symbol: ', symbol)
     console.log('interval: ', time)
 
-    return fetch(baseUrl + `/predict?symbol=${symbol}&time=${time}`, {
+    return  fetch(baseUrl + `/predict?symbol=${symbol}&time=${time}`, {
         method: 'GET',
 
     } )
@@ -58,8 +59,10 @@ export const getPrediction = (symbol, time) => (dispatch) => {
                 throw errmess;
             })
         .then(response => response.json())
+        .then(prediction => {dispatch(predictSuccess(prediction))})
         .catch(error => {
             console.log('Predict Error ', error)
+            dispatch(predictFailed(error))
         })
 
 }

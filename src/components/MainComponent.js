@@ -2,19 +2,13 @@ import React, { Component } from 'react';
 import Header from './Header';
 import LandingPage from './LandingPage'
 import Footer from './Footer';
-import { LightweightChart } from './Chart';
-import CryptoNewsFeed from './CryptoNewsFeed';
 import DashboardComponent from './DashboardComponent';
-import BinancePrice from './BinancePrice';
-import Trading from './Trading';
-import Watchlist from './Watchlist';
-import MyTabs from './Tab';
 import Profile from './Profile/Profile';
 import { Route, Switch, Redirect ,withRouter} from 'react-router';
 import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
 import Collaborators from './Collaborators';
-import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser} from "../redux/actionCreaters";
+import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction} from "../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
@@ -22,14 +16,16 @@ const mapDispatchToProps = (dispatch) => ({
     logoutUser : () => dispatch(logoutUser()),
     fetchWatchlist : () => dispatch(fetchWatchlist()),
     addToWatchlist : (symbol) => dispatch(addToWatchlist(symbol)),
-    removeFromWatchlist : (symbol) => dispatch(removeFromWatchlist(symbol))
+    removeFromWatchlist : (symbol) => dispatch(removeFromWatchlist(symbol)),
+    getPrediction : (info) => dispatch(getPrediction(info))
 
 })
 
 const mapStateToProps = (state) => {
     return {
         watchlist: state.watchlist,
-        auth: state.auth
+        auth: state.auth,
+        prediction: state.prediction
     }
 }
 
@@ -53,7 +49,10 @@ class MainComponent extends Component {
                         <Footer/>
                     </Route>
                     <Route path='/dashboard'>
-                        <DashboardComponent auth={this.props.auth} fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} />
+                        <DashboardComponent 
+                        auth={this.props.auth} 
+                        fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist}
+                        getprediction={this.props.getPrediction} prediction={this.props.prediction} />
                     </Route>
                     <Route path='/profile'>
                         <Profile/>
@@ -65,18 +64,6 @@ class MainComponent extends Component {
                         <Collaborators/>
                     </Route>
                 </Switch>
-              {/* <Header/>  
-              <LandingPage/>
-              <CryptoNewsFeed/>
-              <Footer/> */}
-              {/*<Transaction />*/}
-              {/*<MyTabs/>*/}
-               {/*<DashboardComponent/> */}
-               {/*<Profile/>*/}
-              {/* <BinancePrice/> */}
-              {/* <Trading/> */}
-             {/* <LightweightChart/> */}
-             {/* <Watchlist/> */}
             </div>
         );
     }

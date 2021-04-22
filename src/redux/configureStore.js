@@ -9,7 +9,7 @@ export const ConfigureStore = () => {
         combineReducers({
             watchList : WatchList,
             auth: Auth,
-            Predict: Predict,
+            prediction: Predict
         }),
         applyMiddleware(thunk)
     );
