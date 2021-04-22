@@ -22,12 +22,12 @@ function SignIn(props) {
 })
   const [showPassword, setShowPassword] = useState(false)
    
- const history = useHistory();
- useEffect(() => {
-   console.log('auth',props.auth.isAuthenticated)
-     if (props.auth.isAuthenticated) history.push('/dashboard');
+//  const history = useHistory();
+//  useEffect(() => {
+//    console.log('auth',props.auth.isAuthenticated)
+//      if (props.auth.isAuthenticated) history.push('/dashboard');
      
- })
+//  })
     
    const handleInputChange =(event) =>{
       const target = event.target;
@@ -113,7 +113,9 @@ function SignIn(props) {
               </Col>
               <Button type="submit" color="primary" >Submit</Button>
               <div style={{textAlign:'center'}}>
-              <div><ForgetPassword/></div>
+              <div>
+                <ForgetPassword newPassword={props.newPassword} newPassword_status={props.newPassword_status}/>
+              </div>
               <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>&nbsp;Register Here</button></div>
               </div>
             </Form>

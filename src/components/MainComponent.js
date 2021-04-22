@@ -8,7 +8,7 @@ import { Route, Switch, Redirect ,withRouter} from 'react-router';
 import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
 import Collaborators from './Collaborators';
-import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction} from "../redux/actionCreaters";
+import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword} from "../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
@@ -17,7 +17,8 @@ const mapDispatchToProps = (dispatch) => ({
     fetchWatchlist : () => dispatch(fetchWatchlist()),
     addToWatchlist : (symbol) => dispatch(addToWatchlist(symbol)),
     removeFromWatchlist : (symbol) => dispatch(removeFromWatchlist(symbol)),
-    getPrediction : (info) => dispatch(getPrediction(info))
+    getPrediction : (info) => dispatch(getPrediction(info)),
+    newPassword : (Email) => dispatch(newPassword(Email)),
 
 })
 
@@ -25,7 +26,8 @@ const mapStateToProps = (state) => {
     return {
         watchlist: state.watchlist,
         auth: state.auth,
-        prediction: state.prediction
+        prediction: state.prediction,
+        newPassword_status: state.newPassword_status,
     }
 }
 
@@ -45,7 +47,9 @@ class MainComponent extends Component {
                 </Route>
                     <Route path='/home'>
                         <Header/>
-                        <LandingPage auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} />
+                        <LandingPage 
+                        auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} 
+                        newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} />
                         <Footer/>
                     </Route>
                     <Route path='/dashboard'>

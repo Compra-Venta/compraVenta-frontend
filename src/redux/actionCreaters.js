@@ -34,6 +34,58 @@ export const predictLoading = () => ({
     type: ActionTypes.PREDICT_LOADING
 });
 
+export const newPasswordSucces = (status) => ({
+    type: ActionTypes.NEW_PASSWORD_SUCCESS,
+    payload: status
+}); 
+
+export const newPasswordFailed = (errmess) => ({
+    type: ActionTypes.NEW_PASSWORD_FAILED,
+    payload: errmess
+}); 
+
+export const newPasswordLoading = () => ({
+    type: ActionTypes.NEW_PASSWORD_LOADING
+}); 
+
+export const newPassword = (email) => (dispatch) => {
+
+    // dispatch(newPasswordLoading())
+    console.log(email)
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    // const email = JSON.parse(localStorage.getItem('creds')).email
+    const data = {email:  email}
+
+    return fetch(baseUrl + '/password/get_new', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        // body: {'email' : Email},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(status => dispatch(newPasswordSucces(status)))
+        .catch(error => {
+            console.log(error)
+            dispatch(newPasswordFailed(error))})
+}
+
 export const getPrediction = async (info) => async (dispatch) => {
     dispatch(predictLoading(true))
     const [symbol, time] = [info.symbol, info.time]
@@ -77,7 +129,7 @@ export const addToWatchlist = (symbol) => (dispatch) => {
 
     return fetch(baseUrl + '/watchlist'+`/${symbol}`, {
         method: 'POST',
-        body: {'email' :JSON.stringify(email)},
+        body: {'email' :email},
         headers: {
             'Content-Type': 'application/json',
             'Authorization': bearer

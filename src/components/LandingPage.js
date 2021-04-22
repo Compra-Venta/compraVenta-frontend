@@ -53,22 +53,12 @@ class LandingPage extends Component {
                         
                         
                     </div>
-                    <div className='col-sm-6 text-center' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>{OpenSignup ? <SignUp onClick={this.handleSignIn} registerUser={this.props.registerUser}/> : <SignIn onClick={this.handleRegister} loginUser={this.props.loginUser} auth={this.props.auth}/>}</div>
+                    <div className='col-sm-6 text-center' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>
+                        {OpenSignup ? <SignUp onClick={this.handleSignIn} registerUser={this.props.registerUser}/> :
+                         <SignIn onClick={this.handleRegister} loginUser={this.props.loginUser} auth={this.props.auth}
+                         newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status}/>}</div>
                 </div>
                
-                {/*<div className="row" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <h1>Project Description</h1>
-                    <div>our project is a website based on a virtual trading platform which will provide
-budding investors a platform to dive into the trading of cryptocurrencies without
-having any fear of losing anything.</div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-
-        </div>*/}
         <div className='container' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>
         <div className='container-fluid col-12 text-center'>
                 <h1 >Why Compra Venta?</h1>
