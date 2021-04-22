@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { UncontrolledAlert } from 'reactstrap';
 import {Image} from '../images/Screenshot__305_-removebg-preview.png'
 import SignIn from './SignIn';
 import SignUp from './SignUp';
@@ -19,6 +20,7 @@ class LandingPage extends Component {
             isSigning: !this.state.isSigning
         })
         console.log(this.state.isSigning,this.state.isLogging)
+       
     }
     handleSignIn (){
         this.setState({
@@ -43,6 +45,7 @@ class LandingPage extends Component {
         //console.log('opensignup', OpenSignup)
         return (
             <div className="container-fluid" style={{height:'100%',overflow:'hidden',width:'100%',marginTop:'10px'}}>
+                <UncontrolledAlert color='info'>It's never Late, Start learning Now!</UncontrolledAlert>
                 <div className="row">
                     <div className="col-sm-6 text-center" >
                         
@@ -50,7 +53,7 @@ class LandingPage extends Component {
                         
                         
                     </div>
-                    <div className='col-sm-6 text-center' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>{OpenSignup ? <SignUp onClick={this.handleSignIn}/> : <SignIn onClick={this.handleRegister}/>}</div>
+                    <div className='col-sm-6 text-center' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>{OpenSignup ? <SignUp onClick={this.handleSignIn} registerUser={this.props.registerUser}/> : <SignIn onClick={this.handleRegister} loginUser={this.props.loginUser} auth={this.props.auth}/>}</div>
                 </div>
                
                 {/*<div className="row" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>

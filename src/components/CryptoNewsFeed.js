@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ShowMoreText from 'react-show-more-text'
 // global.fetch = require('node-fetch')
 const cc = require('cryptocompare') 
-cc.setApiKey(process.env.loREACT_APP_Crypto_Compare_API)
+// cc.setApiKey(process.env.REACT_APP_Crypto_Compare_API)
 
 
 class CryptoNewsFeed extends Component {
@@ -13,7 +13,7 @@ class CryptoNewsFeed extends Component {
         this.state = {
              newsList: [],
              /*category: this.props.category,*/
-             count: 13
+             count: 10
         }
     }
     
@@ -71,11 +71,9 @@ class CryptoNewsFeed extends Component {
                                 
                                 return(
                         
-                            <div className="container" style={{marginTop:'20px'}}>
-                                {/*<img src={news.imageurl} />*/}
-                                <a href = {news.url} target="_blank" style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.title}</p></ShowMoreText> </a>  
-                                {/*console.log(news.body.length)*/} 
-                                           
+                            <div className="container" style={{marginTop:'20px',display:'flex'}}>
+                                <img src={news.imageurl} style={{maxHeight:'25px',maxWidth:'25px'}} />
+                                <a href = {news.url} target="_blank" style={{color:'black',paddingLeft:'1.5%'}}><ShowMoreText> <p style={{color:'gray'}}>{news.title}</p></ShowMoreText> </a>                                            
                             </div>
                             )
                             }
@@ -105,11 +103,10 @@ class CryptoNewsFeed extends Component {
                                     /*console.log('2nd Try',MyC)*/
                                     return(
                             
-                                <div className="container" style={{marginTop:'20px'}}>
-                                    {/*<img src={news.imageurl} />*/}
-                                    <a href = {news.url} target="_blank" style={{color:'gray'}}><ShowMoreText> <p style={{color:'gray'}}>{news.title}</p></ShowMoreText> </a>    
-                                               
-                                </div>
+                                    <div className="container" style={{marginTop:'20px',display:'flex'}}>
+                                        <img src={news.imageurl} style={{maxHeight:'25px',maxWidth:'25px'}} />
+                                        <a href = {news.url} target="_blank" style={{color:'black',paddingLeft:'1.5%'}}><ShowMoreText> <p style={{color:'gray'}}>{news.title}</p></ShowMoreText> </a>                                            
+                                    </div>
                                     )
                                      
                                  }
@@ -117,12 +114,7 @@ class CryptoNewsFeed extends Component {
                             }
                          }
                         )
-                   }
-                   {
-                       /*console.log(MyC)*/
-                   }
-                   
-                
+                   }                         
             </>
         )
     }

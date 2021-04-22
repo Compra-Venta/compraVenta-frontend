@@ -2,10 +2,8 @@ import * as ActionTypes from './actionTypes'
 
 export const Register = (state = {
     isLoading: true,
-    isLogging:false,
-    isSigning:true,
     errMess: null,
-    user: localStorage.getItem('creds') ? JSON.parse(localStorage.getItem('creds')) : null
+    user: localStorage.getItem('rcreds') ? JSON.parse(localStorage.getItem('rcreds')) : null
 }, action) => {
     switch (action.type) {
         case ActionTypes.REGISTER_REQUEST:
@@ -15,7 +13,7 @@ export const Register = (state = {
             return { ...state, isLoading: false, errMess: action.message};
 
         case ActionTypes.REGISTER_SUCCESS:
-            return { ...state, isLoading: true, errMess: [],isLogging:true,isSigning:false};
+            return { ...state, isLoading: true, errMess: []};
 
 
         default:

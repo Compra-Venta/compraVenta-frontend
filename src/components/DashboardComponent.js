@@ -291,21 +291,21 @@ class DashboardComponent extends Component {
                             </div>
                                 
                                 <div className='row mx-auto'>
-                                    {(this.state.watchArray.indexOf(this.state.selectedValue)===-1)? addButton : removeButton}
+                                    {this.props.watchlist ? ((this.props.watchlist.indexOf(this.state.selectedValue)===-1)? addButton : removeButton) : addButton}
                                 
                                 {' '}
                                 </div>
                             </div>  
                             <div className='row' style={{paddingTop:'10px'}} >
-                                <p style={{color:'blue',fontSize:'1.5rem'}}>Watch List</p>
+                                <p style={{color:'#257CFF',fontSize:'1.5rem'}}>Watch List</p>
                                 <div className='container'>
-                                    <Watchlist array={this.state.watchArray} ref={this.childRefWatchList}/>
+                                    <Watchlist array={this.props.watchlist} ref={this.childRefWatchList}/>
                                     {/* {watchList} */}
                                 </div>
                             </div>
                          
                             <div className='row' style={{paddingTop:'10px'}} >
-                                <p style={{color:'blue',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
+                                <p style={{color:'#257CFF',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
                                 <div className='container'><MarketTrades  category={`${this.state.selectedValue}`} ref={this.childRef} /></div>
                                 
                         
@@ -379,12 +379,12 @@ class DashboardComponent extends Component {
                         </div>
                         </div>
                         </div>
-                    <div className='col col-md-3 col-lg-3' >
+                    <div className='col col-md-3 col-lg-3' style={{marginLeft:'-1%'}} >
                         <div className='container'>
-                        <div className='row' style={{fontSize:'1.5rem',paddingTop:'10px'}}>News</div>
+                        <div className='row' style={{fontSize:'1.5rem',paddingTop:'10px', marginLeft:'1%'}}>News</div>
                         <div className='row'><CryptoNewsFeed category={`${currencies[this.state.selectedValue].qa}`} /></div>
                         <div className='row' style={{paddingRight:'20px'}}>
-                        <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '}
+                        {/* <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '} */}
                         </div>
                         </div>
                     </div>

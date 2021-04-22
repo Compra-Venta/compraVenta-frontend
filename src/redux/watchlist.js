@@ -14,7 +14,9 @@ export const WatchList = (state = {
 
         case ActionTypes.WATCHLIST_LOADING:
             return { ...state, isLoading: true, errMess: [], watchlist: [] };
-
+        case ActionTypes.ADD_SYMBOL:
+            var symbol= action.payload;
+            return {...state, watchlist: state.watchlist.concat(symbol) }
 
         default:
             return state;
