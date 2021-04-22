@@ -55,13 +55,16 @@ class SignUp extends Component {
 
   handleSubmit = (event) => {
     // event.preventDefault();
-    // alert(`
-    // UserData:
-    // Name: ${this.state.FullName}
-    // EmailId: ${this.state.EmailId}
-    // PhoneNo: ${this.state.PhoneNo}
-    // `)
-    this.props.registerUser({ name: this.state.UserName, password: this.state.Password, email:this.state.EmailId ,age : '20' ,country: this.state.Country ,PhoneNo: '9501028037' });
+    alert(`
+    UserData:
+    Name: ${this.state.FullName}
+    EmailId: ${this.state.EmailId}
+    PhoneNo: ${this.state.PhoneNo}
+    `)
+    var td= new Date().getFullYear()
+    var dob= new Date(this.state.DOB).getFullYear()
+    var age = td - dob
+    this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: '9501028037' });
     this.props.onClick();
   }
 
