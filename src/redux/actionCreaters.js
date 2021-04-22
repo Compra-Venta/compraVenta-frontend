@@ -60,10 +60,11 @@ export const addToWatchlist = (symbol) => (dispatch) => {
 
 export const fetchWatchlist = () => (dispatch) => {
     dispatch(watchlistLoading(true));
-
+    const email = JSON.parse(localStorage.getItem('creds')).email
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
     return fetch(baseUrl + 'watchlist', {
+        body: {'email' :JSON.stringify(email)},
         headers: {
             'method': 'GET',
             'Authorization': bearer
@@ -118,6 +119,7 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
 };
 
 export const requestLogin = (creds) => {
+    console.log(creds)
     return {
         type: ActionTypes.LOGIN_REQUEST,
         creds
@@ -125,10 +127,12 @@ export const requestLogin = (creds) => {
 }
 
 export const receiveLogin = (response) => {
+    console.log(response)
     return {
         type: ActionTypes.LOGIN_SUCCESS,
         token: response.access_token,
         refresh_token: response.refresh_token,
+        
         
     }
 }
@@ -165,21 +169,18 @@ export const loginUser = (creds) => (dispatch) => {
             })
         .then(response => response.json())
         .then(response => {
-            if (response.success) {
+            
+                console.log('success',response)
                 // If login was successful, set the token in local storage
                 localStorage.setItem('token', response.access_token);
-                localStorage.setItem('access-token', response.refresh_token);
+                localStorage.setItem('refresh-token', response.refresh_token);
                 localStorage.setItem('creds', JSON.stringify(creds));
                 
                 // Dispatch the success action
-                
+                dispatch(fetchWatchlist());
                 dispatch(receiveLogin(response));
-            }
-            else {
-                var error = new Error('Error ' + response.status);
-                error.response = response;
-                throw error;
-            }
+            
+            
         })
         .catch(error => dispatch(loginError(error.message)))
 };
@@ -231,19 +232,14 @@ export const logoutUser = () => (dispatch) => {
             })
         .then(response => response.json())
         .then(response => {
-            if (response.success) {
+            
                 // If login was successful, set the token in local storage
                 localStorage.removeItem('token');
                 localStorage.removeItem('creds');
     
    
                 dispatch(receiveLogout())
-            }
-            else {
-                var error = new Error('Error ' + response.status);
-                error.response = response;
-                throw error;
-            }
+            
         })
         .catch(error => dispatch(logoutError(error.message)))
 }
@@ -294,7 +290,7 @@ export const refreshToken = (token) => (dispatch) => {
             })
         .then(response => response.json())
         .then(response => {
-            if (response.success) {
+            
                 // If login was successful, set the token in local storage
                 localStorage.setItem('token', response.access_token);
                 
@@ -302,12 +298,7 @@ export const refreshToken = (token) => (dispatch) => {
                 // Dispatch the success action
                 dispatch(receiveRefresh(response))
                 
-            }
-            else {
-                var error = new Error('Error ' + response.status);
-                error.response = response;
-                throw error;
-            }
+            
         })
         .catch(error => dispatch(refreshError(error.message)))
 };
@@ -360,20 +351,15 @@ export const registerUser = (creds) => (dispatch) => {
             })
         .then(response => response.json())
         .then(response => {
-            if (response.success) {
+            
                 
                 
-                localStorage.setItem('creds', JSON.stringify(creds));
+                localStorage.setItem('rcreds', JSON.stringify(creds));
                 
                 // Dispatch the success action
                 
                 dispatch(receiveRegister());
-            }
-            else {
-                var error = new Error('Error ' + response.status);
-                error.response = response;
-                throw error;
-            }
+            
         })
         .catch(error => dispatch(registerError(error.message)))
 };

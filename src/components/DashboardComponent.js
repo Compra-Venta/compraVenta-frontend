@@ -291,7 +291,7 @@ class DashboardComponent extends Component {
                             </div>
                                 
                                 <div className='row mx-auto'>
-                                    {(this.state.watchArray.indexOf(this.state.selectedValue)===-1)? addButton : removeButton}
+                                    {this.props.watchlist ? ((this.props.watchlist.indexOf(this.state.selectedValue)===-1)? addButton : removeButton) : addButton}
                                 
                                 {' '}
                                 </div>
@@ -299,7 +299,7 @@ class DashboardComponent extends Component {
                             <div className='row' style={{paddingTop:'10px'}} >
                                 <p style={{color:'blue',fontSize:'1.5rem'}}>Watch List</p>
                                 <div className='container'>
-                                    <Watchlist array={this.state.watchArray} ref={this.childRefWatchList}/>
+                                    <Watchlist array={this.props.watchlist} ref={this.childRefWatchList}/>
                                     {/* {watchList} */}
                                 </div>
                             </div>

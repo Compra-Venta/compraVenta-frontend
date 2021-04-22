@@ -20,6 +20,7 @@ export class Watchlist extends Component {
     }
     
     createwatchlist = (symbol) => {
+        if (this.props.watchlist){
         //console.log('my',symbol)
         var checkP = this.state.prices
         //var newP = Object.keys(checkP).filter(symb => symbol.indexOf(symb)!==-1);
@@ -64,7 +65,7 @@ export class Watchlist extends Component {
         }
        })
 	}
-    }
+    }}
 
     check = () => {
         const ws  = this.state.ws;
@@ -83,7 +84,9 @@ export class Watchlist extends Component {
         const prices  = this.state.prices;
 
          console.log('prices',prices);
-        let watchlists = Object.keys(prices).map(( (label, value) => {
+         var watchlists=[];
+         if(this.props.watchlist){
+        watchlists = Object.keys(prices).map(( (label, value) => {
             // console.log(label, prices[label]);
             return (
                 <div className='row'>
@@ -95,7 +98,7 @@ export class Watchlist extends Component {
                     </div>
                 </div>
             )
-        }))
+        }))}
 
         return (
             <div>
