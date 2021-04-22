@@ -83,7 +83,7 @@ export class Watchlist extends Component {
 
         const prices  = this.state.prices;
 
-         console.log('prices',prices);
+        //  console.log('prices',prices);
          var watchlists=[];
          if(this.props.watchlist){
         watchlists = Object.keys(prices).map(( (label, value) => {

@@ -20,6 +20,50 @@ export const addSymbol = (symbol) => ({
     payload: symbol
 });
 
+export const predictSuccess = (predict) => ({
+    type: ActionTypes.PREDICT_SUCCESS,
+    payload: predict
+});
+
+export const predictFailed = (errmess) => ({
+    type: ActionTypes.PREDICT_FAILED,
+    payload: errmess
+});
+
+export const predictLoading = (predict) => ({
+    type: ActionTypes.PREDICT_LOADING
+});
+
+export const getPrediction = (symbol, time) => (dispatch) => {
+
+    console.log('Symbol: ', symbol)
+    console.log('interval: ', time)
+
+    return fetch(baseUrl + `/predict?symbol=${symbol}&time=${time}`, {
+        method: 'GET',
+
+    } )
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        }, 
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .catch(error => {
+            console.log('Predict Error ', error)
+        })
+
+}
+
 export const addToWatchlist = (symbol) => (dispatch) => {
 
     

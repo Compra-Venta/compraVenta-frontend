@@ -86,7 +86,7 @@ class DashboardComponent extends Component {
         binanceSocket.onmessage = (event) => {
             ob = JSON.parse(event.data) ;
             // console.log(ob.p);
-            console.log(ob);
+            // console.log(ob);
             this.setState({
                 ws: binanceSocket,
                 h_high: ob.h,
@@ -373,7 +373,7 @@ class DashboardComponent extends Component {
                                 <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
                             </div>
                            
-                        <Predict/>
+                        <Predict symbol={this.state.selectedValue} />
                         <div className="row">
                             <MyTabs qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`} qp={`${currencies[this.state.selectedValue].qp}`} bp={`${currencies[this.state.selectedValue].bp}`}/>
                         </div>

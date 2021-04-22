@@ -188,23 +188,20 @@ var data = [];
 			 {
 				data.push(
 					{
-						// time: time,
 						time:candle[i][0]/1000,
-						// time: this.convertUnixDate(candle[i][0]), 
 						open:  candle[i][1], 
 						 high: candle[i][2], 
 						 low:  candle[i][3], 
 						 close:candle[i][4]
 					})
 			 };
-            console.log(candle)
         } )
         .catch(error =>{
             // alert(error)
             this.setState({errormsg:'Error Retreiving Data'})
       
           })
-console.log('Data ',data)
+// console.log('Data ',data)
 candleSeries.setData(data);
 
 var smaData = this.calculateSMA(data, 1000);
@@ -221,7 +218,7 @@ smaLine.setData(smaData);
 		var message  = JSON.parse(event.data);
 
 		var candlestick = message.k;
-		console.log(candlestick);
+		// console.log(candlestick);
 		this.setState({
 			ws:ws
 		})
