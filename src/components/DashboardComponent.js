@@ -297,7 +297,7 @@ class DashboardComponent extends Component {
                                 </div>
                             </div>  
                             <div className='row' style={{paddingTop:'10px'}} >
-                                <p style={{color:'blue',fontSize:'1.5rem'}}>Watch List</p>
+                                <p style={{color:'#257CFF',fontSize:'1.5rem'}}>Watch List</p>
                                 <div className='container'>
                                     <Watchlist array={this.props.watchlist} ref={this.childRefWatchList}/>
                                     {/* {watchList} */}
@@ -305,7 +305,7 @@ class DashboardComponent extends Component {
                             </div>
                          
                             <div className='row' style={{paddingTop:'10px'}} >
-                                <p style={{color:'blue',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
+                                <p style={{color:'#257CFF',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
                                 <div className='container'><MarketTrades  category={`${this.state.selectedValue}`} ref={this.childRef} /></div>
                                 
                         

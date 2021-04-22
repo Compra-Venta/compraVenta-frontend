@@ -20,6 +20,7 @@ function SignIn(props) {
         Password: false,
  }
 })
+  const [showPassword, setShowPassword] = useState(false)
    
  const history = useHistory();
  useEffect(() => {
@@ -64,8 +65,7 @@ function SignIn(props) {
           initialState.EmailId,
           initialState.Password,
         );
-        const showPassword = this.state.showPassword
-
+       
         return (
           <Container className="SignIn border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
             <h2 style={{textAlign:'center'}} >Sign In</h2>
@@ -100,7 +100,7 @@ function SignIn(props) {
                     placeholder="********"
                     required
                   />
-                  <Button color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
+                  <Button color='success' outline onClick={()=>{setShowPassword(!showPassword)}} >
                     {
                       showPassword?
                       <FontAwesomeIcon icon={faEyeSlash} />:
