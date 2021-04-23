@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-function ChangePassword() {
+function ChangePassword(props) {
   const [modal, setModal] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -16,8 +16,12 @@ function ChangePassword() {
   };
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    setShowMsg(!showmsg)
+    props.changePassword({email: '',password:currentPassword, new_password:newPassword})
+    
+    const status = props.changePassword_status
+    console.log('status change Password',status)
     // alert(email)
+    setShowMsg(!showmsg)
 }
   return (
     <div>
@@ -28,7 +32,7 @@ function ChangePassword() {
         <ModalHeader toggle={toggle}>Enter Registered Email ID</ModalHeader>
         { showmsg?
           <ModalBody className='text-center'>
-            <Form className="Sign-In-Form" onSubmit={handleSubmit} >
+            <Form className="changePassword" onSubmit={handleSubmit} >
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Current Password</Label>
@@ -39,7 +43,7 @@ function ChangePassword() {
                     value={currentPassword}
                     onChange={ event => {setCurrentPassword(event.target.value)}}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Sign-In-Password"
+                    id="currentPassword"
                     placeholder="********"
                     required
                   />
@@ -64,7 +68,7 @@ function ChangePassword() {
                     value={newPassword}
                     onChange={ event => {setNewPassword(event.target.value)}}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Sign-In-Password"
+                    id="newPassword"
                     placeholder="********"
                     required
                   />
@@ -89,7 +93,7 @@ function ChangePassword() {
                     value={confirmNewPassword}
                     onChange={ event => {setConfirmNewPassword(event.target.value)}}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Sign-In-Password"
+                    id="confirmNewPassword"
                     placeholder="********"
                     required
                   />

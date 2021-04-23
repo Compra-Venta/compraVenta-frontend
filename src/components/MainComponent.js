@@ -8,7 +8,7 @@ import { Route, Switch, Redirect ,withRouter} from 'react-router';
 import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
 import Collaborators from './Collaborators';
-import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword} from "../redux/actionCreaters";
+import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword, changePassword} from "../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
@@ -19,6 +19,8 @@ const mapDispatchToProps = (dispatch) => ({
     removeFromWatchlist : (symbol) => dispatch(removeFromWatchlist(symbol)),
     getPrediction : (info) => dispatch(getPrediction(info)),
     newPassword : (Email) => dispatch(newPassword(Email)),
+    changePassword: (info) => dispatch(changePassword(info)),
+    
 
 })
 
@@ -28,6 +30,7 @@ const mapStateToProps = (state) => {
         auth: state.auth,
         prediction: state.prediction,
         newPassword_status: state.newPassword_status,
+        changePassword_status: state.changePassword_status,
     }
 }
 
@@ -82,7 +85,7 @@ class MainComponent extends Component {
                         
                     
                     <Route path='/profile'>
-                        <Profile/>
+                        <Profile changePassword={this.props.changePassword} changePassword_status={this.props.changePassword_status} />
                     </Route>
                     <Route path='/learn'>
                         <LearnCrypto/>
