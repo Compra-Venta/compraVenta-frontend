@@ -89,7 +89,7 @@ export const newPassword = (email) => (dispatch) => {
             dispatch(newPasswordFailed(error))})
 }
 
-export const getPrediction = async (info) => async (dispatch) => {
+export const getPrediction =  (info) => (dispatch) => {
     dispatch(predictLoading(true))
     const [symbol, time] = [info.symbol, info.time]
     console.log('Symbol: ', symbol)

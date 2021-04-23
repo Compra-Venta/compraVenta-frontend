@@ -18,9 +18,11 @@ const ForgetPassword = (props) => {
   const NewPassword = () => {
     // newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status}
     props.newPassword(email)
-    const status = props.newPassword_status;
-    console.log(status)
+    
   }
+    const status = props.newPassword_status;
+    console.log('Status',status)
+  
 
   return (
     <div>

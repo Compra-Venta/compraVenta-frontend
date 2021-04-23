@@ -32,7 +32,7 @@ export class LightweightChart extends React.Component {
 		var result = [];
 		
 		for (var i= 0 ; i < data.length; i++){
-			console.log('result loop99', data.length)
+			// console.log('result loop99', data.length)
 		//   var val = avg(data.slice(0, i));
 		var sum = 0;
 		for (var j = 0; j < i; j++) {
