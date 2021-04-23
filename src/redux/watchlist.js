@@ -11,6 +11,7 @@ export const WatchList = (state = {
             return { ...state, isLoading: false, errMess: null, watchlist: [...state.watchlist, ...action.payload] };
 
         case ActionTypes.WATCHLIST_FAILED:
+            console.log('watchlist ')
             return { ...state, isLoading: false, errMess: action.payload, watchlist: [] };
 
         case ActionTypes.WATCHLIST_LOADING:
