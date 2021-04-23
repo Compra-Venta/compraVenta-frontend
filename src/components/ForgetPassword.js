@@ -24,7 +24,7 @@ const ForgetPassword = (props) => {
     
   }
     var resultState = props.newPassword_status;
-    console.log('Status',resultState)
+    // console.log('Status',resultState)
   
 
   return (
@@ -68,7 +68,7 @@ const ForgetPassword = (props) => {
         }
         <ModalFooter>
           {/* <Button color="primary" onClick={toggle}>Submit</Button>{' '} */}
-          <Button color="secondary" onClick={toggle}>{showmsg?'Cancel':'Ok, Thanks'}</Button>
+          <Button color={showmsg?'warning':resultState.errMess == null ? 'success' : 'danger'} onClick={toggle}>{showmsg?'Cancel':resultState.errMess == null ? 'Ok, Thanks' : 'Oops! Try Again'}</Button>
         </ModalFooter>
       </Modal>
     </div>
