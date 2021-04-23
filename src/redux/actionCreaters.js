@@ -1,4 +1,5 @@
 import * as ActionTypes from './actionTypes';
+import  axios  from "axios";
 const baseUrl='http://127.0.0.1:5000'
 
 export const watchlistLoading = () => ({
@@ -10,10 +11,12 @@ export const watchlistFailed = (errmess) => ({
     payload: errmess
 });
 
-export const watchlistSuccess = (watchlist) => ({
+export const watchlistSuccess = (watchlist) => {
+    console.log(watchlist.watchlist)
+    return {
     type: ActionTypes.WATCHLIST_SUCCESS,
-    payload: watchlist
-});
+    payload: watchlist.watchlist
+}};
 
 export const addSymbol = (symbol) => ({
     type: ActionTypes.ADD_SYMBOL,
@@ -125,11 +128,13 @@ export const addToWatchlist = (symbol) => (dispatch) => {
     console.log('Symbol: ', symbol);
 
     const bearer = 'Bearer ' + localStorage.getItem('token');
+    
     const email = JSON.parse(localStorage.getItem('creds')).email
-
+    console.log('email',email)
+    const data = {email:  email}
     return fetch(baseUrl + '/watchlist'+`/${symbol}`, {
         method: 'POST',
-        body: {'email' :email},
+        body: JSON.stringify(data),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': bearer
@@ -157,19 +162,24 @@ export const addToWatchlist = (symbol) => (dispatch) => {
         })
 }
 
-export const fetchWatchlist = () => (dispatch) => {
-    dispatch(watchlistLoading(true));
+export const fetchWatchlist =  () => async(dispatch) => {
+    dispatch(watchlistLoading())
+    console.log('fetch Watchlist')
     const email = JSON.parse(localStorage.getItem('creds')).email
     const bearer = 'Bearer ' + localStorage.getItem('token');
-
-    return fetch(baseUrl + 'watchlist', {
-        body: {'email' :JSON.stringify(email)},
+    const data = {email:  email}
+    console.log('watchlist',data)
+     fetch(baseUrl + '/watchlist'+`?email=${email}`, {
+        
+        
         headers: {
-            'method': 'GET',
+            
             'Authorization': bearer
         },
+       /* body: /*JSON.stringify(data)*/
     })
         .then(response => {
+            console.log('wres',response);
             if (response.ok) {
                 return response;
             }
@@ -184,7 +194,7 @@ export const fetchWatchlist = () => (dispatch) => {
                 throw errmess;
             })
         .then(response => response.json())
-        .then(watchlist => dispatch(watchlistSuccess(watchlist)))
+        .then(watchlist => {console.log('watchlist',watchlist);dispatch(watchlistSuccess(watchlist));})
         .catch(error => dispatch(watchlistFailed(error.message)));
 }
 
@@ -192,9 +202,10 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
     console.log('Symbol: ', symbol);
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
-    return fetch(baseUrl + '/watchlist/' + symbol, {
+    const data = {email:  email}
+    return fetch(baseUrl + '/watchlist/' + symbol+`?email=${email}`, {
         method: "DELETE",
-        body: {'email' :JSON.stringify(email)},
+        body: JSON.stringify(data) ,
         headers: {
             'Authorization': bearer
         }
@@ -309,13 +320,14 @@ export const logoutUser = () => (dispatch) => {
     
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
+    const data = {email:  email}
     return fetch(baseUrl + '/logout', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': bearer
         },
-        body: {'email' :JSON.stringify(email)}
+        body: JSON.stringify(data)
     })
         .then(response => {
             if (response.ok) {

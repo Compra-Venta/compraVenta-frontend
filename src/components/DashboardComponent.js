@@ -26,7 +26,7 @@ class DashboardComponent extends Component {
             change_color: 'red',
             prev_val : '3334',
             ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker'),
-            watchArray: ['BTCUSDT'],
+            watchArray: (typeof this.props.watchlist !=='undefined') ? this.props.watchlist.watchlist : [],
             interval: ['15m', '1h', '12h', '1d', '1w'],
             activeTab: '1',
             selected_interval: '5m'
@@ -52,21 +52,54 @@ class DashboardComponent extends Component {
        
     binanceSocket = new WebSocket(this.socketUrl);*/
     addToWatcharray = () => {
-        var array = this.state.watchArray
-        var newItem = this.state.selectedValue
-        array.indexOf(newItem) === -1 && array.push(newItem)
-        this.setState({
-            watchArray: array
-        }, () => {this.childRefWatchList.current.createwatchlist(this.state.watchArray)})
+        this.props.addToWatchlist(this.state.selectedValue);
+      this.childRefWatchList.current.createwatchlist(this.props.watchlist.watchlist);
+      /*console.log('fetch Watchlist')
+        const email = JSON.parse(localStorage.getItem('creds')).email
+        const bearer = 'Bearer ' + localStorage.getItem('token');
+        const data = {email:  email}
+        console.log('watchlist',data)
+        return fetch('http://127.0.0.1:5000' + '/watchlist'+`?email=${email}`, {
+            
+            
+            headers: {
+                
+                'Authorization': bearer
+            },
+           /* body: /*JSON.stringify(data)
+        })
+            .then(response => {
+                console.log('wres',response);
+                if (response.ok) {
+                    return response;
+                }
+                else {
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
+                }
+            },
+                error => {
+                    var errmess = new Error(error.message);
+                    throw errmess;
+                })
+            .then(response => response.json())
+            .then(watchlist => {console.log(' dash watchlist',watchlist);this.setState({
+                watchArray :watchlist.watchlist
+            }, this.childRefWatchList.current.createwatchlist(this.state.watchArray))})
+            .catch(error => console.log(error.message));*/
+       
     }
     removeFromWatcharray = () => {
-        var array = this.state.watchArray
+        /*var array = this.state.watchArray
         var element = this.state.selectedValue
         var result = array.filter(el => el !== element)
         console.log('array',result)
         this.setState({
             watchArray: result
-        }, () => {this.childRefWatchList.current.createwatchlist(this.state.watchArray)})
+        }, () => */
+        this.props.removeFromWatchlist(this.state.selectedValue)
+        this.childRefWatchList.current.createwatchlist(this.props.watchlist.watchlist)
     }
     priceChange =(value) =>{
         this.setState({
@@ -116,10 +149,126 @@ class DashboardComponent extends Component {
         } 
     };
     componentDidMount(){
-    
+        /*var ob =[];
+        var category = this.state.selectedValue;
+        var symbol = category.toLowerCase();
+         
+        var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@ticker"
+        console.log(socketUrl);
+        var binanceSocket = new WebSocket(socketUrl);
+        binanceSocket.onmessage = (event) => {
+            ob = JSON.parse(event.data) ;
+            if (ob.p>=0){
+                this.setState({
+                    price: ob.p,
+                    color:'green'
+                })
+            }
+            else{
+                this.setState({
+                    price: -1*ob.p,
+                    color:'red'
+                })
+            }
+            console.log(ob.p);
+            this.setState({
+            price: ob.p
+        })
+            
+            
+        }*/
+
+        
         this.setUpSocket(this.state.selectedValue);
+        /*console.log('fetch Watchlist')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const data = {email:  email}
+    console.log('watchlist',data)
+    return fetch('http://127.0.0.1:5000' + '/watchlist'+`?email=${email}`, {
+        
+        
+        headers: {
+            
+            'Authorization': bearer
+        },
+       /* body: /*JSON.stringify(data)
+    })
+        .then(response => {
+            console.log('wres',response);
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(watchlist => {console.log(' dash watchlist',watchlist);this.setState({
+            watchArray :watchlist.watchlist
+        }, () => console.log(this.state.watchArray))})
+        .catch(error => console.log(error.message));
+       /* let watchA = [];
+        if (typeof this.props.watchlist!=='undefined'){
+        if (this.props.watchlist.watchlist !== null) {
+        this.props.watchlist.watchlist.forEach(element => {
+      watchA.push({element
+        
+      })
+    });
+}}
+    const watchL = this.state.watchArray.concat(watchA);
+    this.setState({
+        watchArray: watchL
+    },() => console.log('wachhh',this.state.watchArray))*/
 
     }
+    /*componentDidUpdate(){
+        console.log('fetch Watchlist')
+        const email = JSON.parse(localStorage.getItem('creds')).email
+        const bearer = 'Bearer ' + localStorage.getItem('token');
+        const data = {email:  email}
+        console.log('watchlist',data)
+        return fetch('http://127.0.0.1:5000' + '/watchlist'+`?email=${email}`, {
+            
+            
+            headers: {
+                
+                'Authorization': bearer
+            },
+           /* body: /*JSON.stringify(data)
+        })
+            .then(response => {
+                console.log('wres',response);
+                if (response.ok) {
+                    return response;
+                }
+                else {
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    error.response = response;
+                    throw error;
+                }
+            },
+                error => {
+                    var errmess = new Error(error.message);
+                    throw errmess;
+                })
+            .then(response => response.json())
+            .then(watchlist => {console.log(' dash watchlist',watchlist);this.setState({
+                watchArray :watchlist.watchlist
+            }, this.childRefWatchList.current.createwatchlist(this.state.watchArray))})
+            .catch(error => console.log(error.message));
+        
+            
+          }*/
+         
+    
     selectValue = (event) => {
 
         
@@ -143,6 +292,7 @@ class DashboardComponent extends Component {
     }
 
     render() {
+        //console.log('watch',this.state.watchArray)
         var addButton = <Button color="primary" size='md' className='mx-auto' onClick={this.addToWatcharray} >Add to Watchlist</Button>;
         var removeButton = <Button color="danger" size='md' className='mx-auto' onClick={this.removeFromWatcharray} >Remove from Watchlist</Button>;
         const currencies={BTCUSDT:{ba:'BTC',qa:'USDT',qp:'0.00000001',bp:'0.000001'},
@@ -189,7 +339,7 @@ class DashboardComponent extends Component {
             
             <div>
                 <div>
-                <NavDash/>
+                <NavDash logoutUser={this.props.logoutUser}/>
                 </div>
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
@@ -232,7 +382,7 @@ class DashboardComponent extends Component {
                             </div>
                                 
                                 <div className='row mx-auto'>
-                                    {this.props.watchlist ? ((this.props.watchlist.indexOf(this.state.selectedValue)===-1)? addButton : removeButton) : addButton}
+                                    {(this.props.watchlist.watchlist.indexOf(this.state.selectedValue)===-1)? addButton : removeButton}
                                 
                                 {' '}
                                 </div>
@@ -240,7 +390,7 @@ class DashboardComponent extends Component {
                             <div className='row' style={{paddingTop:'10px'}} >
                                 <p style={{color:'#257CFF',fontSize:'1.5rem'}}>Watch List</p>
                                 <div className='container'>
-                                    <Watchlist array={this.props.watchlist} ref={this.childRefWatchList}/>
+                                    <Watchlist array={this.props.watchlist.watchlist} ref={this.childRefWatchList} watch={this.props.watchlist}/>
                                     {/* {watchList} */}
                                 </div>
                             </div>

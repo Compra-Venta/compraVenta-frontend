@@ -7,16 +7,18 @@ export const WatchList = (state = {
 }, action) => {
     switch (action.type) {
         case ActionTypes.WATCHLIST_SUCCESS:
-            return { ...state, isLoading: false, errMess: null, watchlist: action.payload };
+            console.log('wr',action.payload)
+            return { ...state, isLoading: false, errMess: null, watchlist: [...state.watchlist, ...action.payload] };
 
         case ActionTypes.WATCHLIST_FAILED:
+            console.log('watchlist ')
             return { ...state, isLoading: false, errMess: action.payload, watchlist: [] };
 
         case ActionTypes.WATCHLIST_LOADING:
             return { ...state, isLoading: true, errMess: [], watchlist: [] };
         case ActionTypes.ADD_SYMBOL:
             var symbol= action.payload;
-            return {...state, watchlist: state.watchlist.concat(symbol) }
+            return {...state }
 
         default:
             return state;

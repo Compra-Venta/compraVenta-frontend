@@ -32,13 +32,38 @@ const mapStateToProps = (state) => {
 }
 
 class MainComponent extends Component {
+    
     componentDidMount() {
+        console.log('auth',this.props.auth.isAuthenticated)
         if (this.props.auth.isAuthenticated) {
             this.props.fetchWatchlist()
-            this.props.loginUser(JSON.parse(localStorage.getItem('creds')));
+            
         }
+        console.log('main',this.props.watchlist)
+        console.log('main auth',this.props.auth)
+        //const reps= await this.props.watchlist
+       /* try {
+            const response = await this.props.watchlist;
+            if (!response) {
+              throw Error('failed');
+            }
+          } catch (error) {
+            console.log(error);
+          }*/
     }
     render() {
+        const DashRoute = ({ component: Component, ...rest }) => (
+            <Route {...rest} render={(props) => (
+                this.props.auth.isAuthenticated
+                    ? <Component {...props} />
+                    : <Redirect to={{
+                        pathname: '/home',
+                        state: { from: props.location }
+                    }} />
+            )} />
+        );
+
+        console.log('m',this.props.watchlist)
         return (
             <div className="container-full-bg" >
                 <Switch>
@@ -52,12 +77,9 @@ class MainComponent extends Component {
                         newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} />
                         <Footer/>
                     </Route>
-                    <Route path='/dashboard'>
-                        <DashboardComponent 
-                        auth={this.props.auth} 
-                        fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist}
-                        getprediction={this.props.getPrediction} prediction={this.props.prediction} />
-                    </Route>
+                    <DashRoute path='/dashboard' component={() =><DashboardComponent auth={this.props.auth} fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} logoutUser={this.props.logoutUser} getprediction={this.props.getPrediction} prediction={this.props.prediction}/>}/>
+                        
+                    
                     <Route path='/profile'>
                         <Profile/>
                     </Route>
@@ -67,6 +89,7 @@ class MainComponent extends Component {
                     <Route path='/collaborators'>
                         <Collaborators/>
                     </Route>
+                    <Redirect to='/home'/>
                 </Switch>
             </div>
         );

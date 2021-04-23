@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
-
+import {  useHistory, withRouter,Link} from "react-router-dom";
 const NavDash = (props) => {
  const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
   const loggedIn = true;
-
+  
+  const handleLogoutClick = () => {
+    props.logoutUser();
+  }
   return (
     <div style={{boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)'}}>
       <Navbar light expand='md' /*style={{marginBottom:'0px',marginTop:'0px',borderWidth:'medium'}}*/ className=' mr-0' style={{ padding:'0'}} >
@@ -25,7 +28,7 @@ const NavDash = (props) => {
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/profile">Profile </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/home">Logout </NavLink>
+              <Link to='/home' style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  onClick={handleLogoutClick}>Logout </Link>
             </NavItem>
           </Nav>
         </Collapse>
