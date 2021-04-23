@@ -67,7 +67,7 @@ const Predict = (props) => {
            null:
            <Spinner color='primary' />:
            resultState.errmess === null ? 
-           <div style={{color:'deepskyblue', textAlign:'center'}}>{resultState.prediction.prediciton}</div> :
+           <div style={{color:'deepskyblue', textAlign:'center'}}>{resultState.prediction.prediction}</div> :
            <div style={{color:'red', textAlign:'center'}}>{resultState.errMess}</div> 
            
          }

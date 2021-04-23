@@ -85,11 +85,10 @@ export const fetchProfile = () => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token')
     const email = JSON.parse(localStorage.getItem('creds')).email
 
-    fetch(baseUrl + '/myprofile', {
-        method: 'GET',
-        body: JSON.stringify(email),
+    return fetch(baseUrl + '/myprofile' + `?email=${email}`, {
+        
         headers: {
-            'Content-Type': 'application/json',
+            
             'Authorization': bearer
         }
     })
