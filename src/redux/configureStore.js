@@ -5,6 +5,7 @@ import { WatchList } from './watchlist';
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Predict } from './predict'
 import { NewPassword } from './forgetPassword';
+import { ChangePassword } from './changePassword';
 
 
 export const ConfigureStore = () => {
@@ -13,7 +14,8 @@ export const ConfigureStore = () => {
             watchlist : WatchList,
             auth: Auth,
             prediction: Predict,
-            newPassword_status: NewPassword
+            newPassword_status: NewPassword,
+            changePassword_status: ChangePassword,
         }),
         composeWithDevTools( applyMiddleware(thunk))
     );

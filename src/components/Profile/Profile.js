@@ -10,7 +10,7 @@ import OpenTransaction from './OpenTransaction';
 import ClosedTransaction from './ClosedTransaction';
 
 
-function Profile() {
+function Profile(props) {
     const [activeTab, setActiveTab] = useState('1');
     return (
         <>
@@ -24,7 +24,7 @@ function Profile() {
                 </div>
                 
                 <Personal_Info/>
-                <ChangePassword/>
+                <ChangePassword changePassword={props.changePassword} changePassword_status={props.changePassword_status}/>
             </div>
            
             <div className="row" style={{marginLeft:'40px',padding:'20px',paddingLeft:'0px',marginTop:'40px'}}>

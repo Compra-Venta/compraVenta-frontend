@@ -37,7 +37,7 @@ export const predictLoading = () => ({
     type: ActionTypes.PREDICT_LOADING
 });
 
-export const newPasswordSucces = (status) => ({
+export const newPasswordSuccess = (status) => ({
     type: ActionTypes.NEW_PASSWORD_SUCCESS,
     payload: status
 }); 
@@ -51,9 +51,62 @@ export const newPasswordLoading = () => ({
     type: ActionTypes.NEW_PASSWORD_LOADING
 }); 
 
+export const changePasswordSuccess = (status) => ({
+    type: ActionTypes.CHANGE_PASSWORD_SUCCESS,
+    payload: status
+}); 
+
+export const changePasswordFailed = (errmess) => ({
+    type: ActionTypes.CHANGE_PASSWORD_FAILED,
+    payload: errmess
+}); 
+
+export const changePasswordLoading = () => ({
+    type: ActionTypes.CHANGE_PASSWORD_LOADING
+}); 
+
+export const changePassword = (info) => (dispatch) => {
+
+    dispatch(changePasswordLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    info.email = email
+    // const data = {info:  info}
+    console.log(info)
+    fetch(baseUrl + '/password/change', {
+        method: 'POST',
+        body: JSON.stringify(info),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(status => {
+            console.log('changePassword Status',status)
+            dispatch(changePasswordSuccess(status))})
+        .catch(error => {
+            console.log(error)
+            dispatch(changePasswordFailed(error))})
+}
+
 export const newPassword = (email) => (dispatch) => {
 
-    // dispatch(newPasswordLoading())
+    dispatch(newPasswordLoading())
     console.log(email)
     const bearer = 'Bearer ' + localStorage.getItem('token')
     // const email = JSON.parse(localStorage.getItem('creds')).email
@@ -83,7 +136,7 @@ export const newPassword = (email) => (dispatch) => {
                 throw errmess;
             })
         .then(response => response.json())
-        .then(status => dispatch(newPasswordSucces(status)))
+        .then(status => dispatch(newPasswordSuccess(status)))
         .catch(error => {
             console.log(error)
             dispatch(newPasswordFailed(error))})
@@ -157,7 +210,7 @@ export const addToWatchlist = (symbol) => (dispatch) => {
         .then(response => response.json())
         .then(response => { alert(response); dispatch(addSymbol(symbol)); dispatch(fetchWatchlist()); })
         .catch(error => {
-            console.log('Add symbol ', error.message);
+            // console.log('Add symbol ', error.message);
             alert('Requested Symbol could not be added\nError: ' + error.message);
         })
 }
