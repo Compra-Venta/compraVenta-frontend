@@ -23,7 +23,7 @@ function Profile(props) {
                 <hr/>
                 </div>
                 
-                <Personal_Info/>
+                <Personal_Info fetchProfile={props.fetchProfile} profile={props.profile}/>
                 <ChangePassword changePassword={props.changePassword} changePassword_status={props.changePassword_status}/>
             </div>
            
