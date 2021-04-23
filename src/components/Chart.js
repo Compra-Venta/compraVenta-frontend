@@ -35,44 +35,6 @@ export class LightweightChart extends React.Component {
 		return result;
 	  }
 
-
-	// createData = async () => {
-	// 	var data = [];
-          
-    //     await axios.get(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&endTime=${Date.now()}&limit=10000`)//&endTime=1614725621000
-    //     .then( res=>{
-    //         var candle = res.data;
-    //          for ( let i =0; i< 1000 ;i++)
-	// 		 {
-	// 			 var date = this.convertUnixDate(candle[i][0]);
-	// 			//  var time = `${date.slice(6,10)}-${date.slice(0,2)}-${date.slice(3,5)}`
-	// 			var time =
-	// 			{day: parseInt(date.slice(3,5)) ,
-	// 			month: parseInt(date.slice(0,2)),
-	// 			year: parseInt(date.slice(6,10))}
-	// 			data.push(
-	// 				{
-	// 					// time: time,
-	// 					time:candle[i][0]/1000,
-	// 					// time: this.convertUnixDate(candle[i][0]), 
-	// 					open:  candle[i][1], 
-	// 					 high: candle[i][2], 
-	// 					 low:  candle[i][3], 
-	// 					 close:candle[i][4]
-	// 				})
-	// 		 };
-    //         console.log(candle)
-    //     } )
-    //     .catch(error =>{
-    //         alert(error)
-    //         this.setState({errormsg:'Error Retreiving Data'})
-      
-    //       })
-	// 	  console.log(Date.now())
-    //     console.log('Data', typeof(data) ,data)
-	// 	return data;
-
-	// };
 	check = () => {
         const ws  = this.state.ws;
         if (ws || ws.readyState == WebSocket.OPEN) {
@@ -188,23 +150,20 @@ var data = [];
 			 {
 				data.push(
 					{
-						// time: time,
 						time:candle[i][0]/1000,
-						// time: this.convertUnixDate(candle[i][0]), 
 						open:  candle[i][1], 
 						 high: candle[i][2], 
 						 low:  candle[i][3], 
 						 close:candle[i][4]
 					})
 			 };
-            console.log(candle)
         } )
         .catch(error =>{
             // alert(error)
             this.setState({errormsg:'Error Retreiving Data'})
       
           })
-console.log('Data ',data)
+// console.log('Data ',data)
 candleSeries.setData(data);
 
 var smaData = this.calculateSMA(data, 1000);
@@ -221,7 +180,7 @@ smaLine.setData(smaData);
 		var message  = JSON.parse(event.data);
 
 		var candlestick = message.k;
-		console.log(candlestick);
+		// console.log(candlestick);
 		this.setState({
 			ws:ws
 		})

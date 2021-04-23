@@ -23,6 +23,105 @@ export const addSymbol = (symbol) => ({
     payload: symbol
 });
 
+export const predictSuccess = (prediction) => ({
+    type: ActionTypes.PREDICT_SUCCESS,
+    payload: prediction
+});
+
+export const predictFailed = (errmess) => ({
+    type: ActionTypes.PREDICT_FAILED,
+    payload: errmess
+});
+
+export const predictLoading = () => ({
+    type: ActionTypes.PREDICT_LOADING
+});
+
+export const newPasswordSucces = (status) => ({
+    type: ActionTypes.NEW_PASSWORD_SUCCESS,
+    payload: status
+}); 
+
+export const newPasswordFailed = (errmess) => ({
+    type: ActionTypes.NEW_PASSWORD_FAILED,
+    payload: errmess
+}); 
+
+export const newPasswordLoading = () => ({
+    type: ActionTypes.NEW_PASSWORD_LOADING
+}); 
+
+export const newPassword = (email) => (dispatch) => {
+
+    // dispatch(newPasswordLoading())
+    console.log(email)
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    // const email = JSON.parse(localStorage.getItem('creds')).email
+    const data = {email:  email}
+
+    return fetch(baseUrl + '/password/get_new', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        // body: {'email' : Email},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(status => dispatch(newPasswordSucces(status)))
+        .catch(error => {
+            console.log(error)
+            dispatch(newPasswordFailed(error))})
+}
+
+export const getPrediction = async (info) => async (dispatch) => {
+    dispatch(predictLoading(true))
+    const [symbol, time] = [info.symbol, info.time]
+    console.log('Symbol: ', symbol)
+    console.log('interval: ', time)
+
+    return  fetch(baseUrl + `/predict?symbol=${symbol}&time=${time}`, {
+        method: 'GET',
+
+    } )
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        }, 
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(prediction => {dispatch(predictSuccess(prediction))})
+        .catch(error => {
+            console.log('Predict Error ', error)
+            dispatch(predictFailed(error))
+        })
+
+}
+
 export const addToWatchlist = (symbol) => (dispatch) => {
 
     

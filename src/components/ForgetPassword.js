@@ -14,7 +14,14 @@ const ForgetPassword = (props) => {
     evt.preventDefault();
     setShowMsg(!showmsg)
     // alert(email)
-}
+  }
+  const NewPassword = () => {
+    // newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status}
+    props.newPassword(email)
+    const status = props.newPassword_status;
+    console.log(status)
+  }
+
   return (
     <div>
      <div  style={{color:'blue', fontFamily:'cursive'}} onClick={toggle}>
@@ -41,7 +48,7 @@ const ForgetPassword = (props) => {
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
                 </FormGroup>
               </Col>
-              <Button color="primary" >Submit</Button>{' '}
+              <Button onClick={NewPassword} color="primary" >Submit</Button>{' '}
             </Form>
         </ModalBody>:
         <ModalBody >

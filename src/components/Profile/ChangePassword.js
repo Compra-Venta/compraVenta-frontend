@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function ChangePassword() {
   const [modal, setModal] = useState(false);
@@ -7,6 +9,7 @@ function ChangePassword() {
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [showmsg, setShowMsg] = useState(true);
+  const [showPassword, setShowPassword] = useState(false)
   const toggle = () =>{ 
     setModal(!modal);
     setShowMsg(true)
@@ -29,8 +32,9 @@ function ChangePassword() {
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Current Password</Label>
+                  <div style={{display:'flex'}}>
                   <Input
-                    type="password"
+                    type={showPassword?'text':'password'}
                     name="Password"
                     value={currentPassword}
                     onChange={ event => {setCurrentPassword(event.target.value)}}
@@ -39,14 +43,23 @@ function ChangePassword() {
                     placeholder="********"
                     required
                   />
+                  <Button color='success' outline onClick={() => setShowPassword(!showPassword)} >
+                    {
+                      showPassword?
+                      <FontAwesomeIcon icon={faEyeSlash} />:
+                      <FontAwesomeIcon icon={faEye} /> 
+                    }
+                  </Button>
+                  </div>
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">New Password</Label>
+                  <div style={{display:'flex'}}>
                   <Input
-                    type="password"
+                    type={showPassword?'text':'password'}
                     name="Password"
                     value={newPassword}
                     onChange={ event => {setNewPassword(event.target.value)}}
@@ -55,14 +68,23 @@ function ChangePassword() {
                     placeholder="********"
                     required
                   />
+                  <Button color='success' outline onClick={() => setShowPassword(!showPassword)} >
+                    {
+                      showPassword?
+                      <FontAwesomeIcon icon={faEyeSlash} />:
+                      <FontAwesomeIcon icon={faEye} /> 
+                    }
+                  </Button>
+                  </div>
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Confirm New Password</Label>
+                  <div style={{display:'flex'}}>
                   <Input
-                    type="password"
+                    type={showPassword?'text':'password'}
                     name="Password"
                     value={confirmNewPassword}
                     onChange={ event => {setConfirmNewPassword(event.target.value)}}
@@ -71,6 +93,14 @@ function ChangePassword() {
                     placeholder="********"
                     required
                   />
+                  <Button color='success' outline onClick={() => setShowPassword(!showPassword)} >
+                    {
+                      showPassword?
+                      <FontAwesomeIcon icon={faEyeSlash} />:
+                      <FontAwesomeIcon icon={faEye} /> 
+                    }
+                  </Button>
+                  </div>
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>

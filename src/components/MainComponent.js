@@ -2,19 +2,13 @@ import React, { Component } from 'react';
 import Header from './Header';
 import LandingPage from './LandingPage'
 import Footer from './Footer';
-import { LightweightChart } from './Chart';
-import CryptoNewsFeed from './CryptoNewsFeed';
 import DashboardComponent from './DashboardComponent';
-import BinancePrice from './BinancePrice';
-import Trading from './Trading';
-import Watchlist from './Watchlist';
-import MyTabs from './Tab';
 import Profile from './Profile/Profile';
 import { Route, Switch, Redirect ,withRouter} from 'react-router';
 import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
 import Collaborators from './Collaborators';
-import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser} from "../redux/actionCreaters";
+import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword} from "../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
@@ -22,14 +16,18 @@ const mapDispatchToProps = (dispatch) => ({
     logoutUser : () => dispatch(logoutUser()),
     fetchWatchlist : () => dispatch(fetchWatchlist()),
     addToWatchlist : (symbol) => dispatch(addToWatchlist(symbol)),
-    removeFromWatchlist : (symbol) => dispatch(removeFromWatchlist(symbol))
+    removeFromWatchlist : (symbol) => dispatch(removeFromWatchlist(symbol)),
+    getPrediction : (info) => dispatch(getPrediction(info)),
+    newPassword : (Email) => dispatch(newPassword(Email)),
 
 })
 
 const mapStateToProps = (state) => {
     return {
         watchlist: state.watchlist,
-        auth: state.auth
+        auth: state.auth,
+        prediction: state.prediction,
+        newPassword_status: state.newPassword_status,
     }
 }
 
@@ -74,10 +72,12 @@ class MainComponent extends Component {
                 </Route>
                     <Route path='/home'>
                         <Header/>
-                        <LandingPage auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} />
+                        <LandingPage 
+                        auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser} logoutUser={this.props.logoutUser} 
+                        newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} />
                         <Footer/>
                     </Route>
-                    <DashRoute path='/dashboard' component={() =><DashboardComponent auth={this.props.auth} fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} logoutUser={this.props.logoutUser}/>}/>
+                    <DashRoute path='/dashboard' component={() =><DashboardComponent auth={this.props.auth} fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} logoutUser={this.props.logoutUser} getprediction={this.props.getPrediction} prediction={this.props.prediction}/>}/>
                         
                     
                     <Route path='/profile'>
@@ -91,18 +91,6 @@ class MainComponent extends Component {
                     </Route>
                     <Redirect to='/home'/>
                 </Switch>
-              {/* <Header/>  
-              <LandingPage/>
-              <CryptoNewsFeed/>
-              <Footer/> */}
-              {/*<Transaction />*/}
-              {/*<MyTabs/>*/}
-               {/*<DashboardComponent/> */}
-               {/*<Profile/>*/}
-              {/* <BinancePrice/> */}
-              {/* <Trading/> */}
-             {/* <LightweightChart/> */}
-             {/* <Watchlist/> */}
             </div>
         );
     }

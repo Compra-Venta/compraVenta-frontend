@@ -7,6 +7,8 @@ import {
   } from 'reactstrap';
 import { Link, useHistory, withRouter } from "react-router-dom";  
 import ForgetPassword from './ForgetPassword';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function SignIn(props) {
 
@@ -18,13 +20,14 @@ function SignIn(props) {
         Password: false,
  }
 })
+  const [showPassword, setShowPassword] = useState(false)
    
- const history = useHistory();
- useEffect(() => {
-   console.log('auth',props.auth.isAuthenticated)
-     if (props.auth.isAuthenticated) history.push('/dashboard');
+//  const history = useHistory();
+//  useEffect(() => {
+//    console.log('auth',props.auth.isAuthenticated)
+//      if (props.auth.isAuthenticated) history.push('/dashboard');
      
- })
+//  })
     
    const handleInputChange =(event) =>{
       const target = event.target;
@@ -62,7 +65,7 @@ function SignIn(props) {
           initialState.EmailId,
           initialState.Password,
         );
-
+       
         return (
           <Container className="SignIn border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
             <h2 style={{textAlign:'center'}} >Sign In</h2>
@@ -86,8 +89,9 @@ function SignIn(props) {
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Password</Label>
+                  <div style={{display:'flex'}}>
                   <Input
-                    type="password"
+                    type={showPassword?'text':'password'}
                     name="Password"
                     value={initialState.Password}
                     onChange={handleInputChange}
@@ -96,12 +100,22 @@ function SignIn(props) {
                     placeholder="********"
                     required
                   />
+                  <Button color='success' outline onClick={()=>{setShowPassword(!showPassword)}} >
+                    {
+                      showPassword?
+                      <FontAwesomeIcon icon={faEyeSlash} />:
+                      <FontAwesomeIcon icon={faEye} /> 
+                    }
+                  </Button>
+                  </div>
                   <FormFeedback>{errors.Password}</FormFeedback>
                 </FormGroup>
               </Col>
               <Button type="submit" color="primary" >Submit</Button>
               <div style={{textAlign:'center'}}>
-              <div><ForgetPassword/></div>
+              <div>
+                <ForgetPassword newPassword={props.newPassword} newPassword_status={props.newPassword_status}/>
+              </div>
               <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>&nbsp;Register Here</button></div>
               </div>
             </Form>

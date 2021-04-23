@@ -119,7 +119,7 @@ class DashboardComponent extends Component {
         binanceSocket.onmessage = (event) => {
             ob = JSON.parse(event.data) ;
             // console.log(ob.p);
-            console.log(ob);
+            // console.log(ob);
             this.setState({
                 ws: binanceSocket,
                 h_high: ob.h,
@@ -333,24 +333,7 @@ class DashboardComponent extends Component {
         //         </div>
         //     )
         // },this);
-
-        const interval = this.state.interval;
-        let i=1;
-        let chartTab = Object.keys(interval).map( () =>{
-            return(
-           <nav tabs>
-                <NavItem>
-          <NavLink className={this.state.activeTab == `{${i}}` ? 'active' : ''} onClick={() => this.setActiveTab(`${i}`)}>
-            {interval[i++ -1]}
-          </NavLink>
-        </NavItem>
-           </nav>
-            )
-        } )
-
-        // <div className='row' style={{overflow:'auto',display:'grid'}}>
-        //         <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
-        //     </div>
+     
         
         return (
             
@@ -358,26 +341,12 @@ class DashboardComponent extends Component {
                 <div>
                 <NavDash logoutUser={this.props.logoutUser}/>
                 </div>
-                {/*<BinancePrice category={this.state.selectedValue}/>*/}
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
                     <div className='col-12 col-lg-3 col-md-4 border-right'>
                         <div className='row mx-auto' style={{margin:'10px'}} >
                             <div className="col-11">
-                        <select className="form-control " name="crypto" id="crypto" required onChange={this.selectValue} style={{height:'3rem',fontSize:'1.4rem'}}>
-                                        {/*<option defaultValue>Select</option>
-                                        <option value="LTCBTC">LTCBTC</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>
-                                        <option value="BTCUSD">BTCUSD</option>*/}
+                                    <select className="form-control " name="crypto" id="crypto" required onChange={this.selectValue} style={{height:'3rem',fontSize:'1.4rem'}}>                                        
                                         {pairList}
                                     </select>
                                     </div>
@@ -419,7 +388,7 @@ class DashboardComponent extends Component {
                                 </div>
                             </div>  
                             <div className='row' style={{paddingTop:'10px'}} >
-                                <p style={{color:'blue',fontSize:'1.5rem'}}>Watch List</p>
+                                <p style={{color:'#257CFF',fontSize:'1.5rem'}}>Watch List</p>
                                 <div className='container'>
                                     <Watchlist array={this.props.watchlist.watchlist} ref={this.childRefWatchList} watch={this.props.watchlist}/>
                                     {/* {watchList} */}
@@ -427,7 +396,7 @@ class DashboardComponent extends Component {
                             </div>
                          
                             <div className='row' style={{paddingTop:'10px'}} >
-                                <p style={{color:'blue',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
+                                <p style={{color:'#257CFF',fontSize:'1.5rem',marginBottom:'1px'}}>Market Trades</p>
                                 <div className='container'><MarketTrades  category={`${this.state.selectedValue}`} ref={this.childRef} /></div>
                                 
                         
@@ -460,10 +429,7 @@ class DashboardComponent extends Component {
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
                                     <div className='row' style={{fontSize:'1.5rem'}}>{this.state.bs_volume.substring(0,12)}</div></div>
                             </div>
-                           {/* {chartTab} */}
-                            {/* <nav tabs>
-                                {chartTab}
-                            </nav> */}
+                           
                             <Nav tabs>
                             <NavItem>
                                 <NavLink className={this.state.activeTab == '1' ? 'active' : ''} onClick={() => this.setActiveTab('1')}>
@@ -495,18 +461,18 @@ class DashboardComponent extends Component {
                                 <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
                             </div>
                            
-                        <Predict/>
+                        <Predict getprediction={this.props.getprediction} prediction={this.props.prediction} symbol={this.state.selectedValue} />
                         <div className="row">
                             <MyTabs qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`} qp={`${currencies[this.state.selectedValue].qp}`} bp={`${currencies[this.state.selectedValue].bp}`}/>
                         </div>
                         </div>
                         </div>
-                    <div className='col col-md-3 col-lg-3' >
+                    <div className='col col-md-3 col-lg-3' style={{marginLeft:'-1%'}} >
                         <div className='container'>
-                        <div className='row' style={{fontSize:'1.5rem',paddingTop:'10px'}}>News</div>
+                        <div className='row' style={{fontSize:'1.5rem',paddingTop:'10px', marginLeft:'1%'}}>News</div>
                         <div className='row'><CryptoNewsFeed category={`${currencies[this.state.selectedValue].qa}`} /></div>
                         <div className='row' style={{paddingRight:'20px'}}>
-                        <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '}
+                        {/* <Button color="primary" size='md' className='ml-auto' style={{fontSize:'1.2rem'}}>View More</Button>{' '} */}
                         </div>
                         </div>
                     </div>
