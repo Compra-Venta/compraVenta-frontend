@@ -19,7 +19,8 @@ const mapDispatchToProps = (dispatch) => ({
     removeFromWatchlist : (symbol) => dispatch(removeFromWatchlist(symbol)),
     getPrediction : (info) => dispatch(getPrediction(info)),
     newPassword : (Email) => dispatch(newPassword(Email)),
-    changePassword: (info) => dispatch(changePassword(info))
+    changePassword: (info) => dispatch(changePassword(info)),
+    
 
 })
 

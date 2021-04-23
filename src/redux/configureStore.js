@@ -6,6 +6,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { Predict } from './predict'
 import { NewPassword } from './forgetPassword';
 import { ChangePassword } from './changePassword';
+import Profile from '../components/Profile/Profile';
 
 
 export const ConfigureStore = () => {
@@ -16,6 +17,7 @@ export const ConfigureStore = () => {
             prediction: Predict,
             newPassword_status: NewPassword,
             changePassword_status: ChangePassword,
+            profile: Profile,
         }),
         composeWithDevTools( applyMiddleware(thunk))
     );

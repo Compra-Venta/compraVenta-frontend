@@ -65,6 +65,58 @@ export const changePasswordLoading = () => ({
     type: ActionTypes.CHANGE_PASSWORD_LOADING
 }); 
 
+export const profileSuccess = (profile) => ({
+    type: ActionTypes.PROFILE_SUCCESS,
+    payload: profile
+})
+
+export const profileFailed = (errmess) => ({
+    type: ActionTypes.PROFILE_FAILED,
+    payload: errmess
+})
+
+export const profileLoading = () => ({
+    type: ActionTypes.PROFILE_LOADING
+})
+
+export const fetchProfile = () => (dispatch) => {
+
+    dispatch(profileLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+
+    fetch(baseUrl + '/myprofile', {
+        method: 'GET',
+        body: JSON.stringify(email),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(profile => {
+            console.log('User Profile ',profile)
+            dispatch(profileSuccess(profile))})
+        .catch(error => {
+            console.log(error)
+            dispatch(profileFailed(error))})
+
+}
+
 export const changePassword = (info) => (dispatch) => {
 
     dispatch(changePasswordLoading())
