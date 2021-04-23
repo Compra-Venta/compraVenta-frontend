@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useStore } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap';
 
 const Predict = (props) => {
  /* const {
@@ -9,41 +9,43 @@ const Predict = (props) => {
   } = props;*/
   
   const [modal, setModal] = useState(false);
-  const [interval] =useState([ '1d', '7d', '15d' ]);
+  const [interval] =useState([ '1d', '3d', '1w' ]);
   const [resultState, setState] = useState({
-      
+      isLoading: true,
+      errmess: null,
+      prediction : {price:0,
+                    isHigh:true}
   })
-  // const [res]
+
     const [selectedInterval, changeInterval] = useState('1d')
     const intervallist = interval.map( (time) =>{ 
         return(<option>{`${time}`}</option>
 
     ) } )
-  const toggle = () => setModal(!modal);
-  // {isLoading: false, errMess: Error: Failed to fetch
-    // at http://localhost:3000/static/js/main.chunk.js:11380:19, prediction: {…}}
-//     errMess: Error: Failed to fetch at http://localhost:3000/static/js/main.chunk.js:11380:19
-// message: "Failed to fetch"
-// stack: "Error: Failed to fetch\n    at http://localhost:3000/static/js/main.chunk.js:11380:19"
-// __proto__: Object
-// isLoading: false
-// prediction: {}
-  const setData = () => {
-    const prediction = props.prediction
-    // setState(prediction)
-    // console.log(resultState.error)
-  }
+    const [showmsg, setShowMsg] = useState(true);
+    const toggle = () =>{ 
+      setModal(!modal);
+      setShowMsg(true)
+    };
 
-  const GetPrediction = async ()=> {
+  const GetPrediction = ()=> {
     
      props.getprediction({symbol: props.symbol, time: selectedInterval})
-    //  console.log(prediction.prediction.prediciton)
-    //  var state = initialState;
-    //  state.price = prediction.prediction.prediciton
-    //  setState(prediction)
+    // //  console.log(prediction.prediction.prediciton)
+    // //  var state = initialState;
+    // //  state.price = prediction.prediction.prediciton
+    // //  setState(prediction)
+    // //  prediction = props.prediction
+    const prediction = props.prediction
+    var state = resultState
+    resultState.isLoading = prediction.isLoading
+    resultState.errmess = prediction.errmess
+    resultState.prediction = prediction.prediction
+    setShowMsg(!showmsg)
+    // // setState(prediction)
+    //  console.log(resultState)
   }
 
-  
   return (
     <div>
      <div className='row' style={{paddingRight:'20px'}}>
@@ -58,14 +60,21 @@ const Predict = (props) => {
             Select Interval:
          <select onChange={event => {changeInterval(event.target.value);}} style={{height:'3rem',fontSize:'1.4rem'}}>
             {intervallist}
-         </select> 
+         </select> <br/>
          {
+           showmsg ? 
+           resultState.isLoading ? 
+           null:
+           <Spinner color='primary' />:
+           resultState.errmess === null ? 
+           <div style={{color:'deepskyblue', textAlign:'center'}}>{resultState.prediction.prediciton}</div> :
+           <div style={{color:'red', textAlign:'center'}}>{resultState.errMess}</div> 
            
          }
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={GetPrediction}>Predict</Button>{' '}
-          <Button color="secondary" onClick={toggle}>Cancel</Button>
+          {!showmsg ? null : <Button color="primary" onClick={GetPrediction}>Predict</Button>}
+          <Button color={showmsg?'warning':resultState.errMess == null ? 'success' : 'danger'} onClick={toggle}>{showmsg?'Cancel':resultState.errMess == null ? 'Ok, Thanks' : 'Oops! Try Again'}</Button>
         </ModalFooter>
       </Modal>
     </div>
