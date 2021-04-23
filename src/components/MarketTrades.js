@@ -91,7 +91,11 @@ class MarketTrades extends Component {
             selectedValue: this.props.category
         })*/
     }
-   
+    /*shouldComponentUpdate(nextProps) {
+        const differentCategory = this.props.category !== nextProps.category;
+        //const differentDone = this.props.done !== nextProps.done
+        return differentCategory;
+    }*/
 
 
     render() {

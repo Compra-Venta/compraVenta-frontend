@@ -52,7 +52,7 @@ class MainComponent extends Component {
           }*/
     }
     render() {
-        const DashRoute = ({ component: Component, ...rest }) => (
+        /*const DashRoute = ({ component: Component, ...rest }) => (
             <Route {...rest} render={(props) => (
                 this.props.auth.isAuthenticated
                     ? <Component {...props} />
@@ -61,7 +61,7 @@ class MainComponent extends Component {
                         state: { from: props.location }
                     }} />
             )} />
-        );
+        );*/
 
         console.log('m',this.props.watchlist)
         return (
@@ -77,7 +77,8 @@ class MainComponent extends Component {
                         newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} />
                         <Footer/>
                     </Route>
-                    <DashRoute path='/dashboard' component={() =><DashboardComponent auth={this.props.auth} fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} logoutUser={this.props.logoutUser} getprediction={this.props.getPrediction} prediction={this.props.prediction}/>}/>
+                    <Route path='/dashboard'>{ /*component={() =>*/}<DashboardComponent auth={this.props.auth} fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} logoutUser={this.props.logoutUser} getprediction={this.props.getPrediction} prediction={this.props.prediction}/>
+                    </Route>
                         
                     
                     <Route path='/profile'>
