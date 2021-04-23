@@ -20,7 +20,7 @@ class CryptoNewsFeed extends Component {
     componentDidMount(){
         cc.newsList('EN')
     .then(newsList => {
-    console.log(newsList)
+    // console.log(newsList)
     this.setState({
         newsList: newsList
     })
