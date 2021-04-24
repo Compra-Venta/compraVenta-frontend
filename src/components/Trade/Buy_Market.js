@@ -35,10 +35,10 @@ export class Buy_Market extends Component {
     }
 
     handleSubmit = async (event) => {
-      
+      event.preventDefault()
       const state = this.state
       await this.props.placeMarketOrder({email: '', base:state.coin_pair.slice(0,3), quote: state.coin_pair.slice(3), b_amount: state.amount, date: '2021-04-24', time: '23:48:15', side: 'BUY'})
-      event.preventDefault()
+      
       const status = this.props.marketOrder
       this.setState({
         status: status,
@@ -49,6 +49,18 @@ export class Buy_Market extends Component {
     }
 
     render() {
+
+         const view= this.state.showmsg?
+              this.state.status.isLoading ?
+              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+              this.state.status.errMess == null ?
+              <div style={{color:'deepskyblue', textAlign:'center'}}>
+              <h5> {this.state.status.orderStatus.status}</h5>
+              </div> :
+              <div style={{color:'red', textAlign:'center'}}>
+              <h5> {this.state.status.errMess.message}</h5>
+              </div>:
+              null
 
         return (
             
@@ -93,20 +105,11 @@ export class Buy_Market extends Component {
                 </FormGroup>
               </Col>
               <Button type="submit" color="success" className='offset-5' >Buy</Button> 
+              <Col>
+              {view}
+              </Col>
             </Form>
-            {
-              this.state.showmsg?
-              this.status.isLoading ?
-              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
-              this.status.errMess == null ?
-              <div style={{color:'deepskyblue', textAlign:'center'}}>
-              <h5> {this.status.orderStatus.message}</h5>
-              </div> :
-              <div style={{color:'red', textAlign:'center'}}>
-              <h5> {this.status.errMess.message}</h5>
-              </div>:
-              null
-            }
+            
           </Container>
             
         )

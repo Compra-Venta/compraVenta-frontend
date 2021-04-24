@@ -36,10 +36,10 @@ export class Sell_Stoploss extends Component {
       }
 
     handleSubmit = async (event) => {
-      
+      event.preventDefault()
       const state = this.state
       await this.props.placeStopOrder({email: '', base:state.coin_pair.slice(0,3), quote: state.coin_pair.slice(3), b_amount: state.amount, stop: state.stop, date: '2021-04-24', time: '23:48:15', side: 'SELL'})
-      event.preventDefault()
+      
       const status = this.props.stopOrder
       this.setState({
         status: status,
@@ -50,6 +50,17 @@ export class Sell_Stoploss extends Component {
     }
 
     render() {
+      const view= this.state.showmsg?
+              this.state.status.isLoading ?
+              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+              this.state.status.errMess == null ?
+              <div style={{color:'deepskyblue', textAlign:'center'}}>
+              <h5> {this.state.status.orderStatus.status}</h5>
+              </div> :
+              <div style={{color:'red', textAlign:'center'}}>
+              <h5> {this.state.status.errMess.message}</h5>
+              </div>:
+              null
         return (
             <div>
 
@@ -111,19 +122,10 @@ export class Sell_Stoploss extends Component {
               </Col>
               
               <Button type="submit" color="success" className='offset-5' >Sell</Button>
-              {
-              this.state.showmsg?
-              this.status.isLoading ?
-              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
-              this.status.errMess == null ?
-              <div style={{color:'deepskyblue', textAlign:'center'}}>
-              <h5> {this.status.orderStatus.message}</h5>
-              </div> :
-              <div style={{color:'red', textAlign:'center'}}>
-              <h5> {this.status.errMess.message}</h5>
-              </div>:
-              null
-            }
+              <Col>
+              {view}
+              </Col>
+
             </Form>
           </Container>
             </div>
