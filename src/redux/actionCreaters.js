@@ -180,7 +180,11 @@ export const cancelOrder = (orderId) => (dispatch) => {
             console.log(response);
             if (response.ok) {
                 return response;
-            } else {
+            } 
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(cancelOrder(orderId));
+            }else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText);
                 error.response = response;
                 throw error;
