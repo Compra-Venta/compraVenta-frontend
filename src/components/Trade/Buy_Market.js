@@ -43,7 +43,7 @@ export class Buy_Market extends Component {
     handleSubmit = async (event) => {
       event.preventDefault()
       const state = this.state
-      await this.props.placeMarketOrder({email: '', base:state.coin_pair.slice(0,3), quote: state.coin_pair.slice(3), b_amount: state.amount, date: '2021-04-24', time: '23:48:15', side: 'BUY'})
+      await this.props.placeMarketOrder({email: '', base: this.props.ba, quote: this.props.qa, b_amount: state.amount, date: '2021-04-24', time: '23:48:15', side: 'BUY'})
       
       const status = this.props.marketOrder
       this.setState({
@@ -60,12 +60,12 @@ export class Buy_Market extends Component {
               this.state.status.isLoading ?
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               this.state.status.errMess == null ?
-              <div style={{color:'deepskyblue', textAlign:'center'}}>
-               <UncontrolledAlert color='info'>
+              <div style={{ textAlign:'center'}}>
+               <UncontrolledAlert color='success'>
               <h5> {this.state.status.orderStatus.status}</h5>
               </UncontrolledAlert>
               </div> :
-              <div style={{color:'red', textAlign:'center'}}>
+              <div style={{ textAlign:'center'}}>
              <UncontrolledAlert color='danger'>
               <h5> {this.state.status.errMess.message}</h5>
               </UncontrolledAlert>

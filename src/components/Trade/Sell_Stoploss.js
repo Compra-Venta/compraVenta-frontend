@@ -43,7 +43,7 @@ export class Sell_Stoploss extends Component {
     handleSubmit = async (event) => {
       event.preventDefault()
       const state = this.state
-      await this.props.placeStopOrder({email: '', base:state.coin_pair.slice(0,3), quote: state.coin_pair.slice(3), b_amount: state.amount, stop: state.stop, date: '2021-04-24', time: '23:48:15', side: 'SELL'})
+      await this.props.placeStopOrder({email: '',base: this.props.ba, quote: this.props.qa, b_amount: state.amount, stop: state.stop, date: '2021-04-24', time: '23:48:15', side: 'SELL'})
       
       const status = this.props.stopOrder
       this.setState({
@@ -59,12 +59,12 @@ export class Sell_Stoploss extends Component {
               this.state.status.isLoading ?
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               this.state.status.errMess == null ?
-              <div style={{color:'deepskyblue', textAlign:'center'}}>
-              <UncontrolledAlert color='info'>
+              <div style={{ textAlign:'center'}}>
+              <UncontrolledAlert color='success'>
               <h5> {this.state.status.orderStatus.status}</h5>
               </UncontrolledAlert>
               </div> :
-              <div style={{color:'red', textAlign:'center'}}>
+              <div style={{ textAlign:'center'}}>
               <UncontrolledAlert color='danger'>
               <h5> {this.state.status.errMess.message}</h5>
               </UncontrolledAlert>
@@ -112,7 +112,7 @@ export class Sell_Stoploss extends Component {
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
-             {/* <Col>
+              {/* <Col>
                 <FormGroup>
                   <Label for='Total'>Total</Label>
                   <Input
@@ -126,10 +126,10 @@ export class Sell_Stoploss extends Component {
                     placeholder={`${this.props.qa}`}
                     required
                   />
-                  {/* <FormFeedback>{errors.EmailId}</FormFeedback> }
-                </FormGroup>
-             </Col>*/}
-              
+                  {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
+                {/* </FormGroup>
+              </Col>
+               */} 
               <Button type="submit" color="success" className='offset-5' >Sell</Button>
               <Col>
               {view}

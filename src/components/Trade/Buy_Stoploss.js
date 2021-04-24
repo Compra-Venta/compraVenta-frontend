@@ -13,8 +13,8 @@ export class Buy_Stoploss extends Component {
         super(props)
     
         this.state = {
-             coin_pair: 'BTCUSDT',
-             stop: '0.0',
+             coin_pair: '',
+             stop: '',
              amount: '0.0',
              total: '0.0',
              status: {},
@@ -43,8 +43,8 @@ export class Buy_Stoploss extends Component {
     handleSubmit = async (event) => {
       event.preventDefault()
       const state = this.state
-      await this.props.placeStopOrder({email: '', base:state.coin_pair.slice(0,3), quote: state.coin_pair.slice(3), b_amount: state.amount, stop: state.stop, date: '2021-04-24', time: '23:48:15', side: 'BUY'})
-      console.log(this.props)
+      await this.props.placeStopOrder({email: '', base: this.props.ba, quote: this.props.qa, b_amount: state.amount, stop: state.stop, date: '2021-04-24', time: '23:48:15', side: 'BUY'})
+      
       const status = this.props.stopOrder
       this.setState({
         status: status,
@@ -59,8 +59,8 @@ export class Buy_Stoploss extends Component {
               this.state.status.isLoading ?
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               this.state.status.errMess == null ?
-              <div style={{color:'deepskyblue', textAlign:'center'}}>
-              <UncontrolledAlert color='info'>
+              <div style={{ textAlign:'center'}}>
+              <UncontrolledAlert color='success'>
               <h5> {this.state.status.orderStatus.status}</h5>
               </UncontrolledAlert>
               </div> :
