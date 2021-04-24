@@ -138,6 +138,10 @@ export const fetchClosedTransaction = () => (dispatch) => {
             if (response.ok) {
                 return response;
             }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchClosedTransaction());
+            }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
                 error.response = response;
@@ -175,6 +179,10 @@ export const fetchOpenTransaction = () => (dispatch) => {
         .then(response => {
             if (response.ok) {
                 return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchOpenTransaction());
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -214,6 +222,10 @@ export const fetchWallet = () => (dispatch) => {
             if (response.ok) {
                 return response;
             }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchWallet());
+            }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
                 error.response = response;
@@ -250,6 +262,10 @@ export const fetchProfile = () => (dispatch) => {
         .then(response => {
             if (response.ok) {
                 return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchProfile());
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -291,6 +307,10 @@ export const changePassword = (info) => (dispatch) => {
             if (response.ok) {
                 return response;
             }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(changePassword(info));
+            }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
                 error.response = response;
@@ -330,6 +350,10 @@ export const newPassword = (email) => (dispatch) => {
         .then(response => {
             if (response.ok) {
                 return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(newPassword(email));
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -403,6 +427,10 @@ export const addToWatchlist = (symbol) => (dispatch) => {
             if (response.ok) {
                 return response;
             }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(addToWatchlist(symbol));
+            }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
                 error.response = response;
@@ -442,6 +470,10 @@ export const fetchWatchlist =  () => async(dispatch) => {
             if (response.ok) {
                 return response;
             }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchWatchlist());
+            }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
                 error.response = response;
@@ -461,6 +493,7 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
     console.log('Symbol: ', symbol);
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
+    //const refresh_token = localStorage.getItem('refresh-token');
     const data = {email:  email}
     return fetch(baseUrl + '/watchlist/' + symbol+`?email=${email}`, {
         method: "DELETE",
@@ -473,7 +506,12 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
             console.log(response);
             if (response.ok) {
                 return response;
-            } else {
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(removeFromWatchlist(symbol));
+            }
+             else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText);
                 error.response = response;
                 throw error;
@@ -605,7 +643,9 @@ export const logoutUser = () => (dispatch) => {
             
                 // If login was successful, set the token in local storage
                 localStorage.removeItem('token');
+                localStorage.removeItem('refresh-token');
                 localStorage.removeItem('creds');
+                localStorage.removeItem('rcreds');
     
    
                 dispatch(receiveLogout())
@@ -636,12 +676,15 @@ export const refreshError = (message) => {
     }
 }
 
-export const refreshToken = (token) => (dispatch) => {
+export const refreshToken = () => (dispatch) => {
     // We dispatch requestRefresh to kickoff the call to the API
+    const token = localStorage.getItem('refresh-token');
     dispatch(requestRefresh(token))
-    return fetch(baseUrl + '/reauth'+ `?"${token}"`, {
-        method: 'POST',
+    const bearer = 'Bearer ' + token;
+    return fetch(baseUrl + '/reauth', {
+        method: 'GET',
         headers: {
+            'Authorization': bearer,
             'Content-Type': 'application/json'
         },
         
