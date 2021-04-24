@@ -76,7 +76,7 @@ function Profile(props) {
                <h3>Wallet</h3>
                 <hr/>
                 </div>
-                <Wallet/>
+                <Wallet fetchWallet={props.fetchWallet} wallet={props.wallet} />
                 <div>
                 <Button color="danger" size='md' style={{marginLeft:'30px'}}>Trade More Coins</Button>{' '}
                 </div>

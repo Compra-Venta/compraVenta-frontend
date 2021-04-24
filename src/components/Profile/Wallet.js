@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'reactstrap';
+import { Spinner } from 'reactstrap';
+import { walletFailed } from '../../redux/actionCreaters';
 
 export class Wallet extends Component {
 
@@ -7,27 +8,45 @@ export class Wallet extends Component {
         super(props)
     
         this.state = {
+             isLoading: true,
+             errMess: null,
              wallet: {
-                'BTC': {
-                    balance: '0.56900000',
-                    fixed_balance: `0.46543200`,
-                    total_profit: `103.4554`,
-                    color: 'red'
-                },
-                'ETH': {
-                    balance: '2.45549000',
-                    fixed_balance: `0.10695432`,
-                    total_profit: `145.4554`,
-                    color: 'green'
-                }
-             }
+                 USDT:{},
+                 BTC: {},
+                 ETH: {},
+                 LTC: {},
+                 XRP: {},
+                 BNB: {}
+              }
         }
     }
     
+    setWallet = (wallet_info) => {
+    
+        var wallet = this.state.wallet
+        if(wallet_info.errMess ==null) 
+        for ( let i in wallet)
+        {
+            var bal = {'balance': wallet_info.wallet.balance[i], 'fixed_balance': wallet_info.wallet.fixed_balance[i]}
+            wallet[i] = bal
+        }
+    
+        this.setState({
+            isLoading: wallet_info.isLoading,
+            errMess: wallet_info.errMess,
+            wallet: wallet
+        })
 
+    }
+
+    componentDidMount = async () => {
+        await this.props.fetchWallet()
+        this.setWallet(this.props.wallet)
+    }
 
     render() {
-        const wallet = this.state.wallet;
+        const state = this.state;
+        const wallet = state.wallet;
         let wallet_info = Object.keys(wallet).map( (label, value) =>{
             return(
                <div className='container-fluid' >
@@ -41,9 +60,7 @@ export class Wallet extends Component {
                     <div className='col'>
                         {`${wallet[label].fixed_balance}`}
                     </div>
-                    {/* <div className='col' style={{color:wallet[label].color}}>
-                        {`${wallet[label].total_profit}`}
-                    </div> */}
+                    
         </div>
         </div>
             )
@@ -51,21 +68,26 @@ export class Wallet extends Component {
 
         return (
             <div className='container-fluid'>
-            <div className='row' style={{padding:'10px',fontSize:'1.2rem', color: 'dodgerblue'}}>
-                <div className='col'>
+                {
+                    state.isLoading ?
+                    <Spinner color='success' style={{textAlign:'center'}} />:
+                    state.errMess == null ?
+                    <>
+                    <div className='row' style={{padding:'10px',fontSize:'1.2rem', color: 'dodgerblue'}}>
+                    <div className='col'>
                     Coin
-                </div>
-                <div className='col'>
+                    </div>
+                    <div className='col'>
                     Balance
-                </div>
-                <div className='col'>
+                    </div>
+                    <div className='col'>
                    Fixed Balance
-                </div>
-                {/* <div className='col'>
-                   Profit Earned
-                </div> */}
-            </div>
-            {wallet_info}
+                    </div>
+                    </div>
+                    {wallet_info}
+                    </>:
+                    <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
+                }
             </div>
         )
     }

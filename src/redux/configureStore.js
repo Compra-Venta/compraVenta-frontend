@@ -7,6 +7,7 @@ import { Predict } from './predict'
 import { NewPassword } from './forgetPassword';
 import { ChangePassword } from './changePassword';
 import { Profile } from './profile';
+import { Wallet } from './Wallet';
 
 
 
@@ -19,6 +20,7 @@ export const ConfigureStore = () => {
             newPassword_status: NewPassword,
             changePassword_status: ChangePassword,
             profile: Profile,
+            wallet: Wallet,
         }),
         composeWithDevTools( applyMiddleware(thunk))
     );
