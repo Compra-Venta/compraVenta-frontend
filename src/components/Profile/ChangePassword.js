@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback, Spinner } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,19 +10,21 @@ function ChangePassword(props) {
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [showmsg, setShowMsg] = useState(true);
   const [showPassword, setShowPassword] = useState(false)
+
   const toggle = () =>{ 
     setModal(!modal);
     setShowMsg(true)
   };
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    props.changePassword({email: '',password:currentPassword, new_password:newPassword})
-    
-    const status = props.changePassword_status
-    console.log('status change Password',status)
+    await props.changePassword({email: '',password:currentPassword, new_password:newPassword})
     // alert(email)
     setShowMsg(!showmsg)
-}
+  }
+
+  const status = props.changePassword_status
+  // console.log(status)
+
   return (
     <div>
      <div>
@@ -112,13 +114,21 @@ function ChangePassword(props) {
             </Form>
         </ModalBody>:
         <ModalBody >
-          <div style={{color:'deepskyblue', textAlign:'center'}}>
-           <h5> Password Updated</h5>
-          </div>
+           {
+             status.isLoading ?
+             <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+             status.errMess == null ?
+             <div style={{color:'deepskyblue', textAlign:'center'}}>
+             <h5> {status.Change_Passwordstatus.message}</h5>
+            </div> :
+            <div style={{color:'red', textAlign:'center'}}>
+            <h5> {status.errMess.message}</h5>
+           </div>
+           }
         </ModalBody>
         }
         <ModalFooter>
-          {/* <Button color="primary" onClick={toggle}>Submit</Button>{' '} */}
+          
           <Button color="secondary" onClick={toggle}>{showmsg?'Cancel':'Ok, Thanks'}</Button>
         </ModalFooter>
       </Modal>

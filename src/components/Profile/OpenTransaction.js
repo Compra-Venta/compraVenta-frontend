@@ -11,7 +11,8 @@ class OpenTransaction extends Component {
             openOrder: []
         }
         this.cancelOrder = this.cancelOrder.bind(this);
-        this.setData = this.setData.bind(this)
+        this.setData = this.setData.bind(this);
+        this.fetchData = this.fetchData.bind(this);
     }
 
     setData = (info) => {
@@ -26,15 +27,20 @@ class OpenTransaction extends Component {
         })
     }
 
-    cancelOrder =  (orderId, size) =>{
+    cancelOrder = async (orderId) =>{
         
-        this.props.cancelOrder(orderId)
+        await this.props.cancelOrder(orderId);
+        this.fetchData()
 
     }
 
-    componentDidMount = async () => {
+    fetchData = async () => {
         await this.props.fetchOpenTransaction()
         this.setData(this.props.openTransaction_info)
+    }
+
+    componentDidMount = () => {
+        this.fetchData()
     }
     
     render() {
@@ -54,7 +60,7 @@ class OpenTransaction extends Component {
                 <td>{order.order_type}</td>
                 <td>{order.date}</td>
                 <td>{order.time}</td>
-                <td><Button onClick={() => this.cancelOrder(order.order_id,size)} color='danger' size='sm'>Cancel</Button></td>
+                <td><Button onClick={() => this.cancelOrder(order.order_id)} color='danger' size='sm'>Cancel</Button></td>
                 </tr>
             )
         })
@@ -88,7 +94,7 @@ class OpenTransaction extends Component {
                     <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
                 }
                 <div>
-                <Button color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
+                <Button onClick={() => this.fetchData()} color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
                 </div>
             </div>
         )

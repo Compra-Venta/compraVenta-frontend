@@ -14,7 +14,8 @@ export class Personal_Info extends Component {
                  email: 'aseemmangla.bt19ele@pec.edu.in',
                  country: 'India',
                  age: 20,
-                 phone: '+91 9501421773'
+                 phone: '+91 9501421773',
+                 id: ''
              }
         }
         this.setProfile = this.setProfile.bind(this)
@@ -27,6 +28,7 @@ export class Personal_Info extends Component {
             personal_data.country = profile.profile.country
             personal_data.email = profile.profile.email
             personal_data.phone = profile.profile.PhoneNo
+            personal_data.id = profile.profile.user_id
             this.setState({
                 isLoading: profile.isLoading,
                 errMess: profile.errMess,
@@ -65,7 +67,8 @@ export class Personal_Info extends Component {
                      <div className='col-6'>{`Age: ${personal_data.age}`}</div>
                   </div>
                   <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
-                      <div className='col-6'>{`Phone no: ${personal_data.phone}`}</div>          
+                      <div className='col-6'>{`Phone no: ${personal_data.phone}`}</div>
+                      <div className='col-6'>{`Account ID: ${personal_data.id}`}</div>          
                 </div>
                     </>:
                     <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>

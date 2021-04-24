@@ -24,7 +24,7 @@ class Account extends Component {
 
         return (
             <div className='container-fluid'>
-                <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
+                {/* <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
                     <div className='col-6'>{`Balance: ${account_details.balance}`}</div>
                     <div className='col-6'>
                         
@@ -42,7 +42,7 @@ class Account extends Component {
                       <div className='col-6'>{`Current Investment: ${account_details.currentInvestment}`}</div>  
                     
                     
-                </div>
+                </div> */}
             </div>
         )
     }

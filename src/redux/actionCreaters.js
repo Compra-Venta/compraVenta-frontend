@@ -121,6 +121,14 @@ export const closedTransactionLoading = () => ({
     type: ActionTypes.CLOSED_TRANSACTION_LOADING
 })
 
+export const resetAccount = () => (dispatch) => {
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    console.log('Resetting Account ', email)
+    const data = {email: email}
+}
+
 export const fetchClosedTransaction = () => (dispatch) => {
 
     dispatch(closedTransactionLoading())
