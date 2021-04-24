@@ -14,7 +14,7 @@ export class Sell_Stoploss extends Component {
     
         this.state = {
              coin_pair: 'BTCUSDT',
-             stop: '',
+             stop: '0.0',
              amount: '0.0',
              total: '0.0',
              status: {},
@@ -81,7 +81,7 @@ export class Sell_Stoploss extends Component {
                   <Label for='Stop-Price'>Stop</Label>
                   <Input
                     type="number"
-                    name="stopprice"
+                    name="stop"
                     id="Stop-Price"
                     // value={this.state.stop}
                     onChange={this.handleChange}

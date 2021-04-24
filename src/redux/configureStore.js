@@ -28,7 +28,7 @@ export const ConfigureStore = () => {
             openTransaction_info: OpenTransaction,
             closedTransaction_info: ClosedTransaction,
             marketOrder: MarketOrder,
-            stoporder: StopOrder,
+            stopOrder: StopOrder,
         }),
         composeWithDevTools( applyMiddleware(thunk))
     );

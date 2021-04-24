@@ -45,12 +45,12 @@ export default function MyTabs(props) {
                     <div className="col-6">
                         <Buy_Stoploss 
                         qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}
-                        placeStopOrder={props.placeStopOrder} stopOrder={props.stoptOrder} />
+                        placeStopOrder={props.placeStopOrder} stopOrder={props.stopOrder} />
                     </div>
                     <div className="col-6">
                         <Sell_Stoploss 
                         qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}
-                        placeStopOrder={props.placeStopOrder} stopOrder={props.stoptOrder} />
+                        placeStopOrder={props.placeStopOrder} stopOrder={props.stopOrder} />
                     </div>
                 </div>
             </div>

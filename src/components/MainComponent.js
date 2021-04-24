@@ -99,7 +99,7 @@ class MainComponent extends Component {
                     fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} 
                     getprediction={this.props.getPrediction} prediction={this.props.prediction}
                     placeMarketOrder={this.props.placeMarketOrder} marketOrder={this.props.marketOrder}
-                    placeStopOrder={this.props.placeStopOrder} stopOrder={this.props.stoptOrder} />
+                    placeStopOrder={this.props.placeStopOrder} stopOrder={this.props.stopOrder} />
                     </Route>
                         
                     
