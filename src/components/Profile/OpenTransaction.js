@@ -26,11 +26,10 @@ class OpenTransaction extends Component {
         })
     }
 
-    cancelOrder = (orderId, size) =>{
-        alert(orderId)
-        var orderData = this.state.openOrder;
-        orderData.pop(size)
-        // console.log(orderData)
+    cancelOrder =  (orderId, size) =>{
+        
+        this.props.cancelOrder({OrderId: orderId})
+
     }
 
     componentDidMount = async () => {

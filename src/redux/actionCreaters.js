@@ -127,7 +127,7 @@ export const fetchClosedTransaction = () => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token')
     const email = JSON.parse(localStorage.getItem('creds')).email
 
-    return fetch(baseUrl + '/transaction/closed' + `?email=${email}`, {
+    return fetch(baseUrl + '/transactions/closed' + `?email=${email}`, {
         
         headers: {
             
@@ -159,13 +159,44 @@ export const fetchClosedTransaction = () => (dispatch) => {
 
 }
 
+export const cancelOrder = (info) => (dispatch) => {
+    console.log('Cancelling Order ', info.OrderId)
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    const data = {email:  email, order_id: info.OrderId}
+    return fetch(baseUrl + '/order/stoploss' , {
+        method: "DELETE",
+        body: JSON.stringify(data) ,
+        headers: {
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            console.log(response);
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then( res => { dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) })
+        .catch(error => dispatch(fetchOpenTransaction(error.message)));
+
+}
+
 export const fetchOpenTransaction = () => (dispatch) => {
 
     dispatch(openTransactionLoading())
     const bearer = 'Bearer ' + localStorage.getItem('token')
     const email = JSON.parse(localStorage.getItem('creds')).email
 
-    return fetch(baseUrl + '/transaction/open' + `?email=${email}`, {
+    return fetch(baseUrl + '/transactions/open' + `?email=${email}`, {
         
         headers: {
             
