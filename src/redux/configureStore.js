@@ -9,6 +9,7 @@ import { ChangePassword } from './changePassword';
 import { Profile } from './profile';
 import { Wallet } from './Wallet';
 import { OpenTransaction } from './openTransaction';
+import { ClosedTransaction } from './closedTransaction';
 
 
 
@@ -23,6 +24,7 @@ export const ConfigureStore = () => {
             profile: Profile,
             wallet: Wallet,
             openTransaction_info: OpenTransaction,
+            closedTransaction_info: ClosedTransaction,
         }),
         composeWithDevTools( applyMiddleware(thunk))
     );

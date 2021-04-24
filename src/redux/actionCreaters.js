@@ -107,6 +107,58 @@ export const openTransactionLoading = () => ({
     type: ActionTypes.OPEN_TRANSACTION_LOADING
 })
 
+export const closedTransactionSuccess = (info) => ({
+    type: ActionTypes.CLOSED_TRANSACTION_SUCCESS,
+    payload: info
+})
+
+export const closedTransactionFailed = (errmess) => ({
+    type: ActionTypes.CLOSED_TRANSACTION_FAILED,
+    payload: errmess
+})
+
+export const closedTransactionLoading = () => ({
+    type: ActionTypes.CLOSED_TRANSACTION_LOADING
+})
+
+export const fetchClosedTransaction = () => (dispatch) => {
+
+    dispatch(closedTransactionLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+
+    return fetch(baseUrl + '/transaction/closed' + `?email=${email}`, {
+        
+        headers: {
+            
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(info => {
+            console.log('closed Transactions ',info)
+            dispatch(closedTransactionSuccess(info))})
+        .catch(error => {
+            console.log(error)
+            dispatch(closedTransactionFailed(error))
+        })
+
+}
+
 export const fetchOpenTransaction = () => (dispatch) => {
 
     dispatch(openTransactionLoading())

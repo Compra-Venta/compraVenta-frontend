@@ -64,7 +64,7 @@ function Profile(props) {
                      </TabPane>
                     <TabPane tabId="2">
                         <div className='row'>
-                            <ClosedTransaction/>
+                            <ClosedTransaction fetchClosedTransaction={props.fetchClosedTransaction} closedTransaction_info={props.closedTransaction_info}/>
                         </div>
                     </TabPane>
                 </TabContent>

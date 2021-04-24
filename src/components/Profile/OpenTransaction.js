@@ -11,6 +11,7 @@ class OpenTransaction extends Component {
             openOrder: []
         }
         this.cancelOrder = this.cancelOrder.bind(this);
+        this.setData = this.setData.bind(this)
     }
 
     setData = (info) => {
@@ -23,8 +24,6 @@ class OpenTransaction extends Component {
             errMess: info.errMess,
             openOrder: openOrder
         })
-
-
     }
 
     cancelOrder = (orderId, size) =>{
