@@ -8,6 +8,7 @@ import { NewPassword } from './forgetPassword';
 import { ChangePassword } from './changePassword';
 import { Profile } from './profile';
 import { Wallet } from './Wallet';
+import { OpenTransaction } from './openTransaction';
 
 
 
@@ -21,6 +22,7 @@ export const ConfigureStore = () => {
             changePassword_status: ChangePassword,
             profile: Profile,
             wallet: Wallet,
+            openTransaction_info: OpenTransaction,
         }),
         composeWithDevTools( applyMiddleware(thunk))
     );

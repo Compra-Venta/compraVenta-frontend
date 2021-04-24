@@ -19,6 +19,7 @@ export class Wallet extends Component {
                  BNB: {}
               }
         }
+        this.setWallet = this.setWallet.bind(this)
     }
     
     setWallet = (wallet_info) => {
