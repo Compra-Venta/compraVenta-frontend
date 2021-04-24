@@ -4,7 +4,7 @@ import {
     FormGroup, Label, Input,
     Button,
     FormFeedback,
-    Spinner, Alert
+    Spinner, Alert,UncontrolledAlert
   } from 'reactstrap';
 
 export class Buy_Market extends Component {
@@ -23,6 +23,12 @@ export class Buy_Market extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+    /*dismissAlert = () =>{
+      this.setState({
+        showmsg:false
+      })
+    }*/
     
     handleChange =(event) =>{
       const target = event.target;
@@ -55,10 +61,14 @@ export class Buy_Market extends Component {
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               this.state.status.errMess == null ?
               <div style={{color:'deepskyblue', textAlign:'center'}}>
+               <UncontrolledAlert color='info'>
               <h5> {this.state.status.orderStatus.status}</h5>
+              </UncontrolledAlert>
               </div> :
               <div style={{color:'red', textAlign:'center'}}>
+             <UncontrolledAlert color='danger'>
               <h5> {this.state.status.errMess.message}</h5>
+              </UncontrolledAlert>
               </div>:
               null
 

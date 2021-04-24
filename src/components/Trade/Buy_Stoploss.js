@@ -4,7 +4,7 @@ import {
     FormGroup, Label, Input,
     Button,
     FormFeedback,
-    Spinner, Alert
+    Spinner, Alert,UncontrolledAlert
   } from 'reactstrap';
 
 export class Buy_Stoploss extends Component {
@@ -14,7 +14,7 @@ export class Buy_Stoploss extends Component {
     
         this.state = {
              coin_pair: 'BTCUSDT',
-             stop: '',
+             stop: '0.0',
              amount: '0.0',
              total: '0.0',
              status: {},
@@ -24,6 +24,11 @@ export class Buy_Stoploss extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
 
     }
+   /* dismissAlert = () =>{
+      this.setState({
+        showmsg:false
+      })
+    }*/
     
     handleChange =(event) =>{
         const target = event.target;
@@ -55,24 +60,28 @@ export class Buy_Stoploss extends Component {
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               this.state.status.errMess == null ?
               <div style={{color:'deepskyblue', textAlign:'center'}}>
+              <UncontrolledAlert color='info'>
               <h5> {this.state.status.orderStatus.status}</h5>
+              </UncontrolledAlert>
               </div> :
               <div style={{color:'red', textAlign:'center'}}>
+              <UncontrolledAlert color='danger'>
               <h5> {this.state.status.errMess.message}</h5>
+              </UncontrolledAlert>
               </div>:
               null
         return (
-            <div>
+            
 
 <Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
             {/*<h2 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
-            <Form className="Buy-Stoploss"  >
+            <Form className="Buy-Stoploss" onSubmit={this.handleSubmit} >
               <Col>
                 <FormGroup>
                   <Label for='Stop-Price'>Stop</Label>
                   <Input
                     type="number"
-                    name="stopprice"
+                    name="stop"
                     id="Stop-Price"
                     // value={this.state.stop}
                     onChange={this.handleChange}
@@ -103,7 +112,7 @@ export class Buy_Stoploss extends Component {
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
-              <Col>
+              {/*<Col>
                 <FormGroup>
                   <Label for='Total'>Total</Label>
                   <Input
@@ -117,18 +126,18 @@ export class Buy_Stoploss extends Component {
                     placeholder={`${this.props.qa}`}
                     required
                   />
-                  {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
+                  {/* <FormFeedback>{errors.EmailId}</FormFeedback> }
                 </FormGroup>
-              </Col>
+              </Col>*/}
               
-              <Button onClick={() => this.handleSubmit()} type="submit" color="success" className='offset-5' >Buy</Button>
+              <Button type="submit" color="success" className='offset-5' >Buy</Button>
               <Col>
               {view}
               </Col>
                
             </Form>
           </Container>
-            </div>
+            
         )
     }
 }

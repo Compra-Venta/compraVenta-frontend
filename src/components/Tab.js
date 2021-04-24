@@ -8,7 +8,7 @@ import Sell_Stoploss from './Trade/Sell_Stoploss';
 export default function MyTabs(props) {
   const [activeTab, setActiveTab] = useState('1');
   return (
-    <div>
+    <div className='w-100'>
       <Nav tabs>
         <NavItem>
           <NavLink className={activeTab == '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>

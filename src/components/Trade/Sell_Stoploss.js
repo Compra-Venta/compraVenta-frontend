@@ -4,7 +4,7 @@ import {
     FormGroup, Label, Input,
     Button,
     FormFeedback,
-    Spinner, Alert
+    Spinner, Alert,UncontrolledAlert
   } from 'reactstrap';
 
 export class Sell_Stoploss extends Component {
@@ -24,6 +24,11 @@ export class Sell_Stoploss extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
 
     }
+   /*dismissAlert = () =>{
+      this.setState({
+        showmsg:false
+      })
+    }*/
     
     handleChange =(event) =>{
         const target = event.target;
@@ -55,10 +60,14 @@ export class Sell_Stoploss extends Component {
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               this.state.status.errMess == null ?
               <div style={{color:'deepskyblue', textAlign:'center'}}>
+              <UncontrolledAlert color='info'>
               <h5> {this.state.status.orderStatus.status}</h5>
+              </UncontrolledAlert>
               </div> :
               <div style={{color:'red', textAlign:'center'}}>
+              <UncontrolledAlert color='danger'>
               <h5> {this.state.status.errMess.message}</h5>
+              </UncontrolledAlert>
               </div>:
               null
         return (
@@ -103,7 +112,7 @@ export class Sell_Stoploss extends Component {
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
-              <Col>
+             {/* <Col>
                 <FormGroup>
                   <Label for='Total'>Total</Label>
                   <Input
@@ -117,9 +126,9 @@ export class Sell_Stoploss extends Component {
                     placeholder={`${this.props.qa}`}
                     required
                   />
-                  {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
+                  {/* <FormFeedback>{errors.EmailId}</FormFeedback> }
                 </FormGroup>
-              </Col>
+             </Col>*/}
               
               <Button type="submit" color="success" className='offset-5' >Sell</Button>
               <Col>
