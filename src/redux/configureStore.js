@@ -10,6 +10,7 @@ import { Profile } from './profile';
 import { Wallet } from './Wallet';
 import { OpenTransaction } from './openTransaction';
 import { ClosedTransaction } from './closedTransaction';
+import { MarketOrder } from './marketOrder';
 
 
 
@@ -25,6 +26,7 @@ export const ConfigureStore = () => {
             wallet: Wallet,
             openTransaction_info: OpenTransaction,
             closedTransaction_info: ClosedTransaction,
+            marketOrder: MarketOrder,
         }),
         composeWithDevTools( applyMiddleware(thunk))
     );

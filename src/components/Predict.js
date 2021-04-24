@@ -25,8 +25,8 @@ const Predict = (props) => {
   
   const GetPrediction = async ()=> {
     
-     await props.getprediction({symbol: props.symbol, time: selectedInterval})
-     setShowMsg(false)
+    setShowMsg(false) 
+    await props.getprediction({symbol: props.symbol, time: selectedInterval})
     
   }
 

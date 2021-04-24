@@ -4,6 +4,7 @@ import {
     FormGroup, Label, Input,
     Button,
     FormFeedback,
+    Spinner, Alert
   } from 'reactstrap';
 
 export class Buy_Market extends Component {
@@ -15,9 +16,12 @@ export class Buy_Market extends Component {
              coin_pair: 'BTCUSDT',
              price: '5555.55',
              amount: '0.0',
-             total: '0.0'
+             total: '0.0',
+             status: {},
+             showmsg: false
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
     
     handleChange =(event) =>{
@@ -30,11 +34,26 @@ export class Buy_Market extends Component {
       });
     }
 
+    handleSubmit = async (event) => {
+      
+      const state = this.state
+      await this.props.placeMarketOrder({email: '', base:state.coin_pair.slice(0,3), quote: state.coin_pair.slice(3), b_amount: state.amount, date: '2021-04-24', time: '23:48:15', side: 'BUY'})
+      event.preventDefault()
+      const status = this.props.marketOrder
+      this.setState({
+        status: status,
+        showmsg: true
+      })
+      console.log('see status ', this.state.status)
+  
+    }
+
     render() {
+
         return (
             
 
-<Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
+            <Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
             {/*<h2 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
             <Form className="Buy-Market" onSubmit={this.handleSubmit} >
               <Col>
@@ -70,22 +89,24 @@ export class Buy_Market extends Component {
                     placeholder={`${this.props.ba}`}
                     required
                   />
-                {/* <Input
-                    type="text"
-                    name="total"
-                    value={this.state.total}
-                    onChange={this.handleChange}
-                    // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Buy-Market-Amount"
-                    placeholder={`${this.state.coin_pair.slice(3)}`}
-                    required
-                  />  */}
-                  {/* <FormFeedback>{errors.Password}</FormFeedback> */}
+                
                 </FormGroup>
               </Col>
-              <Button type="submit" color="success" className='offset-5' >Buy</Button>
-              
+              <Button type="submit" color="success" className='offset-5' >Buy</Button> 
             </Form>
+            {
+              this.state.showmsg?
+              this.status.isLoading ?
+              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+              this.status.errMess == null ?
+              <div style={{color:'deepskyblue', textAlign:'center'}}>
+              <h5> {this.status.orderStatus.message}</h5>
+              </div> :
+              <div style={{color:'red', textAlign:'center'}}>
+              <h5> {this.status.errMess.message}</h5>
+              </div>:
+              null
+            }
           </Container>
             
         )

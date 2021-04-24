@@ -27,10 +27,14 @@ export default function MyTabs(props) {
             <div className="container">
                 <div className="row">
                     <div className="col-6">
-                        <Buy_Market qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp} />
+                        <Buy_Market 
+                        qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp} 
+                        placeMarketOrder={props.placeMarketOrder} marketOrder={props.marketOrder}/>
                     </div>
                     <div className="col-6">
-                        <Sell_Market qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}/>
+                        <Sell_Market 
+                        qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}
+                        placeMarketOrder={props.placeMarketOrder} marketOrder={props.marketOrder}/>
                     </div>
                 </div>
             </div>
@@ -39,10 +43,14 @@ export default function MyTabs(props) {
         <div className="container-fluid">
                 <div className="row">
                     <div className="col-6">
-                        <Buy_Stoploss qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}/>
+                        <Buy_Stoploss 
+                        qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}
+                        placeMarketOrder={props.placeMarketOrder} marketOrder={props.marketOrder}/>
                     </div>
                     <div className="col-6">
-                        <Sell_Stoploss qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}/>
+                        <Sell_Stoploss 
+                        qa={props.qa} ba={props.ba} qp={props.qp} bp={props.bp}
+                        placeMarketOrder={props.placeMarketOrder} marketOrder={props.marketOrder}/>
                     </div>
                 </div>
             </div>

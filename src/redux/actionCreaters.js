@@ -121,12 +121,100 @@ export const closedTransactionLoading = () => ({
     type: ActionTypes.CLOSED_TRANSACTION_LOADING
 })
 
+export const marketOrderSuccess = (status) => ({
+    type: ActionTypes.MARKET_ORDER_SUCCESS,
+    payload: status
+})
+
+export const marketOrderFailed = (errmess) => ({
+    type: ActionTypes.MARKET_ORDER_FAILED,
+    payload: errmess
+})
+
+export const marketOrderLoading = () => ({
+    type: ActionTypes.MARKET_ORDER_LOADING
+})
+
+export const placeMarketOrder = (info) => (dispatch) =>{
+
+    dispatch(marketOrderLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    info.email = email
+    console.log('Placing Order ', info)
+    return fetch(baseUrl + '/order/market', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        body: JSON.stringify(info) 
+    })
+            .then(response => {
+            console.log(response);
+            if (response.ok) {
+                return response;
+            } 
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(placeMarketOrder(info));
+            }else {
+                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(res => dispatch(marketOrderSuccess(res)))
+        .catch(error => dispatch(marketOrderFailed(error)));
+
+}
+
 export const resetAccount = () => (dispatch) => {
 
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
     console.log('Resetting Account ', email)
     const data = {email: email}
+    
+    return fetch(baseUrl + '/reset' , {
+        method: "DELETE",
+        body: JSON.stringify(data) ,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }       
+    })
+        .then(response => {
+            console.log(response);
+            if (response.ok) {
+                return response;
+            } 
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(resetAccount());
+            }else {
+                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(res => {
+            alert('Account Reset Successfully')
+            dispatch(fetchProfile())
+            dispatch(fetchClosedTransaction())
+            dispatch(fetchOpenTransaction())
+            dispatch(fetchWallet())
+        })
+        .catch(error => alert(error))
+        
 }
 
 export const fetchClosedTransaction = () => (dispatch) => {
@@ -203,7 +291,7 @@ export const cancelOrder = (orderId) => (dispatch) => {
             })
         .then(response => response.json())
         .then( res => { alert('Order Cancelled'); dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) })
-        .catch(error =>{ alert(error); dispatch(fetchOpenTransaction(error.message))});
+        .catch(error =>{ alert(error)});
 
 }
 

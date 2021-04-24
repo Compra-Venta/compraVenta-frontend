@@ -463,7 +463,10 @@ class DashboardComponent extends Component {
                            
                         <Predict getprediction={this.props.getprediction} prediction={this.props.prediction} symbol={this.state.selectedValue} />
                         <div className="row">
-                            <MyTabs qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`} qp={`${currencies[this.state.selectedValue].qp}`} bp={`${currencies[this.state.selectedValue].bp}`}/>
+                            <MyTabs 
+                            qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`} 
+                            qp={`${currencies[this.state.selectedValue].qp}`} bp={`${currencies[this.state.selectedValue].bp}`}
+                            placeMarketOrder={this.props.placeMarketOrder} marketOrder={this.props.marketOrder}/>
                         </div>
                         </div>
                         </div>

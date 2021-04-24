@@ -59,14 +59,14 @@ function Profile(props) {
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="1">
                         <div className='row'>
-                            <OpenTransaction fetchOpenTransaction={props.fetchOpenTransaction} openTransaction_info={props.openTransaction_info} cancelOrder={props.cancelOrder}/>
-                        </div>
-                     </TabPane>
-                    <TabPane tabId="2">
-                        <div className='row'>
                             <ClosedTransaction fetchClosedTransaction={props.fetchClosedTransaction} closedTransaction_info={props.closedTransaction_info}/>
                         </div>
                     </TabPane>
+                    <TabPane tabId="2">
+                        <div className='row'>
+                            <OpenTransaction fetchOpenTransaction={props.fetchOpenTransaction} openTransaction_info={props.openTransaction_info} cancelOrder={props.cancelOrder}/>
+                        </div>
+                     </TabPane>
                 </TabContent>
                 </div>
             </div>
