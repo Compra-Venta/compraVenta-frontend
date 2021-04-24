@@ -1,107 +1,29 @@
 import React, { Component } from 'react';
-import { Button, Table } from 'reactstrap'
+import { Button, Table, Spinner } from 'reactstrap'
 
 class OpenTransaction extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
-            //  symbol: 'BTCUSDT',
-             openOrder: [
-                 {
-                    orderID: 'OrderID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'BUY',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 }, {
-                    orderID: 'OrderID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'BUY',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 }, {
-                    orderID: 'OrderID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'BUY',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 }, {
-                    orderID: 'OrderID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'BUY',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 }, {
-                    orderID: 'OrderID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'Sell',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 }, {
-                    orderID: 'OrderID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'BUY',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 }, {
-                    orderID: 'OrjnjncjnderID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'BUY',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 }, {
-                    orderID: 'Or46r6knkjvID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'BUY',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 },{
-                    orderID: 'OrderID',
-                    ba: 'BTC',
-                    qa: 'USDT',
-                    price: 55555,
-                    amount: 0.003,
-                    side: 'BUY',
-                    type: 'M',
-                    date: '2021-04-21',
-                    time: '11:23'
-                 },
-             ]
+            isLoading: true,
+            errMess: null,
+            openOrder: []
         }
         this.cancelOrder = this.cancelOrder.bind(this);
+        this.setData = this.setData.bind(this)
+    }
+
+    setData = (info) => {
+
+        var openOrder = this.state.openOrder
+        if(info.errMess == null)
+            openOrder = info.openTransaction_info
+        this.setState({
+            isLoading: info.isLoading,
+            errMess: info.errMess,
+            openOrder: openOrder
+        })
     }
 
     cancelOrder = (orderId, size) =>{
@@ -110,10 +32,16 @@ class OpenTransaction extends Component {
         orderData.pop(size)
         // console.log(orderData)
     }
+
+    componentDidMount = async () => {
+        await this.props.fetchOpenTransaction()
+        this.setData(this.props.openTransaction_info)
+    }
     
     render() {
 
-        const orderData = this.state.openOrder;
+        const state = this.state;
+        const orderData = state.openOrder;
         let size = orderData.length;
         console.log('Total Open Orders: ',size)
         const orderTable = orderData.map(order => {
@@ -134,26 +62,32 @@ class OpenTransaction extends Component {
 
         return (
             <div className='container-fluid'>
-                <div className='table-container'>
-                <Table hover responsive >
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>CoinPair</th>
-                            <th>Price</th>
-                            <th>Amount</th>
-                            <th>Side</th>
-                            <th>Type</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {orderTable}
-                    </tbody>
-                </Table>
-                </div>
+                {
+                    state.isLoading ?
+                    <Spinner color='success' style={{textAlign:'center'}} />:
+                    state.errMess == null ?
+                    <div className='table-container'>
+                    <Table hover responsive >
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>CoinPair</th>
+                                <th>Price</th>
+                                <th>Amount</th>
+                                <th>Side</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {orderTable}
+                        </tbody>
+                    </Table>
+                    </div> :
+                    <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
+                }
                 <div>
                 <Button color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
                 </div>

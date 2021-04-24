@@ -8,7 +8,7 @@ import { Route, Switch, Redirect ,withRouter} from 'react-router';
 import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
 import Collaborators from './Collaborators';
-import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword, changePassword, fetchProfile} from "../redux/actionCreaters";
+import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction} from "../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
@@ -21,6 +21,9 @@ const mapDispatchToProps = (dispatch) => ({
     newPassword : (Email) => dispatch(newPassword(Email)),
     changePassword: (info) => dispatch(changePassword(info)),
     fetchProfile: () => dispatch(fetchProfile()),
+    fetchWallet: () => dispatch(fetchWallet()),
+    fetchOpenTransaction: () => dispatch(fetchOpenTransaction()),
+    fetchClosedTransaction: () => dispatch(fetchClosedTransaction()),
 
 })
 
@@ -32,6 +35,9 @@ const mapStateToProps = (state) => {
         newPassword_status: state.newPassword_status,
         changePassword_status: state.changePassword_status,
         profile: state.profile,
+        wallet: state.wallet,
+        openTransaction_info: state.openTransaction_info,
+        closedTransaction_info: state.closedTransaction_info,
     }
 }
 
@@ -87,7 +93,10 @@ class MainComponent extends Component {
                     
                     <Route path='/profile'>
                         <Profile 
+                        fetchClosedTransaction={this.props.fetchClosedTransaction} closedTransaction_info={this.props.closedTransaction_info}
+                        fetchOpenTransaction={this.props.fetchOpenTransaction} openTransaction_info={this.props.openTransaction_info}
                         fetchProfile={this.props.fetchProfile} profile={this.props.profile}
+                        fetchWallet={this.props.fetchWallet} wallet={this.props.wallet}
                         changePassword={this.props.changePassword} changePassword_status={this.props.changePassword_status} />
                     </Route>
                     <Route path='/learn'>

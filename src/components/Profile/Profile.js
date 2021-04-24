@@ -59,12 +59,12 @@ function Profile(props) {
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="1">
                         <div className='row'>
-                            <OpenTransaction/>
+                            <OpenTransaction fetchOpenTransaction={props.fetchOpenTransaction} openTransaction_info={props.openTransaction_info}/>
                         </div>
                      </TabPane>
                     <TabPane tabId="2">
                         <div className='row'>
-                            <ClosedTransaction/>
+                            <ClosedTransaction fetchClosedTransaction={props.fetchClosedTransaction} closedTransaction_info={props.closedTransaction_info}/>
                         </div>
                     </TabPane>
                 </TabContent>
@@ -76,7 +76,7 @@ function Profile(props) {
                <h3>Wallet</h3>
                 <hr/>
                 </div>
-                <Wallet/>
+                <Wallet fetchWallet={props.fetchWallet} wallet={props.wallet} />
                 <div>
                 <Button color="danger" size='md' style={{marginLeft:'30px'}}>Trade More Coins</Button>{' '}
                 </div>

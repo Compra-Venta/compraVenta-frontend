@@ -17,6 +17,7 @@ export class Personal_Info extends Component {
                  phone: '+91 9501421773'
              }
         }
+        this.setProfile = this.setProfile.bind(this)
     }
     
     setProfile = (profile) => {
@@ -61,13 +62,13 @@ export class Personal_Info extends Component {
                  </div>   
                  <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
                      <div className='col-6' style={{overflowWrap:'break-word'}}>{`Email ID: ${personal_data.email}`}</div>
-                     <div className='col-6'>{`DOB: ${personal_data.age}`}</div>
+                     <div className='col-6'>{`Age: ${personal_data.age}`}</div>
                   </div>
                   <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
                       <div className='col-6'>{`Phone no: ${personal_data.phone}`}</div>          
                 </div>
                     </>:
-                    <div style={{color:'red', textAlign:'center'}}>{state.errMess.message}</div>
+                    <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
                 }
             </div>
         )
