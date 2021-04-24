@@ -95,7 +95,7 @@ export const walletFailed = (errmess) => ({
 
 export const openTransactionSuccess = (info) => ({
     type: ActionTypes.OPEN_TRANSACTION_SUCCESS,
-    payload: info
+    payload: info.open
 })
 
 export const openTransactionFailed = (errmess) => ({
@@ -109,7 +109,7 @@ export const openTransactionLoading = () => ({
 
 export const closedTransactionSuccess = (info) => ({
     type: ActionTypes.CLOSED_TRANSACTION_SUCCESS,
-    payload: info
+    payload: info.closed
 })
 
 export const closedTransactionFailed = (errmess) => ({
