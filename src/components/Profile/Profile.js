@@ -12,6 +12,11 @@ import ClosedTransaction from './ClosedTransaction';
 
 function Profile(props) {
     const [activeTab, setActiveTab] = useState('1');
+
+    const resetAccount = async () => {
+        await props.resetAccount()
+    }
+
     return (
         <>
         <div><ProfileNav/></div>
@@ -34,7 +39,7 @@ function Profile(props) {
                 </div>
                 <Account/>
                 <div>
-                <Button color="danger" size='md' style={{marginLeft:'30px'}}>Reset Account Details</Button>{' '}
+                <Button onClick={() => resetAccount()} color="danger" size='md' style={{marginLeft:'30px'}}>Reset Account Details</Button>{' '}
                 </div>
             </div>
 
@@ -47,26 +52,26 @@ function Profile(props) {
                 <Nav tabs>
                     <NavItem>
                         <NavLink className={activeTab == '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                        Open Transactions
+                        Closed Transactions
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink className={activeTab == '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-                        Closed Transactions
+                        Open Transactions
                         </NavLink>
                     </NavItem>
                 </Nav>
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="1">
                         <div className='row'>
-                            <OpenTransaction fetchOpenTransaction={props.fetchOpenTransaction} openTransaction_info={props.openTransaction_info} cancelOrder={props.cancelOrder}/>
-                        </div>
-                     </TabPane>
-                    <TabPane tabId="2">
-                        <div className='row'>
                             <ClosedTransaction fetchClosedTransaction={props.fetchClosedTransaction} closedTransaction_info={props.closedTransaction_info}/>
                         </div>
                     </TabPane>
+                    <TabPane tabId="2">
+                        <div className='row'>
+                            <OpenTransaction fetchOpenTransaction={props.fetchOpenTransaction} openTransaction_info={props.openTransaction_info} cancelOrder={props.cancelOrder}/>
+                        </div>
+                     </TabPane>
                 </TabContent>
                 </div>
             </div>
@@ -78,7 +83,7 @@ function Profile(props) {
                 </div>
                 <Wallet fetchWallet={props.fetchWallet} wallet={props.wallet} />
                 <div>
-                <Button color="danger" size='md' style={{marginLeft:'30px'}}>Trade More Coins</Button>{' '}
+                <Button color="success" size='md' style={{marginLeft:'30px'}}><a style={{color:'white'}} href='/dashboard'>Trade More Coins</a></Button>{' '}
                 </div>
             </div>
             <Footer/>

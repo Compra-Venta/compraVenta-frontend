@@ -4,6 +4,7 @@ import {
     FormGroup, Label, Input,
     Button,
     FormFeedback,
+    Spinner, Alert,UncontrolledAlert
   } from 'reactstrap';
 
 export class Sell_Stoploss extends Component {
@@ -13,13 +14,21 @@ export class Sell_Stoploss extends Component {
     
         this.state = {
              coin_pair: 'BTCUSDT',
-             stop: '',
-             limit: '',
+             stop: '0.0',
              amount: '0.0',
-             total: '0.0'
+             total: '0.0',
+             status: {},
+             showmsg: false
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+
     }
+   /*dismissAlert = () =>{
+      this.setState({
+        showmsg:false
+      })
+    }*/
     
     handleChange =(event) =>{
         const target = event.target;
@@ -31,7 +40,36 @@ export class Sell_Stoploss extends Component {
         });
       }
 
+    handleSubmit = async (event) => {
+      event.preventDefault()
+      const state = this.state
+      await this.props.placeStopOrder({email: '',base: this.props.ba, quote: this.props.qa, b_amount: state.amount, stop: state.stop, date: '2021-04-24', time: '23:48:15', side: 'SELL'})
+      
+      const status = this.props.stopOrder
+      this.setState({
+        status: status,
+        showmsg: true
+      })
+      console.log('see status ', this.state.status)
+  
+    }
+
     render() {
+      const view= this.state.showmsg?
+              this.state.status.isLoading ?
+              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+              this.state.status.errMess == null ?
+              <div style={{ textAlign:'center'}}>
+              <UncontrolledAlert color='success'>
+              <h5> {this.state.status.orderStatus.status}</h5>
+              </UncontrolledAlert>
+              </div> :
+              <div style={{ textAlign:'center'}}>
+              <UncontrolledAlert color='danger'>
+              <h5> {this.state.status.errMess.message}</h5>
+              </UncontrolledAlert>
+              </div>:
+              null
         return (
             <div>
 
@@ -43,10 +81,10 @@ export class Sell_Stoploss extends Component {
                   <Label for='Stop-Price'>Stop</Label>
                   <Input
                     type="number"
-                    name="stopprice"
+                    name="stop"
                     id="Stop-Price"
                     // value={this.state.stop}
-                    onChange={this.handleChange} 
+                    onChange={this.handleChange}
                     min={this.props.qp} step={this.props.qp}
                     // valid={errors.EmailId === ''} invalid={errors.EmailId !== ''}
                     placeholder={`Stop | ${this.props.qa}`}
@@ -74,7 +112,7 @@ export class Sell_Stoploss extends Component {
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
-              <Col>
+              {/* <Col>
                 <FormGroup>
                   <Label for='Total'>Total</Label>
                   <Input
@@ -89,11 +127,14 @@ export class Sell_Stoploss extends Component {
                     required
                   />
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
-                </FormGroup>
+                {/* </FormGroup>
               </Col>
-              
-              <Button type="submit" color="danger" className='offset-5' >Sell</Button>
-              
+               */} 
+              <Button type="submit" color="success" className='offset-5' >Sell</Button>
+              <Col>
+              {view}
+              </Col>
+
             </Form>
           </Container>
             </div>
