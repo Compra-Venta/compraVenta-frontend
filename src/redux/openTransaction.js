@@ -8,15 +8,15 @@ export const OpenTransaction = (state = {
     switch (action.type) {
         case ActionTypes.OPEN_TRANSACTION_SUCCESS:
             console.log('Open Transaction Success')
-            return {...state, isLoading: false, errMess: null, OpenTransaction_info: action.payload};
+            return {...state, isLoading: false, errMess: null, openTransaction_info: action.payload};
 
         case ActionTypes.OPEN_TRANSACTION_FAILED:
             console.log('Open Transaction Failed')
-            return {...state, isLoading: false, errMess: action.payload, OpenTransaction_info: []};
+            return {...state, isLoading: false, errMess: action.payload, openTransaction_info: []};
 
         case ActionTypes.OPEN_TRANSACTION_LOADING:
             console.log('Open Transaction Loading')
-            return {...state, isLoading: true, errMess: null, OpenTransaction_info: []};
+            return {...state, isLoading: true, errMess: null, openTransaction_info: []};
         
         default:
             return state;

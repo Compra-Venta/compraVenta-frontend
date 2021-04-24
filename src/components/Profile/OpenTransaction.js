@@ -15,7 +15,7 @@ class OpenTransaction extends Component {
     }
 
     setData = (info) => {
-
+        
         var openOrder = this.state.openOrder
         if(info.errMess == null)
             openOrder = info.openTransaction_info
@@ -26,11 +26,10 @@ class OpenTransaction extends Component {
         })
     }
 
-    cancelOrder = (orderId, size) =>{
-        alert(orderId)
-        var orderData = this.state.openOrder;
-        orderData.pop(size)
-        // console.log(orderData)
+    cancelOrder =  (orderId, size) =>{
+        
+        this.props.cancelOrder(orderId)
+
     }
 
     componentDidMount = async () => {
@@ -47,15 +46,15 @@ class OpenTransaction extends Component {
         const orderTable = orderData.map(order => {
             return(
                 <tr>
-                    <th scope='row'>{size--}</th>
-                    <td>{order.ba + order.qa}</td>
-                    <td>{order.price}</td>
-                    <td>{order.amount}</td>
-                    <td style={{color:order.side=='BUY'? 'red':'green'}}>{order.side}</td>
-                    <td>{order.type}</td>
-                    <td>{order.date}</td>
-                    <td>{order.time}</td>
-                    <td><Button onClick={() => this.cancelOrder(order.orderID,size)} color='danger' size='sm'>Cancel</Button></td>
+                <th scope='row'>{size--}</th>
+                <td>{order.base + order.quote}</td>
+                <td>{order.price}</td>
+                <td>{order.b_amount}</td>
+                <td style={{color:order.side=='BUY'? 'red':'green'}}>{order.side}</td>
+                <td>{order.order_type}</td>
+                <td>{order.date}</td>
+                <td>{order.time}</td>
+                <td><Button onClick={() => this.cancelOrder(order.order_id,size)} color='danger' size='sm'>Cancel</Button></td>
                 </tr>
             )
         })

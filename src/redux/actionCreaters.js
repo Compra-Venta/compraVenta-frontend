@@ -163,6 +163,38 @@ export const fetchClosedTransaction = () => (dispatch) => {
 
 }
 
+export const cancelOrder = (orderId) => (dispatch) => {
+    console.log('Cancelling Order ', orderId)
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    const data = {email:  email, order_id: orderId}
+    return fetch(baseUrl + '/order/stoploss' , {
+        method: "DELETE",
+        body: JSON.stringify(data) ,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            console.log(response);
+            if (response.ok) {
+                return response;
+            } else {
+                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then( res => { alert('Order Cancelled'); dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) })
+        .catch(error =>{ alert(error); dispatch(fetchOpenTransaction(error.message))});
+
+}
+
 export const fetchOpenTransaction = () => (dispatch) => {
 
     dispatch(openTransactionLoading())
