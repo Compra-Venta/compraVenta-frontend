@@ -40,11 +40,11 @@ class ClosedTransaction extends Component {
             return(
                 <tr>
                     <th scope='row'>{size--}</th>
-                    <td>{order.ba + order.qa}</td>
+                    <td>{order.base + order.quote}</td>
                     <td>{order.price}</td>
-                    <td>{order.amount}</td>
+                    <td>{order.b_amount}</td>
                     <td style={{color:order.side=='BUY'? 'red':'green'}}>{order.side}</td>
-                    <td>{order.type}</td>
+                    <td>{order.order_type}</td>
                     <td>{order.date}</td>
                     <td>{order.time}</td>
                 </tr>

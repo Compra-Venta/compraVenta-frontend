@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchWallet: () => dispatch(fetchWallet()),
     fetchOpenTransaction: () => dispatch(fetchOpenTransaction()),
     fetchClosedTransaction: () => dispatch(fetchClosedTransaction()),
-    cancelOrder: (info) => dispatch(cancelOrder()),
+    cancelOrder: (orderId) => dispatch(cancelOrder(orderId)),
 })
 
 const mapStateToProps = (state) => {

@@ -159,15 +159,16 @@ export const fetchClosedTransaction = () => (dispatch) => {
 
 }
 
-export const cancelOrder = (info) => (dispatch) => {
-    console.log('Cancelling Order ', info.OrderId)
+export const cancelOrder = (orderId) => (dispatch) => {
+    console.log('Cancelling Order ', orderId)
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
-    const data = {email:  email, order_id: info.OrderId}
+    const data = {email:  email, order_id: orderId}
     return fetch(baseUrl + '/order/stoploss' , {
         method: "DELETE",
         body: JSON.stringify(data) ,
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': bearer
         }
     })
@@ -185,8 +186,8 @@ export const cancelOrder = (info) => (dispatch) => {
                 throw error;
             })
         .then(response => response.json())
-        .then( res => { dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) })
-        .catch(error => dispatch(fetchOpenTransaction(error.message)));
+        .then( res => { alert('Order Cancelled'); dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) })
+        .catch(error =>{ alert(error); dispatch(fetchOpenTransaction(error.message))});
 
 }
 
