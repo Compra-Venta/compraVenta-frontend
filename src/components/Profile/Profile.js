@@ -83,7 +83,7 @@ function Profile(props) {
                 </div>
                 <Wallet fetchWallet={props.fetchWallet} wallet={props.wallet} />
                 <div>
-                <Button color="danger" size='md' style={{marginLeft:'30px'}}>Trade More Coins</Button>{' '}
+                <Button color="success" size='md' style={{marginLeft:'30px'}}><a style={{color:'white'}} href='/dashboard'>Trade More Coins</a></Button>{' '}
                 </div>
             </div>
             <Footer/>

@@ -77,7 +77,7 @@ class OpenTransaction extends Component {
                             <tr>
                                 <th>#</th>
                                 <th>CoinPair</th>
-                                <th>Price</th>
+                                <th>Stop Price</th>
                                 <th>Amount</th>
                                 <th>Side</th>
                                 <th>Type</th>
