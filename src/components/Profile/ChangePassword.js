@@ -1,24 +1,30 @@
 import React, {useState} from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback, Spinner } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-function ChangePassword() {
+function ChangePassword(props) {
   const [modal, setModal] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [showmsg, setShowMsg] = useState(true);
   const [showPassword, setShowPassword] = useState(false)
+
   const toggle = () =>{ 
     setModal(!modal);
     setShowMsg(true)
   };
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    setShowMsg(!showmsg)
+    await props.changePassword({email: '',password:currentPassword, new_password:newPassword})
     // alert(email)
-}
+    setShowMsg(!showmsg)
+  }
+
+  const status = props.changePassword_status
+  // console.log(status)
+
   return (
     <div>
      <div>
@@ -28,7 +34,7 @@ function ChangePassword() {
         <ModalHeader toggle={toggle}>Enter Registered Email ID</ModalHeader>
         { showmsg?
           <ModalBody className='text-center'>
-            <Form className="Sign-In-Form" onSubmit={handleSubmit} >
+            <Form className="changePassword" onSubmit={handleSubmit} >
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Current Password</Label>
@@ -39,7 +45,7 @@ function ChangePassword() {
                     value={currentPassword}
                     onChange={ event => {setCurrentPassword(event.target.value)}}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Sign-In-Password"
+                    id="currentPassword"
                     placeholder="********"
                     required
                   />
@@ -64,7 +70,7 @@ function ChangePassword() {
                     value={newPassword}
                     onChange={ event => {setNewPassword(event.target.value)}}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Sign-In-Password"
+                    id="newPassword"
                     placeholder="********"
                     required
                   />
@@ -89,7 +95,7 @@ function ChangePassword() {
                     value={confirmNewPassword}
                     onChange={ event => {setConfirmNewPassword(event.target.value)}}
                     // valid={errors.Password === ''} invalid={errors.Password !== ''}
-                    id="Sign-In-Password"
+                    id="confirmNewPassword"
                     placeholder="********"
                     required
                   />
@@ -108,13 +114,21 @@ function ChangePassword() {
             </Form>
         </ModalBody>:
         <ModalBody >
-          <div style={{color:'deepskyblue', textAlign:'center'}}>
-           <h5> Password Updated</h5>
-          </div>
+           {
+             status.isLoading ?
+             <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+             status.errMess == null ?
+             <div style={{color:'deepskyblue', textAlign:'center'}}>
+             <h5> {status.Change_Passwordstatus.message}</h5>
+            </div> :
+            <div style={{color:'red', textAlign:'center'}}>
+            <h5> {status.errMess.message}</h5>
+           </div>
+           }
         </ModalBody>
         }
         <ModalFooter>
-          {/* <Button color="primary" onClick={toggle}>Submit</Button>{' '} */}
+          
           <Button color="secondary" onClick={toggle}>{showmsg?'Cancel':'Ok, Thanks'}</Button>
         </ModalFooter>
       </Modal>

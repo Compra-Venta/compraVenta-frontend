@@ -91,7 +91,11 @@ class MarketTrades extends Component {
             selectedValue: this.props.category
         })*/
     }
-   
+    /*shouldComponentUpdate(nextProps) {
+        const differentCategory = this.props.category !== nextProps.category;
+        //const differentDone = this.props.done !== nextProps.done
+        return differentCategory;
+    }*/
 
 
     render() {
@@ -126,57 +130,7 @@ class MarketTrades extends Component {
         return (
             <>
             <div className='row' style={{color:'#969696'}}>
-               {/* <table class="table table-borderless 'table-responsive-sm'" style={{padding:'0px',margin:'0px'}}>
-                    <thead style={{padding:'0px',margin:'0px'}}>
-                    <tr style={{color:'#969696',padding:'0px',margin:'0px'}}>
-                        <th>Price</th>
-                        <th>Amount</th>
-                        <th>Time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>0.003551</td>
-                        <td>0.98</td>
-                        <td>12:05:42</td>
-                    </tr>
-                    <tr>
-                        <td>0.003552</td>
-                        <td>0.10</td>
-                        <td>12:05:42</td>
-                    </tr>
-                    <tr>
-                        <td>0.003554</td>
-                        <td>0.99</td>
-                        <td>12:05:42</td>
-                    </tr>
-                    <tr>
-                        <td>0.003554</td>
-                        <td>0.99</td>
-                        <td>12:05:42</td>
-                    </tr>
-                    <tr>
-                        <td>0.003551</td>
-                        <td>3.98</td>
-                        <td>12:05:42</td>
-                    </tr>
-                    <tr>
-                        <td>0.003549</td>
-                        <td>0.22</td>
-                        <td>12:05:42</td>
-                    </tr>
-                    <tr>
-                        <td>0.003551</td>
-                        <td>2.28</td>
-                        <td>12:05:42</td>
-                    </tr>
-                    <tr>
-                        <td>0.003549</td>
-                        <td>2.28</td>
-                        <td>12:05:42</td>
-                    </tr>
-                    </tbody>
-        </table>*/}
+               
         <div className='col-4 col-md-4'>
                         Price
         </div>

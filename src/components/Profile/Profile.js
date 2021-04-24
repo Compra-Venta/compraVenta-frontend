@@ -10,7 +10,7 @@ import OpenTransaction from './OpenTransaction';
 import ClosedTransaction from './ClosedTransaction';
 
 
-function Profile() {
+function Profile(props) {
     const [activeTab, setActiveTab] = useState('1');
     return (
         <>
@@ -23,8 +23,8 @@ function Profile() {
                 <hr/>
                 </div>
                 
-                <Personal_Info/>
-                <ChangePassword/>
+                <Personal_Info fetchProfile={props.fetchProfile} profile={props.profile}/>
+                <ChangePassword changePassword={props.changePassword} changePassword_status={props.changePassword_status}/>
             </div>
            
             <div className="row" style={{marginLeft:'40px',padding:'20px',paddingLeft:'0px',marginTop:'40px'}}>
@@ -59,12 +59,12 @@ function Profile() {
                 <TabContent activeTab={activeTab}>
                     <TabPane tabId="1">
                         <div className='row'>
-                            <OpenTransaction/>
+                            <OpenTransaction fetchOpenTransaction={props.fetchOpenTransaction} openTransaction_info={props.openTransaction_info} cancelOrder={props.cancelOrder}/>
                         </div>
                      </TabPane>
                     <TabPane tabId="2">
                         <div className='row'>
-                            <ClosedTransaction/>
+                            <ClosedTransaction fetchClosedTransaction={props.fetchClosedTransaction} closedTransaction_info={props.closedTransaction_info}/>
                         </div>
                     </TabPane>
                 </TabContent>
@@ -76,7 +76,7 @@ function Profile() {
                <h3>Wallet</h3>
                 <hr/>
                 </div>
-                <Wallet/>
+                <Wallet fetchWallet={props.fetchWallet} wallet={props.wallet} />
                 <div>
                 <Button color="danger" size='md' style={{marginLeft:'30px'}}>Trade More Coins</Button>{' '}
                 </div>

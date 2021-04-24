@@ -1,4 +1,5 @@
 import * as ActionTypes from './actionTypes';
+import  axios  from "axios";
 const baseUrl='http://127.0.0.1:5000'
 
 export const watchlistLoading = () => ({
@@ -10,27 +11,337 @@ export const watchlistFailed = (errmess) => ({
     payload: errmess
 });
 
-export const watchlistSuccess = (watchlist) => ({
+export const watchlistSuccess = (watchlist) => {
+    console.log(watchlist.watchlist)
+    return {
     type: ActionTypes.WATCHLIST_SUCCESS,
-    payload: watchlist
-});
+    payload: watchlist.watchlist
+}};
 
 export const addSymbol = (symbol) => ({
     type: ActionTypes.ADD_SYMBOL,
     payload: symbol
 });
 
-export const addToWatchlist = (symbol) => (dispatch) => {
+export const predictSuccess = (prediction) => ({
+    type: ActionTypes.PREDICT_SUCCESS,
+    payload: prediction
+});
 
-    
-    console.log('Symbol: ', symbol);
+export const predictFailed = (errmess) => ({
+    type: ActionTypes.PREDICT_FAILED,
+    payload: errmess
+});
+
+export const predictLoading = () => ({
+    type: ActionTypes.PREDICT_LOADING
+});
+
+export const newPasswordSuccess = (status) => ({
+    type: ActionTypes.NEW_PASSWORD_SUCCESS,
+    payload: status
+}); 
+
+export const newPasswordFailed = (errmess) => ({
+    type: ActionTypes.NEW_PASSWORD_FAILED,
+    payload: errmess
+}); 
+
+export const newPasswordLoading = () => ({
+    type: ActionTypes.NEW_PASSWORD_LOADING
+}); 
+
+export const changePasswordSuccess = (status) => ({
+    type: ActionTypes.CHANGE_PASSWORD_SUCCESS,
+    payload: status
+}); 
+
+export const changePasswordFailed = (errmess) => ({
+    type: ActionTypes.CHANGE_PASSWORD_FAILED,
+    payload: errmess
+}); 
+
+export const changePasswordLoading = () => ({
+    type: ActionTypes.CHANGE_PASSWORD_LOADING
+}); 
+
+export const profileSuccess = (profile) => ({
+    type: ActionTypes.PROFILE_SUCCESS,
+    payload: profile
+})
+
+export const profileFailed = (errmess) => ({
+    type: ActionTypes.PROFILE_FAILED,
+    payload: errmess
+})
+
+export const profileLoading = () => ({
+    type: ActionTypes.PROFILE_LOADING
+})
+
+export const walletSuccess = (wallet) => ({
+    type: ActionTypes.WALLET_SUCCESS,
+    payload: wallet
+})
+
+export const walletLoading = () => ({
+    type: ActionTypes.WALLET_LOADING
+})
+
+export const walletFailed = (errmess) => ({
+    type: ActionTypes.WALLET_FAILED,
+    payload: errmess
+})
+
+export const openTransactionSuccess = (info) => ({
+    type: ActionTypes.OPEN_TRANSACTION_SUCCESS,
+    payload: info.open
+})
+
+export const openTransactionFailed = (errmess) => ({
+    type: ActionTypes.OPEN_TRANSACTION_FAILED,
+    payload: errmess
+})
+
+export const openTransactionLoading = () => ({
+    type: ActionTypes.OPEN_TRANSACTION_LOADING
+})
+
+export const closedTransactionSuccess = (info) => ({
+    type: ActionTypes.CLOSED_TRANSACTION_SUCCESS,
+    payload: info.closed
+})
+
+export const closedTransactionFailed = (errmess) => ({
+    type: ActionTypes.CLOSED_TRANSACTION_FAILED,
+    payload: errmess
+})
+
+export const closedTransactionLoading = () => ({
+    type: ActionTypes.CLOSED_TRANSACTION_LOADING
+})
+
+export const resetAccount = () => (dispatch) => {
 
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
+    console.log('Resetting Account ', email)
+    const data = {email: email}
+}
 
-    return fetch(baseUrl + '/watchlist'+`/${symbol}`, {
+export const fetchClosedTransaction = () => (dispatch) => {
+
+    dispatch(closedTransactionLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+
+    return fetch(baseUrl + '/transactions/closed' + `?email=${email}`, {
+        
+        headers: {
+            
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchClosedTransaction());
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(info => {
+            console.log('closed Transactions ',info)
+            dispatch(closedTransactionSuccess(info))})
+        .catch(error => {
+            console.log(error)
+            dispatch(closedTransactionFailed(error))
+        })
+
+}
+
+export const cancelOrder = (orderId) => (dispatch) => {
+    console.log('Cancelling Order ', orderId)
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    const data = {email:  email, order_id: orderId}
+    return fetch(baseUrl + '/order/stoploss' , {
+        method: "DELETE",
+        body: JSON.stringify(data) ,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            console.log(response);
+            if (response.ok) {
+                return response;
+            } 
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(cancelOrder(orderId));
+            }else {
+                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then( res => { alert('Order Cancelled'); dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) })
+        .catch(error =>{ alert(error); dispatch(fetchOpenTransaction(error.message))});
+
+}
+
+export const fetchOpenTransaction = () => (dispatch) => {
+
+    dispatch(openTransactionLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+
+    return fetch(baseUrl + '/transactions/open' + `?email=${email}`, {
+        
+        headers: {
+            
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchOpenTransaction());
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(info => {
+            console.log('Open Transactions ',info)
+            dispatch(openTransactionSuccess(info))})
+        .catch(error => {
+            console.log(error)
+            dispatch(openTransactionFailed(error))
+        })
+
+}
+
+export const fetchWallet = () => (dispatch) => {
+
+    dispatch(walletLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+
+    return fetch(baseUrl + '/wallet' + `?email=${email}`, {
+        
+        headers: {
+            
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchWallet());
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(wallet => {
+            console.log('User Wallet ',wallet)
+            dispatch(walletSuccess(wallet))})
+        .catch(error => {
+            console.log(error)
+            dispatch(walletFailed(error))
+        })
+}
+
+export const fetchProfile = () => (dispatch) => {
+
+    dispatch(profileLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+
+    return fetch(baseUrl + '/myprofile' + `?email=${email}`, {
+        
+        headers: {
+            
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchProfile());
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(profile => {
+            console.log('User Profile ',profile)
+            dispatch(profileSuccess(profile))})
+        .catch(error => {
+            console.log(error)
+            dispatch(profileFailed(error))})
+
+}
+
+export const changePassword = (info) => (dispatch) => {
+
+    dispatch(changePasswordLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    info.email = email
+    // const data = {info:  info}
+    console.log(info)
+    fetch(baseUrl + '/password/change', {
         method: 'POST',
-        body: {'email' :JSON.stringify(email)},
+        body: JSON.stringify(info),
         headers: {
             'Content-Type': 'application/json',
             'Authorization': bearer
@@ -39,6 +350,130 @@ export const addToWatchlist = (symbol) => (dispatch) => {
         .then(response => {
             if (response.ok) {
                 return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(changePassword(info));
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(status => {
+            console.log('changePassword Status',status)
+            dispatch(changePasswordSuccess(status))})
+        .catch(error => {
+            console.log(error)
+            dispatch(changePasswordFailed(error))})
+}
+
+export const newPassword = (email) => (dispatch) => {
+
+    dispatch(newPasswordLoading())
+    console.log(email)
+    const bearer = 'Bearer ' + localStorage.getItem('token')
+    // const email = JSON.parse(localStorage.getItem('creds')).email
+    const data = {email:  email}
+
+    return fetch(baseUrl + '/password/get_new', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        // body: {'email' : Email},
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(newPassword(email));
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(status => dispatch(newPasswordSuccess(status)))
+        .catch(error => {
+            console.log(error)
+            dispatch(newPasswordFailed(error))})
+}
+
+export const getPrediction =  (info) => (dispatch) => {
+    dispatch(predictLoading(true))
+    const [symbol, time] = [info.symbol, info.time]
+    console.log('Symbol: ', symbol)
+    console.log('interval: ', time)
+
+    return  fetch(baseUrl + `/predict?symbol=${symbol}&time=${time}`, {
+        method: 'GET',
+
+    } )
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        }, 
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(prediction => {dispatch(predictSuccess(prediction))})
+        .catch(error => {
+            console.log('Predict Error ', error)
+            dispatch(predictFailed(error))
+        })
+
+}
+
+export const addToWatchlist = (symbol) => (dispatch) => {
+
+    
+    console.log('Symbol: ', symbol);
+
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    console.log('email',email)
+    const data = {email:  email}
+    return fetch(baseUrl + '/watchlist'+`/${symbol}`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(addToWatchlist(symbol));
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -53,26 +488,35 @@ export const addToWatchlist = (symbol) => (dispatch) => {
         .then(response => response.json())
         .then(response => { alert(response); dispatch(addSymbol(symbol)); dispatch(fetchWatchlist()); })
         .catch(error => {
-            console.log('Add symbol ', error.message);
+            // console.log('Add symbol ', error.message);
             alert('Requested Symbol could not be added\nError: ' + error.message);
         })
 }
 
-export const fetchWatchlist = () => (dispatch) => {
-    dispatch(watchlistLoading(true));
+export const fetchWatchlist =  () => async(dispatch) => {
+    dispatch(watchlistLoading())
+    console.log('fetch Watchlist')
     const email = JSON.parse(localStorage.getItem('creds')).email
     const bearer = 'Bearer ' + localStorage.getItem('token');
-
-    return fetch(baseUrl + 'watchlist', {
-        body: {'email' :JSON.stringify(email)},
+    const data = {email:  email}
+    console.log('watchlist',data)
+     fetch(baseUrl + '/watchlist'+`?email=${email}`, {
+        
+        
         headers: {
-            'method': 'GET',
+            
             'Authorization': bearer
         },
+       /* body: /*JSON.stringify(data)*/
     })
         .then(response => {
+            console.log('wres',response);
             if (response.ok) {
                 return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(fetchWatchlist());
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -85,7 +529,7 @@ export const fetchWatchlist = () => (dispatch) => {
                 throw errmess;
             })
         .then(response => response.json())
-        .then(watchlist => dispatch(watchlistSuccess(watchlist)))
+        .then(watchlist => {console.log('watchlist',watchlist);dispatch(watchlistSuccess(watchlist));})
         .catch(error => dispatch(watchlistFailed(error.message)));
 }
 
@@ -93,9 +537,11 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
     console.log('Symbol: ', symbol);
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
-    return fetch(baseUrl + '/watchlist/' + symbol, {
+    //const refresh_token = localStorage.getItem('refresh-token');
+    const data = {email:  email}
+    return fetch(baseUrl + '/watchlist/' + symbol+`?email=${email}`, {
         method: "DELETE",
-        body: {'email' :JSON.stringify(email)},
+        body: JSON.stringify(data) ,
         headers: {
             'Authorization': bearer
         }
@@ -104,7 +550,12 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
             console.log(response);
             if (response.ok) {
                 return response;
-            } else {
+            }
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(removeFromWatchlist(symbol));
+            }
+             else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText);
                 error.response = response;
                 throw error;
@@ -210,13 +661,14 @@ export const logoutUser = () => (dispatch) => {
     
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
+    const data = {email:  email}
     return fetch(baseUrl + '/logout', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': bearer
         },
-        body: {'email' :JSON.stringify(email)}
+        body: JSON.stringify(data)
     })
         .then(response => {
             if (response.ok) {
@@ -235,7 +687,9 @@ export const logoutUser = () => (dispatch) => {
             
                 // If login was successful, set the token in local storage
                 localStorage.removeItem('token');
+                localStorage.removeItem('refresh-token');
                 localStorage.removeItem('creds');
+                localStorage.removeItem('rcreds');
     
    
                 dispatch(receiveLogout())
@@ -266,12 +720,15 @@ export const refreshError = (message) => {
     }
 }
 
-export const refreshToken = (token) => (dispatch) => {
+export const refreshToken = () => (dispatch) => {
     // We dispatch requestRefresh to kickoff the call to the API
+    const token = localStorage.getItem('refresh-token');
     dispatch(requestRefresh(token))
-    return fetch(baseUrl + '/reauth'+ `?"${token}"`, {
-        method: 'POST',
+    const bearer = 'Bearer ' + token;
+    return fetch(baseUrl + '/reauth', {
+        method: 'GET',
         headers: {
+            'Authorization': bearer,
             'Content-Type': 'application/json'
         },
         

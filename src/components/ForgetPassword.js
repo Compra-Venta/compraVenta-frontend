@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback, Spinner } from 'reactstrap';
 
 const ForgetPassword = (props) => {
 
@@ -14,13 +14,25 @@ const ForgetPassword = (props) => {
     evt.preventDefault();
     setShowMsg(!showmsg)
     // alert(email)
-}
+  }
+  const NewPassword = () => {
+    // newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status}
+    props.newPassword(email)
+    // const status = props.newPassword_status;
+    // console.log('Status',status)
+    setShowMsg(!showmsg)
+    
+  }
+    var resultState = props.newPassword_status;
+    // console.log('Status',resultState)
+  
+
   return (
     <div>
      <div  style={{color:'blue', fontFamily:'cursive'}} onClick={toggle}>
         <a href='#'>Forget Password</a>
      </div>
-      <Modal isOpen={modal} toggle={toggle}>
+      <Modal id='get_newPassword' isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Enter Registered Email ID</ModalHeader>
         { showmsg?
           <ModalBody className='text-center'>
@@ -41,18 +53,22 @@ const ForgetPassword = (props) => {
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
                 </FormGroup>
               </Col>
-              <Button color="primary" >Submit</Button>{' '}
+              <Button onClick={NewPassword} color="primary" >Submit</Button>{' '}
             </Form>
         </ModalBody>:
         <ModalBody >
-          <div style={{color:'deepskyblue', textAlign:'center'}}>
-           <h5> New Password Send, Check Mail!</h5>
-          </div>
+          {
+           resultState.isLoading ? 
+            <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+            resultState.errMess == null ? 
+            <div style={{color:'deepskyblue', textAlign:'center'}} >{resultState.new_Passwordstatus.message}</div> :
+            <div style={{color:'red', textAlign:'center'}} >{resultState.errMess.message}</div>
+         }
         </ModalBody>
         }
         <ModalFooter>
           {/* <Button color="primary" onClick={toggle}>Submit</Button>{' '} */}
-          <Button color="secondary" onClick={toggle}>{showmsg?'Cancel':'Ok, Thanks'}</Button>
+          <Button color={showmsg?'warning':resultState.errMess == null ? 'success' : 'danger'} onClick={toggle}>{showmsg?'Cancel':resultState.errMess == null ? 'Ok, Thanks' : 'Oops! Try Again'}</Button>
         </ModalFooter>
       </Modal>
     </div>
