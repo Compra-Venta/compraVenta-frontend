@@ -135,6 +135,58 @@ export const marketOrderLoading = () => ({
     type: ActionTypes.MARKET_ORDER_LOADING
 })
 
+export const stopOrderSuccess = (status) => ({
+    type: ActionTypes.STOP_ORDER_SUCCESS,
+    payload: status
+})
+
+export const stopOrderFailed = (errmess) => ({
+    type: ActionTypes.STOP_ORDER_FAILED,
+    payload: errmess
+})
+
+export const stopOrderLoading = () => ({
+    type: ActionTypes.STOP_ORDER_LOADING
+})
+
+export const placeStopOrder = (info) => (dispatch) =>{
+
+    dispatch(stopOrderLoading())
+    const bearer = 'Bearer ' + localStorage.getItem('token');
+    const email = JSON.parse(localStorage.getItem('creds')).email
+    info.email = email
+    console.log('Placing Order ', info)
+    return fetch(baseUrl + '/order/stoploss', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': bearer
+        },
+        body: JSON.stringify(info) 
+    })
+            .then(response => {
+            console.log(response);
+            if (response.ok) {
+                return response;
+            } 
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(placeStopOrder(info));
+            }else {
+                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                throw error;
+            })
+        .then(response => response.json())
+        .then(res => dispatch(stopOrderSuccess(res)))
+        .catch(error => dispatch(stopOrderFailed(error)));
+
+}
+
 export const placeMarketOrder = (info) => (dispatch) =>{
 
     dispatch(marketOrderLoading())

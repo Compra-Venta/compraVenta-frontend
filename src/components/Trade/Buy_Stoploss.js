@@ -4,6 +4,7 @@ import {
     FormGroup, Label, Input,
     Button,
     FormFeedback,
+    Spinner, Alert
   } from 'reactstrap';
 
 export class Buy_Stoploss extends Component {
@@ -15,9 +16,13 @@ export class Buy_Stoploss extends Component {
              coin_pair: 'BTCUSDT',
              stop: '',
              amount: '0.0',
-             total: '0.0'
+             total: '0.0',
+             status: {},
+             showmsg: false
         }
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this)
+
     }
     
     handleChange =(event) =>{
@@ -30,13 +35,27 @@ export class Buy_Stoploss extends Component {
         });
       }
 
+    handleSubmit = async (event) => {
+      
+      const state = this.state
+      await this.props.placeStopOrder({email: '', base:state.coin_pair.slice(0,3), quote: state.coin_pair.slice(3), b_amount: state.amount, stop: state.stop, date: '2021-04-24', time: '23:48:15', side: 'BUY'})
+      event.preventDefault()
+      const status = this.props.stopOrder
+      this.setState({
+        status: status,
+        showmsg: true
+      })
+      console.log('see status ', this.state.status)
+  
+    }
+
     render() {
         return (
             <div>
 
 <Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
             {/*<h2 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
-            <Form className="Buy-Stoploss" onSubmit={this.handleSubmit} >
+            <Form className="Buy-Stoploss"  >
               <Col>
                 <FormGroup>
                   <Label for='Stop-Price'>Stop</Label>
@@ -91,8 +110,20 @@ export class Buy_Stoploss extends Component {
                 </FormGroup>
               </Col>
               
-              <Button type="submit" color="success" className='offset-5' >Buy</Button>
-              
+              <Button onClick={() => this.handleSubmit()} type="submit" color="success" className='offset-5' >Buy</Button>
+              {/* {
+              this.state.showmsg?
+              this.status.isLoading ?
+              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+              this.status.errMess == null ?
+              <div style={{color:'deepskyblue', textAlign:'center'}}>
+              <h5> {this.status.orderStatus.message}</h5>
+              </div> :
+              <div style={{color:'red', textAlign:'center'}}>
+              <h5> {this.status.errMess.message}</h5>
+              </div>:
+              null
+            } */}
             </Form>
           </Container>
             </div>

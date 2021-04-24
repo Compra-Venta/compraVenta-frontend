@@ -52,12 +52,12 @@ function Profile(props) {
                 <Nav tabs>
                     <NavItem>
                         <NavLink className={activeTab == '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                        Open Transactions
+                        Closed Transactions
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink className={activeTab == '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-                        Closed Transactions
+                        Open Transactions
                         </NavLink>
                     </NavItem>
                 </Nav>

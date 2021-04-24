@@ -8,7 +8,7 @@ import { Route, Switch, Redirect ,withRouter} from 'react-router';
 import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
 import Collaborators from './Collaborators';
-import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount} from "../redux/actionCreaters";
+import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder} from "../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
@@ -26,7 +26,9 @@ const mapDispatchToProps = (dispatch) => ({
     fetchClosedTransaction: () => dispatch(fetchClosedTransaction()),
     cancelOrder: (orderId) => dispatch(cancelOrder(orderId)),
     placeMarketOrder: (info) => dispatch(placeMarketOrder(info)),
+    placeStopOrder: (info) => dispatch(placeStopOrder(info)),
     resetAccount : () => dispatch(resetAccount())
+
 })
 
 const mapStateToProps = (state) => {
@@ -41,7 +43,7 @@ const mapStateToProps = (state) => {
         openTransaction_info: state.openTransaction_info,
         closedTransaction_info: state.closedTransaction_info,
         marketOrder: state.marketOrder,
-        
+        stopOrder: state.stopOrder,        
     }
 }
 
@@ -96,7 +98,8 @@ class MainComponent extends Component {
                     auth={this.props.auth} logoutUser={this.props.logoutUser}
                     fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} 
                     getprediction={this.props.getPrediction} prediction={this.props.prediction}
-                    placeMarketOrder={this.props.placeMarketOrder} marketOrder={this.props.marketOrder} />
+                    placeMarketOrder={this.props.placeMarketOrder} marketOrder={this.props.marketOrder}
+                    placeStopOrder={this.props.placeStopOrder} stopOrder={this.props.stoptOrder} />
                     </Route>
                         
                     

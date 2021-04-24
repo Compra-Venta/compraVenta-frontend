@@ -466,7 +466,8 @@ class DashboardComponent extends Component {
                             <MyTabs 
                             qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`} 
                             qp={`${currencies[this.state.selectedValue].qp}`} bp={`${currencies[this.state.selectedValue].bp}`}
-                            placeMarketOrder={this.props.placeMarketOrder} marketOrder={this.props.marketOrder}/>
+                            placeMarketOrder={this.props.placeMarketOrder} marketOrder={this.props.marketOrder}
+                            placeStopOrder={this.props.placeStopOrder} stopOrder={this.props.stoptOrder} />
                         </div>
                         </div>
                         </div>
