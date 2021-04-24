@@ -346,14 +346,14 @@ var smaLine = chart.addLineSeries({
 		this.setState({
 			ws:ws
 		})
-		// candleSeries.update({
-		// 	time: candlestick.t /1000,
-		// 	// time: Date.now(),
-		// 	open: candlestick.o,
-		// 	high: candlestick.h,
-		// 	low: candlestick.l,
-		// 	close: candlestick.c
-		// });
+		candleSeries.update({
+			time: candlestick.t /1000,
+			// time: Date.now(),
+			open: candlestick.o,
+			high: candlestick.h,
+			low: candlestick.l,
+			close: candlestick.c
+		});
 		// smaLine.update(this.calculateSMA({
 		// 	// time: candlestick.t,
 		// 	time: Date.now(),

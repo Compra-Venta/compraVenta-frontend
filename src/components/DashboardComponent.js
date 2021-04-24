@@ -427,7 +427,7 @@ class DashboardComponent extends Component {
                                 </div>
                                 <div className='col-sm-6 col-lg-3'>
                                     <div className='row mx-auto' style={{color:'gray'}}>24 Volume</div>
-                                    <div className='row' style={{fontSize:'1.5rem'}}>{this.state.bs_volume.substring(0,12)}</div></div>
+                                    <div className='row' style={{color:`${this.state.change_color}`, fontSize:'1.5rem'}}>{this.state.bs_volume.substring(0,12)}</div></div>
                             </div>
                            
                             <Nav tabs>
