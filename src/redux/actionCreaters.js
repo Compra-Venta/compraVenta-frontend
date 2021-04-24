@@ -181,7 +181,7 @@ export const resetAccount = () => (dispatch) => {
     const data = {email: email}
     
     return fetch(baseUrl + '/reset' , {
-        method: "DELETE",
+        method: "PUT",
         body: JSON.stringify(data) ,
         headers: {
             'Content-Type': 'application/json',
@@ -207,7 +207,7 @@ export const resetAccount = () => (dispatch) => {
             })
         .then(response => response.json())
         .then(res => {
-            alert('Account Reset Successfully')
+            alert('Account Reset Successfully! Reload Page')
             dispatch(fetchProfile())
             dispatch(fetchClosedTransaction())
             dispatch(fetchOpenTransaction())

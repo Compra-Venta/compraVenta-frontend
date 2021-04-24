@@ -12,6 +12,11 @@ import ClosedTransaction from './ClosedTransaction';
 
 function Profile(props) {
     const [activeTab, setActiveTab] = useState('1');
+
+    const resetAccount = async () => {
+        await props.resetAccount()
+    }
+
     return (
         <>
         <div><ProfileNav/></div>
@@ -34,7 +39,7 @@ function Profile(props) {
                 </div>
                 <Account/>
                 <div>
-                <Button color="danger" size='md' style={{marginLeft:'30px'}}>Reset Account Details</Button>{' '}
+                <Button onClick={() => resetAccount()} color="danger" size='md' style={{marginLeft:'30px'}}>Reset Account Details</Button>{' '}
                 </div>
             </div>
 

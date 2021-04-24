@@ -8,7 +8,7 @@ import { Route, Switch, Redirect ,withRouter} from 'react-router';
 import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
 import Collaborators from './Collaborators';
-import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder} from "../redux/actionCreaters";
+import { registerUser, fetchWatchlist,addToWatchlist,removeFromWatchlist,loginUser,logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount} from "../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
@@ -26,6 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchClosedTransaction: () => dispatch(fetchClosedTransaction()),
     cancelOrder: (orderId) => dispatch(cancelOrder(orderId)),
     placeMarketOrder: (info) => dispatch(placeMarketOrder(info)),
+    resetAccount : () => dispatch(resetAccount())
 })
 
 const mapStateToProps = (state) => {
@@ -105,6 +106,7 @@ class MainComponent extends Component {
                         fetchOpenTransaction={this.props.fetchOpenTransaction} openTransaction_info={this.props.openTransaction_info} cancelOrder={this.props.cancelOrder}
                         fetchProfile={this.props.fetchProfile} profile={this.props.profile}
                         fetchWallet={this.props.fetchWallet} wallet={this.props.wallet}
+                        resetAccount={this.props.resetAccount}
                         changePassword={this.props.changePassword} changePassword_status={this.props.changePassword_status} />
                     </Route>
                     <Route path='/learn'>
