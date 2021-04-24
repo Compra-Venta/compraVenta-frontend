@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useStore } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner, Alert } from 'reactstrap';
 
 const Predict = (props) => {
  /* const {
@@ -8,43 +8,30 @@ const Predict = (props) => {
     className
   } = props;*/
   
-  const [modal, setModal] = useState(false);
-  const [interval] =useState([ '1d', '3d', '1w' ]);
-  const [resultState, setState] = useState({
-      isLoading: true,
-      errmess: null,
-      prediction : {price:0,
-                    isHigh:true}
-  })
-
+    const [modal, setModal] = useState(false);
+    const [interval] =useState([ '1d', '3d', '1w' ]);
+  
+    const [showmsg, setShowMsg] = useState(true);
     const [selectedInterval, changeInterval] = useState('1d')
     const intervallist = interval.map( (time) =>{ 
         return(<option>{`${time}`}</option>
 
     ) } )
-    const [showmsg, setShowMsg] = useState(true);
+    
     const toggle = () =>{ 
       setModal(!modal);
       setShowMsg(true)
     };
-
-  const GetPrediction = ()=> {
+  
+  const GetPrediction = async ()=> {
     
-     props.getprediction({symbol: props.symbol, time: selectedInterval})
-    // //  console.log(prediction.prediction.prediciton)
-    // //  var state = initialState;
-    // //  state.price = prediction.prediction.prediciton
-    // //  setState(prediction)
-    // //  prediction = props.prediction
-    const prediction = props.prediction
-    var state = resultState
-    resultState.isLoading = prediction.isLoading
-    resultState.errmess = prediction.errmess
-    resultState.prediction = prediction.prediction
-    setShowMsg(!showmsg)
-    // // setState(prediction)
-    //  console.log(resultState)
+     await props.getprediction({symbol: props.symbol, time: selectedInterval})
+     setShowMsg(false)
+    
   }
+
+  const prediction = props.prediction;
+  // console.log(prediction)
 
   return (
     <div>
@@ -62,19 +49,19 @@ const Predict = (props) => {
             {intervallist}
          </select> <br/>
          {
-           showmsg ? 
-           resultState.isLoading ? 
-           null:
+           showmsg ?
+           null :
+           prediction.isLoading ? 
            <Spinner color='primary' />:
-           resultState.errmess === null ? 
-           <div style={{color:'deepskyblue', textAlign:'center'}}>{resultState.prediction.prediction}</div> :
-           <div style={{color:'red', textAlign:'center'}}>{resultState.errMess}</div> 
+           prediction.errmess == null ? 
+           <div style={{color:'deepskyblue', textAlign:'center'}}> <Alert color='success'><h4>{`Predicted Price: ${parseFloat(prediction.prediction.prediction).toPrecision(8)}`}</h4></Alert> </div> :
+           <div style={{color:'red', textAlign:'center'}}><Alert color='danger' ><h4>{prediction.errMess.message}</h4></Alert></div> 
            
          }
         </ModalBody>
         <ModalFooter>
           {!showmsg ? null : <Button color="primary" onClick={GetPrediction}>Predict</Button>}
-          <Button color={showmsg?'warning':resultState.errMess == null ? 'success' : 'danger'} onClick={toggle}>{showmsg?'Cancel':resultState.errMess == null ? 'Ok, Thanks' : 'Oops! Try Again'}</Button>
+          <Button color={showmsg?'warning':prediction.errMess == null ? 'success' : 'danger'} onClick={toggle}>{showmsg?'Cancel':prediction.errMess == null ? 'Ok, Thanks' : 'Oops! Try Again'}</Button>
         </ModalFooter>
       </Modal>
     </div>

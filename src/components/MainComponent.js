@@ -88,7 +88,11 @@ class MainComponent extends Component {
                         newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} />
                         <Footer/>
                     </Route>
-                    <Route path='/dashboard'>{ /*component={() =>*/}<DashboardComponent auth={this.props.auth} fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} logoutUser={this.props.logoutUser} getprediction={this.props.getPrediction} prediction={this.props.prediction}/>
+                    <Route path='/dashboard'>{ /*component={() =>*/}
+                    <DashboardComponent 
+                    auth={this.props.auth} logoutUser={this.props.logoutUser}
+                    fetchWatchlist={this.props.fetchWatchlist} addToWatchlist={this.props.addToWatchlist} removeFromWatchlist={this.props.removeFromWatchlist} watchlist={this.props.watchlist} 
+                    getprediction={this.props.getPrediction} prediction={this.props.prediction}/>
                     </Route>
                         
                     
