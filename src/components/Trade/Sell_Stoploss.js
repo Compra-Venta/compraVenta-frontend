@@ -43,8 +43,11 @@ export class Sell_Stoploss extends Component {
     handleSubmit = async (event) => {
       event.preventDefault()
       const state = this.state
-      await this.props.placeStopOrder({email: '',base: this.props.ba, quote: this.props.qa, b_amount: state.amount, stop: state.stop, date: '2021-04-24', time: '23:48:15', side: 'SELL'})
-      
+      await this.props.placeStopOrder(
+        {email: '', base: this.props.ba, quote: this.props.qa, b_amount: state.amount, stop: state.stop, 
+        date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(), time: new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds() ,
+        side: 'SELL'})
+
       const status = this.props.stopOrder
       this.setState({
         status: status,
