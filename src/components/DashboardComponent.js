@@ -29,7 +29,7 @@ class DashboardComponent extends Component {
             watchArray: (typeof this.props.watchlist !=='undefined') ? this.props.watchlist.watchlist : [],
             interval: ['15m', '1h', '12h', '1d', '1w'],
             activeTab: '1',
-            selected_interval: '5m'
+            selected_interval: '15m'
             // watchArray : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
             
         }

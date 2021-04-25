@@ -7,7 +7,7 @@ export class LightweightChart extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ws: new WebSocket(`wss://stream.binance.com:9443/ws/BTCUSDT@kline_1m`)
+			ws: new WebSocket(`wss://stream.binance.com:9443/ws/BTCUSDT@kline_15m`)
 		}
 		this.makeChart=this.makeChart.bind(this);
 	}
@@ -337,6 +337,7 @@ var smaLine = chart.addLineSeries({
 	this.check();
 	//var category= symbol.toLowerCase()
 	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_${interval}`)
+	console.log(ws)
 	ws.onmessage = (event)=>{
 		
 		var message  = JSON.parse(event.data);
@@ -346,14 +347,14 @@ var smaLine = chart.addLineSeries({
 		this.setState({
 			ws:ws
 		})
-		// candleSeries.update({
-		// 	time: candlestick.t /1000,
-		// 	// time: Date.now(),
-		// 	open: candlestick.o,
-		// 	high: candlestick.h,
-		// 	low: candlestick.l,
-		// 	close: candlestick.c
-		// });
+		candleSeries.update({
+			time: candlestick.t /1000,
+			// time: Date.now(),
+			open: candlestick.o,
+			high: candlestick.h,
+			low: candlestick.l,
+			close: candlestick.c
+		});
 		// smaLine.update(this.calculateSMA({
 		// 	// time: candlestick.t,
 		// 	time: Date.now(),
