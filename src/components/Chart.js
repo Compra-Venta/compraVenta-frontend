@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createChart,CrosshairMode, PriceScaleMode } from 'lightweight-charts';
 import axios from 'axios'
+import {sma, ema, SMA} from 'technicalindicators'
 
 export class LightweightChart extends React.Component {
     
@@ -19,31 +20,16 @@ export class LightweightChart extends React.Component {
     chart = null;
 
 	 calculateSMA = (data, count) =>{
-		//  console.log("Dabhbhbhta", data)
-		var avg = (data) => {
-		  var sum = 0;
-		  for (var i = 0; i < data.length; i++) {
-			 sum += parseFloat(data[i].close);
-			//  console.log('samaaanj',sum)
-		  }
-		//   console('Sum', sum)
-		  return sum / data.length;
-		};
-		var result = [];
+		const a = data.map( d => parseFloat(d.close) )
+		const smaData = SMA.calculate({period: 10, values : a} )
+		console.log('ddddd', smaData)
+		const result = [];
+		for (let i=0; i<950;i++)
+		{result.push({time: data[i].time, value: smaData[i] })}
 		
-		for (var i= 0 ; i < data.length; i++){
-			// console.log('result loop99', data.length)
-		//   var val = avg(data.slice(0, i));
-		var sum = 0;
-		for (var j = 0; j < i; j++) {
-		   sum += parseFloat(data[j].close);
-		//    console.log('samaaanj',sum)
-		}
-		//   console.log('result loop')
-		  result.push({ time: data[i].time, value: sum/(i+1)});
-		}
-		// console.log('SMA Data',result)
-		return result;
+		
+		console.log('alalalalal', result)
+	
 	  }
 
 	check = () => {
@@ -319,13 +305,16 @@ var smaData = [];
         } )
 		.then( t =>{
 			//  console.log(data);
-			 smaData = this.calculateSMA(data, 15)})
+			 smaData = this.calculateSMA(data, 0)
+			})
         .catch(error =>{
             // alert(error)
             this.setState({errormsg:'Error Retreiving Data'})
       
           })
-// console.log('Data ',data)
+// console.log('Historical Charts Data',data.map(d => d.close))
+
+
 candleSeries.setData(data);
 
 
@@ -335,6 +324,7 @@ var smaLine = chart.addLineSeries({
 });
 // smaLine.setData(smaData);
 	this.check();
+	
 	//var category= symbol.toLowerCase()
 	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_${interval}`)
 	console.log(ws)
@@ -343,7 +333,7 @@ var smaLine = chart.addLineSeries({
 		var message  = JSON.parse(event.data);
 
 		var candlestick = message.k;
-		// console.log(candlestick);
+		console.log(candlestick);
 		this.setState({
 			ws:ws
 		})
@@ -356,12 +346,9 @@ var smaLine = chart.addLineSeries({
 			close: candlestick.c
 		});
 		// smaLine.update(this.calculateSMA({
-		// 	// time: candlestick.t,
-		// 	time: Date.now(),
-		// 	open: candlestick.o,
-		// 	high: candlestick.h,
-		// 	low: candlestick.l,
-		// 	close: candlestick.c
+		// 	time: candlestick.t,
+		// 	// time: Date.now(),
+		// 	value: candlestick.c
 		// },10))
 	}
 if (true)	{

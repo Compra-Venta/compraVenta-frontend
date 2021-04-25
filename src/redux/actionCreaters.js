@@ -626,7 +626,7 @@ export const addToWatchlist = (symbol) => (dispatch) => {
                 throw errmess;
             })
         .then(response => response.json())
-        .then(response => { alert(response); dispatch(addSymbol(symbol)); dispatch(fetchWatchlist()); })
+        .then(response => { alert(symbol + response.message.slice(6)); dispatch(addSymbol(symbol)); dispatch(fetchWatchlist()); })
         .catch(error => {
             // console.log('Add symbol ', error.message);
             alert('Requested Symbol could not be added\nError: ' + error.message);
