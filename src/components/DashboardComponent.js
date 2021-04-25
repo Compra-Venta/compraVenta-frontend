@@ -489,7 +489,9 @@ class DashboardComponent extends Component {
                                 <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
                             </div>
                            
-                        <Predict getprediction={this.props.getPrediction} prediction={this.props.prediction} symbol={this.state.selectedValue} />
+                        <Predict 
+                        getprediction={this.props.getPrediction} prediction={this.props.prediction} 
+                        symbol={this.state.selectedValue} currentPrice={this.state.current_price} />
                         <div className="row">
                             <MyTabs 
                             qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`} 

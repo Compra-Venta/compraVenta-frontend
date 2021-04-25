@@ -1,5 +1,5 @@
-import { isUTCTimestamp } from 'lightweight-charts';
 import React, { Component } from 'react'
+
 
 export class Watchlist extends Component {
     constructor(props) {
@@ -75,19 +75,19 @@ export class Watchlist extends Component {
     };
 
     componentDidMount(){
-        console.log('w',this.props.array)
+        // console.log('w',this.props.array)
         this.createwatchlist(this.props.array);
         this.props.setClick(this.createwatchlist)
     }
     componentDidUpdate(prevProps){
         if (prevProps.array !== this.props.array) {
-            console.log('hi',this.props.array);
+            // console.log('hi',this.props.array);
             this.createwatchlist(this.props.array);
           }
     }
 
     render() {
-        //console.log('win',this.props.watchlist)
+        
         const prices  = this.state.prices;
 
          //console.log('prices',prices);

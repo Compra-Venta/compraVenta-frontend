@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useStore } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner, Alert } from 'reactstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown, faArrowUp, faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 const Predict = (props) => {
  /* const {
@@ -33,6 +35,9 @@ const Predict = (props) => {
   const prediction = props.prediction;
   // console.log(prediction)
 
+  const currentPrice = props.currentPrice;
+  const isHigh = prediction.prediction.prediction > currentPrice;
+
   return (
     <div>
      <div className='row' style={{paddingRight:'20px'}}>
@@ -54,8 +59,13 @@ const Predict = (props) => {
            prediction.isLoading ? 
            <Spinner color='primary' />:
            prediction.errmess == null ? 
-           <div style={{color:'deepskyblue', textAlign:'center'}}> <Alert color='success'><h4>{`Predicted Price: ${parseFloat(prediction.prediction.prediction).toPrecision(8)}`}</h4></Alert> </div> :
-           <div style={{color:'red', textAlign:'center'}}><Alert color='danger' ><h4>{prediction.errMess.message}</h4></Alert></div> 
+           <div style={{color:'deepskyblue', textAlign:'center'}}>
+              <Alert color={ isHigh ? 'success' : 'danger'} >
+                <h4 className='col'>{`Predicted Price: ${parseFloat(prediction.prediction.prediction).toPrecision(8)}`}</h4>
+                <FontAwesomeIcon size='2x' icon={isHigh ? faCaretUp : faCaretDown} />
+                </Alert> </div> :
+           <div style={{color:'red', textAlign:'center'}}>
+             <Alert color='danger' ><h4>{prediction.errMess.message}</h4></Alert></div> 
            
          }
         </ModalBody>
