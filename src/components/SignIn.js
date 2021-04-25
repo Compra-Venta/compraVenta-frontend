@@ -3,7 +3,7 @@ import {
     Container, Col, Form,
     FormGroup, Label, Input,
     Button,
-    FormFeedback,
+    FormFeedback,Spinner,UncontrolledAlert
   } from 'reactstrap';
 import { Link, useHistory, withRouter } from "react-router-dom";  
 import ForgetPassword from './ForgetPassword';
@@ -65,6 +65,17 @@ function SignIn(props) {
           initialState.EmailId,
           initialState.Password,
         );
+
+        const view= !(props.auth.isAuthenticated)?
+              props.auth.isLoading ?
+              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+              props.auth.errMess ?
+              <div style={{ textAlign:'center'}}>
+             <UncontrolledAlert color='danger'>
+              <h5> Invalid Credentials! Please try again...</h5>
+              </UncontrolledAlert>
+              </div>:
+              null:null
        
         return (
           <Container className="SignIn border border-primary border-3" style={{backgroundColor:'white',width:'500px',borderRadius:'20px',border:'1px solid'}}>
@@ -118,6 +129,9 @@ function SignIn(props) {
               </div>
               <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>&nbsp;Register Here</button></div>
               </div>
+              <Col>
+              {view}
+              </Col>
             </Form>
           </Container>
         )
