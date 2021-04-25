@@ -144,7 +144,7 @@ class DashboardComponent extends Component {
         console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage = (event) => {
-            console.log('message')
+            //console.log('message')
             ob = JSON.parse(event.data) ;
             // console.log(ob.p);
             // console.log(ob);
