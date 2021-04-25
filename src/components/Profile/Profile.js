@@ -8,7 +8,34 @@ import ChangePassword from './ChangePassword'
 import Footer from '../Footer'
 import OpenTransaction from './OpenTransaction';
 import ClosedTransaction from './ClosedTransaction';
+import { connect } from "react-redux";
+import {  fetchWatchlist, addToWatchlist, removeFromWatchlist, loginUser, logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder } from "../../redux/actionCreaters";
 
+const mapDispatchToProps = (dispatch) => ({
+    
+    logoutUser: () => dispatch(logoutUser()),
+    changePassword: (info) => dispatch(changePassword(info)),
+    fetchProfile: () => dispatch(fetchProfile()),
+    fetchWallet: () => dispatch(fetchWallet()),
+    fetchOpenTransaction: () => dispatch(fetchOpenTransaction()),
+    fetchClosedTransaction: () => dispatch(fetchClosedTransaction()),
+    cancelOrder: (orderId) => dispatch(cancelOrder(orderId)),
+    resetAccount: () => dispatch(resetAccount())
+
+})
+
+const mapStateToProps = (state) => {
+    return {
+        
+        auth: state.auth,
+        changePassword_status: state.changePassword_status,
+        profile: state.profile,
+        wallet: state.wallet,
+        openTransaction_info: state.openTransaction_info,
+        closedTransaction_info: state.closedTransaction_info,
+
+    }
+}
 
 function Profile(props) {
     const [activeTab, setActiveTab] = useState('1');
@@ -19,7 +46,7 @@ function Profile(props) {
 
     return (
         <>
-        <div><ProfileNav/></div>
+        <div><ProfileNav logoutUser={props.logoutUser}/></div>
         <div className='container-fluid'>
             <div className="row" style={{padding:'30px'}}><h2>Profile</h2></div>
             <div className='row' style={{marginLeft:'40px'}}>
@@ -92,6 +119,6 @@ function Profile(props) {
     )
 }
 
-export default Profile
+export default connect(mapStateToProps,mapDispatchToProps)(Profile);
 
 

@@ -10,7 +10,32 @@ import Watchlist from './Watchlist';
 import MyTabs from './Tab';
 import Predict from './Predict';
 import Footer from './Footer';
+ import {  withRouter } from 'react-router';
+import { connect } from "react-redux";
+import {  fetchWatchlist, addToWatchlist, removeFromWatchlist, loginUser, logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder } from "../redux/actionCreaters";
 
+const mapDispatchToProps = (dispatch) => ({
+    
+    logoutUser: () => dispatch(logoutUser()),
+    fetchWatchlist: () => dispatch(fetchWatchlist()),
+    addToWatchlist: (symbol) => dispatch(addToWatchlist(symbol)),
+    removeFromWatchlist: (symbol) => dispatch(removeFromWatchlist(symbol)),
+    getPrediction: (info) => dispatch(getPrediction(info)),
+    placeMarketOrder: (info) => dispatch(placeMarketOrder(info)),
+    placeStopOrder: (info) => dispatch(placeStopOrder(info)),
+   
+
+})
+
+const mapStateToProps = (state) => {
+    return {
+        watchlist: state.watchlist,
+        auth: state.auth,
+        prediction: state.prediction,
+        marketOrder: state.marketOrder,
+        stopOrder: state.stopOrder,
+    }
+}
 class DashboardComponent extends Component {
     constructor(props){
         super(props);
@@ -29,7 +54,7 @@ class DashboardComponent extends Component {
             watchArray: (typeof this.props.watchlist !=='undefined') ? this.props.watchlist.watchlist : [],
             interval: ['15m', '1h', '12h', '1d', '1w'],
             activeTab: '1',
-            selected_interval: '15m'
+            selected_interval: '5m'
             // watchArray : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
             
         }
@@ -53,7 +78,8 @@ class DashboardComponent extends Component {
     binanceSocket = new WebSocket(this.socketUrl);*/
     addToWatcharray = () => {
         this.props.addToWatchlist(this.state.selectedValue);
-      this.childRefWatchList.current.createwatchlist(this.props.watchlist.watchlist);
+      //this.childRefWatchList.current.createwatchlist(this.props.watchlist.watchlist);
+      this.clickChild(this.props.watchlist.watchlist);
       /*console.log('fetch Watchlist')
         const email = JSON.parse(localStorage.getItem('creds')).email
         const bearer = 'Bearer ' + localStorage.getItem('token');
@@ -99,7 +125,8 @@ class DashboardComponent extends Component {
             watchArray: result
         }, () => */
         this.props.removeFromWatchlist(this.state.selectedValue)
-        this.childRefWatchList.current.createwatchlist(this.props.watchlist.watchlist)
+       /*  this.childRefWatchList.current.createwatchlist(this.props.watchlist.watchlist) */
+        this.clickChild(this.props.watchlist.watchlist);
     }
     priceChange =(value) =>{
         this.setState({
@@ -117,6 +144,7 @@ class DashboardComponent extends Component {
         console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage = (event) => {
+            console.log('message')
             ob = JSON.parse(event.data) ;
             // console.log(ob.p);
             // console.log(ob);
@@ -140,11 +168,11 @@ class DashboardComponent extends Component {
     check = () => {
         const ws  = this.state.ws;
         if (ws || ws.readyState == WebSocket.OPEN) {
-            console.log('connection check');
+            console.log('connection check',ws);
 
             ws.close();
         if(!ws|| ws.readyState == WebSocket.CLOSED){
-            console.log('connection close');
+            console.log('connection close',ws);
         }
         } 
     };
@@ -390,7 +418,7 @@ class DashboardComponent extends Component {
                             <div className='row' style={{paddingTop:'10px'}} >
                                 <p style={{color:'#257CFF',fontSize:'1.5rem'}}>Watch List</p>
                                 <div className='container'>
-                                    <Watchlist array={this.props.watchlist.watchlist} ref={this.childRefWatchList} watch={this.props.watchlist}/>
+                                    <Watchlist array={this.props.watchlist.watchlist} /*ref={this.childRefWatchList}*/ watch={this.props.watchlist} setClick={click => this.clickChild = click} />
                                     {/* {watchList} */}
                                 </div>
                             </div>
@@ -461,7 +489,7 @@ class DashboardComponent extends Component {
                                 <LightweightChart interval={`${this.state.selected_interval}`} coinpair={`${this.state.selectedValue}`}  ref={this.childRefChart}/>
                             </div>
                            
-                        <Predict getprediction={this.props.getprediction} prediction={this.props.prediction} symbol={this.state.selectedValue} />
+                        <Predict getprediction={this.props.getPrediction} prediction={this.props.prediction} symbol={this.state.selectedValue} />
                         <div className="row">
                             <MyTabs 
                             qa={`${currencies[this.state.selectedValue].qa}`} ba={`${currencies[this.state.selectedValue].ba}`} 
@@ -489,4 +517,4 @@ class DashboardComponent extends Component {
     }
 }
 
-export default DashboardComponent;
+export default connect(mapStateToProps,mapDispatchToProps)(DashboardComponent);

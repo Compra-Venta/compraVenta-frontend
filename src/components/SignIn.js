@@ -22,12 +22,12 @@ function SignIn(props) {
 })
   const [showPassword, setShowPassword] = useState(false)
    
-  // const history = useHistory();
-  // useEffect(() => {
-  //   console.log('auth',props.auth.isAuthenticated)
-  //     if (props.auth.isAuthenticated) history.push('/dashboard');
+   const history = useHistory();
+  useEffect(() => {
+    console.log('auth',props.auth.isAuthenticated)
+      if (props.auth.isAuthenticated) history.push('/dashboard');
      
-  // })
+   })
     
    const handleInputChange =(event) =>{
       const target = event.target;

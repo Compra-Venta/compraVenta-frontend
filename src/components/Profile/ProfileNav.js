@@ -6,6 +6,9 @@ const ProfileNav = (props) => {
 
   const toggleNavbar = () => setCollapsed(!collapsed);
   const loggedIn = true;
+  const handleLogoutClick = () => {
+    props.logoutUser();
+  }
 
   return (
     <div style={{boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)'}}>
@@ -22,7 +25,7 @@ const ProfileNav = (props) => {
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/faqs">FAQs </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/home">Logout </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} onClick={handleLogoutClick}  href="/home">Logout </NavLink>
             </NavItem>
           </Nav>
         </Collapse>

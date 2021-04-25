@@ -77,6 +77,7 @@ export class Watchlist extends Component {
     componentDidMount(){
         console.log('w',this.props.array)
         this.createwatchlist(this.props.array);
+        this.props.setClick(this.createwatchlist)
     }
     componentDidUpdate(prevProps){
         if (prevProps.array !== this.props.array) {

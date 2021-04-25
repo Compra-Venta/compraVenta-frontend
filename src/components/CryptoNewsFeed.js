@@ -51,10 +51,11 @@ class CryptoNewsFeed extends Component {
     .catch(console.error)
 }
 
+
     render() {
 
         const {newsList}=this.state;
-        const {category}=this.props ;
+        const {category}=this.props  ;
         /*console.log(category);*/
         var MyC=0;
 
@@ -73,9 +74,9 @@ class CryptoNewsFeed extends Component {
                         
                             <div className="container" style={{marginTop:'20px',display:'flex'}}>
                                 <img src={news.imageurl} style={{maxHeight:'25px',maxWidth:'25px'}}/>
-                                <span>
+                                
                                 <a href = {news.url} target="_blank" style={{color:'black',paddingLeft:'1.5%'}}><p >{news.title}</p></a>       
-                                </span>                                     
+                                                                    
                             </div>
                            
                             )
