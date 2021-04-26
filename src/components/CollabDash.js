@@ -1,15 +1,12 @@
 import React, { useState ,useEffect} from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
 import {  useHistory, withRouter,Link} from "react-router-dom";
-const NavDash = (props) => {
+const CollabDash = (props) => {
  const [collapsed, setCollapsed] = useState(true);
 
   const toggleNavbar = () => setCollapsed(!collapsed);
   const loggedIn = true;
   
-  const handleLogoutClick = () => {
-    props.logoutUser();
-  }
   return (
     <div style={{boxShadow:'0px 4px 4px rgba(0, 0, 0, 0.25)'}}>
       <Navbar light expand='md' /*style={{marginBottom:'0px',marginTop:'0px',borderWidth:'medium'}}*/ className=' mr-0' style={{ padding:'0'}} >
@@ -19,16 +16,13 @@ const NavDash = (props) => {
         <Collapse  isOpen={!collapsed} navbar>
           <Nav className='ml-auto col-md-7 justify-content-end' navbar style={{paddingRight:'0px',justifyItems:'right'}} >
             <NavItem>
-              <NavLink style={{color:'blue',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="/profile"><span color='violet' >My Profile</span></NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="/home">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/learn"> Learn </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/learn">Learn</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/collaborators"> Collaborators </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/home" style={{color:'red',fontSize:'1.4rem',paddingRight:'2vw'}}  onClick={handleLogoutClick}>Logout </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/dashboard">Dashboard</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
@@ -37,4 +31,4 @@ const NavDash = (props) => {
   );
 }
 
-export default NavDash;
+export default CollabDash;

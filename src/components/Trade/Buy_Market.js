@@ -78,10 +78,10 @@ export class Buy_Market extends Component {
         return (
             
 
-            <Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
+            <Container className="themed-container" fluid={true} /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
             {/*<h2 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
             <Form className="Buy-Market" onSubmit={this.handleSubmit} >
-              <Col>
+              
                 <FormGroup>
                   <Label for='Coin-Price'>Price</Label>
                   <Input
@@ -97,8 +97,8 @@ export class Buy_Market extends Component {
                   />
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
                 </FormGroup>
-              </Col>
-              <Col>
+              
+              
                 <FormGroup>
                 <label data-bn-type="text" for="Buy-Market-Amount" class="css-ef8yc4" style={{display: 'inline-block', textAlign: 'right' }}>
                     Amount
@@ -116,8 +116,8 @@ export class Buy_Market extends Component {
                   />
                 
                 </FormGroup>
-              </Col>
-              <Button type="submit" color="danger" className='offset-5' >Buy</Button> 
+            
+              <Button block type="submit" color="success" >Buy</Button> 
               <Col>
               {view}
               </Col>

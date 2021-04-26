@@ -626,7 +626,7 @@ export const addToWatchlist = (symbol) => (dispatch) => {
                 throw errmess;
             })
         .then(response => response.json())
-        .then(response => { alert(response); dispatch(addSymbol(symbol)); dispatch(fetchWatchlist()); })
+        .then(response => { alert(symbol + response.message.slice(6)); dispatch(addSymbol(symbol)); dispatch(fetchWatchlist()); })
         .catch(error => {
             // console.log('Add symbol ', error.message);
             alert('Requested Symbol could not be added\nError: ' + error.message);
@@ -813,7 +813,12 @@ export const logoutUser = () => (dispatch) => {
         .then(response => {
             if (response.ok) {
                 return response;
-            } else {
+            } 
+            else if (response.status==401){
+                dispatch(refreshToken());
+                dispatch(logoutUser());
+            }
+            else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
                 error.response = response;
                 throw error;

@@ -63,7 +63,7 @@ class LandingPage extends Component {
         <div className='container-fluid col-12 text-center'>
                 <h1 >Why Compra Venta?</h1>
                
-                <p className="content container-fluid" style={{color:'lightgray'}}>Our project is a website based on a virtual trading platform which will provide<br/>
+                <p className="content container-fluid" style={{color:'black'}}>Our project is a website based on a virtual trading platform which will provide<br/>
 budding investors a platform to dive into the trading of cryptocurrencies without<br/>
 having any fear of losing anything.</p>
             </div>

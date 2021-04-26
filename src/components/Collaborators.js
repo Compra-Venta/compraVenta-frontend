@@ -10,6 +10,7 @@ import {
   } from '@fortawesome/free-solid-svg-icons';
 import NavDash from './NavDashboard'
 import Footer from './Footer'
+import CollabDash from './CollabDash';
 
 export class Collaborators extends Component {
     constructor(props) {
@@ -74,7 +75,7 @@ export class Collaborators extends Component {
         return (
             <div>
                 <div>
-                    <NavDash/>
+                    <CollabDash/>
                 </div>
                 <div style={{backgroundColor:'aliceblue'}}>
                 <div style={{textAlign:'center', margin:'2%',fontFamily:'wonderbar', background: '#ffa529', padding: '1.5%'}}>

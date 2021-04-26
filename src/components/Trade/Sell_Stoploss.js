@@ -76,10 +76,10 @@ export class Sell_Stoploss extends Component {
         return (
             <div>
 
-<Container className="SignIn /*border border-primary border-3*/" /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
+<Container >
             {/*<h2 style={{textAlign:'left'}} >{`Sell ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
             <Form className="Sell-Stoploss" onSubmit={this.handleSubmit} >
-              <Col>
+              
                 <FormGroup>
                   <Label for='Stop-Price'>Stop</Label>
                   <Input
@@ -95,8 +95,7 @@ export class Sell_Stoploss extends Component {
                   />
                   {/* <FormFeedback>{errors.EmailId}</FormFeedback> */}
                 </FormGroup>
-              </Col>
-              <Col>
+              
                 <FormGroup>
                 <label data-bn-type="text" for="Sell-Stoploss-Amount" class="css-ef8yc4" style={{display: 'inline-block', textAlign: 'right' }}>
                     Amount
@@ -114,7 +113,7 @@ export class Sell_Stoploss extends Component {
                   />
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
-              </Col>
+             
               {/* <Col>
                 <FormGroup>
                   <Label for='Total'>Total</Label>
@@ -133,7 +132,7 @@ export class Sell_Stoploss extends Component {
                 {/* </FormGroup>
               </Col>
                */} 
-              <Button type="submit" color="success" className='offset-5' >Sell</Button>
+              <Button type="submit" color="danger" block >Sell</Button>
               <Col>
               {view}
               </Col>

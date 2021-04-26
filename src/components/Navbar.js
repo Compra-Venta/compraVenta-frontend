@@ -31,7 +31,7 @@ const NavComp = (props) => {
               <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/Collaborators">Collaborators </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/faqs">FAQs </NavLink>
+              <NavLink style={{color:'darkcyan',fontSize:'1.5vw',paddingRight:'2vw'}}  href="/learn">Learn</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useStore } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner, Alert } from 'reactstrap';
+import React, { useState } from 'react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner, Alert, ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from 'reactstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 const Predict = (props) => {
  /* const {
@@ -12,11 +13,18 @@ const Predict = (props) => {
     const [interval] =useState([ '1d', '3d', '1w' ]);
   
     const [showmsg, setShowMsg] = useState(true);
-    const [selectedInterval, changeInterval] = useState('1d')
-    const intervallist = interval.map( (time) =>{ 
-        return(<option>{`${time}`}</option>
+    const [selectedInterval, changeInterval] = useState('')
+    const [dropdownOpen, setOpen] = useState(false);
+    // const intervallist = interval.map( (time) =>{ 
+    //     return(<option>{`${time}`}</option>
 
-    ) } )
+    // ) } )
+
+    const intervalList = interval.map( (time) => {
+      return(
+        <DropdownItem onClick={() => changeInterval(time)} >{time}</DropdownItem>
+      )
+    })
     
     const toggle = () =>{ 
       setModal(!modal);
@@ -33,6 +41,9 @@ const Predict = (props) => {
   const prediction = props.prediction;
   // console.log(prediction)
 
+  const currentPrice = props.currentPrice;
+  const isHigh = prediction.prediction.prediction > currentPrice;
+
   return (
     <div>
      <div className='row' style={{paddingRight:'20px'}}>
@@ -41,21 +52,40 @@ const Predict = (props) => {
                 onClick={toggle}>
                 Predict</Button>{' '}
             </div>
-      <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>CompraVenta Prediction System</ModalHeader>
+        <Modal isOpen={modal} toggle={toggle}>
+        <ModalHeader toggle={toggle}>Compra Venta Prediction System</ModalHeader>
         <ModalBody className='text-center'>
-            Select Interval:
-         <select onChange={event => {changeInterval(event.target.value);}} style={{height:'3rem',fontSize:'1.4rem'}}>
+           <div style={{ fontSize:'150%',fontFamily:'Roboto'}}>Coin Pair: {props.symbol}<br/>
+           </div>
+            {/* <select onChange={event => {changeInterval(event.target.value);}} style={{height:'3rem',fontSize:'1.4rem'}}>
             {intervallist}
-         </select> <br/>
+         </select> */}
+            {
+              showmsg ?
+              <ButtonDropdown  isOpen={dropdownOpen} toggle={ () => {setOpen(!dropdownOpen)}} >
+              <DropdownToggle color='danger' caret >
+                Select Interval
+              </DropdownToggle>
+              <DropdownMenu >
+                {intervalList}
+              </DropdownMenu>
+             </ButtonDropdown>:
+              <div style={{ fontSize:'150%', fontFamily:'Roboto'}}>Selected Interval : {selectedInterval}</div>
+            }
+          <br/>
          {
            showmsg ?
            null :
            prediction.isLoading ? 
            <Spinner color='primary' />:
            prediction.errmess == null ? 
-           <div style={{color:'deepskyblue', textAlign:'center'}}> <Alert color='success'><h4>{`Predicted Price: ${parseFloat(prediction.prediction.prediction).toPrecision(8)}`}</h4></Alert> </div> :
-           <div style={{color:'red', textAlign:'center'}}><Alert color='danger' ><h4>{prediction.errMess.message}</h4></Alert></div> 
+           <div style={{color:'deepskyblue', textAlign:'center'}}>
+              <Alert color={ isHigh ? 'success' : 'danger'} >
+                <h4 className='col'>{`Predicted Price: ${parseFloat(prediction.prediction.prediction).toPrecision(8)}`}</h4>
+                <FontAwesomeIcon size='2x' icon={isHigh ? faCaretUp : faCaretDown} />
+                </Alert> </div> :
+           <div style={{color:'red', textAlign:'center'}}>
+             <Alert color='danger' ><h4>{prediction.errMess.message}</h4></Alert></div> 
            
          }
         </ModalBody>
