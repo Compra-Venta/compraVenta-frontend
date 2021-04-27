@@ -84,6 +84,15 @@ export class LearnCrypto extends Component {
                     <br/>You must be dying to get started right away. And technically, you could. It's that easy! But, like most things worth pursuing, trading is hard! It would take us a long time to talk about all that you need to keep in mind.
                     </p>
                 </div>
+                <div id='dashboard'>
+                    <h3 style={{fontFamily:'cursive'}}>Dashboard</h3>
+                    <div style={{display:'flex'}}>
+                    <img src='assets/images/learnPage/dashboard.png' style={{height:'60vh', width:'80%', borderStyle:'groove' }} />
+                    <p style={{fontFamily:'Helvetica Neue'}} className='cryC my-auto'>
+                        Here is the dashboard of our website where you will be doing everything related to trading. We will jump deeply explaining each component.
+                    </p>
+                    </div>
+                </div>
                
             </div>
             <Footer/>

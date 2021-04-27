@@ -132,10 +132,10 @@ class MarketTrades extends Component {
             <div className='row' style={{color:'#969696'}}>
                
         <div className='col-4 col-md-4'>
-                        Price
+                        Price({this.props.category.slice(3)})
         </div>
         <div className='col-4 col-md-4'>
-            Amount
+            Amount({this.props.category.slice(0,3)})
         </div>
         <div className='col-4 col-md-4'>
             Time

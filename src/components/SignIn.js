@@ -132,7 +132,7 @@ function SignIn(props) {
               <div>
                 <ForgetPassword newPassword={props.newPassword} newPassword_status={props.newPassword_status}/>
               </div>
-              <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>&nbsp;Register Here</button></div>
+              <div>New to Compra Venta?&nbsp;&nbsp;&nbsp;<button className='regB' onClick={props.onClick} style={{color:'dodgerblue',borderColor:'transparent',backgroundColor:'transparent', fontFamily:'cursive'}}>&nbsp;Register Here</button></div>
               </div>
               <Col>
               {view}
