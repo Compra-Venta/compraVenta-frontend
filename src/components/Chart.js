@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createChart,CrosshairMode, PriceScaleMode } from 'lightweight-charts';
 import axios from 'axios'
-import {sma, ema, SMA} from 'technicalindicators'
+import {sma, ema, SMA, EMA} from 'technicalindicators'
 
 export class LightweightChart extends React.Component {
     
@@ -19,16 +19,33 @@ export class LightweightChart extends React.Component {
 
     chart = null;
 
-	 calculateSMA = (data, count) =>{
-		const a = data.map( d => parseFloat(d.close) )
+	 calculateSMA = (data) =>{
+		 
+		const a = data.map( d => parseFloat(d.open) )
 		const smaData = SMA.calculate({period: 10, values : a} )
-		console.log('ddddd', smaData)
+		console.log('SmaData', smaData)
 		const result = [];
-		for (let i=0; i<950;i++)
+		for (let i=0; i<smaData.length;i++)
 		{result.push({time: data[i].time, value: smaData[i] })}
 		
 		
-		console.log('alalalalal', result)
+		console.log('Sma Result', result)
+		return result;
+	
+	  }
+
+	  calculateEMA = (data) =>{
+		 
+		const a = data.map( d => parseFloat(d.open) )
+		const emaData = EMA.calculate({period: 25, values : a} )
+		console.log('EmaData', emaData)
+		const result = [];
+		for (let i=0; i<emaData.length;i++)
+		{result.push({time: data[i].time, value: emaData[i] })}
+		
+		
+		console.log('Ema Result', result)
+		return result;
 	
 	  }
 
@@ -286,6 +303,7 @@ var sampledata = [{ time: '2018-10-19', open: 180.34, high: 180.99, low: 178.57,
 ];
 var data = [];
 var smaData = [];
+var emaData = [];
 
 		//var symbol = props.coinpair;
         await axios.get(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&endTime=${Date.now()}&limit=10000`)//&endTime=1614725621000
@@ -305,7 +323,8 @@ var smaData = [];
         } )
 		.then( t =>{
 			//  console.log(data);
-			 smaData = this.calculateSMA(data, 0)
+			 smaData = this.calculateSMA(data);
+			 emaData = this.calculateEMA(data);
 			})
         .catch(error =>{
             // alert(error)
@@ -320,9 +339,15 @@ candleSeries.setData(data);
 
 var smaLine = chart.addLineSeries({
 	color: 'rgba(4, 111, 232, 1)',
-	lineWidth: 2,
+	lineWidth: 1,
 });
-// smaLine.setData(smaData);
+smaLine.setData(smaData);
+
+var emaLine = chart.addLineSeries({
+	color: 'orange',
+	lineWidth: 1,
+});
+emaLine.setData(emaData);
 	this.check();
 	
 	//var category= symbol.toLowerCase()
@@ -333,7 +358,7 @@ var smaLine = chart.addLineSeries({
 		var message  = JSON.parse(event.data);
 
 		var candlestick = message.k;
-		console.log(candlestick);
+		// console.log(candlestick);
 		this.setState({
 			ws:ws
 		})
@@ -345,11 +370,17 @@ var smaLine = chart.addLineSeries({
 			low: candlestick.l,
 			close: candlestick.c
 		});
-		// smaLine.update(this.calculateSMA({
-		// 	time: candlestick.t,
-		// 	// time: Date.now(),
-		// 	value: candlestick.c
-		// },10))
+		// smaData.push()
+		smaLine.update({
+			time: candlestick.t,
+			value: candlestick.c
+		});
+
+		emaLine.update({
+			time: candlestick.t,
+			value: candlestick.c
+		})
+
 	}
 if (true)	{
 this.chart=chart;
