@@ -210,6 +210,43 @@ html{
 .border-3 {
   border-width:3px !important;
 }
+.sidenav {
+  height: 80vh;
+  width: 25vw;
+  position: fixed;
+  z-index: 1;
+  top: 30;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  
+}
+.Links{
+  color:black;
+  font-size: 1.5rem;
+  font-weight: 600;
+  
+}
+.fixed-nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  background-color: black;
+  
+}
+.learnC {
+  margin-left: 25vw; /* Same as the width of the sidenav */
+   /* Increased text to enable scrolling */
+  font-weight: 600;
+  padding: 10px 10px;
+}
+/* .li::marker 
+{
+    font-size: 10rem;
+    font-weight: 700;
+} */
 .getStarted{
   background-color: #0abcf9;
 background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
