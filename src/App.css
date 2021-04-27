@@ -252,11 +252,25 @@ background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);
     border-radius: 8px;
     color: rgb(255, 255, 255);
     display: inline-flex;
-    margin-bottom: 16px;
-    margin-left: 16px;
+   /*  margin-bottom: 16px;
+    margin-left: 16px; */
+    margin-right: 16px;
     justify-content: center;
     
 }
+.cryC {
+  overflow-wrap: break-word;
+  margin-bottom: 32px;
+  font-size: 24px;
+  color: rgb(20, 21, 26);
+  font-weight: 400;
+  line-height: 1.45;
+}
+.row-full{
+  width: 100vw;
+  position: relative;
+  left:0
+ }
 .handlebox{
   opacity: 0;
   transition: .5s ease;
