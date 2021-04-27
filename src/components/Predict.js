@@ -13,7 +13,7 @@ const Predict = (props) => {
     const [interval] =useState([ '1d', '3d', '1w' ]);
   
     const [showmsg, setShowMsg] = useState(true);
-    const [selectedInterval, changeInterval] = useState('')
+    const [selectedInterval, changeInterval] = useState('Select Interval')
     const [dropdownOpen, setOpen] = useState(false);
     // const intervallist = interval.map( (time) =>{ 
     //     return(<option>{`${time}`}</option>
@@ -63,8 +63,8 @@ const Predict = (props) => {
             {
               showmsg ?
               <ButtonDropdown  isOpen={dropdownOpen} toggle={ () => {setOpen(!dropdownOpen)}} >
-              <DropdownToggle color='danger' caret >
-                Select Interval
+              <DropdownToggle color='danger' caret onChange={event => {changeInterval(event.target.value);}} >
+                {selectedInterval}
               </DropdownToggle>
               <DropdownMenu >
                 {intervalList}
