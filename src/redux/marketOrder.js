@@ -11,7 +11,7 @@ export const MarketOrder = (state = {
             return {...state, isLoading: false, errMess: null, orderStatus: action.payload};
 
         case ActionTypes.MARKET_ORDER_FAILED:
-            console.log('MarketOrder Failed')
+            console.log('MarketOrder Failed',action.payload)
             return {...state, isLoading: false, errMess: action.payload, orderStatus: {}};
 
         case ActionTypes.MARKET_ORDER_LOADING:

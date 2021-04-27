@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Spinner } from 'reactstrap';
+import {Button, Spinner } from 'reactstrap';
 import { walletFailed } from '../../redux/actionCreaters';
 
 export class Wallet extends Component {
@@ -23,20 +23,20 @@ export class Wallet extends Component {
     }
     
     setWallet = (wallet_info) => {
-    
+        console.log('wallet info',wallet_info)
         var wallet = this.state.wallet
-        if(wallet_info.errMess ==null) 
+        if(wallet_info.errMess ==null) {
         for ( let i in wallet)
         {
             var bal = {'balance': wallet_info.wallet.balance[i], 'fixed_balance': wallet_info.wallet.fixed_balance[i]}
             wallet[i] = bal
         }
-    
+        //return wallet
         this.setState({
             isLoading: wallet_info.isLoading,
             errMess: wallet_info.errMess,
             wallet: wallet
-        })
+        })}
 
     }
 
@@ -48,6 +48,7 @@ export class Wallet extends Component {
     render() {
         const state = this.state;
         const wallet = state.wallet;
+        //const wallet=this.setWallet(Wallet)
         let wallet_info = Object.keys(wallet).map( (label, value) =>{
             return(
                <div className='container-fluid' >
@@ -89,6 +90,7 @@ export class Wallet extends Component {
                     </>:
                     <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
                 }
+                
             </div>
         )
     }

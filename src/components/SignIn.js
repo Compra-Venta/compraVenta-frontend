@@ -3,7 +3,7 @@ import {
     Container, Col, Form,
     FormGroup, Label, Input,
     Button,
-    FormFeedback,Spinner,UncontrolledAlert
+    FormFeedback,Spinner,UncontrolledAlert,Alert
   } from 'reactstrap';
 import { Link, useHistory, withRouter } from "react-router-dom";  
 import ForgetPassword from './ForgetPassword';
@@ -21,6 +21,7 @@ function SignIn(props) {
  }
 })
   const [showPassword, setShowPassword] = useState(false)
+  const [showmsg, setShowMsg] = useState(true);
    
    const history = useHistory();
   useEffect(() => {
@@ -43,6 +44,10 @@ function SignIn(props) {
    const handleSubmit = (event) => {
       event.preventDefault();
       props.loginUser({email : initialState.EmailId, password: initialState.Password})
+      setShowMsg(true)
+    }
+    const dismissAlert = () =>{
+      setShowMsg(false)
     }
 
     const validate = ( EmailId, Password, ) => {
@@ -71,9 +76,9 @@ function SignIn(props) {
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               props.auth.errMess ?
               <div style={{ textAlign:'center'}}>
-             <UncontrolledAlert color='danger'>
+              <Alert color='danger' isOpen={showmsg} toggle={dismissAlert}>
               <h5> Invalid Credentials! Please try again...</h5>
-              </UncontrolledAlert>
+              </Alert>
               </div>:
               null:null
        

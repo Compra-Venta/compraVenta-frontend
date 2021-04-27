@@ -35,9 +35,9 @@ class OpenTransaction extends Component {
 
     }
 
-    fetchData = async () => {
-        await this.props.fetchOpenTransaction()
-        this.setData(this.props.openTransaction_info)
+    fetchData = () => {
+        this.props.fetchOpenTransaction()
+        //this.setData(this.props.openTransaction_info)
     }
 
     componentDidMount = () => {
@@ -47,7 +47,7 @@ class OpenTransaction extends Component {
     render() {
 
         const state = this.state;
-        const orderData = state.openOrder;
+        const orderData = this.props.openTransaction_info.openTransaction_info;
         let size = orderData.length;
         console.log('Total Open Orders: ',size)
         const orderTable = orderData.map(order => {
@@ -69,9 +69,9 @@ class OpenTransaction extends Component {
         return (
             <div className='container-fluid'>
                 {
-                    state.isLoading ?
+                    this.props.openTransaction_info.isLoading ?
                     <Spinner color='success' style={{textAlign:'center'}} />:
-                    state.errMess == null ?
+                    this.props.openTransaction_info.errMess == null ?
                     <div className='table-container'>
                     <Table hover responsive >
                         <thead>
@@ -95,7 +95,7 @@ class OpenTransaction extends Component {
                     <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
                 }
                 <div>
-                <Button onClick={() => this.fetchData()} color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
+                <Button onClick={this.fetchData} color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
                 </div>
             </div>
         )
