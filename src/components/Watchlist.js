@@ -80,8 +80,9 @@ export class Watchlist extends Component {
         this.props.setClick(this.createwatchlist)
     }
     componentDidUpdate(prevProps){
+        console.log('hi i m updated')
         if (prevProps.array !== this.props.array) {
-            // console.log('hi',this.props.array);
+            console.log('hi',this.props.array);
             this.createwatchlist(this.props.array);
           }
     }

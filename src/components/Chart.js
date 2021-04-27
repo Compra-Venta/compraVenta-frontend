@@ -390,6 +390,7 @@ histogramSeries.setData(data)
 		var message  = JSON.parse(event.data);
 
 		var candlestick = message.k;
+		//console.log(candlestick);
 		// console.log(candlestick);
 		this.setState({
 			ws:ws
