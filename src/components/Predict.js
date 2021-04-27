@@ -13,7 +13,7 @@ const Predict = (props) => {
     const [interval] =useState([ '1d', '3d', '1w' ]);
   
     const [showmsg, setShowMsg] = useState(true);
-    const [selectedInterval, changeInterval] = useState('Select Interval')
+    const [selectedInterval, changeInterval] = useState('')
     const [dropdownOpen, setOpen] = useState(false);
     // const intervallist = interval.map( (time) =>{ 
     //     return(<option>{`${time}`}</option>
@@ -28,7 +28,8 @@ const Predict = (props) => {
     
     const toggle = () =>{ 
       setModal(!modal);
-      setShowMsg(true)
+      setShowMsg(true);
+      changeInterval('')
     };
   
   const GetPrediction = async ()=> {
@@ -63,8 +64,8 @@ const Predict = (props) => {
             {
               showmsg ?
               <ButtonDropdown  isOpen={dropdownOpen} toggle={ () => {setOpen(!dropdownOpen)}} >
-              <DropdownToggle color='danger' caret onChange={event => {changeInterval(event.target.value);}} >
-                {selectedInterval}
+              <DropdownToggle color='danger' caret >
+                {selectedInterval == '' ? 'Select Interval' : `Selected Interval: ${selectedInterval}`}
               </DropdownToggle>
               <DropdownMenu >
                 {intervalList}
@@ -90,7 +91,7 @@ const Predict = (props) => {
          }
         </ModalBody>
         <ModalFooter>
-          {!showmsg ? null : <Button color="primary" onClick={GetPrediction}>Predict</Button>}
+          {!showmsg ? null : <Button color="primary" disabled={!selectedInterval} onClick={GetPrediction}>Predict</Button>}
           <Button color={showmsg?'warning':prediction.errMess == null ? 'success' : 'danger'} onClick={toggle}>{showmsg?'Cancel':prediction.errMess == null ? 'Ok, Thanks' : 'Oops! Try Again'}</Button>
         </ModalFooter>
       </Modal>

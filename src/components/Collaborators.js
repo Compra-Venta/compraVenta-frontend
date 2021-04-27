@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faLinkedin,
-    faGithub,
-  } from "@fortawesome/free-brands-svg-icons";
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button, CardFooter, Container, Row, Col
+  } from 'reactstrap';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faEnvelopeSquare,
     faEnvelope
   } from '@fortawesome/free-solid-svg-icons';
-import NavDash from './NavDashboard'
 import Footer from './Footer'
 import CollabDash from './CollabDash';
 
@@ -49,27 +48,22 @@ export class Collaborators extends Component {
     render() {
         const collaboratorsData = this.state.data.map( person => {
             return(
-                    <div className='column' id='collaborator'>
-                    <div className='card'>
-                        <img className='collaborator-pic' src={`assets/images/collaborators/${person.name}.png`} />
-                        <div className='handlebox'>
-                        <div className='socialhandles' >
-                            <a href={`mailto:${person.mail}`} target="_blank">
-                                <FontAwesomeIcon icon={faEnvelopeSquare} className='faEnvelope' size="3x" />
-                            </a>
-                            <a href={`${person.linkedln}`} target="_blank">
-                                <FontAwesomeIcon icon={faLinkedin} className='faLinkedln' size="3x" />
-                            </a>
-                            <a href={`${person.github}`} target="_blank">
-                                <FontAwesomeIcon icon={faGithub} className='faGithub' size="3x" />
-                            </a>
-                        </div>
-                        </div>
-                        <div className='colab-name'>
-                            <h2>{`${person.name}`}</h2>
-                        </div>
+                <Col sm='6' >
+                    <div >
+                    <Card style={{ margin: 'auto ', marginBlockEnd:'30px', marginBlockStart:'10px', width: "300px" }} >
+                    <CardImg top style={{ margin: "auto", width: "300px", height: "250px" }} src={`assets/images/collaborators/${person.name}.png`} alt={person.name}/>
+                    <CardBody style={{ margin: "auto", width: "100%"}}>
+                        <CardTitle tag='h5' >{person.name}</CardTitle>
+                        <CardSubtitle>Connect with me on</CardSubtitle>
+                    </CardBody>
+                    <CardFooter >
+                        <a href={person.github} target='_blank' ><img src='https://github.githubassets.com/favicons/favicon.png' style={{ marginTop:'8px'}} alt="git-hub icon"/></a>
+                        <a href={`mailto:${person.mail}`} target='_blank' ><img src='https://cdn.worldvectorlogo.com/logos/official-gmail-icon-2020-.svg' style={{ marginTop:'8px', paddingLeft:'30%', height:'38px'}} alt="mail icon" /></a>
+                        <a href={person.linkedln} target='_blank' ><img style={{float: "right" }} src='https://img.icons8.com/fluent/50/000000/linkedin.png' alt="linked-in icon" /></a>
+                    </CardFooter>
+                    </Card>
                     </div>
-                    </div>
+                </Col>
             )
         } )
         return (
@@ -77,14 +71,12 @@ export class Collaborators extends Component {
                 <div>
                     <CollabDash/>
                 </div>
-                <div style={{backgroundColor:'aliceblue'}}>
-                <div style={{textAlign:'center', margin:'2%',fontFamily:'wonderbar', background: '#ffa529', padding: '1.5%'}}>
-                    <h2>Meet the Team</h2>
-                </div>
-                <div className='row' style={{ margin:'3%'}}>
-                    {collaboratorsData}
-                </div>
-                </div>
+                <div style={{marginBlockStart:'10px', fontFamily:'Roboto' ,textAlign:'center'}}><h1>Meet the Team</h1></div>
+                <Container>
+                    <Row>
+                        {collaboratorsData}
+                    </Row>
+                </Container>
                 <Footer/>
             </div>
         )

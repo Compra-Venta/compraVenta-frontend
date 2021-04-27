@@ -57,10 +57,10 @@ export class Wallet extends Component {
                         {`${label}`}
                     </div>
                     <div className='col'>
-                        {`${parseFloat(wallet[label].balance).toPrecision(8)}`}
+                        { wallet[label].balance > 0.00000001 ? `${parseFloat(wallet[label].balance).toPrecision(8)}` : parseFloat(0).toPrecision(8) }
                     </div>
                     <div className='col'>
-                        {`${parseFloat(wallet[label].fixed_balance).toPrecision(8)}`}
+                        { wallet[label].fixed_balance > 0.00000001 ? `${parseFloat(wallet[label].fixed_balance).toPrecision(8)}` : parseFloat(0).toPrecision(8) }
                     </div>
                     
         </div>
