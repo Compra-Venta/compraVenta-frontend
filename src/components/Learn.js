@@ -48,7 +48,7 @@ class Learn extends Component {
                         </div>
                     </div>
                     <div className='col-8 learnC'>
-                        <div id='crypto' style={{ paddingBottom: 30 }}>
+                        <div id='crypto' style={{ paddingBottom: 30 }}><br/><br/><br/>
                             <h2 style={{ fontSize: 40 }}>What is Crypto Currency?</h2>
                             <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
                                 <br />
@@ -61,7 +61,7 @@ class Learn extends Component {
                         So, this magical internet money isn't owned by anyone and uses cryptography to secure the system. But you've already got apps for paying people – why should you care?
                         </div>
                         </div>
-                        <div id='blockchain' style={{ paddingBottom: 30 }}>
+                        <div id='blockchain' style={{ paddingBottom: 30 }}><br/><br/><br/>
                             <h2 style={{ fontSize: 40 }}>What is BlockChain?</h2>
                             <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
                                 <br />
@@ -76,10 +76,10 @@ class Learn extends Component {
 
                          </div>
                         </div>
-                        <div id='compraventa' style={{ paddingBottom: 30 }}>
-                            <h2 style={{ fontSize: 40 }}>Our Platform</h2>
+                        <div id='compraventa' style={{ paddingBottom: 30 }}><br/><br/><br/>
+                            <h2 style={{color:'deepskyblue' ,fontSize: 40 }}>Our Platform</h2>
                             <br /><br />
-                            <div id='assets' style={{ paddingLeft: 50,paddingBottom:50 }}>
+                            <div id='assets' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
                                 <h3 style={{ fontSize: 30 }}>Assets</h3>
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>
 
@@ -93,7 +93,7 @@ class Learn extends Component {
                                 Base currency represents how much of the quote currency is needed for you to get one unit of the base currency. For example, if you were looking at the CAD/USD currency pair, the Canadian dollar would be the base currency and the U.S. dollar would be the quote currency.
 
                             </div></div>
-                            <div  id='charts' style={{ paddingLeft: 50,paddingBottom:50 }}>
+                            <div  id='charts' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
                                 <h3 style={{ fontSize: 30 }}>Charts</h3>
                                 <br/>
                                 <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'30vh', width:'40%', borderStyle:'groove' }}/>
@@ -102,7 +102,7 @@ class Learn extends Component {
                                 Candlesticks charts are mostly used to analyze the trading trend.<br/>
 Each candle corresponds to a time interval. The endpoints of the box in the candle represents the price of the symbol at starting and end of the interval. If the closing price (price at the end) is more than opening price (price at the starting) then the candle is coloured green, otherwise it is colored red. The endpoints of the line, shows the highest and lowest price in the particular interval. 
                                     </div></div>
-                                    <div id='orders' style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                    <div id='orders' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
                                 <h3 style={{ fontSize: 30 }}>Orders</h3>
                                 <br/><br/>
                                
@@ -119,7 +119,7 @@ Each candle corresponds to a time interval. The endpoints of the box in the cand
                                 </div>
                                 <img src='assets/images/learnPage/buysell.jpeg' style={{height:'30vh', width:'55vw', borderStyle:'groove' }}/>
                                 </div>
-                                <div id='predictions' style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <div id='predictions' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
                                 <h3 style={{ fontSize: 30 }}>Predictions</h3>
                                 <br/><br/>
                                
@@ -131,7 +131,7 @@ Each candle corresponds to a time interval. The endpoints of the box in the cand
                                 </div>
                                
                                 </div>
-                                <div id='account' style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <div id='account' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
                                 <h3 style={{ fontSize: 30 }}>Account</h3>
                                 <br/><br/>
                                
@@ -144,7 +144,7 @@ Each candle corresponds to a time interval. The endpoints of the box in the cand
                                
                                 </div>
                         </div>
-                        <div id='demo' style={{ paddingBottom: 30 }}>
+                        <div id='demo' style={{ paddingBottom: 30 }}><br/><br/><br/>
                             <h2 style={{ fontSize: 40 }}>Demo</h2>
                             <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
                                 <br />

@@ -63,7 +63,7 @@ class ClosedTransaction extends Component {
                     <Spinner color='success' style={{textAlign:'center'}} />:
                     this.props.closedTransaction_info.errMess == null ?
                     <div className='table-container'>
-                    <Table hover responsive >
+                    <Table hover responsive style={{maxHeight:'380px'}} >
                         <thead>
                             <tr>
                                 <th>#</th>

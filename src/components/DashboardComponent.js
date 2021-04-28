@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import NavDash from './NavDashboard';
 import {LightweightChart} from './Chart';
-import { Button, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { Button, Nav, NavItem, NavLink, TabContent, TabPane, UncontrolledAlert } from 'reactstrap';
 import MarketTrades from './MarketTrades';
 import CryptoNewsFeed from './CryptoNewsFeed';
 import Watchlist from './Watchlist';
@@ -369,6 +367,7 @@ class DashboardComponent extends Component {
                 <div>
                 <NavDash logoutUser={this.props.logoutUser}/>
                 </div>
+                <UncontrolledAlert >Welcome to Comra Venta. Having doubts? Go to our <a href='/learn' className='alert-link'>Learn</a> Page and clear you doubts! </UncontrolledAlert>
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
                     <div className='col-12 col-lg-3 col-md-4 border-right'>
