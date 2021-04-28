@@ -21,7 +21,7 @@ const LearnDash = (props) => {
             <NavItem className='my-auto'>
               <NavLink style={{color:'white',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/faqs">FAQs </NavLink>
             </NavItem>
-            <div className='getStarted text-center' style={{justifyContent:'center',justifyItems:'center'}}>
+            <div className='getStarted'>
             <NavItem >
               <NavLink style={{color:'white',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/home">Get Started</NavLink>
             </NavItem>

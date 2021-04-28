@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
 import LearnDash from './LearnDash';
-
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    NavbarText
+  } from 'reactstrap';
+  
 
 class Learn extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            collapsed:true
+        }
 
     }
 
-
+toggleNavbar = () =>{
+    this.setState({
+        collapsed:!this.state.collapsed
+    })
+}
 
     render() {
         return (
@@ -19,8 +40,8 @@ class Learn extends Component {
 
                 <div className='container-fluid' style={{marginTop:80}}>
                     <div className='row'>
-                        <div className='col-3 border-right border-dark'>
-                            <div className="sidenav border-right " style={{ lineHeight: 2.1, paddingLeft: '20px' }}>
+                        <div className='col-3 border-right border-dark d-none d-md-block'>
+                            <div className="sidenav border-right  " style={{ lineHeight: 2.1, paddingLeft: '20px' }}>
                                 <h2>Quick Links</h2>
                                 <ul>
                                     <li><a href="#crypto" className="Links">What is Crypto Currency?</a></li>
@@ -48,6 +69,48 @@ class Learn extends Component {
                         </div>
                     </div>
                     <div className='col-8 learnC'>
+                    <div className='d-block d-md-none'>
+                        <Navbar color="faded" light>
+                            <NavbarBrand className="mr-auto">Quick Links</NavbarBrand>
+                            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                            <Collapse isOpen={!this.state.collapsed} navbar>
+                            <Nav className="mr-auto" navbar>
+                            <NavItem>
+                            <NavLink href="#crypto">What is Crypto Currency?</NavLink>
+                            </NavItem>
+                            <NavItem>
+                            <NavLink href="#blockchain">What is Block Chain?</NavLink>
+                            </NavItem>
+                            <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                Our Platform
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem>
+                                <NavLink href="#assets">Assets</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                <NavLink href="#charts">Charts</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                <NavLink href="#orders">Orders</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                <NavLink href="#predictions">Predictions</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                <NavLink href="#account">Account</NavLink>
+                                </DropdownItem>
+                            </DropdownMenu>
+                            </UncontrolledDropdown>
+                            <NavItem>
+                            <NavLink href="#demo">Demo</NavLink>
+                            </NavItem>
+                        </Nav>
+                            </Collapse>
+                        </Navbar>
+                        </div>
+
                         <div id='crypto' style={{ paddingBottom: 30 }}>
                             <h2 style={{ fontSize: 40 }}>What is Crypto Currency?</h2>
                             <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
@@ -96,7 +159,7 @@ class Learn extends Component {
                             <div  id='charts' style={{ paddingLeft: 50,paddingBottom:50 }}>
                                 <h3 style={{ fontSize: 30 }}>Charts</h3>
                                 <br/>
-                                <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'30vh', width:'40%', borderStyle:'groove' }}/>
+                                <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'30vh', borderStyle:'groove' }}/>
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>
 
                                 Candlesticks charts are mostly used to analyze the trading trend.<br/>

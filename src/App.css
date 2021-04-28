@@ -211,7 +211,7 @@ html{
   border-width:3px !important;
 }
 .sidenav {
-  height: 80vh;
+  height: 90vh;
   width: 25vw;
   position: fixed;
   z-index: 1;
