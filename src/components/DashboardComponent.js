@@ -39,13 +39,13 @@ class DashboardComponent extends Component {
         super(props);
         this.state = {
             selectedValue: 'BTCUSDT',
-            current_price: '55505',
-            price:'0.002',
+            current_price: '0.00',
+            price:'0.00',
             h_high: '0.001',
             h_low: '0.00001',
             color: 'green',
             bs_volume: '000',
-            change: '',
+            change: '0.00',
             change_color: 'red',
             prev_val : '3334',
             ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker'),
@@ -367,7 +367,7 @@ class DashboardComponent extends Component {
                 <div>
                 <NavDash logoutUser={this.props.logoutUser}/>
                 </div>
-                <UncontrolledAlert >Welcome to Comra Venta. Having doubts? Go to our <a href='/learn' className='alert-link'>Learn</a> Page and clear you doubts! </UncontrolledAlert>
+                <UncontrolledAlert color='info' >Welcome to Comra Venta. Having doubts? Go to our <a href='/learn' className='alert-link'>Learn</a> Page and clear you doubts! </UncontrolledAlert>
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
                     <div className='col-12 col-lg-3 col-md-4 border-right'>

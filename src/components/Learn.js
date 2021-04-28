@@ -160,16 +160,42 @@ toggleNavbar = () =>{
                             <div   style={{ paddingLeft: 50,paddingBottom:50 }}>
                                 <h3 id='charts' style={{ fontSize: 30 }}>Charts</h3>
                                 <br/>
-                                <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'30vh', borderStyle:'groove' }}/>
-                                <div style={{ fontSize: 22, lineHeight: '1.6' }}>
-
-                                Candlesticks charts are mostly used to analyze the trading trend.<br/>
-                                Each candle corresponds to a time interval. The endpoints of the box in the candle represents the price of the symbol at starting and end of the interval. If the closing price (price at the end) is more than opening price (price at the starting) then the candle is coloured green, otherwise it is colored red. The endpoints of the line, shows the highest and lowest price in the particular interval.<br/><br/>
-                                <img src='assets/images/learnPage/chart.png' style={{height:'50vh',width:'100%', borderStyle:'groove' }}/><br/><br/>
+                                <img src='assets/images/learnPage/chart.png' style={{height:'80vh',width:'80%', borderStyle:'groove' }}/><br/><br/>
+                                <div style={{ fontSize: 22, lineHeight: '1.6' }}>                                
+                                A total of 4 graphs are used in this chart which are described as follows:-
+                                <ol>
+                                    <li>
+                                        <h3>CandleSticks</h3><br/>
+                                        Candlesticks charts are mostly used to analyze the trading trend.<br/>
+                                        Each candle corresponds to a time interval. The endpoints of the box in the candle represents the price of the symbol at starting and end of the interval. If the closing price (price at the end) is more than opening price (price at the starting) then the candle is coloured green, otherwise it is colored red. The endpoints of the line, shows the highest and lowest price in the particular interval.<br/><br/>
+                                        <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'40vh', borderStyle:'groove' }}/>      
+                                    </li>
+                                    <li>
+                                        <h3>Moving Averages</h3><br/>
+                                        We have used <i>2</i> moving averages for showing the trend of the market.
+                                        <ul>
+                                            <li>
+                                            An <i>Exponential Moving Average</i> (EMA) is a type of moving average (MA) that places a greater weight and significance on the most recent data points. The exponential moving average is also referred to as the exponentially weighted moving average. An exponentially weighted moving average reacts more significantly to recent price changes than a simple moving average (SMA),
+                                             which applies an equal weight to all observations in the period. Here Smoothing = 2.
+                                            <br/><img src='assets/images/learnPage/emaformula.png' style={{height:'55vh'}} />                                          
+                                            </li>
+                                            <li>
+                                             A <i>Simple Moving Average</i> (SMA) calculates the average of a selected range of prices, usually closing prices, by the number of periods in that range.Short-term averages respond quickly to changes in the price of the underlying security, while long-term averages are slower to react.
+                                             <br/><img src='assets/images/learnPage/smaformula.png' style={{height:'47vh'}} />                                          
+                                            </li>
+                                        </ul>
+                                        <i> Here is the video will help you to predict different patterns using these averages.<br/>(Source: Binance)</i>
+                                        <div className='video-responsive'>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/WYnKlC1AEV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>     
+                                        </div>                                
+                                    </li>
+                                    <li>
+                                        <h3>Price by Volume</h3><br/>
+                                        A price by volume (PBV) chart is a horizontal histogram plotted on a security's chart, showing the volume of shares traded at a specific price level. Often times, price by volume histograms are found on the Y-axis and are used by technical traders to predict areas of support and resistance.
+                                    </li>
+                                </ol>
                                 
-                                <div className='video-responsive'>
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/WYnKlC1AEV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>     
-                                </div></div></div>
+                                </div></div>
                                     <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
                                 <h3 id='orders' style={{ fontSize: 30 }}>Orders</h3>
                                 <br/><br/>
@@ -182,10 +208,11 @@ toggleNavbar = () =>{
                                 Market orders do not require the price at which you need to sell/buy.<br/><br/> 
                                 The price value is filled by the exchange. For famous cryptocurrencies (like on our platform), the orders are traded almost instantly. <br/><br/>
 
-                                Stop Orders are traded when a certain price value hits. For example you want to buy BTC in exchange to USD, when its price hits 50,000 USD. In this case you can add the stop value to 50,000 and your order will be traded whenever the BTC hits 50,000 mark. For name sake, Stop orders are of 2 types explained below.<br/><br/>
-
+                                Stop Orders are traded when a certain price value hits. For example you want to buy BTC in exchange to USD, when its price hits 50,000 USD. In this case you can add the stop value to 50,000 and your order will be traded whenever the BTC hits 50,000 mark. For name sake, Stop orders are of 2 types explained below.
+                                <br/>Compra Venta provides user a feature to <span style={{color:'red'}}>cancel</span> any open order if the order is not placed yet.
+                                <br/><br/>
                                 </div>
-                                <img src='assets/images/learnPage/buysell.jpeg' style={{height:'30vh', width:'100%', borderStyle:'groove' }}/>
+                                <img src='assets/images/learnPage/buysell.jpeg' style={{height:'30vh', width:'85%', borderStyle:'groove' }}/>
                                 </div>
                                 <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
                                 <h3 id='predictions' style={{ fontSize: 30 }}>Predictions</h3>
@@ -218,6 +245,19 @@ toggleNavbar = () =>{
                                 User can register to Compra Venta using their Email ID. At any point of time, user may feel free to change their passwords or reset the account details.<br/><br/>
 
                                 By Reseting account, we mean that user can undo all the transactions, cancel ongoing transactions and bring wallet to initial state.
+
+                                A dedicated My Profile page is also designed where user can check their personal details, all their previous and ongoing transactions, cancel the open orders, reset their account and can also check wallet where balances of all coins are shown. 
+                                <br/>Balances are of 2 types:
+                                <ul>
+                                    <li>
+                                        Balance: All the transactions that happen using Market Order, the exchange value of coins is updated in Balance. 
+                                    </li>
+                                    <li>
+                                        Fixed Balance: All the transactions that happen using Stop Order, the exchange value of coins is temporarily reserved in fixed balance and updated in Balance once the transaction is completed.
+                                    </li>
+                                </ul>
+                                For getting if user is earning profit by doing transactions, user are provided the <span style={{color:'blue'}}>Assets Earned</span> and a <span style={{color:'blue'}}>Rating System</span> which will motivate them to trade by analysing more even without any risk! 
+                                <br/> Assets Earned: Current Assets - Initial Assets
                                 </div>
                                
                                 </div>

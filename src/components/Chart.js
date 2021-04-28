@@ -22,7 +22,7 @@ export class LightweightChart extends React.Component {
 	 calculateSMA = (data) =>{
 		 
 		const a = data.map( d => parseFloat(d.open) )
-		const smaData = new SMA.calculate({period: 20, values : a} )
+		const smaData = new SMA.calculate({period: 10, values : a} )
 		// console.log('SmaData', smaData)
 	
 		const result = [];
@@ -38,7 +38,7 @@ export class LightweightChart extends React.Component {
 	  calculateEMA = (data) =>{
 		 
 		const a = data.map( d => parseFloat(d.open) )
-		const emaData = new EMA.calculate({period: 20, values : a} )
+		const emaData = new EMA.calculate({period: 25, values : a} )
 		// console.log('EmaData', emaData)
 		const result = [];
 		for (let i=0; i<emaData.length;i++)
@@ -118,7 +118,7 @@ export class LightweightChart extends React.Component {
     },
 	
 });*/
-	chart.resize(730,390);
+	chart.resize(730,400);
 	var candleSeries = chart.addCandlestickSeries({
   		upColor: 'green',
   		downColor: 'red',
@@ -366,6 +366,7 @@ var histogramSeries = chart.addHistogramSeries({
 	priceFormat: {
 		type: 'volume',
 	},
+	
 	priceScaleId: '',
 	scaleMargins: {
 		top: 0.85,
@@ -379,9 +380,10 @@ var histogramSeries = chart.addHistogramSeries({
 histogramSeries.setData(data)
 
 	this.check();
-	// var n = smaData.length
-	// var k = 2 / (n+1)
-	// var prevEma = emaData[n-1];
+	var n = smaData.length
+	var k = 2 / (emaData.length +1 )
+	var prevEma = emaData[emaData.length -1 ].value;
+	var prevSma = smaData[n-1].value
 	//var category= symbol.toLowerCase()
 	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_${interval}`)
 	console.log(ws)
@@ -403,18 +405,20 @@ histogramSeries.setData(data)
 			low: candlestick.l,
 			close: candlestick.c
 		});
-		// var value = 0;
+		var smaValue = ( ((prevSma + candlestick.c) / (n + 1)) * (n / prevSma) ) ;
 		smaLine.update({
 			time: candlestick.t /1000,
-			value: candlestick.c 
+			value: smaValue 
 		});
-		// value = candlestick.c * k + prevEma * (1 - k++)
+		prevSma = smaValue
+		n++
+		var emaValue = candlestick.c * k + prevEma * (1 - k)
 		emaLine.update({
 			time: candlestick.t /1000,
-			value: candleSeries.h
-			// value: candlestick.c * k + prevEma * (1 - k++)
+			// value:candlestick.o
+			value: emaValue
 		});
-		// prevEma = value
+		prevEma = emaValue
 		histogramSeries.update({
 			time: candlestick.t /1000,
 			value: candlestick.v
