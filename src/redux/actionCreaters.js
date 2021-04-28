@@ -170,12 +170,19 @@ export const placeStopOrder = (info) => (dispatch) =>{
                 return response;
             } 
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(placeStopOrder(info));
-            }else {
-                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                dispatch(refreshToken()).then(() =>dispatch(placeStopOrder(info)))
+                
+            } else {
+                /*var error = new Error('Error' + response.status + ': ' + response.statusText);
+                response.json().then((data) => error.response = data)
                 error.response = response;
-                throw error;
+                if (error.response.statusText=='UNAUTHORIZED'){console.log('error');
+                dispatch(refreshToken()).then(() =>dispatch(placeStopOrder(info)))}
+                else{*/
+                   return response.text().then(text => {throw Error(text)})
+                    //console.log('throw error')
+                //throw error
+            //};
             }
         },
             error => {
@@ -208,20 +215,33 @@ export const placeMarketOrder = (info) => (dispatch) =>{
                 return response;
             } 
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(placeMarketOrder(info));
+                console.log('error')
+                dispatch(refreshToken()).then(() =>dispatch(placeMarketOrder(info)))
+                
+                
             }else {
-                var error = new Error('Error' + response.status + ': ' + response.statusText);
+                console.log('be')
+                /*var error = new Error('Error' + response.status + ': ' + response.statusText);
                 error.response = response;
-                throw error;
+                console.log(error.response)
+                if (error.response.statusText=='UNAUTHORIZED'){console.log('error');
+                dispatch(refreshToken()).then(() =>dispatch(placeMarketOrder(info)))}*/
+               // else{
+                    //console.log('throw error')
+                    //dispatch(marketOrderFailed(response.json()))
+                    return response.text().then(text => {throw Error(text)})
+                //throw error
+  //};
             }
         },
             error => {
+                console.log('here')
+                
                 throw error;
             })
-        .then(response => response.json())
+        .then(response =>{console.log(response); return response.json()})
         .then(res => dispatch(marketOrderSuccess(res)))
-        .catch(error => dispatch(marketOrderFailed(error)));
+        .catch(error => {console.log(error); dispatch(marketOrderFailed(error))});
 
 }
 
@@ -348,7 +368,7 @@ export const cancelOrder = (orderId) => (dispatch) => {
 }
 
 export const fetchOpenTransaction = () => (dispatch) => {
-
+    //await dispatch(fetchWatchlist());
     dispatch(openTransactionLoading())
     const bearer = 'Bearer ' + localStorage.getItem('token')
     const email = JSON.parse(localStorage.getItem('creds')).email
@@ -378,10 +398,11 @@ export const fetchOpenTransaction = () => (dispatch) => {
                 var errmess = new Error(error.message);
                 throw errmess;
             })
-        .then(response => response.json())
-        .then(info => {
+        .then(response => {if (response){return response.json();}
+                            else return null})
+        .then(info => {if (info){
             console.log('Open Transactions ',info)
-            dispatch(openTransactionSuccess(info))})
+            dispatch(openTransactionSuccess(info))}})
         .catch(error => {
             console.log(error)
             dispatch(openTransactionFailed(error))
@@ -655,8 +676,8 @@ export const fetchWatchlist =  () => async(dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(fetchWatchlist());
+                dispatch(refreshToken()).then(() => dispatch(fetchWatchlist()))
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);

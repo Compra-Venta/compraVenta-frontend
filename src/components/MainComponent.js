@@ -7,6 +7,7 @@ import Profile from './Profile/Profile';
 import { Route, Switch, Redirect, withRouter } from 'react-router';
 import { connect } from "react-redux";
 import LearnCrypto from './LearnCrypto';
+import  Learn  from "./Learn";
 import Collaborators from './Collaborators';
 import RouteGuard from "./RouteGaurd";
 import { registerUser, fetchWatchlist, addToWatchlist, removeFromWatchlist, loginUser, logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder } from "../redux/actionCreaters";
@@ -115,7 +116,7 @@ class MainComponent extends Component {
                         component={Profile}
                         />
                     <Route path='/learn'>
-                        <LearnCrypto />
+                        <Learn/>
                     </Route>
                     <Route path='/collaborators'>
                         <Collaborators />

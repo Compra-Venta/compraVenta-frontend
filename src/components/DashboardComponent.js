@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import NavDash from './NavDashboard';
 import {LightweightChart} from './Chart';
-import { Button, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { Button, Nav, NavItem, NavLink, TabContent, TabPane, UncontrolledAlert } from 'reactstrap';
 import MarketTrades from './MarketTrades';
 import CryptoNewsFeed from './CryptoNewsFeed';
 import Watchlist from './Watchlist';
@@ -41,20 +39,20 @@ class DashboardComponent extends Component {
         super(props);
         this.state = {
             selectedValue: 'BTCUSDT',
-            current_price: '55505',
-            price:'0.002',
+            current_price: '0.00',
+            price:'0.00',
             h_high: '0.001',
             h_low: '0.00001',
             color: 'green',
             bs_volume: '000',
-            change: '',
+            change: '0.00',
             change_color: 'red',
             prev_val : '3334',
             ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker'),
             watchArray: (typeof this.props.watchlist !=='undefined') ? this.props.watchlist.watchlist : [],
             interval: ['15m', '1h', '12h', '1d', '1w'],
             activeTab: '1',
-            selected_interval: '5m'
+            selected_interval: '15m'
             // watchArray : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
             
         }
@@ -369,6 +367,7 @@ class DashboardComponent extends Component {
                 <div>
                 <NavDash logoutUser={this.props.logoutUser}/>
                 </div>
+                <UncontrolledAlert color='info' >Welcome to Comra Venta. Having doubts? Go to our <a href='/learn' className='alert-link'>Learn</a> Page and clear you doubts! </UncontrolledAlert>
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
                     <div className='col-12 col-lg-3 col-md-4 border-right'>

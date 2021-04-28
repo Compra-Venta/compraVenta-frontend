@@ -25,15 +25,20 @@ class ClosedTransaction extends Component {
         })
     }
 
+    fetchData = () => {
+        this.props.fetchClosedTransaction()
+        //this.setData(this.props.openTransaction_info)
+    }
+
     componentDidMount = async () => {
-        await this.props.fetchClosedTransaction()
-        this.setData(this.props.closedTransaction_info)
+        this.fetchData()
+        //this.setData(this.props.closedTransaction_info)
     }
 
     render() {
 
         const state = this.state;
-        const orderData = state.closedOrder;
+        const orderData = this.props.closedTransaction_info.closedTransaction_info;
         let size = orderData.length;
         console.log('Total Closed Orders: ',size)
         const orderTable = orderData.map(order => {
@@ -54,11 +59,11 @@ class ClosedTransaction extends Component {
         return (
             <div className='container-fluid'>
                 {
-                    state.isLoading ?
+                    this.props.closedTransaction_info.isLoading ?
                     <Spinner color='success' style={{textAlign:'center'}} />:
-                    state.errMess == null ?
+                    this.props.closedTransaction_info.errMess == null ?
                     <div className='table-container'>
-                    <Table hover responsive >
+                    <Table hover responsive style={{maxHeight:'380px'}} >
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -76,11 +81,11 @@ class ClosedTransaction extends Component {
                             {orderTable}
                         </tbody>
                     </Table>
-                    </div> :
-                    <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
+                    </div> : this.props.closedTransaction_info.errMess.message=="Cannot read property 'json' of undefined" ? null:
+                    <div style={{color:'red', textAlign:'center'}}><h2>{this.props.closedTransaction_info.errMess.message}</h2></div>
                 }
                 <div>
-                <Button color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
+                <Button onClick={this.fetchData} color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
                 </div>
             </div>
         )

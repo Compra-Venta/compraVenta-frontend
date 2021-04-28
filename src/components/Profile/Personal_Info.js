@@ -46,17 +46,17 @@ export class Personal_Info extends Component {
 
     render() {
 
-        const state = this.state
-        const personal_data = state.personal_data;
+        //const state = this.state
+        const personal_data = this.props.profile.profile;
 
         // var person = Object.keys(personal_data).map()
 
         return (
             <div className='container-fluid'>
                 {
-                    state.isLoading ?
+                    this.props.profile.isLoading ?
                     <Spinner color='success' style={{textAlign:'center'}} />:
-                    state.errMess == null ?
+                    this.props.profile.errMess == null ?
                     <>
                         <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
                     <div className='col-6'>{`Name: ${personal_data.name}`}</div>
@@ -67,11 +67,11 @@ export class Personal_Info extends Component {
                      <div className='col-6'>{`Age: ${personal_data.age}`}</div>
                   </div>
                   <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
-                      <div className='col-6'>{`Phone no: ${personal_data.phone}`}</div>
-                      <div className='col-6'>{`Account ID: ${personal_data.id}`}</div>          
+                      <div className='col-6'>{`Phone no: ${personal_data.PhoneNo}`}</div>
+                      <div className='col-6'>{`Account ID: ${personal_data.user_id}`}</div>          
                 </div>
-                    </>:
-                    <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
+                    </>: this.props.profile.errMess.message=="Cannot read property 'json' of undefined"?null:
+                    <div style={{color:'red', textAlign:'center'}}><h2>{this.props.profile.errMess.message}</h2></div>
                 }
             </div>
         )

@@ -23,11 +23,11 @@ export class Sell_Market extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-  /*dismissAlert = () =>{
+  dismissAlert = () =>{
       this.setState({
         showmsg:false
       })
-    }*/
+    }
     
     handleChange =(event) =>{
       const target = event.target;
@@ -48,11 +48,20 @@ export class Sell_Market extends Component {
         side: 'SELL'})
 
       const status = this.props.marketOrder
-      this.setState({
+      if (status.errMess){
+        if (status.errMess.message=="Cannot read property 'json' of undefined"){
+          status.errMess.message='successful'}
+          else{status.errMess.message=JSON.parse(status.errMess.message)}
+        this.setState({
+          status: status,
+          showmsg: true
+        }/*,() => console.log('see status err ', this.state.status,this.state.showmsg)*/)
+        
+      }
+      else{this.setState({
         status: status,
         showmsg: true
-      })
-      console.log('see status ', this.state.status)
+      }/*,() => console.log('see status no err ', this.state.status,this.state.showmsg)*/)}
   
     }
 
@@ -62,16 +71,19 @@ export class Sell_Market extends Component {
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               this.state.status.errMess == null ?
               <div style={{ textAlign:'center'}}>
-             <UncontrolledAlert color='success'>
+               <Alert color='success'isOpen={this.state.showmsg} toggle={this.dismissAlert}>
               <h5> {this.state.status.orderStatus.status}</h5>
-              </UncontrolledAlert>
-              </div> :
+              </Alert>
+              </div> : this.state.status.errMess.message!=="successful" ?
               <div style={{ textAlign:'center'}}>
-              <UncontrolledAlert color='danger'>
-              <h5> {this.state.status.errMess.message}</h5>
-              </UncontrolledAlert>
+             <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+              <h5> {this.state.status.errMess.message.msg}</h5>
+              </Alert>
               </div>:
-              null
+              <div style={{ textAlign:'center'}}>
+              <Alert color='success' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+               <h5> {this.state.status.errMess.message}</h5>
+               </Alert> </div>:null
 
         return (
             

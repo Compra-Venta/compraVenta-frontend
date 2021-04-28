@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback, Spinner } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter,Container, Col, Form, FormGroup, Label, Input, FormFeedback, Spinner, Row } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -24,6 +24,29 @@ function ChangePassword(props) {
 
   const status = props.changePassword_status
   // console.log(status)
+
+  const validate = (
+       newPassword,
+       ConfirmPassword,
+  ) => {
+    const errors = {
+       newPassword: '',
+       ConfirmPassword: '',
+    }
+    
+    const reg_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+
+    if (newPassword && !reg_password.test(newPassword) )
+      errors.newPassword = 'Password must be a minimum of 8 characters including number, Upper, Lower And one special character.'
+    if (newPassword && ConfirmPassword && newPassword !== ConfirmPassword)
+      errors.ConfirmPassword = 'Password didn\'t matched! '
+        
+
+    
+    return errors;
+    }
+    
+    const errors = validate(newPassword, confirmNewPassword);
 
   return (
     <div>
@@ -69,7 +92,7 @@ function ChangePassword(props) {
                     name="Password"
                     value={newPassword}
                     onChange={ event => {setNewPassword(event.target.value)}}
-                    // valid={errors.Password === ''} invalid={errors.Password !== ''}
+                    valid={errors.newPassword === ''} invalid={errors.newPassword !== ''}
                     id="newPassword"
                     placeholder="********"
                     required
@@ -82,19 +105,21 @@ function ChangePassword(props) {
                     }
                   </Button>
                   </div>
-                  {/* <FormFeedback>{errors.Password}</FormFeedback> */}
+                  <FormFeedback>{errors.newPassword}</FormFeedback>
                 </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Confirm New Password</Label>
+                  <Container>
                   <div style={{display:'flex'}}>
                   <Input
+                    disabled={!newPassword}
                     type={showPassword?'text':'password'}
                     name="Password"
                     value={confirmNewPassword}
                     onChange={ event => {setConfirmNewPassword(event.target.value)}}
-                    // valid={errors.Password === ''} invalid={errors.Password !== ''}
+                    valid={errors.ConfirmPassword === ''} invalid={errors.ConfirmPassword !== ''}
                     id="confirmNewPassword"
                     placeholder="********"
                     required
@@ -106,8 +131,10 @@ function ChangePassword(props) {
                       <FontAwesomeIcon icon={faEye} /> 
                     }
                   </Button>
+                  
                   </div>
-                  {/* <FormFeedback>{errors.Password}</FormFeedback> */}
+                  <FormFeedback>{errors.ConfirmPassword}</FormFeedback>
+                  </Container>
                 </FormGroup>
               </Col>
               <Button color="primary" >Submit</Button>{' '}
@@ -115,14 +142,14 @@ function ChangePassword(props) {
         </ModalBody>:
         <ModalBody >
            {
-             status.isLoading ?
+             props.changePassword_status.isLoading ?
              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
-             status.errMess == null ?
+             props.changePassword_status.errMess == null ?
              <div style={{color:'deepskyblue', textAlign:'center'}}>
-             <h5> {status.Change_Passwordstatus.message}</h5>
-            </div> :
+             <h5> {props.changePassword_status.Change_Passwordstatus.message}</h5>
+            </div> :props.changePassword_status.errMess.message=="Cannot read property 'json' of undefined" ? null:
             <div style={{color:'red', textAlign:'center'}}>
-            <h5> {status.errMess.message}</h5>
+            <h5> {props.changePassword_status.errMess.message}</h5>
            </div>
            }
         </ModalBody>

@@ -129,18 +129,17 @@ class MarketTrades extends Component {
             
         return (
             <>
-            <div className='row' style={{color:'#969696'}}>
+            <div className='row' style={{color:'#969696',textAlign:'center' }}>
                
-        <div className='col-4 col-md-4'>
-                        Price
-        </div>
-        <div className='col-4 col-md-4'>
-            Amount
-        </div>
-        <div className='col-4 col-md-4'>
-            Time
-        </div>
-
+            <div className='col-4 col-md-4'>
+                Price({this.props.category.slice(3)})
+            </div>
+            <div className='col-4 col-md-4'>
+                Amount({this.props.category.slice(0,3)})
+            </div>
+            <div className='col-4 col-md-4'>
+                Time
+            </div>
             </div>
             {tradeView}
             </>
