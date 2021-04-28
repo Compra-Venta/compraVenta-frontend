@@ -188,8 +188,9 @@ export const placeStopOrder = (info) => (dispatch) =>{
             error => {
                 throw error;
             })
-        .then(response => response.json())
-        .then(res => dispatch(stopOrderSuccess(res)))
+        .then(response => {if (response){return response.json();}
+        else return null})
+        .then(res => {if (res){dispatch(stopOrderSuccess(res))}})
         .catch(error => dispatch(stopOrderFailed(error)));
 
 }
@@ -239,8 +240,9 @@ export const placeMarketOrder = (info) => (dispatch) =>{
                 
                 throw error;
             })
-        .then(response =>{console.log(response); return response.json()})
-        .then(res => dispatch(marketOrderSuccess(res)))
+        .then(response =>{console.log(response); if (response){return response.json();}
+        else return null})
+        .then(res => {if (res){dispatch(marketOrderSuccess(res))}})
         .catch(error => {console.log(error); dispatch(marketOrderFailed(error))});
 
 }
@@ -361,8 +363,9 @@ export const cancelOrder = (orderId) => (dispatch) => {
             error => {
                 throw error;
             })
-        .then(response => response.json())
-        .then( res => { alert('Order Cancelled'); dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) })
+        .then(response => {if (response){return response.json();}
+        else return null})
+        .then( res => { if (res){alert('Order Cancelled'); dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) }})
         .catch(error =>{ alert(error)});
 
 }
@@ -428,8 +431,8 @@ export const fetchWallet = () => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(fetchWallet());
+                dispatch(refreshToken()).then(() =>dispatch(fetchWallet()) );
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -513,8 +516,8 @@ export const changePassword = (info) => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(changePassword(info));
+                dispatch(refreshToken()).then(() =>dispatch(changePassword(info)))
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);

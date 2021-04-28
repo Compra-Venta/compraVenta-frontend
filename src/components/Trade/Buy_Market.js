@@ -47,8 +47,11 @@ export class Buy_Market extends Component {
         {email: '', base: this.props.ba, quote: this.props.qa, b_amount: state.amount, 
         date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(), time: new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds() ,
         side: 'BUY'})
+        this.setState({
+          showmsg:true
+        })
 
-      const status = this.props.marketOrder
+     /*  const status = this.props.marketOrder
       //console.log('bs',status)
       if (status.errMess){
       if (status.errMess.message=="Cannot read property 'json' of undefined"){
@@ -57,35 +60,35 @@ export class Buy_Market extends Component {
       this.setState({
         status: status,
         showmsg: true
-      }/*,() => console.log('see status err ', this.state.status,this.state.showmsg)*/)
+      }/*,() => console.log('see status err ', this.state.status,this.state.showmsg))
       
     }
     else{this.setState({
       status: status,
       showmsg: true
-    }/*,() => console.log('see status no err ', this.state.status,this.state.showmsg)*/)}
+    }/*,() => console.log('see status no err ', this.state.status,this.state.showmsg))} */
     }
 
     render() {
 
          const view= this.state.showmsg?
-              this.state.status.isLoading ?
+              this.props.marketOrder.isLoading ?
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
-              this.state.status.errMess == null ?
+              this.props.marketOrder.errMess == null ?
               <div style={{ textAlign:'center'}}>
                <Alert color='success'isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-              <h5> {this.state.status.orderStatus.status}</h5>
+              <h5> {this.props.marketOrder.orderStatus.status}</h5>
               </Alert>
-              </div> : this.state.status.errMess.message!=="successful" ?
+              </div> : /* this.props.marketOrder.errMess.message!=="successful" ?
               <div style={{ textAlign:'center'}}>
              <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-              <h5> {this.state.status.errMess.message.msg}</h5>
+              <h5> {this.props.marketOrder.errMess.message.msg}</h5>
               </Alert>
-              </div>:
+              </div> :*/this.props.marketOrder.errMess.message?
               <div style={{ textAlign:'center'}}>
-              <Alert color='success' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-               <h5> {this.state.status.errMess.message}</h5>
-               </Alert> </div>:null
+              <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+               <h5> {this.props.marketOrder.errMess.message}</h5>
+               </Alert> </div>:null:null
 
         return (
             
