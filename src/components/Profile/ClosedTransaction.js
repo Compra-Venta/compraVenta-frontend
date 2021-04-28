@@ -81,7 +81,7 @@ class ClosedTransaction extends Component {
                             {orderTable}
                         </tbody>
                     </Table>
-                    </div> :
+                    </div> : this.props.closedTransaction_info.errMess.message=="Cannot read property 'json' of undefined" ? null:
                     <div style={{color:'red', textAlign:'center'}}><h2>{this.props.closedTransaction_info.errMess.message}</h2></div>
                 }
                 <div>

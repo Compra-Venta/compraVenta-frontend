@@ -142,14 +142,14 @@ function ChangePassword(props) {
         </ModalBody>:
         <ModalBody >
            {
-             status.isLoading ?
+             props.changePassword_status.isLoading ?
              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
-             status.errMess == null ?
+             props.changePassword_status.errMess == null ?
              <div style={{color:'deepskyblue', textAlign:'center'}}>
-             <h5> {status.Change_Passwordstatus.message}</h5>
-            </div> :
+             <h5> {props.changePassword_status.Change_Passwordstatus.message}</h5>
+            </div> :props.changePassword_status.errMess.message=="Cannot read property 'json' of undefined" ? null:
             <div style={{color:'red', textAlign:'center'}}>
-            <h5> {status.errMess.message}</h5>
+            <h5> {props.changePassword_status.errMess.message}</h5>
            </div>
            }
         </ModalBody>

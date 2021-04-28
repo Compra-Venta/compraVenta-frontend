@@ -187,8 +187,8 @@ toggleNavbar = () =>{
                                 </div>
                                 <img src='assets/images/learnPage/buysell.jpeg' style={{height:'30vh', width:'100%', borderStyle:'groove' }}/>
                                 </div>
-                                <div id='predictions' style={{ paddingLeft: 50,paddingBottom:50 }}>
-                                <h3 style={{ fontSize: 30 }}>Predictions</h3>
+                                <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <h3 id='predictions' style={{ fontSize: 30 }}>Predictions</h3>
                                 <br/><br/>
                                
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>

@@ -98,7 +98,7 @@ export class Wallet extends Component {
                     </div>
                     </div>
                     {wallet_info}
-                    </>:
+                    </>: state.errMess.message=="Cannot read property 'json' of undefined" ?<div>Plz refresh the page </div> :
                     <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
                 }
                 

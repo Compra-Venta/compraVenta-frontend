@@ -70,7 +70,7 @@ export class Personal_Info extends Component {
                       <div className='col-6'>{`Phone no: ${personal_data.PhoneNo}`}</div>
                       <div className='col-6'>{`Account ID: ${personal_data.user_id}`}</div>          
                 </div>
-                    </>:
+                    </>: this.props.profile.errMess.message=="Cannot read property 'json' of undefined"?null:
                     <div style={{color:'red', textAlign:'center'}}><h2>{this.props.profile.errMess.message}</h2></div>
                 }
             </div>

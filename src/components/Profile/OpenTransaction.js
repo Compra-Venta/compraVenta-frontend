@@ -91,8 +91,8 @@ class OpenTransaction extends Component {
                             {orderTable}
                         </tbody>
                     </Table>
-                    </div> :
-                    <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
+                    </div> : this.props.openTransaction_info.errMess.message=="Cannot read property 'json' of undefined" ? null:
+                    <div style={{color:'red', textAlign:'center'}}><h2>{this.props.openTransaction_info.errMess.message}</h2></div>
                 }
                 <div>
                 <Button onClick={this.fetchData} color="danger" size='md' style={{margin:'5px'}}>Refresh</Button>{' '}
