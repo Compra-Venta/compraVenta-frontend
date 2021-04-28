@@ -211,7 +211,7 @@ html{
   border-width:3px !important;
 }
 .sidenav {
-  height: 80vh;
+  height: 90vh;
   width: 25vw;
   position: fixed;
   z-index: 1;
@@ -236,9 +236,24 @@ html{
   background-color: black;
   
 }
+
+  .learnC h2  { 
+    margin-top: -200px; 
+    padding-top: 200px; 
+    display: inline-block;
+  }
+
+  .learnC h3  { 
+    margin-top: -200px; 
+    padding-top: 200px; 
+    display: inline-block;
+  }
+
+
 .learnC {
   margin-left: 25vw; /* Same as the width of the sidenav */
    /* Increased text to enable scrolling */
+  
   font-weight: 600;
   padding: 10px 10px;
 }
@@ -247,6 +262,26 @@ html{
     font-size: 10rem;
     font-weight: 700;
 } */
+
+@media (max-width: 992px) {
+  .learnC{
+      margin-left:0
+  }
+  
+}
+.video-responsive{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.video-responsive iframe{
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  position:absolute;
+}
 .getStarted{
   background-color: #0abcf9;
 background-image: linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%);

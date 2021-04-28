@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
 import LearnDash from './LearnDash';
-
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    NavbarText
+  } from 'reactstrap';
+  
 
 class Learn extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            collapsed:true
+        }
 
     }
 
-
+toggleNavbar = () =>{
+    this.setState({
+        collapsed:!this.state.collapsed
+    })
+}
 
     render() {
         return (
@@ -19,8 +40,8 @@ class Learn extends Component {
 
                 <div className='container-fluid' style={{marginTop:80}}>
                     <div className='row'>
-                        <div className='col-3 border-right border-dark'>
-                            <div className="sidenav border-right " style={{ lineHeight: 2.1, paddingLeft: '20px' }}>
+                        <div className='col-3 border-right border-dark d-none d-md-block'>
+                            <div className="sidenav border-right  " style={{ lineHeight: 2.1, paddingLeft: '20px' }}>
                                 <h2>Quick Links</h2>
                                 <ul>
                                     <li><a href="#crypto" className="Links">What is Crypto Currency?</a></li>
@@ -47,9 +68,51 @@ class Learn extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className='col-8 learnC'>
-                        <div id='crypto' style={{ paddingBottom: 30 }}><br/><br/><br/>
-                            <h2 style={{ fontSize: 40 }}>What is Crypto Currency?</h2>
+                    <div className='col-12 col-md-8 learnC'>
+                    <div className='d-block d-md-none'>
+                        <Navbar color="faded" light>
+                            <NavbarBrand className="mr-auto">Quick Links</NavbarBrand>
+                            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                            <Collapse isOpen={!this.state.collapsed} navbar>
+                            <Nav className="mr-auto" navbar>
+                            <NavItem>
+                            <NavLink href="#crypto">What is Crypto Currency?</NavLink>
+                            </NavItem>
+                            <NavItem>
+                            <NavLink href="#blockchain">What is Block Chain?</NavLink>
+                            </NavItem>
+                            <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                Our Platform
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem>
+                                <NavLink href="#assets">Assets</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                <NavLink href="#charts">Charts</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                <NavLink href="#orders">Orders</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                <NavLink href="#predictions">Predictions</NavLink>
+                                </DropdownItem>
+                                <DropdownItem>
+                                <NavLink href="#account">Account</NavLink>
+                                </DropdownItem>
+                            </DropdownMenu>
+                            </UncontrolledDropdown>
+                            <NavItem>
+                            <NavLink href="#demo">Demo</NavLink>
+                            </NavItem>
+                        </Nav>
+                            </Collapse>
+                        </Navbar>
+                        </div>
+
+                        <div  style={{ paddingBottom: 30 }}>
+                            <h2 id='crypto' style={{ fontSize: 40 }}>What is Crypto Currency?</h2>
                             <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
                                 <br />
                         A cryptocurrency is just like a digital form of cash. You can use it to pay friends for your share of the bar tab, buy that new pair of socks you've been eyeing up 👀, or book flights ✈️ and hotels 🏨 for your next holiday. Because cryptocurrency is digital, it can also be sent to friends and family anywhere in the world.
@@ -61,8 +124,8 @@ class Learn extends Component {
                         So, this magical internet money isn't owned by anyone and uses cryptography to secure the system. But you've already got apps for paying people – why should you care?
                         </div>
                         </div>
-                        <div id='blockchain' style={{ paddingBottom: 30 }}><br/><br/><br/>
-                            <h2 style={{ fontSize: 40 }}>What is BlockChain?</h2>
+                        <div  style={{ paddingBottom: 30 }}>
+                            <h2 id='blockchain' style={{ fontSize: 40 }}>What is BlockChain?</h2>
                             <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
                                 <br />
                         Blockchain is a specific type of database.<br />
@@ -76,34 +139,39 @@ class Learn extends Component {
 
                          </div>
                         </div>
-                        <div id='compraventa' style={{ paddingBottom: 30 }}><br/><br/><br/>
-                            <h2 style={{color:'deepskyblue' ,fontSize: 40 }}>Our Platform</h2>
+                        <div  style={{ paddingBottom: 30 }}>
+                            <h2 id='compraventa' style={{ fontSize: 40 }}>Our Platform</h2>
+                            <img src='assets/images/learnPage/dashboard.png' style={{ width:'100%', borderStyle:'groove' }}/>
                             <br /><br />
-                            <div id='assets' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
-                                <h3 style={{ fontSize: 30 }}>Assets</h3>
+                            <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <h3 id='assets' style={{ fontSize: 30 }}>Assets</h3>
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>
 
                                     An <strong>asset</strong> is something containing economic value and/or future benefit.
                                 On our platform we provide assets like Bitcoin, Litecoin, Etheruem, Ripple etc. You trade by buying and selling these assets.<br /><br />
 
                                 Assets always exists in pairs. A pair defines that what assets will be involved in a transaction. For example if you buy LTCBTC, you are buying LTC (Litecoin) in exchange of BTC (Bitcoin).<br /><br />
-
+                                <img src='assets/images/learnPage/assets.png' style={{ height:'30vh', borderStyle:'groove',float:'none' }}/><br/>
                                 Base asset vs Quote asset - <br /><br />
 
                                 Base currency represents how much of the quote currency is needed for you to get one unit of the base currency. For example, if you were looking at the CAD/USD currency pair, the Canadian dollar would be the base currency and the U.S. dollar would be the quote currency.
 
                             </div></div>
-                            <div  id='charts' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
-                                <h3 style={{ fontSize: 30 }}>Charts</h3>
+                            <div   style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <h3 id='charts' style={{ fontSize: 30 }}>Charts</h3>
                                 <br/>
-                                <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'30vh', width:'40%', borderStyle:'groove' }}/>
+                                <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'30vh', borderStyle:'groove' }}/>
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>
 
                                 Candlesticks charts are mostly used to analyze the trading trend.<br/>
-Each candle corresponds to a time interval. The endpoints of the box in the candle represents the price of the symbol at starting and end of the interval. If the closing price (price at the end) is more than opening price (price at the starting) then the candle is coloured green, otherwise it is colored red. The endpoints of the line, shows the highest and lowest price in the particular interval. 
-                                    </div></div>
-                                    <div id='orders' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
-                                <h3 style={{ fontSize: 30 }}>Orders</h3>
+                                Each candle corresponds to a time interval. The endpoints of the box in the candle represents the price of the symbol at starting and end of the interval. If the closing price (price at the end) is more than opening price (price at the starting) then the candle is coloured green, otherwise it is colored red. The endpoints of the line, shows the highest and lowest price in the particular interval.<br/><br/>
+                                <img src='assets/images/learnPage/chart.png' style={{height:'50vh',width:'100%', borderStyle:'groove' }}/><br/><br/>
+                                
+                                <div className='video-responsive'>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/WYnKlC1AEV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>     
+                                </div></div></div>
+                                    <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <h3 id='orders' style={{ fontSize: 30 }}>Orders</h3>
                                 <br/><br/>
                                
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>
@@ -117,22 +185,32 @@ Each candle corresponds to a time interval. The endpoints of the box in the cand
                                 Stop Orders are traded when a certain price value hits. For example you want to buy BTC in exchange to USD, when its price hits 50,000 USD. In this case you can add the stop value to 50,000 and your order will be traded whenever the BTC hits 50,000 mark. For name sake, Stop orders are of 2 types explained below.<br/><br/>
 
                                 </div>
-                                <img src='assets/images/learnPage/buysell.jpeg' style={{height:'30vh', width:'55vw', borderStyle:'groove' }}/>
+                                <img src='assets/images/learnPage/buysell.jpeg' style={{height:'30vh', width:'100%', borderStyle:'groove' }}/>
                                 </div>
-                                <div id='predictions' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
+                                <div id='predictions' style={{ paddingLeft: 50,paddingBottom:50 }}>
                                 <h3 style={{ fontSize: 30 }}>Predictions</h3>
                                 <br/><br/>
                                
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>
 
                                 Our platform predicts the prices after 1 day, 3 days and 1 week for every symbol.<br/><br/>
-
+                                <div className='container-fluid'>
+                                    <div className='row'>
+                                <div className='col-md-6'>
+                                <img src='assets/images/learnPage/predictI.png' style={{height:'45vh', width:'100%', borderStyle:'groove' }}/>
+                                </div>
+                                <div className='col-md-6'>
+                                <img src='assets/images/learnPage/predict.png' style={{height:'45vh', width:'100%', borderStyle:'groove' }}/>
+                                </div>
+                                </div>
+                                </div>
+                                <br/>
                                 The predictions are made using<span style={{color:'blue'}}> exponentially weighted averages </span>and are based on the recent trends. We do not provide any gaurantee about the predictions but present a expected trend only.
                                 </div>
                                
                                 </div>
-                                <div id='account' style={{ paddingLeft: 50,paddingBottom:50 }}><br/><br/><br/>
-                                <h3 style={{ fontSize: 30 }}>Account</h3>
+                                <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <h3 id='account' style={{ fontSize: 30 }}>Account</h3>
                                 <br/><br/>
                                
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>
@@ -144,8 +222,8 @@ Each candle corresponds to a time interval. The endpoints of the box in the cand
                                
                                 </div>
                         </div>
-                        <div id='demo' style={{ paddingBottom: 30 }}><br/><br/><br/>
-                            <h2 style={{ fontSize: 40 }}>Demo</h2>
+                        <div  style={{ paddingBottom: 30 }}>
+                            <h2 id='demo' style={{ fontSize: 40 }}>Demo</h2>
                             <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
                                 <br />
                        
