@@ -21,7 +21,7 @@ export class Watchlist extends Component {
     
     createwatchlist = (symbol) => {
         
-        console.log('my',symbol)
+        console.log('CoinPair',symbol)
         var checkP = this.state.prices
         //var newP = Object.keys(checkP).filter(symb => symbol.indexOf(symb)!==-1);
         for (const item of Object.keys(checkP)){
@@ -82,7 +82,7 @@ export class Watchlist extends Component {
     componentDidUpdate(prevProps){
         //console.log('hi i m updated')
         if (prevProps.array !== this.props.array) {
-            console.log('hi',this.props.array);
+            // console.log('hi',this.props.array);
             this.createwatchlist(this.props.array);
           }
     }
