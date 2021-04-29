@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  Container, Col, Form,
+  Container, Col, Row, Form,
   FormGroup, Label, Input,
   Button, FormFeedback,Spinner,Alert
 } from 'reactstrap';
@@ -16,7 +16,6 @@ class SignUp extends Component {
     this.state = {
        FullName: '',
        EmailId: '',
-       UserName: '',
        PhoneNo: '',
        DOB: '' ,
        Country: '',
@@ -26,7 +25,6 @@ class SignUp extends Component {
        touched: {
         FullName: false,
         EmailId: false,
-        UserName: false,
         PhoneNo: false,
         DOB: false ,
         Country: false,
@@ -93,7 +91,6 @@ class SignUp extends Component {
   validate = (
        FullName,
        EmailId,
-       UserName,
        PhoneNo,
        DOB ,
        Country,
@@ -103,7 +100,6 @@ class SignUp extends Component {
     const errors = {
        FullName: '',
        EmailId: '',
-       UserName: '',
        PhoneNo: '',
        DOB: '' ,
        Country: '',
@@ -140,13 +136,13 @@ class SignUp extends Component {
     const errors = this.validate(
        this.state.FullName,
        this.state.EmailId,
-       this.state.UserName,
        this.state.PhoneNo,
        this.state.DOB ,
        this.state.Country,
        this.state.Password,
        this.state.ConfirmPassword,
     );
+    const shouldSubmit = errors.ConfirmPassword || errors.Country || errors.DOB || errors.EmailId || errors.FullName || errors.Password || errors.Password || errors.PhoneNo  ;
    const showPassword = this.state.showPassword;
    const view= !(this.props.register.isRegistered)?
               this.props.register.isLoading ?
@@ -240,7 +236,8 @@ class SignUp extends Component {
               <Col>
                 <FormGroup>
                   <Label >Password</Label>
-                  <div style={{display:'flex'}}>
+                  <Row>
+                   <Col xs="10" style={{paddingRight:'0px'}}>
                   <Input
                     type={showPassword ?'text':'password'}
                     name="Password"
@@ -250,21 +247,28 @@ class SignUp extends Component {
                     placeholder="********"
                     required 
                   />
+                  <FormFeedback>{errors.Password}</FormFeedback>
+                  </Col>
+
+                  <Col xs='1' style={{padding:0}}>
                   <Button type='button' color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
                     {
                       showPassword?
                       <FontAwesomeIcon icon={faEyeSlash} />:
                       <FontAwesomeIcon icon={faEye} /> 
                     }
-                  </Button>
-                  </div>
-                  <FormFeedback>{errors.Password}</FormFeedback>
+                  </Button>  
+                  </Col>
+                  </Row>
+                  
                 </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
                   <Label >Confirm Password</Label>
-                  <div style={{display:'flex'}}>
+                  
+                  <Row>
+                   <Col xs="10" style={{paddingRight:'0px'}}>
                   <Input
                     type={showPassword?'text':'password'}
                     name="ConfirmPassword"
@@ -274,6 +278,10 @@ class SignUp extends Component {
                     placeholder="********"
                     required
                   />
+                  <FormFeedback>{errors.ConfirmPassword}</FormFeedback>
+                  </Col>
+
+                  <Col xs='1' style={{padding:0}}>
                   <Button type='button' color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
                     {
                       showPassword?
@@ -281,11 +289,12 @@ class SignUp extends Component {
                       <FontAwesomeIcon icon={faEye} /> 
                     }
                   </Button>
-                  </div>
-                  <FormFeedback>{errors.ConfirmPassword}</FormFeedback>
+                  </Col>
+                  </Row>
+                  
                 </FormGroup>
               </Col>
-              <Button type="submit" color="primary" >Submit</Button>
+              <Button disabled={shouldSubmit} type="submit" color="primary" >Submit</Button>
               <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' type='button' onClick={this.props.onClick}  style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
               <Col>{view}</Col>
             </Form>

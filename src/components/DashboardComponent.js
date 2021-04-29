@@ -10,6 +10,7 @@ import Predict from './Predict';
 import Footer from './Footer';
  import {  withRouter } from 'react-router';
 import { connect } from "react-redux";
+import * as Icon from 'react-cryptocoins'
 import {  fetchWatchlist, addToWatchlist, removeFromWatchlist, loginUser, logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder } from "../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,6 +25,8 @@ const mapDispatchToProps = (dispatch) => ({
    
 
 })
+
+
 
 const mapStateToProps = (state) => {
     return {
@@ -337,7 +340,16 @@ class DashboardComponent extends Component {
                           BNBETH:{ba:'BNB',qa:'ETH',qp:'0.00000001',bp:'0.01'},
                           BNBUSDT:{ba:'BNB',qa:'USDT',qp:'0.0000001',bp:'0.001'},  
                         }
-                            
+        
+        const coinInfo = {
+            'BTC': {name: 'BitCoin', icon: <Icon.BtcAlt/> },
+            'USDT':{name: 'Tether', icon: <Icon.UsdtAlt/> },
+            'ETH': {name: 'Ethereum', icon: <Icon.EthAlt/>},
+            'LTC': {name: 'LiteCoin', icon: <Icon.LtcAlt/>},
+            'XRP': {name: 'Ripple', icon:  <Icon.XrpAlt/> },
+            'BNB': {name: 'Binance', icon: <img src='assets/images/binance-coin-logo.png' width='30px' height='30px' /> },
+        }
+                        
         let pairList = Object.keys(currencies).map((k) => {
             return (
                 <option key={k} value={k}>{k}</option>
@@ -368,7 +380,7 @@ class DashboardComponent extends Component {
                 <div>
                 <NavDash logoutUser={this.props.logoutUser}/>
                 </div>
-                <UncontrolledAlert color='info' >Welcome to Comra Venta. Having doubts? Go to our <a href='/learn' className='alert-link'>Learn</a> Page and clear you doubts! </UncontrolledAlert>
+                <UncontrolledAlert color='info' >Welcome to Comrpa Venta. Having doubts? Go to our <a href='/learn' className='alert-link'>Learn</a> Page and clear you doubts! </UncontrolledAlert>
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
                     <div className='col-12 col-lg-3 col-md-4 border-right'>
@@ -385,7 +397,9 @@ class DashboardComponent extends Component {
                                     Quote Asset : 
                                 </div>
                                 <div className='col-7 col-md-7 text-center my-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px', justifyItems:'self-end'}}>
-                                {`${currencies[this.state.selectedValue].qa}`} 
+                                {coinInfo[currencies[this.state.selectedValue].qa].icon}
+                                {` ${currencies[this.state.selectedValue].qa}`}
+                                <span style={{color:'gray', fontSize:'18px'}}> ({coinInfo[currencies[this.state.selectedValue].qa].name})</span>
                                 </div>
                                 </div>
                             <div className='row' style={{padding:'0px 10px 0px 10px'}}>
@@ -393,7 +407,10 @@ class DashboardComponent extends Component {
                                     Base Asset : 
                                 </div>
                                 <div className='col-7 col-md-7 text-center my-auto' style={{margin:'0px',fontSize:'2rem',verticalAlign:'center',padding:'0px'}}>
-                                {`${currencies[this.state.selectedValue].ba}`} 
+                                {coinInfo[currencies[this.state.selectedValue].ba].icon}
+                                {` ${currencies[this.state.selectedValue].ba}`} 
+
+                                <span style={{color:'gray', fontSize:'18px'}}> ({coinInfo[currencies[this.state.selectedValue].ba].name})</span>
                                 </div>
                            
                            </div>  
