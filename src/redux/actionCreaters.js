@@ -905,7 +905,16 @@ export const refreshToken = () => (dispatch) => {
         .then(response => {
             if (response.ok) {
                 return response;
-            } else {
+            }
+            else if(response.status==401){
+                localStorage.removeItem('token');
+                localStorage.removeItem('refresh-token');
+                localStorage.removeItem('creds');
+                alert('Login Again')
+                window.location.reload();
+                return response.text().then(text => {throw Error(text)})
+            }
+             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
                 error.response = response;
                 throw error;
