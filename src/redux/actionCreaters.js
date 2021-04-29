@@ -862,7 +862,7 @@ export const logoutUser = () => (dispatch) => {
                 localStorage.removeItem('refresh-token');
                 localStorage.removeItem('creds');
                 //localStorage.removeItem('rcreds');
-                history.push('/')
+                window.location.reload();
    
                 dispatch(receiveLogout())
             
