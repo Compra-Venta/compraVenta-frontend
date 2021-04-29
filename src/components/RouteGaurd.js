@@ -17,7 +17,7 @@ const RouteGuard = ({
           <Redirect
             to={{
               pathname: redPath,
-              search: `?redirectUrl=${props.location.pathname}`,
+              
               state: {from: props.location}
             }}
           />

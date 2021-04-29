@@ -15,15 +15,16 @@ const CollabDash = (props) => {
         <NavbarToggler /*style={{backgroundColor: 'blue',marginRight:'40px',width:'7vw',height:'7vw'}}*/ onClick={toggleNavbar} className="me-0"/>
         <Collapse  isOpen={!collapsed} navbar>
           <Nav className='ml-auto col-md-7 justify-content-end' navbar style={{paddingRight:'0px',justifyItems:'right'}} >
-            <NavItem>
+            {!(props.auth.isAuthenticated)?<NavItem>
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="/home">Home</NavLink>
-            </NavItem>
+            </NavItem>:<NavItem>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/dashboard">Dashboard</NavLink>
+            </NavItem>}
+            
             <NavItem>
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/learn">Learn</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/dashboard">Dashboard</NavLink>
-            </NavItem>
+            
           </Nav>
         </Collapse>
       </Navbar>

@@ -28,7 +28,7 @@ const NavDash = (props) => {
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/collaborators"> Collaborators </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/home" style={{color:'red',fontSize:'1.4rem',paddingRight:'2vw'}}  onClick={handleLogoutClick}>Logout </NavLink>
+              <NavLink style={{color:'red',fontSize:'1.4rem',paddingRight:'2vw'}} className='logoutt'  onClick={handleLogoutClick}>Logout </NavLink>
             </NavItem>
           </Nav>
         </Collapse>

@@ -1,5 +1,8 @@
 import * as ActionTypes from './actionTypes';
 import  axios  from "axios";
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
 const baseUrl='http://127.0.0.1:5000'
 
 export const watchlistLoading = () => ({
@@ -188,8 +191,9 @@ export const placeStopOrder = (info) => (dispatch) =>{
             error => {
                 throw error;
             })
-        .then(response => response.json())
-        .then(res => dispatch(stopOrderSuccess(res)))
+        .then(response => {if (response){return response.json();}
+        else return null})
+        .then(res => {if (res){dispatch(stopOrderSuccess(res))}})
         .catch(error => dispatch(stopOrderFailed(error)));
 
 }
@@ -239,8 +243,9 @@ export const placeMarketOrder = (info) => (dispatch) =>{
                 
                 throw error;
             })
-        .then(response =>{console.log(response); return response.json()})
-        .then(res => dispatch(marketOrderSuccess(res)))
+        .then(response =>{console.log(response); if (response){return response.json();}
+        else return null})
+        .then(res => {if (res){dispatch(marketOrderSuccess(res))}})
         .catch(error => {console.log(error); dispatch(marketOrderFailed(error))});
 
 }
@@ -266,8 +271,8 @@ export const resetAccount = () => (dispatch) => {
                 return response;
             } 
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(resetAccount());
+                dispatch(refreshToken()).then(() => dispatch(resetAccount()) );
+                
             }else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText);
                 error.response = response;
@@ -307,8 +312,8 @@ export const fetchClosedTransaction = () => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(fetchClosedTransaction());
+                dispatch(refreshToken()).then(() => dispatch(fetchClosedTransaction()));
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -323,7 +328,7 @@ export const fetchClosedTransaction = () => (dispatch) => {
         .then(response => response.json())
         .then(info => {
             console.log('closed Transactions ',info)
-            dispatch(closedTransactionSuccess(info))})
+            dispatch(closedTransactionSuccess(info));dispatch(fetchWallet())})
         .catch(error => {
             console.log(error)
             dispatch(closedTransactionFailed(error))
@@ -350,8 +355,8 @@ export const cancelOrder = (orderId) => (dispatch) => {
                 return response;
             } 
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(cancelOrder(orderId));
+                dispatch(refreshToken()).then(() => dispatch(cancelOrder(orderId)));
+                
             }else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText);
                 error.response = response;
@@ -361,8 +366,9 @@ export const cancelOrder = (orderId) => (dispatch) => {
             error => {
                 throw error;
             })
-        .then(response => response.json())
-        .then( res => { alert('Order Cancelled'); dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) })
+        .then(response => {if (response){return response.json();}
+        else return null})
+        .then( res => { if (res){alert('Order Cancelled'); dispatch(fetchOpenTransaction()); dispatch(fetchWallet()) }})
         .catch(error =>{ alert(error)});
 
 }
@@ -385,8 +391,8 @@ export const fetchOpenTransaction = () => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(fetchOpenTransaction());
+                dispatch(refreshToken()).then(() =>dispatch(fetchOpenTransaction()) );
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -402,7 +408,7 @@ export const fetchOpenTransaction = () => (dispatch) => {
                             else return null})
         .then(info => {if (info){
             console.log('Open Transactions ',info)
-            dispatch(openTransactionSuccess(info))}})
+            dispatch(openTransactionSuccess(info));dispatch(fetchWallet())}})
         .catch(error => {
             console.log(error)
             dispatch(openTransactionFailed(error))
@@ -428,8 +434,8 @@ export const fetchWallet = () => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(fetchWallet());
+                dispatch(refreshToken()).then(() =>dispatch(fetchWallet()) );
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -469,8 +475,8 @@ export const fetchProfile = () => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(fetchProfile());
+                dispatch(refreshToken()).then(() => dispatch(fetchProfile()) );
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -513,8 +519,8 @@ export const changePassword = (info) => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(changePassword(info));
+                dispatch(refreshToken()).then(() =>dispatch(changePassword(info)))
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -557,8 +563,8 @@ export const newPassword = (email) => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(newPassword(email));
+                dispatch(refreshToken()).then(() =>dispatch(newPassword(email)) );
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -633,8 +639,8 @@ export const addToWatchlist = (symbol) => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(addToWatchlist(symbol));
+                dispatch(refreshToken()).then(() => dispatch(addToWatchlist(symbol)));
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -713,8 +719,8 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
                 return response;
             }
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(removeFromWatchlist(symbol));
+                dispatch(refreshToken()).then(() =>dispatch(removeFromWatchlist(symbol)));
+                
             }
              else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText);
@@ -759,7 +765,8 @@ export const loginError = (message) => {
 export const loginUser = (creds) => (dispatch) => {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(creds))
-
+    const obj={email: creds.email}
+    const email = JSON.stringify(obj)
     return fetch(baseUrl + '/login', {
         method: 'POST',
         headers: {
@@ -771,9 +778,7 @@ export const loginUser = (creds) => (dispatch) => {
             if (response.ok) {
                 return response;
             } else {
-                var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                error.response = response;
-                throw error;
+                return response.text().then(text => {throw Error(text)})
             }
         },
             error => {
@@ -786,7 +791,7 @@ export const loginUser = (creds) => (dispatch) => {
                 // If login was successful, set the token in local storage
                 localStorage.setItem('token', response.access_token);
                 localStorage.setItem('refresh-token', response.refresh_token);
-                localStorage.setItem('creds', JSON.stringify(creds));
+                localStorage.setItem('creds', email);
                 
                 // Dispatch the success action
                 dispatch(fetchWatchlist());
@@ -794,7 +799,7 @@ export const loginUser = (creds) => (dispatch) => {
             
             
         })
-        .catch(error => dispatch(loginError(error.message)))
+        .catch(error => dispatch(loginError(error)))
 };
 
 export const requestLogout = () => {
@@ -836,8 +841,9 @@ export const logoutUser = () => (dispatch) => {
                 return response;
             } 
             else if (response.status==401){
-                dispatch(refreshToken());
-                dispatch(logoutUser());
+               dispatch(refreshToken()).then(() => dispatch(logoutUser()));
+                
+                
             }
             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
@@ -855,8 +861,8 @@ export const logoutUser = () => (dispatch) => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('refresh-token');
                 localStorage.removeItem('creds');
-                localStorage.removeItem('rcreds');
-    
+                //localStorage.removeItem('rcreds');
+                window.location.reload();
    
                 dispatch(receiveLogout())
             
@@ -888,6 +894,7 @@ export const refreshError = (message) => {
 
 export const refreshToken = () => (dispatch) => {
     // We dispatch requestRefresh to kickoff the call to the API
+    //console.log('Refresshing')
     const token = localStorage.getItem('refresh-token');
     dispatch(requestRefresh(token))
     const bearer = 'Bearer ' + token;
@@ -902,7 +909,16 @@ export const refreshToken = () => (dispatch) => {
         .then(response => {
             if (response.ok) {
                 return response;
-            } else {
+            }
+            /* else if(response.status==401){
+                localStorage.removeItem('token');
+                localStorage.removeItem('refresh-token');
+                localStorage.removeItem('creds');
+                alert('Login Again')
+                window.location.reload();
+                return response.text().then(text => {throw Error(text)})
+            } */
+             else {
                 var error = new Error('Error ' + response.status + ': ' + response.statusText);
                 error.response = response;
                 throw error;
@@ -923,7 +939,7 @@ export const refreshToken = () => (dispatch) => {
                 
             
         })
-        .catch(error => dispatch(refreshError(error.message)))
+        .catch(error => dispatch(refreshError(error)))
 };
 
 export const requestRegister = (creds) => {
@@ -963,10 +979,9 @@ export const registerUser = (creds) => (dispatch) => {
             console.log(response)
             if (response.ok) {
                 return response;
-            } else {
-                var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                error.response = response;
-                throw error;
+            }
+             else {
+                return response.text().then(text => {throw Error(text)})
             }
         },
             error => {
@@ -977,12 +992,12 @@ export const registerUser = (creds) => (dispatch) => {
             
                 
                 
-                localStorage.setItem('rcreds', JSON.stringify(creds));
+               // localStorage.setItem('rcreds', JSON.stringify(creds));
                 
                 // Dispatch the success action
                 
                 dispatch(receiveRegister());
             
         })
-        .catch(error => dispatch(registerError(error.message)))
+        .catch(error => dispatch(registerError(error)))
 };

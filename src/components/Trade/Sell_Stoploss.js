@@ -40,15 +40,17 @@ export class Sell_Stoploss extends Component {
         });
       }
 
-    handleSubmit = async (event) => {
+    handleSubmit = (event) => {
       event.preventDefault()
       const state = this.state
-      await this.props.placeStopOrder(
+      this.props.placeStopOrder(
         {email: '', base: this.props.ba, quote: this.props.qa, b_amount: state.amount, stop: state.stop, 
         date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(), time: new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds() ,
         side: 'SELL'})
-
-      const status = this.props.stopOrder
+        this.setState({
+          showmsg:true
+        })
+      /*const status = this.props.stopOrder
       if (status.errMess){
         if (status.errMess.message=="Cannot read property 'json' of undefined"){
           status.errMess.message='successful'}
@@ -56,34 +58,34 @@ export class Sell_Stoploss extends Component {
         this.setState({
           status: status,
           showmsg: true
-        }/*,() => console.log('see status err ', this.state.status,this.state.showmsg)*/)
+        }/*,() => console.log('see status err ', this.state.status,this.state.showmsg))
         
       }
       else{this.setState({
         status: status,
         showmsg: true
-      }/*,() => console.log('see status no err ', this.state.status,this.state.showmsg)*/)}
+      }/*,() => console.log('see status no err ', this.state.status,this.state.showmsg))}*/
     }
 
     render() {
       const view= this.state.showmsg?
-              this.state.status.isLoading ?
-              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
-              this.state.status.errMess == null ?
-              <div style={{ textAlign:'center'}}>
-               <Alert color='success'isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-              <h5> {this.state.status.orderStatus.status}</h5>
-              </Alert>
-              </div> : this.state.status.errMess.message!=="successful" ?
-              <div style={{ textAlign:'center'}}>
-             <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-              <h5> {this.state.status.errMess.message.msg}</h5>
-              </Alert>
-              </div>:
-              <div style={{ textAlign:'center'}}>
-              <Alert color='success' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-               <h5> {this.state.status.errMess.message}</h5>
-               </Alert> </div>:null
+      this.props.stopOrder.isLoading ?
+      <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+      this.props.stopOrder.errMess == null ?
+      <div style={{ textAlign:'center'}}>
+       <Alert color='success'isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+      <h5> {this.props.stopOrder.orderStatus.status}</h5>
+      </Alert>
+      </div> : /* this.props.stopOrder.errMess.message!=="successful" ?
+      <div style={{ textAlign:'center'}}>
+     <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+      <h5> {this.props.stopOrder.errMess.message.msg}</h5>
+      </Alert>
+      </div> :*/this.props.stopOrder.errMess.message?
+      <div style={{ textAlign:'center'}}>
+      <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+       <h5> {this.props.stopOrder.errMess.message}</h5>
+       </Alert> </div>:null:null
         return (
             <div>
 

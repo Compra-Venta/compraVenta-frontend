@@ -15,7 +15,6 @@ import { registerUser, fetchWatchlist, addToWatchlist, removeFromWatchlist, logi
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
     loginUser: (creds) => dispatch(loginUser(creds)),
-    logoutUser: () => dispatch(logoutUser()),
     newPassword: (Email) => dispatch(newPassword(Email)),
     fetchWatchlist: () => dispatch(fetchWatchlist())
     
@@ -27,6 +26,7 @@ const mapStateToProps = (state) => {
         watchlist: state.watchlist,
         auth: state.auth,
         newPassword_status: state.newPassword_status,
+        register: state.register
         
     }
 }
@@ -34,13 +34,15 @@ const mapStateToProps = (state) => {
 class MainComponent extends Component {
 
     componentDidMount() {
-        console.log('auth', this.props.auth.isAuthenticated)
+        /* console.log('auth', this.props.auth)
+        console.log('reg', this.props.register)
+
         if (this.props.auth.isAuthenticated) {
             this.props.fetchWatchlist()
 
         }
-        console.log('main', this.props.watchlist)
-        console.log('main auth', this.props.auth)
+    console.log('main', this.props.watchlist) */
+        //console.log('main auth', this.props.auth)
         //const reps= await this.props.watchlist
         /* try {
              const response = await this.props.watchlist;
@@ -73,8 +75,8 @@ class MainComponent extends Component {
                     <Route path='/home'>
                         <Header />
                         <LandingPage
-                            auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser} logoutUser={this.props.logoutUser}
-                            newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} />
+                            auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser}
+                            newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} register={this.props.register} />
                         <Footer />
                     </Route>
                      {/* <Route path='/dashboard'> {/* component={() =>} <DashboardComponent
@@ -119,7 +121,7 @@ class MainComponent extends Component {
                         <Learn/>
                     </Route>
                     <Route path='/collaborators'>
-                        <Collaborators />
+                        <Collaborators auth={this.props.auth} />
                     </Route>
                     <Redirect to='/home' />
                 </Switch>

@@ -9,7 +9,8 @@ function ChangePassword(props) {
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [showmsg, setShowMsg] = useState(true);
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [submit, setSubmit] = useState(true);
 
   const toggle = () =>{ 
     setModal(!modal);
@@ -40,13 +41,12 @@ function ChangePassword(props) {
       errors.newPassword = 'Password must be a minimum of 8 characters including number, Upper, Lower And one special character.'
     if (newPassword && ConfirmPassword && newPassword !== ConfirmPassword)
       errors.ConfirmPassword = 'Password didn\'t matched! '
-        
-
     
     return errors;
     }
     
     const errors = validate(newPassword, confirmNewPassword);
+    const shouldSubmit = errors.ConfirmPassword || errors.newPassword ;
 
   return (
     <div>
@@ -55,13 +55,16 @@ function ChangePassword(props) {
      </div>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Enter Registered Email ID</ModalHeader>
+        <Container>
         { showmsg?
           <ModalBody className='text-center'>
             <Form className="changePassword" onSubmit={handleSubmit} >
+              
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Current Password</Label>
-                  <div style={{display:'flex'}}>
+                  <Row>
+                    <Col xs='10' style={{padding:0}}>
                   <Input
                     type={showPassword?'text':'password'}
                     name="Password"
@@ -72,6 +75,8 @@ function ChangePassword(props) {
                     placeholder="********"
                     required
                   />
+                  </Col>
+                  <Col xs='1' style={{padding:0}}>
                   <Button color='success' outline onClick={() => setShowPassword(!showPassword)} >
                     {
                       showPassword?
@@ -79,14 +84,16 @@ function ChangePassword(props) {
                       <FontAwesomeIcon icon={faEye} /> 
                     }
                   </Button>
-                  </div>
+                  </Col>
+                  </Row>
                   {/* <FormFeedback>{errors.Password}</FormFeedback> */}
                 </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">New Password</Label>
-                  <div style={{display:'flex'}}>
+                  <Row>
+                  <Col xs="10" style={{padding:0}}>
                   <Input
                     type={showPassword?'text':'password'}
                     name="Password"
@@ -97,6 +104,9 @@ function ChangePassword(props) {
                     placeholder="********"
                     required
                   />
+                  <FormFeedback>{errors.newPassword}</FormFeedback>
+                  </Col>
+                  <Col xs='1' style={{padding:0}}>
                   <Button color='success' outline onClick={() => setShowPassword(!showPassword)} >
                     {
                       showPassword?
@@ -104,15 +114,17 @@ function ChangePassword(props) {
                       <FontAwesomeIcon icon={faEye} /> 
                     }
                   </Button>
-                  </div>
-                  <FormFeedback>{errors.newPassword}</FormFeedback>
+                  </Col>
+                  </Row>
+                  
                 </FormGroup>
               </Col>
               <Col>
                 <FormGroup>
                   <Label for="examplePassword">Confirm New Password</Label>
-                  <Container>
-                  <div style={{display:'flex'}}>
+                  
+                 <Row>
+                   <Col xs="10" style={{padding:0}}>
                   <Input
                     disabled={!newPassword}
                     type={showPassword?'text':'password'}
@@ -124,6 +136,10 @@ function ChangePassword(props) {
                     placeholder="********"
                     required
                   />
+                  <FormFeedback>{errors.ConfirmPassword}</FormFeedback>
+                  </Col>
+                  
+                  <Col xs='1' style={{padding:0}}>
                   <Button color='success' outline onClick={() => setShowPassword(!showPassword)} >
                     {
                       showPassword?
@@ -131,13 +147,13 @@ function ChangePassword(props) {
                       <FontAwesomeIcon icon={faEye} /> 
                     }
                   </Button>
+                  </Col>
+                  </Row>
+                 
                   
-                  </div>
-                  <FormFeedback>{errors.ConfirmPassword}</FormFeedback>
-                  </Container>
                 </FormGroup>
               </Col>
-              <Button color="primary" >Submit</Button>{' '}
+              <Button disabled={shouldSubmit} color="primary" >Submit</Button>{' '}
             </Form>
         </ModalBody>:
         <ModalBody >
@@ -154,6 +170,7 @@ function ChangePassword(props) {
            }
         </ModalBody>
         }
+        </Container>
         <ModalFooter>
           
           <Button color="secondary" onClick={toggle}>{showmsg?'Cancel':'Ok, Thanks'}</Button>

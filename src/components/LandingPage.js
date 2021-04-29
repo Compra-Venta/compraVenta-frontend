@@ -54,7 +54,7 @@ class LandingPage extends Component {
                         
                     </div>
                     <div className='col-sm-6 text-center' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>
-                        {OpenSignup ? <SignUp onClick={this.handleSignIn} registerUser={this.props.registerUser}/> :
+                        {OpenSignup ? <SignUp onClick={this.handleSignIn} registerUser={this.props.registerUser} register={this.props.register}/> :
                          <SignIn onClick={this.handleRegister} loginUser={this.props.loginUser} auth={this.props.auth}
                          newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status}/>}</div>
                 </div>

@@ -177,11 +177,11 @@ toggleNavbar = () =>{
                                             <li>
                                             An <i>Exponential Moving Average</i> (EMA) is a type of moving average (MA) that places a greater weight and significance on the most recent data points. The exponential moving average is also referred to as the exponentially weighted moving average. An exponentially weighted moving average reacts more significantly to recent price changes than a simple moving average (SMA),
                                              which applies an equal weight to all observations in the period. Here Smoothing = 2.
-                                            <br/><img src='assets/images/learnPage/emaformula.png' style={{height:'55vh'}} />                                          
+                                            <br/><img src='assets/images/learnPage/emaformula.png' style={{height:'55vh',width:'100%'}} />                                          
                                             </li>
                                             <li>
                                              A <i>Simple Moving Average</i> (SMA) calculates the average of a selected range of prices, usually closing prices, by the number of periods in that range.Short-term averages respond quickly to changes in the price of the underlying security, while long-term averages are slower to react.
-                                             <br/><img src='assets/images/learnPage/smaformula.png' style={{height:'47vh'}} />                                          
+                                             <br/><img src='assets/images/learnPage/smaformula.png' style={{height:'47vh',width:'100%'}} />                                          
                                             </li>
                                         </ul>
                                         <i> Here is the video will help you to predict different patterns using these averages.<br/>(Source: Binance)</i>

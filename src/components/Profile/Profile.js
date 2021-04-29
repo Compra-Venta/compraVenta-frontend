@@ -113,8 +113,9 @@ function Profile(props) {
                 <Button color="success" size='md' style={{marginLeft:'30px'}}><a style={{color:'white'}} href='/dashboard'>Trade More Coins</a></Button>{' '}
                 </div>
             </div>
-            <Footer/>
+           
         </div>
+        <Footer/>
         </>
     )
 }

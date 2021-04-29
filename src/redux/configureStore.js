@@ -12,6 +12,7 @@ import { OpenTransaction } from './openTransaction';
 import { ClosedTransaction } from './closedTransaction';
 import { MarketOrder } from './marketOrder';
 import { StopOrder } from './stopOrder';
+import { Register } from './register';
 
 
 
@@ -20,6 +21,7 @@ export const ConfigureStore = () => {
         combineReducers({
             watchlist : WatchList,
             auth: Auth,
+            register: Register,
             prediction: Predict,
             newPassword_status: NewPassword,
             changePassword_status: ChangePassword,

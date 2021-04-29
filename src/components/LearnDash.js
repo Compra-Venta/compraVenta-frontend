@@ -18,16 +18,14 @@ const LearnDash = (props) => {
             <NavItem className='my-auto'>
               <NavLink style={{color:'white',fontSize:'1.4rem',paddingRight:'2vw'}} href="/collaborators">Collaborators</NavLink>
             </NavItem>
-            <NavItem className='my-auto'>
-              <NavLink style={{color:'white',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/faqs">FAQs </NavLink>
-            </NavItem>
+            
             <div className='getStarted'>
             <NavItem >
               <NavLink style={{color:'white',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/home">Get Started</NavLink>
             </NavItem>
             </div>
-            <NavItem className='my-auto'>
-              <NavLink style={{color:'white',fontSize:'1.4rem',paddingRight:'2vw',paddingLeft:'1.6vw'}}  href="/aboutus">About Us </NavLink>
+            <NavItem>
+              <div>&nbsp;&nbsp;&nbsp;</div>
             </NavItem>
           </Nav>
         </Collapse>

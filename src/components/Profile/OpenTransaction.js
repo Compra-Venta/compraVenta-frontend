@@ -31,7 +31,7 @@ class OpenTransaction extends Component {
         
         await this.props.cancelOrder(orderId);
         this.fetchData()
-        window.location.reload()
+        //window.location.reload()
 
     }
 

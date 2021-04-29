@@ -77,7 +77,7 @@ function SignIn(props) {
               props.auth.errMess ?
               <div style={{ textAlign:'center'}}>
               <Alert color='danger' isOpen={showmsg} toggle={dismissAlert}>
-              <h5> Invalid Credentials! Please try again...</h5>
+              <h5>{props.auth.errMess.message}</h5>
               </Alert>
               </div>:
               null:null

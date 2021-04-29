@@ -28,14 +28,14 @@ export class Wallet extends Component {
     setWallet = (wallet_info) => {
         console.log('wallet info',wallet_info)
         var wallet = this.state.wallet
-        if(wallet_info.errMess ==null) {
+        if(wallet_info.errMess ==null && wallet_info.isLoading==false) {
         for ( let i in wallet)
         {
             var bal = {'balance': wallet_info.wallet.balance[i], 'fixed_balance': wallet_info.wallet.fixed_balance[i]}
             wallet[i] = bal
         }
         const profit = (parseFloat(wallet_info.wallet.profit) - 50000 ).toPrecision(8);
-        const rating = profit< 0 ? 0 : profit < 1000 ? 1 : profit < 2000 ? 2 : profit < 3500 ? 3 : profit <= 5000 ? 4 : parseInt(profit)/1000
+        const rating = profit<= 0 ? 0 : profit < 1000 ? 1 : profit < 2000 ? 2 : profit < 3500 ? 3 : profit <= 5000 ? 4 : parseInt(profit)/1000
     
         this.setState({
             isLoading: wallet_info.isLoading,
@@ -51,9 +51,18 @@ export class Wallet extends Component {
         await this.props.fetchWallet()
         this.setWallet(this.props.wallet)
     }
+    componentDidUpdate(prevProps){
+        if (prevProps.wallet!==this.props.wallet){
+            this.setWallet(this.props.wallet)
+        }
+    }
 
     render() {
+        /* if (typeof this.props.wallet!=='undefined'){
+            this.setWallet(this.props.wallet)
+        } */
         const state = this.state;
+        console.log(state);
         const wallet = state.wallet;
         // const wallet=this.setWallet(Wallet)
         let wallet_info = Object.keys(wallet).map( (label, value) =>{
