@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button, CardFooter, Container, Row, Col
+    CardTitle, CardSubtitle, Button, CardFooter, Container, Row, Col, UncontrolledCollapse
   } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,39 +22,51 @@ export class Collaborators extends Component {
                      mail: 'tanveersodhi.bt19cse@pec.edu.in',
                      linkedln: 'https://www.linkedin.com/in/tanveer-sodhi-89329b190',
                      github: 'https://github.com/TanveerSodhi',
+                     bio: 'Hi, I am a sophomore at PEC'
                  },
                  {
                     name: 'Jaskaran Singh',
                     mail: 'jaskaransingh.bt19cse@pec.edu.in',
                     linkedln: 'https://www.linkedin.com/in/jaskaran-singh-351426192/',
                     github: 'https://github.com/jaskaran-23',
+                    bio: 'Hi, I am a sophomore at PEC'
                 },
                 {
                     name: 'Daksh Verma',
                     mail: 'dakshverma.bt19cse@pec.edu.in',
                     linkedln: 'https://www.linkedin.com/in/daksh-verma/',
                     github: 'https://github.com/dakshverma2411/',
+                    bio: 'Daksh Verma is a Computer Science Undergraduate at PEC, Chandigarh. He is passionate about developing application that solves real life problems. He also has a keen interest in fields like Android Development, API development, Machine learning and Deep learning.'
                 },
                 {
                     name: 'Aseem Mangla',
                     mail: 'aseemmangla.bt19ele@pec.edu.in',
                     linkedln: 'https://www.linkedin.com/in/aseemmangla',
                     github: 'https://github.com/manglaaseem28',
+                    bio: 'Aseem Mangla is a Computer Science Undergraduate at PEC, Chandigarh. He is always ready to do something which can serve to society well and enjoy organising events. He has a keen interest in Web Development, Machine Learning and Competitive Programming.'
                 }
              ]
         }
     }
     
     render() {
+        var id = 1;
         const collaboratorsData = this.state.data.map( person => {
             return(
-                <Col sm='6' >
+                <Col >
                     <div >
-                    <Card style={{ margin: 'auto ', marginBlockEnd:'30px', marginBlockStart:'10px', width: "300px" }} >
-                    <CardImg top style={{ margin: "auto", width: "300px", height: "250px" }} src={`assets/images/collaborators/${person.name}.png`} alt={person.name}/>
-                    <CardBody style={{ margin: "auto", width: "100%"}}>
+                    <Card style={{  width: "300px" }} >
+                    <CardImg top style={{  width: "300px", height: "250px" }} src={`assets/images/collaborators/${person.name}.png`} alt={person.name}/>
+                    <CardBody style={{width: "100%"}}>
                         <CardTitle tag='h5' >{person.name}</CardTitle>
-                        <CardSubtitle>Connect with me on</CardSubtitle>
+                        <Button outline color="primary" id={`toogler_${id}`} style={{ marginBottom: '1rem' }}>
+                         Bio
+                        </Button>
+                        <UncontrolledCollapse toggler={`toogler_${id++}`} >
+                            <CardText style={{fontSize:'15px'}} >{person.bio}</CardText>
+                        </UncontrolledCollapse>
+                        <CardText><i>Connect with {person.name} on</i></CardText>
+
                     </CardBody>
                     <CardFooter >
                         <a href={person.github} target='_blank' ><img src='https://github.githubassets.com/favicons/favicon.png' style={{ marginTop:'8px'}} alt="git-hub icon"/></a>
@@ -72,11 +84,9 @@ export class Collaborators extends Component {
                     <CollabDash/>
                 </div>
                 <div style={{marginBlockStart:'10px', fontFamily:'Roboto' ,textAlign:'center'}}><h1>Meet the Team</h1></div>
-                <Container>
-                    <Row>
-                        {collaboratorsData}
-                    </Row>
-                </Container>
+                <Row>
+                {collaboratorsData}
+                </Row>
                 <Footer/>
             </div>
         )

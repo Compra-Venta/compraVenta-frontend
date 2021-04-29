@@ -35,7 +35,7 @@ export class Wallet extends Component {
             wallet[i] = bal
         }
         const profit = (parseFloat(wallet_info.wallet.profit) - 50000 ).toPrecision(8);
-        const rating = profit< 0 ? 0 : profit < 1000 ? 1 : profit < 2000 ? 2 : profit < 3500 ? 3 : profit <= 5000 ? 4 : parseInt(profit)/1000
+        const rating = profit<= 0 ? 0 : profit < 1000 ? 1 : profit < 2000 ? 2 : profit < 3500 ? 3 : profit <= 5000 ? 4 : parseInt(profit)/1000
     
         this.setState({
             isLoading: wallet_info.isLoading,
