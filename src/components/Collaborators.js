@@ -43,7 +43,7 @@ export class Collaborators extends Component {
                     mail: 'aseemmangla.bt19ele@pec.edu.in',
                     linkedln: 'https://www.linkedin.com/in/aseemmangla',
                     github: 'https://github.com/manglaaseem28',
-                    bio: 'Aseem Mangla is a Computer Science Undergraduate at PEC, Chandigarh. He is always ready to do something which can serve to society well and enjoy organising events. He has a keen interest in Web Development, Machine Learning and Competitive Programming.'
+                    bio: 'Aseem Mangla is a Computer Science Undergraduate at PEC, Chandigarh. He is always ready to do something which can serve to society well and enjoy organising events. He has a keen interest in Web Development, Machine Learning and Blockchain Technology.'
                 }
              ]
         }
