@@ -9,7 +9,8 @@ function ChangePassword(props) {
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [showmsg, setShowMsg] = useState(true);
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [submit, setSubmit] = useState(true);
 
   const toggle = () =>{ 
     setModal(!modal);
@@ -40,13 +41,12 @@ function ChangePassword(props) {
       errors.newPassword = 'Password must be a minimum of 8 characters including number, Upper, Lower And one special character.'
     if (newPassword && ConfirmPassword && newPassword !== ConfirmPassword)
       errors.ConfirmPassword = 'Password didn\'t matched! '
-        
-
     
     return errors;
     }
     
     const errors = validate(newPassword, confirmNewPassword);
+    const shouldSubmit = errors.ConfirmPassword || errors.newPassword ;
 
   return (
     <div>
@@ -153,7 +153,7 @@ function ChangePassword(props) {
                   
                 </FormGroup>
               </Col>
-              <Button color="primary" >Submit</Button>{' '}
+              <Button disabled={shouldSubmit} color="primary" >Submit</Button>{' '}
             </Form>
         </ModalBody>:
         <ModalBody >
