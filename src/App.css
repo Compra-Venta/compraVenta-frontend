@@ -254,7 +254,7 @@ html{
   margin-left: 25vw; /* Same as the width of the sidenav */
    /* Increased text to enable scrolling */
   
-  font-weight: 600;
+  font-weight: 400;
   padding: 10px 10px;
 }
 /* .li::marker 

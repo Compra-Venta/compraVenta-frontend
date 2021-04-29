@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import {
   Container, Col, Form,
   FormGroup, Label, Input,
-  Button, FormFeedback,
+  Button, FormFeedback,Spinner,Alert
 } from 'reactstrap';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { withRouter } from 'react-router';
 
 class SignUp extends Component {
 
@@ -31,6 +32,7 @@ class SignUp extends Component {
         Country: false,
         Password: false,
         ConfirmPassword: false,
+        showmsg:false
        }
 
     }
@@ -53,21 +55,35 @@ class SignUp extends Component {
 
   }
 
-  handleSubmit = (event) => {
-    // event.preventDefault();
-    alert(`
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    /* alert(`
     UserData:
     Name: ${this.state.FullName}
     EmailId: ${this.state.EmailId}
     PhoneNo: ${this.state.PhoneNo}
-    `)
+    `) */
     var td= new Date().getFullYear()
     var dob= new Date(this.state.DOB).getFullYear()
     var age = td - dob
-    this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: '9501028037' });
-    this.props.onClick();
+    await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: this.state.PhoneNo });
+    console.log(this.props.register)
+    if( this.props.register.isRegistered){
+      alert('Registered Successfully')
+      this.props.onClick();
+    }
+     else{
+      this.setState({
+        showmsg:true
+      })
+    }
+    
   }
-
+  dismissAlert = () =>{
+    this.setState({
+      showmsg:false
+    })
+  }
   handleBlur = (field) => (event) => {
     this.setState({
       touched: {...this.state.touched, [field]: true}
@@ -132,6 +148,16 @@ class SignUp extends Component {
        this.state.ConfirmPassword,
     );
    const showPassword = this.state.showPassword;
+   const view= !(this.props.register.isRegistered)?
+              this.props.register.isLoading ?
+              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+              this.props.register.errMess ?
+              <div style={{ textAlign:'center'}}>
+              <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+              <h5>{this.props.register.errMess.message}</h5>
+              </Alert>
+              </div>:
+              null:null
 
     return (
       
@@ -224,7 +250,7 @@ class SignUp extends Component {
                     placeholder="********"
                     required 
                   />
-                  <Button color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
+                  <Button type='button' color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
                     {
                       showPassword?
                       <FontAwesomeIcon icon={faEyeSlash} />:
@@ -248,7 +274,7 @@ class SignUp extends Component {
                     placeholder="********"
                     required
                   />
-                  <Button color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
+                  <Button type='button' color='success' outline onClick={()=>{this.setState({showPassword: !showPassword})}} >
                     {
                       showPassword?
                       <FontAwesomeIcon icon={faEyeSlash} />:
@@ -260,7 +286,8 @@ class SignUp extends Component {
                 </FormGroup>
               </Col>
               <Button type="submit" color="primary" >Submit</Button>
-              <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' onClick={this.props.onClick} style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
+              <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' type='button' onClick={this.props.onClick}  style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
+              <Col>{view}</Col>
             </Form>
           </Container>
       
@@ -268,5 +295,5 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp
+export default SignUp;
 

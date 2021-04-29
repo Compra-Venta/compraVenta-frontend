@@ -325,7 +325,7 @@ export const fetchClosedTransaction = () => (dispatch) => {
         .then(response => response.json())
         .then(info => {
             console.log('closed Transactions ',info)
-            dispatch(closedTransactionSuccess(info))})
+            dispatch(closedTransactionSuccess(info));dispatch(fetchWallet())})
         .catch(error => {
             console.log(error)
             dispatch(closedTransactionFailed(error))
@@ -405,7 +405,7 @@ export const fetchOpenTransaction = () => (dispatch) => {
                             else return null})
         .then(info => {if (info){
             console.log('Open Transactions ',info)
-            dispatch(openTransactionSuccess(info))}})
+            dispatch(openTransactionSuccess(info));dispatch(fetchWallet())}})
         .catch(error => {
             console.log(error)
             dispatch(openTransactionFailed(error))
@@ -858,7 +858,7 @@ export const logoutUser = () => (dispatch) => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('refresh-token');
                 localStorage.removeItem('creds');
-                localStorage.removeItem('rcreds');
+                //localStorage.removeItem('rcreds');
     
    
                 dispatch(receiveLogout())
@@ -966,10 +966,9 @@ export const registerUser = (creds) => (dispatch) => {
             console.log(response)
             if (response.ok) {
                 return response;
-            } else {
-                var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                error.response = response;
-                throw error;
+            }
+             else {
+                return response.text().then(text => {throw Error(text)})
             }
         },
             error => {
@@ -980,12 +979,12 @@ export const registerUser = (creds) => (dispatch) => {
             
                 
                 
-                localStorage.setItem('rcreds', JSON.stringify(creds));
+               // localStorage.setItem('rcreds', JSON.stringify(creds));
                 
                 // Dispatch the success action
                 
                 dispatch(receiveRegister());
             
         })
-        .catch(error => dispatch(registerError(error.message)))
+        .catch(error => dispatch(registerError(error)))
 };
