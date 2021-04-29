@@ -15,7 +15,6 @@ import { registerUser, fetchWatchlist, addToWatchlist, removeFromWatchlist, logi
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
     loginUser: (creds) => dispatch(loginUser(creds)),
-    logoutUser: () => dispatch(logoutUser()),
     newPassword: (Email) => dispatch(newPassword(Email)),
     fetchWatchlist: () => dispatch(fetchWatchlist())
     
@@ -35,14 +34,14 @@ const mapStateToProps = (state) => {
 class MainComponent extends Component {
 
     componentDidMount() {
-        console.log('auth', this.props.auth)
+        /* console.log('auth', this.props.auth)
         console.log('reg', this.props.register)
 
         if (this.props.auth.isAuthenticated) {
             this.props.fetchWatchlist()
 
         }
-        console.log('main', this.props.watchlist)
+    console.log('main', this.props.watchlist) */
         //console.log('main auth', this.props.auth)
         //const reps= await this.props.watchlist
         /* try {
@@ -76,7 +75,7 @@ class MainComponent extends Component {
                     <Route path='/home'>
                         <Header />
                         <LandingPage
-                            auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser} logoutUser={this.props.logoutUser}
+                            auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser}
                             newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} register={this.props.register} />
                         <Footer />
                     </Route>
@@ -122,7 +121,7 @@ class MainComponent extends Component {
                         <Learn/>
                     </Route>
                     <Route path='/collaborators'>
-                        <Collaborators />
+                        <Collaborators auth={this.props.auth} />
                     </Route>
                     <Redirect to='/home' />
                 </Switch>

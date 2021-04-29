@@ -25,7 +25,7 @@ const ProfileNav = (props) => {
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/learn">Learn </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} onClick={handleLogoutClick}  href="/home">Logout </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} className='logoutt' onClick={handleLogoutClick} >Logout </NavLink>
             </NavItem>
           </Nav>
         </Collapse>

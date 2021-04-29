@@ -253,6 +253,7 @@ class DashboardComponent extends Component {
     this.setState({
         watchArray: watchL
     },() => console.log('wachhh',this.state.watchArray))*/
+    this.props.fetchWatchlist();
 
     }
     /*componentDidUpdate(){

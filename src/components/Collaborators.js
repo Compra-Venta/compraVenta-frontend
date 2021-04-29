@@ -69,7 +69,7 @@ export class Collaborators extends Component {
         return (
             <div>
                 <div>
-                    <CollabDash/>
+                    <CollabDash auth={this.props.auth}/>
                 </div>
                 <div style={{marginBlockStart:'10px', fontFamily:'Roboto' ,textAlign:'center'}}><h1>Meet the Team</h1></div>
                 <Container>
