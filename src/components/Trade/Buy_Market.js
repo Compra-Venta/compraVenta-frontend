@@ -42,6 +42,7 @@ export class Buy_Market extends Component {
 
     handleSubmit =  (event) => {
       event.preventDefault()
+      event.target.reset()
       const state = this.state
        this.props.placeMarketOrder(
         {email: '', base: this.props.ba, quote: this.props.qa, b_amount: state.amount, 
