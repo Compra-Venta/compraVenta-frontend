@@ -42,6 +42,7 @@ export class Buy_Stoploss extends Component {
 
     handleSubmit = (event) => {
       event.preventDefault()
+      event.target.reset()
       const state = this.state
       this.props.placeStopOrder(
         {email: '', base: this.props.ba, quote: this.props.qa, b_amount: state.amount, stop: state.stop, 
@@ -146,7 +147,7 @@ export class Buy_Stoploss extends Component {
                 </FormGroup>
               </Col>*/}
               
-              <Button type="submit" color="success" block >Buy</Button>
+              <Button type="submit" color="success" block >{`Buy ${this.props.ba}`}</Button>
               <Col>
               {view}
               </Col>

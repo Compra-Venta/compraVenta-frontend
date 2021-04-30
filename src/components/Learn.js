@@ -113,7 +113,7 @@ toggleNavbar = () =>{
 
                         <div  style={{ paddingBottom: 30 }}>
                             <h2 id='crypto' style={{ fontSize: 40 }}>What is Crypto Currency?</h2>
-                            <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
+                            <div className='hPad' style={{ fontSize: 22, lineHeight: '1.6' }}>
                                 <br />
                         A cryptocurrency is just like a digital form of cash. You can use it to pay friends for your share of the bar tab, buy that new pair of socks you've been eyeing up 👀, or book flights ✈️ and hotels 🏨 for your next holiday. Because cryptocurrency is digital, it can also be sent to friends and family anywhere in the world.
                         Just like PayTm or bank transfers, right?
@@ -126,7 +126,7 @@ toggleNavbar = () =>{
                         </div>
                         <div  style={{ paddingBottom: 30 }}>
                             <h2 id='blockchain' style={{ fontSize: 40 }}>What is BlockChain?</h2>
-                            <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
+                            <div className='hPad' style={{ fontSize: 22, lineHeight: '1.6' }}>
                                 <br />
                         Blockchain is a specific type of database.<br />
                         It differs from a typical database in the way it stores information; blockchains store data in blocks that are then chained together.
@@ -143,7 +143,7 @@ toggleNavbar = () =>{
                             <h2 id='compraventa' style={{ fontSize: 40 }}>Our Platform</h2>
                             <img src='assets/images/learnPage/dashboard.png' style={{ width:'100%', borderStyle:'groove' }}/>
                             <br /><br />
-                            <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
+                            <div className='cPad' style={{paddingBottom:50 }}>
                                 <h3 id='assets' style={{ fontSize: 30 }}>Assets</h3>
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>
 
@@ -157,31 +157,31 @@ toggleNavbar = () =>{
                                 Base currency represents how much of the quote currency is needed for you to get one unit of the base currency. For example, if you were looking at the CAD/USD currency pair, the Canadian dollar would be the base currency and the U.S. dollar would be the quote currency.
 
                             </div></div>
-                            <div   style={{ paddingLeft: 50,paddingBottom:50 }}>
+                            <div className='cPad'  style={{ paddingBottom:50 }}>
                                 <h3 id='charts' style={{ fontSize: 30 }}>Charts</h3>
                                 <br/>
-                                <img src='assets/images/learnPage/chart.png' style={{height:'80vh',width:'80%', borderStyle:'groove' }}/><br/><br/>
+                                <img className='chartW' src='assets/images/learnPage/chart.png' style={{ borderStyle:'groove' }}/><br/><br/>
                                 <div style={{ fontSize: 22, lineHeight: '1.6' }}>                                
                                 A total of 4 graphs are used in this chart which are described as follows:-
-                                <ol>
-                                    <li>
+                                <ol className='olist'>
+                                    <li className='olist'>
                                         <h3>CandleSticks</h3><br/>
                                         Candlesticks charts are mostly used to analyze the trading trend.<br/>
                                         Each candle corresponds to a time interval. The endpoints of the box in the candle represents the price of the symbol at starting and end of the interval. If the closing price (price at the end) is more than opening price (price at the starting) then the candle is coloured green, otherwise it is colored red. The endpoints of the line, shows the highest and lowest price in the particular interval.<br/><br/>
-                                        <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'40vh', borderStyle:'groove' }}/>      
+                                        <img src='assets/images/learnPage/candlestick.jpeg' style={{height:'40vh', borderStyle:'groove',width:'300px' }}/>      
                                     </li>
-                                    <li>
+                                    <li className='olist'>
                                         <h3>Moving Averages</h3><br/>
                                         We have used <i>2</i> moving averages for showing the trend of the market.
-                                        <ul>
-                                            <li>
+                                        <ul className='olist'>
+                                            <li className='olist'>
                                             An <i>Exponential Moving Average</i> (EMA) is a type of moving average (MA) that places a greater weight and significance on the most recent data points. The exponential moving average is also referred to as the exponentially weighted moving average. An exponentially weighted moving average reacts more significantly to recent price changes than a simple moving average (SMA),
                                              which applies an equal weight to all observations in the period. Here Smoothing = 2.
-                                            <br/><img src='assets/images/learnPage/emaformula.png' style={{height:'55vh',width:'100%'}} />                                          
+                                            <br/><img src='assets/images/learnPage/emaformula.png' style={{height:'47vh',width:'95%'}} />                                          
                                             </li>
-                                            <li>
+                                            <li className='olist'>
                                              A <i>Simple Moving Average</i> (SMA) calculates the average of a selected range of prices, usually closing prices, by the number of periods in that range.Short-term averages respond quickly to changes in the price of the underlying security, while long-term averages are slower to react.
-                                             <br/><img src='assets/images/learnPage/smaformula.png' style={{height:'47vh',width:'100%'}} />                                          
+                                             <br/><img src='assets/images/learnPage/smaformula.png' style={{height:'47vh',width:'95%'}} />                                          
                                             </li>
                                         </ul>
                                         <i> Here is the video will help you to predict different patterns using these averages.<br/>(Source: Binance)</i>
@@ -189,14 +189,14 @@ toggleNavbar = () =>{
                                         <iframe width="560" height="315" src="https://www.youtube.com/embed/WYnKlC1AEV0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>     
                                         </div>                                
                                     </li>
-                                    <li>
+                                    <li className='olist'>
                                         <h3>Price by Volume</h3><br/>
                                         A price by volume (PBV) chart is a horizontal histogram plotted on a security's chart, showing the volume of shares traded at a specific price level. Often times, price by volume histograms are found on the Y-axis and are used by technical traders to predict areas of support and resistance.
                                     </li>
                                 </ol>
                                 
                                 </div></div>
-                                    <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                    <div className='cPad' style={{paddingBottom:50 }}>
                                 <h3 id='orders' style={{ fontSize: 30 }}>Orders</h3>
                                 <br/><br/>
                                
@@ -212,9 +212,9 @@ toggleNavbar = () =>{
                                 <br/>Compra Venta provides user a feature to <span style={{color:'red'}}>cancel</span> any open order if the order is not placed yet.
                                 <br/><br/>
                                 </div>
-                                <img src='assets/images/learnPage/buysell.jpeg' style={{height:'30vh', width:'85%', borderStyle:'groove' }}/>
+                                <img src='assets/images/learnPage/buysell.jpeg' style={{height:'30vh', width:'95%', borderStyle:'groove' }}/>
                                 </div>
-                                <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <div className='cPad' style={{paddingBottom:50 }}>
                                 <h3 id='predictions' style={{ fontSize: 30 }}>Predictions</h3>
                                 <br/><br/>
                                
@@ -236,7 +236,7 @@ toggleNavbar = () =>{
                                 </div>
                                
                                 </div>
-                                <div  style={{ paddingLeft: 50,paddingBottom:50 }}>
+                                <div className='cPad' style={{paddingBottom:50 }}>
                                 <h3 id='account' style={{ fontSize: 30 }}>Account</h3>
                                 <br/><br/>
                                
@@ -264,7 +264,7 @@ toggleNavbar = () =>{
                         </div>
                         <div  style={{ paddingBottom: 30 }}>
                             <h2 id='demo' style={{ fontSize: 40 }}>Demo</h2>
-                            <div style={{ fontSize: 22, lineHeight: '1.6', paddingLeft: 10 }}>
+                            <div className='hPad' style={{ fontSize: 22, lineHeight: '1.6' }}>
                                 <br />
                        
 
