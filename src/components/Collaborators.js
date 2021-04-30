@@ -29,7 +29,7 @@ export class Collaborators extends Component {
                     mail: 'jaskaransingh.bt19cse@pec.edu.in',
                     linkedln: 'https://www.linkedin.com/in/jaskaran-singh-351426192/',
                     github: 'https://github.com/jaskaran-23',
-                    bio: 'Hi, I am a sophomore at PEC'
+                    bio: 'Jaskaran Singh is a CSE sophomore at PEC, Chandigarh. He is passionate about taking up new challenges and solving real life problems which drove him to have a huge interest in Competitive Programming.He is also keen in Blockchain Technology and is currently working on to improve his Machine Learning skills.'
                 },
                 {
                     name: 'Daksh Verma',
@@ -43,7 +43,7 @@ export class Collaborators extends Component {
                     mail: 'aseemmangla.bt19ele@pec.edu.in',
                     linkedln: 'https://www.linkedin.com/in/aseemmangla',
                     github: 'https://github.com/manglaaseem28',
-                    bio: 'Aseem Mangla is a Computer Science Undergraduate at PEC, Chandigarh. He is always ready to do something which can serve to society well and enjoy organising events. He has a keen interest in Web Development, Machine Learning and Blockchain Technology.'
+                    bio: 'Aseem Mangla is a Computer Science Undergraduate at PEC, Chandigarh. He is always ready to do something which can serve to society well and enjoy organising events which helped him to work in a team effectively. He has a keen interest in Web Development, Machine Learning and Blockchain Technology.'
                 }
              ]
         }

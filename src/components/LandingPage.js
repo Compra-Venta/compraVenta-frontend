@@ -63,9 +63,18 @@ class LandingPage extends Component {
         <div className='container-fluid col-12 text-center'>
                 <h1 >Why Compra Venta?</h1>
                
-                <p className="content container-fluid" style={{color:'black'}}>Our project is a website based on a virtual trading platform which will provide<br/>
-budding investors a platform to dive into the trading of cryptocurrencies without<br/>
-having any fear of losing anything.</p>
+                <p className="content container-fluid" style={{color:'black'}}>
+                Today’s world has advanced a lot in terms of cryptocurrency exchange or digital
+currency exchange and the main reason that these digital currencies are overtaking
+physical currency is that it is not governed by any one single authority and is totally
+secure since it uses the blockchain technology. It is becoming investors' choice to
+trade into crypto currencies.
+Many people who trade into this market without any prior knowledge face severe
+losses and fear using it again.<br/>
+So our project is a website based on a virtual trading platform which will provide
+budding investors a platform to dive into the trading of cryptocurrencies without
+having any fear of losing anything.
+                </p>
             </div>
             
               

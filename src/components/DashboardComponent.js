@@ -380,7 +380,7 @@ class DashboardComponent extends Component {
                 <div>
                 <NavDash logoutUser={this.props.logoutUser}/>
                 </div>
-                <UncontrolledAlert color='info' >Welcome to Comrpa Venta. Having doubts? Go to our <a href='/learn' className='alert-link'>Learn</a> Page and clear you doubts! </UncontrolledAlert>
+                <UncontrolledAlert color='info' >Welcome to Compra Venta. Having doubts? Go to our <a href='/learn' className='alert-link'>Learn</a> Page and clear you doubts! </UncontrolledAlert>
                 <div className='container-fluid'>
                     <div className='row mx-auto'>
                     <div className='col-12 col-lg-3 col-md-4 border-right'>

@@ -41,6 +41,7 @@ export class Sell_Market extends Component {
 
     handleSubmit = (event) => {
       event.preventDefault()
+      event.target.reset()
       const state = this.state
       this.props.placeMarketOrder(
         {email: '', base: this.props.ba, quote: this.props.qa, b_amount: state.amount, 
@@ -128,7 +129,7 @@ export class Sell_Market extends Component {
                 
                 </FormGroup>
               
-              <Button type="submit" color="danger" block >Sell</Button> 
+              <Button type="submit" color="danger" block >{`Sell ${this.props.ba}`}</Button> 
               <Col>
               {view}
               </Col>

@@ -3,7 +3,8 @@ import  axios  from "axios";
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
-const baseUrl='http://127.0.0.1:5000'
+// const baseUrl='http://127.0.0.1:5000'
+const baseUrl='https://apicompraventa.herokuapp.com'
 
 export const watchlistLoading = () => ({
     type: ActionTypes.WATCHLIST_LOADING
