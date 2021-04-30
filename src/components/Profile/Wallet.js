@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Button, Spinner } from 'reactstrap';
+import {Button, Spinner, Table } from 'reactstrap';
 import ReactStars from 'react-rating-stars-component'
 import { walletFailed } from '../../redux/actionCreaters';
 
@@ -67,20 +67,25 @@ export class Wallet extends Component {
         // const wallet=this.setWallet(Wallet)
         let wallet_info = Object.keys(wallet).map( (label, value) =>{
             return(
-               <div className='container-fluid' >
-                <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
-                    <div className='col'>
-                        {`${label}`}
-                    </div>
-                    <div className='col'>
-                        { wallet[label].balance > 0.00000001 ? `${parseFloat(wallet[label].balance).toPrecision(8)}` : parseFloat(0).toPrecision(8) }
-                    </div>
-                    <div className='col'>
-                        { wallet[label].fixed_balance > 0.00000001 ? `${parseFloat(wallet[label].fixed_balance).toPrecision(8)}` : parseFloat(0).toPrecision(8) }
-                    </div>
+                <tr>
+                    <th>{`${label}`}</th>
+                    <th>{ wallet[label].balance > 0.00000001 ? `${parseFloat(wallet[label].balance).toPrecision(8)}` : parseFloat(0).toPrecision(8) }</th>
+                    <th>{ wallet[label].fixed_balance > 0.00000001 ? `${parseFloat(wallet[label].fixed_balance).toPrecision(8)}` : parseFloat(0).toPrecision(8) }</th>
+                </tr>
+        //        <div className='container-fluid' >
+        //         <div className='row' style={{padding:'10px',fontSize:'1.2rem'}}>
+        //             <div className='col'>
+        //                 {`${label}`}
+        //             </div>
+        //             <div className='col'>
+        //                 { wallet[label].balance > 0.00000001 ? `${parseFloat(wallet[label].balance).toPrecision(8)}` : parseFloat(0).toPrecision(8) }
+        //             </div>
+        //             <div className='col'>
+        //                 { wallet[label].fixed_balance > 0.00000001 ? `${parseFloat(wallet[label].fixed_balance).toPrecision(8)}` : parseFloat(0).toPrecision(8) }
+        //             </div>
                     
-        </div>
-        </div>
+        // </div>
+        // </div>
             )
         } )
 
@@ -95,18 +100,20 @@ export class Wallet extends Component {
                         <Button disabled color={'info'} >Assets Earned: $ {state.profit} </Button> 
                         <Button disabled style={{marginLeft:'1%', display:'flex', alignItems:'center'}} color={state.profit >=0 ? 'success' : 'danger'}>Rating: {state.rating <= 0 ? '0' : null} <ReactStars count={state.rating} color="#ffd700" size={25} edit={false}/></Button>
                     </div>
-                    <div className='row' style={{padding:'10px',fontSize:'1.2rem', color: 'dodgerblue'}}>
-                    <div className='col'>
-                    Coin
+                    <div className='table-container'>
+                    <Table hover responsive style={{textAlign:'center'}} >
+                        <thead>
+                            <tr style={{color:'deepskyblue'}}>
+                                <th>Coin</th>
+                                <th>Balance</th>
+                                <th>Fixed Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            {wallet_info}
+                        </tbody>
+                    </Table>
                     </div>
-                    <div className='col'>
-                    Balance
-                    </div>
-                    <div className='col'>
-                   Fixed Balance
-                    </div>
-                    </div>
-                    {wallet_info}
                     </>: state.errMess.message=="Cannot read property 'json' of undefined" ?<div>Plz refresh the page </div> :
                     <div style={{color:'red', textAlign:'center'}}><h2>{state.errMess.message}</h2></div>
                 }

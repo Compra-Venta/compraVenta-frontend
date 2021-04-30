@@ -15,27 +15,24 @@ const NavComp = (props) => {
         <NavbarBrand  href="/" className="mr-auto" >
           <div className='row'>
           <div style={{display:'flex'}}>
-          <div className='col-sm-3'>
-            <img src='/assets/images/HeadLogo.png'height='60vh' width='60vh' 
-              style={{float:'left',maxHeight:'100%',width:'7vw',height:'7vw'}} /> 
+          <div className='col-sm-2'>
+            <img src='/assets/images/HeadLogo.png'height='50vh' width='50vh' 
+              style={{float:'left',maxHeight:'100%',width:'6vw',height:'6vw'}} /> 
           </div>
           <div style={{width:'100%',textAlign:'center',justifyContent:'center',verticalAlign:'center',marginTop:'auto'}} className='col-sm-2 my-auto'> 
-          <h1 className='my-auto' id='top' style={{fontSize:'4vw',alignContent:'center'}}>Compra Venta</h1></div></div></div></NavbarBrand>
+          <h1 className='my-auto' id='top' style={{fontSize:'3.1vw',alignContent:'center'}}>Compra Venta</h1></div></div></div></NavbarBrand>
         
         <NavbarToggler /*style={{backgroundColor: 'blue',marginRight:'40px',width:'7vw',height:'7vw'}}*/ onClick={toggleNavbar} className="me-0"/>
         <Collapse  isOpen={!collapsed} navbar>
-          <Nav className='ml-auto mr-2 col-sm-7' navbar >
+          <Nav className='ml-auto mr-2 col-sm-6' navbar style={{fontFamily:'Roboto', fontSize:'1.8rem'}} >
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="/aboutus"><span color='violet' >About us</span></NavLink>
+              <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="mailto:teamcompraventa@gmail.com">Contact Us </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/contactus">Contact Us </NavLink>
+              <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="/Collaborators">Collaborators </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/Collaborators">Collaborators </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/learn">Learn</NavLink>
+              <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="/learn">Learn</NavLink>
             </NavItem>
           </Nav>
         </Collapse>

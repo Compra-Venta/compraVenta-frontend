@@ -22,7 +22,7 @@ export class Collaborators extends Component {
                      mail: 'tanveersodhi.bt19cse@pec.edu.in',
                      linkedln: 'https://www.linkedin.com/in/tanveer-sodhi-89329b190',
                      github: 'https://github.com/TanveerSodhi',
-                     bio: 'Hi, I am a sophomore at PEC'
+                     bio: "Tanveer Sodhi is CSE Undergraduate at PEC, Chandigarh. He is passionate about emerging technologies and how they are becoming vital part of everyone's life. He has a keen interest in Python, Web Development and Mathematics"
                  },
                  {
                     name: 'Jaskaran Singh',
@@ -84,9 +84,11 @@ export class Collaborators extends Component {
                     <CollabDash auth={this.props.auth}/>
                 </div>
                 <div style={{marginBlockStart:'10px', fontFamily:'Roboto' ,textAlign:'center'}}><h1>Meet the Team</h1></div>
+                <div className='container-fluid' style={{paddingLeft:'40px'}}>
                 <Row>
                 {collaboratorsData}
                 </Row>
+                </div>
                 <Footer/>
             </div>
         )

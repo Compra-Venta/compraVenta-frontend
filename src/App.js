@@ -4,6 +4,7 @@ import MainComponent from './components/MainComponent';
 import { BrowserRouter } from 'react-router-dom';
 import { ConfigureStore } from "./redux/configureStore";
 import { Provider } from 'react-redux';
+require("dotenv").config();
 const Store = ConfigureStore()
 function App() {
   return (
