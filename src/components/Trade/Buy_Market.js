@@ -48,7 +48,7 @@ export class Buy_Market extends Component {
         date: new Date().getFullYear()+'-'+(new Date().getMonth()+1)+'-'+new Date().getDate(), time: new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds() ,
         side: 'BUY'})
         this.setState({
-          showmsg:true
+          showmsg:true,
         })
 
      /*  const status = this.props.marketOrder
@@ -94,7 +94,7 @@ export class Buy_Market extends Component {
             
 
             <Container className="themed-container" fluid={true} /*style={{backgroundColor:'white',borderRadius:'20px',border:'1px solid'}}*/>
-            {/*<h2 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h2>*/}
+            {/* <h4 style={{textAlign:'left'}} >{`Buy ${this.state.coin_pair.slice(0,3)}`} </h4> */}
             <Form className="Buy-Market" onSubmit={this.handleSubmit} >
               
                 <FormGroup>
@@ -132,7 +132,7 @@ export class Buy_Market extends Component {
                 
                 </FormGroup>
             
-              <Button block type="submit" color="success" >Buy</Button> 
+              <Button block type="submit" color="success" >{`Buy ${this.props.ba}`}</Button> 
               <Col>
               {view}
               </Col>

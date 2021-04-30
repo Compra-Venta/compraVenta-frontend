@@ -13,7 +13,7 @@ export class Sell_Stoploss extends Component {
         super(props)
     
         this.state = {
-             coin_pair: 'BTCUSDT',
+             coin_pair: '',
              stop: '0.0',
              amount: '0.0',
              total: '0.0',
@@ -50,6 +50,7 @@ export class Sell_Stoploss extends Component {
         this.setState({
           showmsg:true
         })
+
       /*const status = this.props.stopOrder
       if (status.errMess){
         if (status.errMess.message=="Cannot read property 'json' of undefined"){
@@ -145,7 +146,7 @@ export class Sell_Stoploss extends Component {
                 {/* </FormGroup>
               </Col>
                */} 
-              <Button type="submit" color="danger" block >Sell</Button>
+              <Button type="submit" color="danger" block >{`Sell ${this.props.ba}`}</Button>
               <Col>
               {view}
               </Col>

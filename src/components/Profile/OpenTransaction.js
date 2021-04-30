@@ -57,7 +57,7 @@ class OpenTransaction extends Component {
                 <td>{order.base + order.quote}</td>
                 <td>{order.price}</td>
                 <td>{order.b_amount}</td>
-                <td style={{color:order.side=='BUY'? 'red':'green'}}>{order.side}</td>
+                <td style={{color:order.side=='SELL'? 'red':'green'}}>{order.side}</td>
                 <td>{order.order_type}</td>
                 <td>{order.date}</td>
                 <td>{order.time}</td>

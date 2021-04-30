@@ -146,7 +146,7 @@ export class Buy_Stoploss extends Component {
                 </FormGroup>
               </Col>*/}
               
-              <Button type="submit" color="success" block >Buy</Button>
+              <Button type="submit" color="success" block >{`Buy ${this.props.ba}`}</Button>
               <Col>
               {view}
               </Col>

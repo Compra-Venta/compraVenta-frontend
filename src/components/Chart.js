@@ -118,7 +118,7 @@ export class LightweightChart extends React.Component {
     },
 	
 });*/
-	chart.resize(730,400);
+	chart.resize(715,395);
 	var candleSeries = chart.addCandlestickSeries({
   		upColor: 'green',
   		downColor: 'red',

@@ -128,7 +128,7 @@ export class Sell_Market extends Component {
                 
                 </FormGroup>
               
-              <Button type="submit" color="danger" block >Sell</Button> 
+              <Button type="submit" color="danger" block >{`Sell ${this.props.ba}`}</Button> 
               <Col>
               {view}
               </Col>
