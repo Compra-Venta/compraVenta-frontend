@@ -281,8 +281,14 @@ html{
     width:100%;
     height: 250px
   }
+  .maW{
+    width:100%
+  }
   
 }
+ .maW{
+  width:78%
+} 
 .hPad{
   padding-left: 10;
 }

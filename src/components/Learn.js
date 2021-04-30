@@ -177,11 +177,11 @@ toggleNavbar = () =>{
                                             <li className='olist'>
                                             An <i>Exponential Moving Average</i> (EMA) is a type of moving average (MA) that places a greater weight and significance on the most recent data points. The exponential moving average is also referred to as the exponentially weighted moving average. An exponentially weighted moving average reacts more significantly to recent price changes than a simple moving average (SMA),
                                              which applies an equal weight to all observations in the period. Here Smoothing = 2.
-                                            <br/><img src='assets/images/learnPage/emaformula.png' style={{height:'47vh',width:'95%'}} />                                          
+                                            <br/><img className="maW" src='assets/images/learnPage/emaformula.png' style={{height:'41vh'}} />                                          
                                             </li>
                                             <li className='olist'>
                                              A <i>Simple Moving Average</i> (SMA) calculates the average of a selected range of prices, usually closing prices, by the number of periods in that range.Short-term averages respond quickly to changes in the price of the underlying security, while long-term averages are slower to react.
-                                             <br/><img src='assets/images/learnPage/smaformula.png' style={{height:'47vh',width:'95%'}} />                                          
+                                             <br/><img className="maW" src='assets/images/learnPage/smaformula.png' style={{height:'41vh'}} />                                          
                                             </li>
                                         </ul>
                                         <i> Here is the video will help you to predict different patterns using these averages.<br/>(Source: Binance)</i>
@@ -223,11 +223,11 @@ toggleNavbar = () =>{
                                 Our platform predicts the prices after 1 day, 3 days and 1 week for every symbol.<br/><br/>
                                 <div className='container-fluid'>
                                     <div className='row'>
-                                <div className='col-md-6'>
-                                <img src='assets/images/learnPage/predictI.png' style={{height:'45vh', width:'100%', borderStyle:'groove' }}/>
+                                <div className='col-lg-6'>
+                                <img src='assets/images/learnPage/predictI.png' style={{height:'40vh', width:'100%', borderStyle:'groove' }}/>
                                 </div>
-                                <div className='col-md-6'>
-                                <img src='assets/images/learnPage/predict.png' style={{height:'45vh', width:'100%', borderStyle:'groove' }}/>
+                                <div className='col-lg-6'>
+                                <img src='assets/images/learnPage/predict.png' style={{height:'40vh', width:'100%', borderStyle:'groove' }}/>
                                 </div>
                                 </div>
                                 </div>
