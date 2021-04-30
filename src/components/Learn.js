@@ -134,8 +134,7 @@ toggleNavbar = () =>{
                         Different types of information can be stored on a blockchain but the most common use so far has been as a ledger for transactions. <br /><br />
                         In Bitcoin’s case, blockchain is used in a decentralized way so that no single person or group has control—rather, all users collectively retain control.
                         Decentralized blockchains are immutable, which means that the data entered is irreversible. For Bitcoin, this means that transactions are permanently recorded and viewable to anyone.<br /><br />
-                        In Bitcoin’s case, blockchain is used in a decentralized way so that no single person or group has control—rather, all users collectively retain control.
-                        Decentralized blockchains are immutable, which means that the data entered is irreversible. For Bitcoin, this means that transactions are permanently recorded and viewable to anyone.
+                        
 
                          </div>
                         </div>
