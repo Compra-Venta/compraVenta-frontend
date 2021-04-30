@@ -20,7 +20,7 @@ const NavComp = (props) => {
               style={{float:'left',maxHeight:'100%',width:'7vw',height:'7vw'}} /> 
           </div>
           <div style={{width:'100%',textAlign:'center',justifyContent:'center',verticalAlign:'center',marginTop:'auto'}} className='col-sm-2 my-auto'> 
-          <h1 className='my-auto' id='top' style={{fontSize:'4vw',alignContent:'center'}}>Compra Venta</h1></div></div></div></NavbarBrand>
+          <h1 className='my-auto' id='top' style={{fontSize:'3.1vw',alignContent:'center'}}>Compra Venta</h1></div></div></div></NavbarBrand>
         
         <NavbarToggler /*style={{backgroundColor: 'blue',marginRight:'40px',width:'7vw',height:'7vw'}}*/ onClick={toggleNavbar} className="me-0"/>
         <Collapse  isOpen={!collapsed} navbar>
