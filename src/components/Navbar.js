@@ -25,11 +25,11 @@ const NavComp = (props) => {
         <NavbarToggler /*style={{backgroundColor: 'blue',marginRight:'40px',width:'7vw',height:'7vw'}}*/ onClick={toggleNavbar} className="me-0"/>
         <Collapse  isOpen={!collapsed} navbar>
           <Nav className='ml-auto mr-2 col-sm-7' navbar >
-            <NavItem>
+            {/* <NavItem>
               <NavLink style={{color:'darkcyan',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="/aboutus"><span color='violet' >About us</span></NavLink>
-            </NavItem>
+            </NavItem> */}
             <NavItem>
-              <NavLink style={{color:'darkcyan',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/contactus">Contact Us </NavLink>
+              <NavLink style={{color:'darkcyan',fontSize:'1.4rem',paddingRight:'2vw'}}  href="mailto:teamcompraventa@gmail.com">Contact Us </NavLink>
             </NavItem>
             <NavItem>
               <NavLink style={{color:'darkcyan',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/Collaborators">Collaborators </NavLink>

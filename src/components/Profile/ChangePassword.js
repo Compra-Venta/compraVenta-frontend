@@ -18,8 +18,12 @@ function ChangePassword(props) {
   };
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    evt.target.reset()
     await props.changePassword({email: '',password:currentPassword, new_password:newPassword})
     // alert(email)
+    setNewPassword('')
+    setConfirmNewPassword('')
+    setCurrentPassword('')
     setShowMsg(!showmsg)
   }
 
