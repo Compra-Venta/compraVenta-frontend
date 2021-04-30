@@ -2,19 +2,22 @@
 
 A Virtual Crypto Currency Trading Platform (frontend)
 
+
+ **The project is live at** https://compraventalive.herokuapp.com/ 
+***
 # Motivation
 
 Our project is a website based on a virtual trading platform which will provide
 budding investors a platform to dive into the trading of cryptocurrencies without
 having any fear of losing anything.
-
+***
 # Screenshots
 ![alt text](https://github.com/Compra-Venta/compraVenta-frontend/blob/master/public/assets/images/learnPage/dashboard.png?raw=true)
 
-# Tech/Framework Used
-  * [Reactjs](https://reactjs.org/)
-  * [React Redux](https://react-redux.js.org/)
-  
+***
+
+ 
+
 # Features
 * **User authentication**- Each user will be provided its own username and
 password and details of the user will be stored in the database along with its
@@ -34,17 +37,31 @@ environment.
 cryptocurrency trading, the model will help them accordingly.
 * **Learn** - If users are not familiar about cryptotrading and other features
 or want to furnish their knowledge, we have a provided a platform to learn
+***
 
 # API Reference
-* **CandleStick Historical Data** - https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m
-                    *(startdate and enddate also to be added in key parameter)*
-* **News Feed**- https://min-api.cryptocompare.com/                    
-   
+### **CandleStick Historical Data**
+```
+     https://api.binance.com/api/v3/klines?symbol={symbol}&interval={interval}
+            
+```
+      
+### **News Feed**
+```
+     https://min-api.cryptocompare.com/ 
+```
+***   
 # Web Sockets
-* **24h ticker**- wss://stream.binance.com:9443/ws/{symbol}@ticker
-* **kline CandleStick Data**- wss://stream.binance.com:9443/ws/BTCUSDT@kline_15m
-* **Market Trades**- wss://stream.binance.com:9443/ws/{symbol}@trade
-* **WatchList**- wss://stream.binance.com:9443/ws/!miniTicker@arr
+ * **24h ticker**- wss://stream.binance.com:9443/ws/{symbol}@ticker
+ 
+ * **kline CandleStick Data**- wss://stream.binance.com:9443/ws/{symbol}@kline_{interval}
+ 
+ * **Market Trades**- wss://stream.binance.com:9443/ws/{symbol}@trade
+
+ * **WatchList**-wss://stream.binance.com:9443/ws/!miniTicker@arr
+
+***
+
 ## Installation
 
 ### Clone to your local repo
@@ -58,6 +75,18 @@ or want to furnish their knowledge, we have a provided a platform to learn
 ```
     npm install
 ```
+***
+
+# Tech/Framework Used
+<a href="https://reactjs.org/"><img src="https://img.icons8.com/plasticine/48/000000/react.png"/></a> &nbsp;<a href="https://react-redux.js.org/"> <img src="https://img.icons8.com/color/48/000000/redux.png"/></a>
+ ### Other Technologies Used 
+  * [FontAwesome](https://fontawesome.com/v4.7.0/icons/)
+  * [Reactstrap](https://reactstrap.github.io/)
+  * [React Router](https://reactrouter.com/)
+  * [Lightweight Charts](https://in.tradingview.com/lightweight-charts/)
+
+***
+
 # Contributors
 * [**Tanveer Sodhi** ](https://github.com/TanveerSodhi "Connect on Github")
 * [**Aseem Mangla** ](https://github.com/manglaaseem28 "Connect on Github")
