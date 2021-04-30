@@ -1,10 +1,9 @@
 import * as ActionTypes from './actionTypes';
-import  axios  from "axios";
 import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
-// const baseUrl='http://127.0.0.1:5000'
-const baseUrl='https://apicompraventa.herokuapp.com'
+
+const baseUrl=process.env.REACT_APP_BASEURL
 
 export const watchlistLoading = () => ({
     type: ActionTypes.WATCHLIST_LOADING

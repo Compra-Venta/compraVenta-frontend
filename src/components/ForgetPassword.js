@@ -12,6 +12,7 @@ const ForgetPassword = (props) => {
   };
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    evt.target.reset()
     setShowMsg(!showmsg)
     // alert(email)
   }
