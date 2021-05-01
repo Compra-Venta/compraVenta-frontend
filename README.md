@@ -3,7 +3,7 @@
 A Virtual Crypto Currency Trading Platform (frontend)
 
 
- **The project is live at** https://compraventalive.herokuapp.com/ 
+ **Compra Venta is live at** https://compraventalive.herokuapp.com/ 
 ***
 # Motivation
 
@@ -75,6 +75,13 @@ or want to furnish their knowledge, we have a provided a platform to learn
 ```
     npm install
 ```
+
+### Run on localhost
+
+```
+    npm start
+```
+> [backend_repo](https://github.com/Compra-Venta/compraVenta-backend)
 ***
 
 # Tech/Framework Used
