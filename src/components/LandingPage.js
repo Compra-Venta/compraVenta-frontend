@@ -19,7 +19,7 @@ class LandingPage extends Component {
             isLogging: !this.state.isLogging,
             isSigning: !this.state.isSigning
         })
-        console.log(this.state.isSigning,this.state.isLogging)
+        //console.log(this.state.isSigning,this.state.isLogging)
        
     }
     handleSignIn (){
@@ -27,7 +27,7 @@ class LandingPage extends Component {
             isLogging: !this.state.isLogging,
             isSigning: !this.state.isSigning
         })
-        console.log(this.state.isSigning,this.state.isLogging)
+        //console.log(this.state.isSigning,this.state.isLogging)
     }
     
     render() {

@@ -8,7 +8,7 @@ export const Register = (state = {
 }, action) => {
     switch (action.type) {
         case ActionTypes.REGISTER_SUCCESS:
-            console.log('rc',action.creds)
+            //console.log('rc',action.creds)
             return { ...state, isLoading: false, errMess: null, /* user: action.creds, */isRegistered:true };
 
         case ActionTypes.REGISTER_FAILURE:

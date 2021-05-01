@@ -14,11 +14,11 @@ class BinancePrice extends Component {
         var symbol = category.toLowerCase();
          
         const socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@ticker"
-        console.log(socketUrl);
+        //console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage = function (event) {
             ob = JSON.parse(event.data) ;
-            console.log(ob.p);
+            //console.log(ob.p);
             
         }
 

@@ -73,7 +73,7 @@ class SignUp extends Component {
     var age = Math.abs(ageDate.getUTCFullYear()-1970)
     var ph= this.state.Code+" "+this.state.PhoneNo
     await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
-    console.log(this.props.register)
+    //console.log(this.props.register)
     if( this.props.register.isRegistered){
       alert('Registered Successfully')
       this.props.onClick();
@@ -144,16 +144,16 @@ class SignUp extends Component {
   render() {
     //console.log(this.state.cValues)
     const CV=this.state.infoC.filter((ele) => !(ele.name.length>40))
-    console.log(CV)
+    //console.log(CV)
     const codes=this.state.infoC.map(value => parseInt(value.dial_code.substr(1)))
-    console.log(codes)
+    //console.log(codes)
     var CS=codes.sort()
-    console.log(codes.sort())
+    //console.log(codes.sort())
     const final_codes = CS.map(code => "+"+code.toString())
     
-    console.log(final_codes)
+    //console.log(final_codes)
     const FC=[...new Set(final_codes)]
-    console.log(FC)
+    //console.log(FC)
     const countries = CV.map((c) => {
       return (
       <option key={c.name} value={c.name}>{c.name}</option>
@@ -246,7 +246,7 @@ class SignUp extends Component {
                     id="User-Phone"
                     value={this.state.PhoneNo}
                     onChange={this.handleInputChange} valid={errors.PhoneNo === ''} invalid={errors.PhoneNo !==''} onBlur={this.handleBlur('PhoneNo')}
-                    placeholder="+91 9999999999"
+                    placeholder="9999999999"
                     maxLength="10"
                     // pattern="[+][0-9]{2}(| )[0-9]{10}"
                     required

@@ -30,7 +30,7 @@ export class LightweightChart extends React.Component {
 		{result.push({time: data[i].time, value: smaData[i] })}
 		
 		// console.log('fffffffffffffff', result.slice(-1))
-		console.log('Sma Result', result)
+		//console.log('Sma Result', result)
 		return result;
 	
 	  }
@@ -53,18 +53,18 @@ export class LightweightChart extends React.Component {
 	check = () => {
         const ws  = this.state.ws;
         if (ws || ws.readyState == WebSocket.OPEN) {
-            console.log('connection check');
+            //console.log('connection check');
 
             ws.close();
         if(!ws|| ws.readyState == WebSocket.CLOSED){
-            console.log('connection close');
+            //console.log('connection close');
         }
         } 
     };
  
     makeChart = async (symbol, interval) =>{
-		console.log('symbol',symbol,'interval',interval)
-		console.log(this.chart !== null)
+		//console.log('symbol',symbol,'interval',interval)
+		//console.log(this.chart !== null)
 		if (this.chart !== null) {
 			this.chart.remove();
 			this.chart = null;
@@ -386,7 +386,7 @@ histogramSeries.setData(data)
 	var prevSma = smaData[n-1].value
 	//var category= symbol.toLowerCase()
 	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_${interval}`)
-	console.log(ws)
+	//console.log(ws)
 	ws.onmessage = (event)=>{
 		
 		var message  = JSON.parse(event.data);

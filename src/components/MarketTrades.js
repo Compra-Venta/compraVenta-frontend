@@ -41,9 +41,9 @@ class MarketTrades extends Component {
     setupTradeSocket = (category) =>{
         //this.check();
         var symbol = category.toLowerCase();
-        console.log('Category',category);
+        //console.log('Category',category);
         var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@trade";
-        console.log(socketUrl);
+        //console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage =(event) =>{
             var j = JSON.parse(event.data);
@@ -72,20 +72,20 @@ class MarketTrades extends Component {
     }
     check = (category) => {
         const ws  = this.state.ws;
-        console.log(ws);
+        //console.log(ws);
         if (ws || ws.readyState == WebSocket.OPEN) {
-            console.log('connection check trade');
+            //console.log('connection check trade');
 
             ws.close();
         if(!ws|| ws.readyState == WebSocket.CLOSED){
-            console.log('connection close trade');
+            //console.log('connection close trade');
         }
     }
     this.setupTradeSocket(category);
     };
     componentDidMount()
     {
-       console.log(this.props.category);
+       //console.log(this.props.category);
         this.setupTradeSocket("BTCUSDT");
         /*this.setState({
             selectedValue: this.props.category

@@ -15,7 +15,7 @@ export const watchlistFailed = (errmess) => ({
 });
 
 export const watchlistSuccess = (watchlist) => {
-    console.log(watchlist.watchlist)
+    //console.log(watchlist.watchlist)
     return {
     type: ActionTypes.WATCHLIST_SUCCESS,
     payload: watchlist.watchlist
@@ -158,7 +158,7 @@ export const placeStopOrder = (info) => (dispatch) =>{
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
     info.email = email
-    console.log('Placing Order ', info)
+    //console.log('Placing Order ', info)
     return fetch(baseUrl + '/order/stoploss', {
         method: "POST",
         headers: {
@@ -168,7 +168,7 @@ export const placeStopOrder = (info) => (dispatch) =>{
         body: JSON.stringify(info) 
     })
             .then(response => {
-            console.log(response);
+            //console.log(response);
             if (response.ok) {
                 return response;
             } 
@@ -204,7 +204,7 @@ export const placeMarketOrder = (info) => (dispatch) =>{
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
     info.email = email
-    console.log('Placing Order ', info)
+    //console.log('Placing Order ', info)
     return fetch(baseUrl + '/order/market', {
         method: "POST",
         headers: {
@@ -214,17 +214,17 @@ export const placeMarketOrder = (info) => (dispatch) =>{
         body: JSON.stringify(info) 
     })
             .then(response => {
-            console.log(response);
+            //console.log(response);
             if (response.ok) {
                 return response;
             } 
             else if (response.status==401){
-                console.log('error')
+                //console.log('error')
                 dispatch(refreshToken()).then(() =>dispatch(placeMarketOrder(info)))
                 
                 
             }else {
-                console.log('be')
+                //console.log('be')
                 /*var error = new Error('Error' + response.status + ': ' + response.statusText);
                 error.response = response;
                 console.log(error.response)
@@ -239,14 +239,14 @@ export const placeMarketOrder = (info) => (dispatch) =>{
             }
         },
             error => {
-                console.log('here')
+                //console.log('here')
                 
                 throw error;
             })
-        .then(response =>{console.log(response); if (response){return response.json();}
+        .then(response =>{/* console.log(response); */ if (response){return response.json();}
         else return null})
         .then(res => {if (res){dispatch(marketOrderSuccess(res))}})
-        .catch(error => {console.log(error); dispatch(marketOrderFailed(error))});
+        .catch(error => {/* console.log(error); */ dispatch(marketOrderFailed(error))});
 
 }
 
@@ -254,7 +254,7 @@ export const resetAccount = () => (dispatch) => {
 
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
-    console.log('Resetting Account ', email)
+    //console.log('Resetting Account ', email)
     const data = {email: email}
     
     return fetch(baseUrl + '/reset' , {
@@ -266,7 +266,7 @@ export const resetAccount = () => (dispatch) => {
         }       
     })
         .then(response => {
-            console.log(response);
+            //console.log(response);
             if (response.ok) {
                 return response;
             } 
@@ -327,17 +327,17 @@ export const fetchClosedTransaction = () => (dispatch) => {
             })
         .then(response => response.json())
         .then(info => {
-            console.log('closed Transactions ',info)
+            //console.log('closed Transactions ',info)
             dispatch(closedTransactionSuccess(info));dispatch(fetchWallet())})
         .catch(error => {
-            console.log(error)
+            //console.log(error)
             dispatch(closedTransactionFailed(error))
         })
 
 }
 
 export const cancelOrder = (orderId) => (dispatch) => {
-    console.log('Cancelling Order ', orderId)
+    //console.log('Cancelling Order ', orderId)
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
     const data = {email:  email, order_id: orderId}
@@ -350,7 +350,7 @@ export const cancelOrder = (orderId) => (dispatch) => {
         }
     })
         .then(response => {
-            console.log(response);
+            //console.log(response);
             if (response.ok) {
                 return response;
             } 
@@ -407,10 +407,10 @@ export const fetchOpenTransaction = () => (dispatch) => {
         .then(response => {if (response){return response.json();}
                             else return null})
         .then(info => {if (info){
-            console.log('Open Transactions ',info)
+            //console.log('Open Transactions ',info)
             dispatch(openTransactionSuccess(info));dispatch(fetchWallet())}})
         .catch(error => {
-            console.log(error)
+            //console.log(error)
             dispatch(openTransactionFailed(error))
         })
 
@@ -449,10 +449,10 @@ export const fetchWallet = () => (dispatch) => {
             })
         .then(response => response.json())
         .then(wallet => {
-            console.log('User Wallet ',wallet)
+            //console.log('User Wallet ',wallet)
             dispatch(walletSuccess(wallet))})
         .catch(error => {
-            console.log(error)
+            //console.log(error)
             dispatch(walletFailed(error))
         })
 }
@@ -490,10 +490,10 @@ export const fetchProfile = () => (dispatch) => {
             })
         .then(response => response.json())
         .then(profile => {
-            console.log('User Profile ',profile)
+            //console.log('User Profile ',profile)
             dispatch(profileSuccess(profile))})
         .catch(error => {
-            console.log(error)
+            //console.log(error)
             dispatch(profileFailed(error))})
 
 }
@@ -505,7 +505,7 @@ export const changePassword = (info) => (dispatch) => {
     const email = JSON.parse(localStorage.getItem('creds')).email
     info.email = email
     // const data = {info:  info}
-    console.log(info)
+    //console.log(info)
     fetch(baseUrl + '/password/change', {
         method: 'POST',
         body: JSON.stringify(info),
@@ -534,17 +534,17 @@ export const changePassword = (info) => (dispatch) => {
             })
         .then(response => response.json())
         .then(status => {
-            console.log('changePassword Status',status)
+            //console.log('changePassword Status',status)
             dispatch(changePasswordSuccess(status))})
         .catch(error => {
-            console.log(error)
+            //console.log(error)
             dispatch(changePasswordFailed(error))})
 }
 
 export const newPassword = (email) => (dispatch) => {
 
     dispatch(newPasswordLoading())
-    console.log(email)
+    //console.log(email)
     const bearer = 'Bearer ' + localStorage.getItem('token')
     // const email = JSON.parse(localStorage.getItem('creds')).email
     const data = {email:  email}
@@ -579,15 +579,15 @@ export const newPassword = (email) => (dispatch) => {
         .then(response => response.json())
         .then(status => dispatch(newPasswordSuccess(status)))
         .catch(error => {
-            console.log(error)
+            //console.log(error)
             dispatch(newPasswordFailed(error))})
 }
 
 export const getPrediction =  (info) => (dispatch) => {
     dispatch(predictLoading(true))
     const [symbol, time] = [info.symbol, info.time]
-    console.log('Symbol: ', symbol)
-    console.log('interval: ', time)
+    //console.log('Symbol: ', symbol)
+    //console.log('interval: ', time)
 
     return  fetch(baseUrl + `/predict?symbol=${symbol}&time=${time}`, {
         method: 'GET',
@@ -610,7 +610,7 @@ export const getPrediction =  (info) => (dispatch) => {
         .then(response => response.json())
         .then(prediction => {dispatch(predictSuccess(prediction))})
         .catch(error => {
-            console.log('Predict Error ', error)
+            //console.log('Predict Error ', error)
             dispatch(predictFailed(error))
         })
 
@@ -619,12 +619,12 @@ export const getPrediction =  (info) => (dispatch) => {
 export const addToWatchlist = (symbol) => (dispatch) => {
 
     
-    console.log('Symbol: ', symbol);
+    //console.log('Symbol: ', symbol);
 
     const bearer = 'Bearer ' + localStorage.getItem('token');
     
     const email = JSON.parse(localStorage.getItem('creds')).email
-    console.log('email',email)
+    //console.log('email',email)
     const data = {email:  email}
     return fetch(baseUrl + '/watchlist'+`/${symbol}`, {
         method: 'POST',
@@ -662,11 +662,11 @@ export const addToWatchlist = (symbol) => (dispatch) => {
 
 export const fetchWatchlist =  () => async(dispatch) => {
     dispatch(watchlistLoading())
-    console.log('fetch Watchlist')
+    //console.log('fetch Watchlist')
     const email = JSON.parse(localStorage.getItem('creds')).email
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const data = {email:  email}
-    console.log('watchlist',data)
+    //console.log('watchlist',data)
      fetch(baseUrl + '/watchlist'+`?email=${email}`, {
         
         
@@ -677,7 +677,7 @@ export const fetchWatchlist =  () => async(dispatch) => {
        /* body: /*JSON.stringify(data)*/
     })
         .then(response => {
-            console.log('wres',response);
+            //console.log('wres',response);
             if (response.ok) {
                 return response;
             }
@@ -696,12 +696,12 @@ export const fetchWatchlist =  () => async(dispatch) => {
                 throw errmess;
             })
         .then(response => response.json())
-        .then(watchlist => {console.log('watchlist',watchlist);dispatch(watchlistSuccess(watchlist));})
+        .then(watchlist => {/* console.log('watchlist',watchlist); */dispatch(watchlistSuccess(watchlist));})
         .catch(error => dispatch(watchlistFailed(error.message)));
 }
 
 export const removeFromWatchlist = (symbol) => (dispatch) => {
-    console.log('Symbol: ', symbol);
+    //console.log('Symbol: ', symbol);
     const bearer = 'Bearer ' + localStorage.getItem('token');
     const email = JSON.parse(localStorage.getItem('creds')).email
     //const refresh_token = localStorage.getItem('refresh-token');
@@ -714,7 +714,7 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
         }
     })
         .then(response => {
-            console.log(response);
+            //console.log(response);
             if (response.ok) {
                 return response;
             }
@@ -732,12 +732,12 @@ export const removeFromWatchlist = (symbol) => (dispatch) => {
                 throw error;
             })
         .then(response => response.json())
-        .then(watchlist => { console.log('removed from watchlist', watchlist); dispatch(fetchWatchlist()); })
+        .then(watchlist => {/*  console.log('removed from watchlist', watchlist); */ dispatch(fetchWatchlist()); })
         .catch(error => dispatch(watchlistFailed(error.message)));
 };
 
 export const requestLogin = (creds) => {
-    console.log(creds)
+    //console.log(creds)
     return {
         type: ActionTypes.LOGIN_REQUEST,
         creds
@@ -745,7 +745,7 @@ export const requestLogin = (creds) => {
 }
 
 export const receiveLogin = (response) => {
-    console.log(response)
+    //console.log(response)
     return {
         type: ActionTypes.LOGIN_SUCCESS,
         token: response.access_token,
@@ -787,7 +787,7 @@ export const loginUser = (creds) => (dispatch) => {
         .then(response => response.json())
         .then(response => {
             
-                console.log('success',response)
+                //console.log('success',response)
                 // If login was successful, set the token in local storage
                 localStorage.setItem('token', response.access_token);
                 localStorage.setItem('refresh-token', response.refresh_token);
@@ -976,7 +976,7 @@ export const registerUser = (creds) => (dispatch) => {
         body: JSON.stringify(creds)
     })
         .then(response => {
-            console.log(response)
+            //console.log(response)
             if (response.ok) {
                 return response;
             }

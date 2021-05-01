@@ -25,7 +25,7 @@ function SignIn(props) {
    
    const history = useHistory();
   useEffect(() => {
-    console.log('auth',props.auth.isAuthenticated)
+    //console.log('auth',props.auth.isAuthenticated)
       if (props.auth.isAuthenticated) history.push('/dashboard');
      
    })

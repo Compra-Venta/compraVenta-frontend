@@ -34,7 +34,7 @@ export class Personal_Info extends Component {
                 errMess: profile.errMess,
                 personal_data: personal_data
             })
-            console.log(this.state.personal_data)
+            //console.log(this.state.personal_data)
     }
 
     componentDidMount = async () =>

@@ -7,11 +7,11 @@ export const WatchList = (state = {
 }, action) => {
     switch (action.type) {
         case ActionTypes.WATCHLIST_SUCCESS:
-            console.log('wr',action.payload)
+            //console.log('wr',action.payload)
             return { ...state, isLoading: false, errMess: null, watchlist: action.payload };
 
         case ActionTypes.WATCHLIST_FAILED:
-            console.log('watchlist ')
+            //console.log('watchlist ')
             return { ...state, isLoading: false, errMess: action.payload, watchlist: [] };
 
         case ActionTypes.WATCHLIST_LOADING:

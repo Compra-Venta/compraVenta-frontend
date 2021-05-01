@@ -7,15 +7,15 @@ export const ClosedTransaction = (state = {
 },action) => {
     switch (action.type) {
         case ActionTypes.CLOSED_TRANSACTION_SUCCESS:
-            console.log('Closed Transaction Success')
+            //console.log('Closed Transaction Success')
             return {...state, isLoading: false, errMess: null, closedTransaction_info: action.payload};
 
         case ActionTypes.CLOSED_TRANSACTION_FAILED:
-            console.log('Closed Transaction Failed')
+            //console.log('Closed Transaction Failed')
             return {...state, isLoading: false, errMess: action.payload, closedTransaction_info: []};
 
         case ActionTypes.CLOSED_TRANSACTION_LOADING:
-            console.log('Closed Transaction Loading')
+            //console.log('Closed Transaction Loading')
             return {...state, isLoading: true, errMess: null, closedTransaction_info: []};
         
         default:

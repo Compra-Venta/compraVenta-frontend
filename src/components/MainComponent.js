@@ -65,7 +65,7 @@ class MainComponent extends Component {
             )} />
         ); */
 
-        console.log('m', this.props.watchlist)
+        //console.log('m', this.props.watchlist)
         return (
             <div className="container-full-bg" >
                 <Switch>
