@@ -66,9 +66,11 @@ class SignUp extends Component {
     EmailId: ${this.state.EmailId}
     PhoneNo: ${this.state.PhoneNo}
     `) */
-    var td= new Date().getFullYear()
-    var dob= new Date(this.state.DOB).getFullYear()
-    var age = td - dob
+    /* var td= new Date().getFullYear()
+    var dob= new Date(this.state.DOB).getFullYear() */
+    var diff = Date.now()-new Date(this.state.DOB)
+    var ageDate = new Date(diff);
+    var age = Math.abs(ageDate.getUTCFullYear()-1970)
     var ph= this.state.Code+" "+this.state.PhoneNo
     await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
     console.log(this.props.register)
