@@ -88,7 +88,7 @@ export class Buy_Market extends Component {
               </div> :*/this.props.marketOrder.errMess.message?
               <div style={{ textAlign:'center'}}>
               <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-               <h5> {this.props.marketOrder.errMess.message}</h5>
+               <h5> {JSON.parse(this.props.marketOrder.errMess.message).msg}</h5>
                </Alert> </div>:null:null
 
         return (

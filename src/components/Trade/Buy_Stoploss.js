@@ -86,7 +86,7 @@ export class Buy_Stoploss extends Component {
       </div> :*/this.props.stopOrder.errMess.message?
       <div style={{ textAlign:'center'}}>
       <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-       <h5> {this.props.stopOrder.errMess.message}</h5>
+       <h5> {JSON.parse(this.props.stopOrder.errMess.message).message}</h5>
        </Alert> </div>:null:null
         return (
             

@@ -187,9 +187,7 @@ export const verifyMail = (email) => (dispatch) => {
                 
             }
             else {
-                var error = new Error('Error ' + response.status + ': ' + response.statusText);
-                error.response = response;
-                throw error;
+                return response.text().then(text => {throw Error(text)})
             }
         },
             error => {

@@ -5,6 +5,7 @@ import {
   Button, FormFeedback,Spinner,Alert, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 //import countryList from "react-select-country-list";
+import OtpTimer  from "otp-timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { withRouter } from 'react-router';
@@ -137,7 +138,8 @@ class SignUp extends Component {
       else
       {
         modal.loadForm = false
-        modal.modalmsg = <Alert color='danger'>{verifyStatus.errMess.message}</Alert>
+        const err=JSON.parse(verifyStatus.errMess.message)
+        modal.modalmsg = <Alert color='danger'>{err.error}</Alert>
       }
     }
     this.setState({
@@ -153,6 +155,30 @@ class SignUp extends Component {
     var dob= new Date(this.state.DOB).getFullYear() */
     
     
+  }
+  resendOtp = async () =>{
+    var modal = this.state.modal
+    await this.props.verifyMail({email: this.state.EmailId})
+    // console.log(this.props.verifyMailStatus)
+    const verifyStatus = this.props.verifyMailStatus
+    console.log(verifyStatus)
+    if(verifyStatus.isLoading)
+    modal.show= false
+    else
+    {
+      modal.show = true
+      if(verifyStatus.errMess == null)
+      modal.loadForm = true
+      else
+      {
+        modal.loadForm = false
+        const err=JSON.parse(verifyStatus.errMess.message)
+        modal.modalmsg = <Alert color='danger'>{err.error}</Alert>
+      }
+    }
+    this.setState({
+      modal: modal
+    })
   }
   dismissAlert = () =>{
     this.setState({
@@ -429,7 +455,11 @@ class SignUp extends Component {
             </Form>
               <Modal isOpen={this.state.modal.open} toggle={this.toogle} >
                 <ModalHeader toggle={this.toogle} >
-                  Confirm your Email
+                  <div style={{display:'inline-flex'}}>
+                    <div>
+                  Confirm your Email</div>   <div className='my-auto' style={{marginLeft:'100px'}}>
+        <OtpTimer seconds= {15} minutes={3} resend={this.resendOtp} ButtonText='Resend Otp' background={'red'} />
+      </div></div>
                 </ModalHeader>
                 <ModalBody onSubmit={this.handletokenSubmit}>
                   {
