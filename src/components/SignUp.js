@@ -2,14 +2,12 @@ import React, { Component } from 'react'
 import {
   Container, Col, Row, Form,
   FormGroup, Label, Input,
-  Button, FormFeedback,Spinner,Alert, Modal, ModalHeader, ModalBody
+  Button, FormFeedback,Spinner,Alert
 } from 'reactstrap';
 //import countryList from "react-select-country-list";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import nodemailer from 'nodemailer'
 import { withRouter } from 'react-router';
-
 
 class SignUp extends Component {
 
@@ -17,8 +15,6 @@ class SignUp extends Component {
     super(props)
   
     this.state = {
-       showmodal: false,
-       confirmMailcode: '',
        FullName: '',
        EmailId: '',
        PhoneNo: '',
@@ -62,40 +58,6 @@ class SignUp extends Component {
 
   }
 
-  // signUp = useAuth()
-
-  validateMail = async (email) => {
-
-    var smtpConfig = {
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: true, // use SSL
-      auth: {
-           user:'teamcompraventa@gmail.com',
-           pass:'CompraVenta@03'
-            }
-      };
-      var transporter = nodemailer.createTransport(smtpConfig);
-      var mailOptions = {
-        from: "teamcompraventa@gmail.com", // sender address
-        to: email, // list of receivers
-        subject: "Email verification", // Subject line
-        text: "Email verification, press here to verify your email: happy ",
-        html: "<b>Hello there,<br> click <a href=" + 'ddff'+ "> here to verify</a></b>" // html body
-      };
-      alert(`sending Mail${email}`)
-      transporter.sendMail(mailOptions, function(error, response){
-        if(error){
-         console.log(error);
-        }else{
-         console.log("Message sent: " + response.message);
-        }
-        // if you don't want to use this transport object anymore, uncomment following line
-        //smtpTransport.close(); // shut down the connection pool, no more messages
-        });
-
-  }
-
   handleSubmit = async (event) => {
     event.preventDefault();
     /* alert(`
@@ -106,15 +68,12 @@ class SignUp extends Component {
     `) */
     /* var td= new Date().getFullYear()
     var dob= new Date(this.state.DOB).getFullYear() */
-    // this.signUp(this.state.EmailId, this.state.Password)
     var diff = Date.now()-new Date(this.state.DOB)
     var ageDate = new Date(diff);
     var age = Math.abs(ageDate.getUTCFullYear()-1970)
     var ph= this.state.Code+" "+this.state.PhoneNo
-    this.validateMail(this.state.EmailId)
-    // if(this.state.confirmMailcode == 'Hello')
-    // await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
-    // //console.log(this.props.register)
+    await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
+    //console.log(this.props.register)
     if( this.props.register.isRegistered){
       alert('Registered Successfully')
       this.props.onClick();
@@ -158,7 +117,7 @@ class SignUp extends Component {
        ConfirmPassword: '',
     }
     
-    const reg_num = /^[0-9]{10}/ ;
+    const reg_num = /^[1-9]{1}\s*[0-9]{9}/ ;
     const reg_dob = /^[0-9]{2}[-][0-9]{2}[-][0-9]{4}/ ;
     const reg_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
@@ -168,8 +127,8 @@ class SignUp extends Component {
        errors.EmailId = 'Name should be greater than 2 characters';
      if (this.state.touched.PhoneNo && !reg_num.test(PhoneNo) )
        errors.PhoneNo = 'Number not Valid'; 
-      //  if (this.state.touched.DOB && !reg_dob.test(DOB) )
-      //  errors.DOB = 'Number not Valid';    
+    
+    
     if (this.state.touched.Country && Country.length < 4)
       errors.Country = 'Enter Valid Country Name';
     if (this.state.touched.Password && !reg_password.test(Password) )
@@ -181,11 +140,9 @@ class SignUp extends Component {
     
     return errors;
     }
-  
 
   render() {
     //console.log(this.state.cValues)
-
     const CV=this.state.infoC.filter((ele) => !(ele.name.length>40))
     //console.log(CV)
     const codes=this.state.infoC.map(value => parseInt(value.dial_code.substr(1)))
@@ -229,15 +186,6 @@ class SignUp extends Component {
               </Alert>
               </div>:
               null:null
-
-    const confirmModal =  
-          <Modal isOpen={true} >
-            <ModalHeader>Confirm Your Email</ModalHeader>
-            <ModalBody >
-              hi
-            </ModalBody>
-          </Modal>
-    
 
     return (
       
@@ -300,7 +248,7 @@ class SignUp extends Component {
                     onChange={this.handleInputChange} valid={errors.PhoneNo === ''} invalid={errors.PhoneNo !==''} onBlur={this.handleBlur('PhoneNo')}
                     placeholder="9999999999"
                     maxLength="10"
-                    pattern="[0-9]{10}"
+                    // pattern="[+][0-9]{2}(| )[0-9]{10}"
                     required
                   />
                   </div>
@@ -410,28 +358,6 @@ class SignUp extends Component {
               <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' type='button' onClick={this.props.onClick}  style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
               <Col>{view}</Col>
             </Form>
-            {
-              this.state.showmodal ?
-              <Modal isOpen={true} >
-              <ModalHeader>Confirm Your Email</ModalHeader>
-              <ModalBody >
-              <FormGroup>
-                  <Label >Enter Code</Label>
-                  <Input type="text" name="confirmMailcode" id="User-FullName"
-                    value={this.state.confirmMailcode}
-                    onChange={this.handleInputChange} 
-                    // valid={errors.FullName === ''} invalid={errors.FullName !==''}
-                     onBlur={this.handleBlur('confirmMailcode')}
-                    placeholder=""
-                    required
-                  />
-                  {/* <FormFeedback>{errors.FullName}</FormFeedback> */}
-                </FormGroup>
-                <Button >Submit</Button>
-              </ModalBody>
-              </Modal>:
-              null
-            }
           </Container>
       
     )

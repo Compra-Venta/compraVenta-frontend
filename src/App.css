@@ -232,7 +232,8 @@ html{
   left: 0;
   z-index: 9999;
   width: 100%;
-  background-color: black;
+  border-bottom: black;
+  background-color: white; 
   
 }
 
