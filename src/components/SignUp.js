@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {
   Container, Col, Row, Form,
   FormGroup, Label, Input,
-  Button, FormFeedback,Spinner,Alert
+  Button, FormFeedback,Spinner,Alert, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 //import countryList from "react-select-country-list";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +15,13 @@ class SignUp extends Component {
     super(props)
   
     this.state = {
+       modal: {
+          open: false,
+          loadForm: false,
+          show: false,
+          modalmsg: ''
+       },
+       confirmToken: '',
        FullName: '',
        EmailId: '',
        PhoneNo: '',
@@ -58,8 +65,84 @@ class SignUp extends Component {
 
   }
 
+  toogle = () => {
+    var modal = this.state.modal
+    modal.open = !modal.open
+    this.setState({
+      modal: modal
+    })
+  }
+
+  handletokenSubmit = async (event) => {
+    event.preventDefault()
+    const verifyStatus = this.props.verifyMailStatus
+    var verifyToken = verifyStatus.verifyStatus.token
+    var modal = this.state.modal
+    if(verifyToken)
+    if(this.state.confirmToken === verifyToken)
+    {
+      modal.show = true
+      modal.loadForm = false
+      this.setState({
+        modal:modal
+      })
+      var diff = Date.now()-new Date(this.state.DOB)
+      var ageDate = new Date(diff);
+      var age = Math.abs(ageDate.getUTCFullYear()-1970)
+      var ph= this.state.Code+" "+this.state.PhoneNo
+      await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
+      console.log(this.props.register)
+      if( this.props.register.isRegistered){
+        // alert('Registered Successfully')
+        // this.props.onClick();
+        modal.modalmsg = <Alert color='success'>Successfully Registered!</Alert>
+        modal.show = false
+      }
+       else if(this.props.register.errMess){
+        modal.modalmsg = <Alert color='Danger'>{this.props.register.errMess.message}</Alert>
+        modal.show = false
+      }
+      this.setState({
+        modal: modal
+      })
+    }
+    else
+    {
+      modal.modalmsg = <Alert color='danger'>Token Didn't Matched</Alert>
+      modal.loadForm = false
+      this.setState({
+        modal:modal
+      })
+    }
+  }
+
   handleSubmit = async (event) => {
     event.preventDefault();
+    var modal = this.state.modal
+    modal.open = true
+    this.setState({
+      modal: modal
+    })
+    await this.props.verifyMail({email: this.state.EmailId})
+    // console.log(this.props.verifyMailStatus)
+    const verifyStatus = this.props.verifyMailStatus
+    console.log(verifyStatus)
+    if(verifyStatus.isLoading)
+    modal.show= false
+    else
+    {
+      modal.show = true
+      if(verifyStatus.errMess == null)
+      modal.loadForm = true
+      else
+      {
+        modal.loadForm = false
+        modal.modalmsg = <Alert color='danger'>{verifyStatus.errMess.message}</Alert>
+      }
+    }
+    this.setState({
+      modal: modal
+    })
     /* alert(`
     UserData:
     Name: ${this.state.FullName}
@@ -68,21 +151,7 @@ class SignUp extends Component {
     `) */
     /* var td= new Date().getFullYear()
     var dob= new Date(this.state.DOB).getFullYear() */
-    var diff = Date.now()-new Date(this.state.DOB)
-    var ageDate = new Date(diff);
-    var age = Math.abs(ageDate.getUTCFullYear()-1970)
-    var ph= this.state.Code+" "+this.state.PhoneNo
-    await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
-    //console.log(this.props.register)
-    if( this.props.register.isRegistered){
-      alert('Registered Successfully')
-      this.props.onClick();
-    }
-     else{
-      this.setState({
-        showmsg:true
-      })
-    }
+    
     
   }
   dismissAlert = () =>{
@@ -358,6 +427,40 @@ class SignUp extends Component {
               <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' type='button' onClick={this.props.onClick}  style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
               <Col>{view}</Col>
             </Form>
+              <Modal isOpen={this.state.modal.open} toggle={this.toogle} >
+                <ModalHeader toggle={this.toogle} >
+                  Confirm your Email
+                </ModalHeader>
+                <ModalBody onSubmit={this.handletokenSubmit}>
+                  {
+                    this.state.modal.show ?
+                    this.state.modal.loadForm ?   
+                    <Form>
+                    <Label>Confirm OTP</Label>
+                    <Input
+                      type="text"
+                      name="confirmToken"
+                      id="Confirm-Email"
+                      value={this.state.confirmToken}
+                      onChange={this.handleInputChange} 
+                      // valid={errors.DOB === ''} invalid={errors.DOB !==''}  onBlur={this.handleBlur('DOB')}
+                      placeholder="Enter OTP"
+                      required
+                    />
+                    {/* <FormFeedback>{errors.DOB}</FormFeedback> */}
+
+                    <Button style={{padding:'2%'}} color='info' type='submit'>Submit</Button>
+                  </Form> :
+                  <div>{this.state.modal.modalmsg}</div> :
+                  <span style={{textAlign:'center', padding:'1%'}}><Spinner grow color='info' /></span>
+                  }
+                
+                </ModalBody>
+                <ModalFooter>
+                  <Button color='info' onClick={this.toogle} >Cancel</Button>
+                </ModalFooter>
+              </Modal>
+            
           </Container>
       
     )

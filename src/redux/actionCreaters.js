@@ -3,7 +3,8 @@ import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 
-const baseUrl=process.env.REACT_APP_BASEURL
+// const baseUrl=process.env.REACT_APP_BASEURL
+const baseUrl='https://compra-venta-daksh.herokuapp.com/'
 
 export const watchlistLoading = () => ({
     type: ActionTypes.WATCHLIST_LOADING
@@ -151,6 +152,57 @@ export const stopOrderFailed = (errmess) => ({
 export const stopOrderLoading = () => ({
     type: ActionTypes.STOP_ORDER_LOADING
 })
+
+export const verifyMailSuccess = (status) => ({
+    type: ActionTypes.VERIFY_MAIL_SUCCESS,
+    payload: status
+})
+
+export const verifyMailFailed = (errmess) => ({
+    type: ActionTypes.VERIFY_MAIL_FAILURE,
+    payload: errmess
+})
+
+export const verifyMailLoading = () => ({
+    type: ActionTypes.VERIFY_MAIL_LOADING
+})
+
+export const verifyMail = (email) => (dispatch) => {
+
+    dispatch(verifyMailLoading())
+
+    return fetch(baseUrl + '/validate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(email)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else if (response.status==401){
+                dispatch(refreshToken()).then(() =>dispatch(verifyMail(email)) );
+                
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+            error => {
+                var errmess = new Error(error.message);
+                throw errmess;
+            })
+        .then(response => response.json())
+        .then(status => dispatch(verifyMailSuccess(status)))
+        .catch(error => {
+            console.log(error)
+            dispatch(verifyMailFailed(error))})
+            
+}
 
 export const placeStopOrder = (info) => (dispatch) =>{
 
