@@ -117,7 +117,7 @@ class SignUp extends Component {
        ConfirmPassword: '',
     }
     
-    const reg_num = /^[0-9]{1}\s*[0-9]{9}/ ;
+    const reg_num = /^[1-9]{1}\s*[0-9]{9}/ ;
     const reg_dob = /^[0-9]{2}[-][0-9]{2}[-][0-9]{4}/ ;
     const reg_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 

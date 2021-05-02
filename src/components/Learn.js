@@ -263,11 +263,10 @@ toggleNavbar = () =>{
                         </div>
                         <div  style={{ paddingBottom: 30 }}>
                             <h2 id='demo' style={{ fontSize: 40 }}>Demo</h2>
-                            <div className='hPad' style={{ fontSize: 22, lineHeight: '1.6' }}>
-                                <br />
-                       
-
-                         </div>
+                            <br/><br/>
+                            <div className='video-responsive'>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/wV72CrYvtGQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        </div> 
                         </div>
                     </div>
                 </div>
