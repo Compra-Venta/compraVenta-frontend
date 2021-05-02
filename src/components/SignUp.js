@@ -81,7 +81,7 @@ class SignUp extends Component {
     if(verifyToken)
     if(this.state.confirmToken === verifyToken)
     {
-      modal.show = true
+      modal.show = false
       modal.loadForm = false
       this.setState({
         modal:modal
@@ -96,11 +96,11 @@ class SignUp extends Component {
         // alert('Registered Successfully')
         // this.props.onClick();
         modal.modalmsg = <Alert color='success'>Successfully Registered!</Alert>
-        modal.show = false
+        modal.show = true
       }
        else if(this.props.register.errMess){
         modal.modalmsg = <Alert color='Danger'>{this.props.register.errMess.message}</Alert>
-        modal.show = false
+        modal.show = true
       }
       this.setState({
         modal: modal
@@ -154,11 +154,11 @@ class SignUp extends Component {
     
     
   }
-  dismissAlert = () =>{
-    this.setState({
-      showmsg:false
-    })
-  }
+  // dismissAlert = () =>{
+  //   this.setState({
+  //     showmsg:false
+  //   })
+  // }
   handleBlur = (field) => (event) => {
     this.setState({
       touched: {...this.state.touched, [field]: true}
@@ -245,16 +245,16 @@ class SignUp extends Component {
     );
     const shouldSubmit = errors.ConfirmPassword || errors.Country || errors.DOB || errors.EmailId || errors.FullName || errors.Password || errors.Password || errors.PhoneNo  ;
    const showPassword = this.state.showPassword;
-   const view= !(this.props.register.isRegistered)?
-              this.props.register.isLoading ?
-              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
-              this.props.register.errMess ?
-              <div style={{ textAlign:'center'}}>
-              <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-              <h5>{this.props.register.errMess.message}</h5>
-              </Alert>
-              </div>:
-              null:null
+  //  const view= !(this.props.register.isRegistered)?
+  //             this.props.register.isLoading ?
+  //             <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+  //             this.props.register.errMess ?
+  //             <div style={{ textAlign:'center'}}>
+  //             <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+  //             <h5>{this.props.register.errMess.message}</h5>
+  //             </Alert>
+  //             </div>:
+  //             null:null
 
     return (
       
@@ -425,7 +425,7 @@ class SignUp extends Component {
               </Col>
               <Button disabled={shouldSubmit} type="submit" color="primary" >Submit</Button>
               <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' type='button' onClick={this.props.onClick}  style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
-              <Col>{view}</Col>
+              {/* <Col>{view}</Col> */}
             </Form>
               <Modal isOpen={this.state.modal.open} toggle={this.toogle} >
                 <ModalHeader toggle={this.toogle} >
