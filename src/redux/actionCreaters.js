@@ -284,7 +284,7 @@ export const resetAccount = () => (dispatch) => {
             })
         .then(response => response.json())
         .then(res => {
-            alert('Account Reset Successfully! Reload Page')
+            alert('Account Reset Successfully!')
             dispatch(fetchProfile())
             dispatch(fetchClosedTransaction())
             dispatch(fetchOpenTransaction())
