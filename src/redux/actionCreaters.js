@@ -3,8 +3,8 @@ import { createBrowserHistory } from 'history';
 
 const history = createBrowserHistory();
 
-// const baseUrl=process.env.REACT_APP_BASEURL
-const baseUrl='https://compra-venta-daksh.herokuapp.com/'
+const baseUrl=process.env.REACT_APP_BASEURL
+
 
 export const watchlistLoading = () => ({
     type: ActionTypes.WATCHLIST_LOADING
