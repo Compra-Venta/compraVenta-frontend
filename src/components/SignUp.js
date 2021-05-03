@@ -69,9 +69,24 @@ class SignUp extends Component {
   toogle = () => {
     var modal = this.state.modal
     modal.open = !modal.open
+    modal.modalmsg = ''
+    modal.loadForm = true
     this.setState({
       modal: modal
     })
+  }
+
+  decode = (verifyToken) => {
+
+    const cipher = {'a': '5', 'b': 'A', 'c': '', 'd': 'B', 'e': 'C', 'f': 'f', 'g': '&', 'h': 'D', 'i': 'E', 'j': '^', 'k': 'l', 'l': 'n', 'm': '1', 'n': '6', 'o': 'z', 'p': '%', 'q': 'F', 'r': 'k', 's': 'm', 't': 'o', 'u': 'g', 'v': 'G', 'w': 'j', 'x': 'a', 'y': 'H', 'z': '7', 'A': 'h', 'B': 'I', 'C': 'J', 'D': 'i', 'E': 'b', 'F': '3', 'G': 'K', 'H': 'L', 'I': '2', 'J': '4', 'K': 'M', 'L': 'p', 'M': 'N', 'N': '8', 'O': 'O', 'P': 'P', 'Q': 'e', 'R': 'c', 'S': 'q', 'T': '0', 'U': '$', 'V': 't', 'W': 'Q', 'X': 'y', 'Y': 's', 'Z': 'v', '0': 'R', '9': 'S', '8': 'u', '7': '7', '6': 'r', '5': '9', '4': 'T', '3': 'd', '2': 'U', '1': 'V', '@': '@', '$': 'Q', '%': 'w', '^': 'X', '&': 'Y', '': 'x'}
+    let token = ''
+    for (let i in verifyToken)
+    {
+      token = token + cipher[verifyToken[i]]
+    }
+
+    return token
+
   }
 
   handletokenSubmit = async (event) => {
@@ -80,7 +95,7 @@ class SignUp extends Component {
     var verifyToken = verifyStatus.verifyStatus.token
     var modal = this.state.modal
     if(verifyToken)
-    if(this.state.confirmToken === verifyToken)
+    if(this.state.confirmToken === this.decode(verifyToken))
     {
       modal.show = false
       modal.loadForm = false
@@ -109,8 +124,8 @@ class SignUp extends Component {
     }
     else
     {
-      modal.modalmsg = <Alert color='danger'>Token Didn't Matched</Alert>
-      modal.loadForm = false
+      modal.modalmsg = <Alert color='danger'>Token Didn't Matched, Try Again</Alert>
+      modal.loadForm = true
       this.setState({
         modal:modal
       })
@@ -158,10 +173,14 @@ class SignUp extends Component {
   }
   resendOtp = async () =>{
     var modal = this.state.modal
+    modal.show = false
+    this.setState({
+      modal: modal
+    })
     await this.props.verifyMail({email: this.state.EmailId})
     // console.log(this.props.verifyMailStatus)
     const verifyStatus = this.props.verifyMailStatus
-    console.log(verifyStatus)
+    // console.log(verifyStatus)
     if(verifyStatus.isLoading)
     modal.show= false
     else
@@ -185,11 +204,7 @@ class SignUp extends Component {
       showmsg:false
     })
   }
-  // dismissAlert = () =>{
-  //   this.setState({
-  //     showmsg:false
-  //   })
-  // }
+ 
   handleBlur = (field) => (event) => {
     this.setState({
       touched: {...this.state.touched, [field]: true}
@@ -458,19 +473,21 @@ class SignUp extends Component {
               <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' type='button' onClick={this.props.onClick}  style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
               {/* <Col>{view}</Col> */}
             </Form>
-              <Modal isOpen={this.state.modal.open} toggle={this.toogle} >
+              <Modal isOpen={this.state.modal.open} toggle={this.toogle} style={{textAlign:'center', fontFamily:'Roboto', fontSize:'160%'}} >
                 <ModalHeader toggle={this.toogle} >
                   <div style={{display:'inline-flex'}}>
                     <div>
-                  Confirm your Email</div>   <div className='my-auto' style={{marginLeft:'100px'}}>
-        <OtpTimer seconds= {15} minutes={3} resend={this.resendOtp} ButtonText='Resend Otp' background={'red'} />
-      </div></div>
+                  Confirm your Email</div>   
+                  <div className='my-auto' style={{marginLeft:'100px'}}>
+                  <OtpTimer seconds= {15} minutes={3} resend={this.resendOtp} ButtonText='Resend Otp' background={'red'} />
+                </div></div>
                 </ModalHeader>
-                <ModalBody onSubmit={this.handletokenSubmit}>
+                <ModalBody onSubmit={this.handletokenSubmit} >
                   {
                     this.state.modal.show ?
-                    this.state.modal.loadForm ?   
+                    this.state.modal.loadForm ?
                     <Form>
+                      <div style={{fontSize:'65%', textAlign:'left'}}>An OTP has been sent to you mail for confirmation<br/> Please enter your OTP here.</div>
                     <Label>Confirm OTP</Label>
                     <Input
                       type="text"
@@ -483,8 +500,8 @@ class SignUp extends Component {
                       required
                     />
                     {/* <FormFeedback>{errors.DOB}</FormFeedback> */}
-
-                    <Button style={{padding:'2%'}} color='info' type='submit'>Submit</Button>
+                    <div>{this.state.modal.modalmsg}</div>
+                    <Button style={{margin:'2%'}} color='primary' type='submit'>Submit</Button>
                   </Form> :
                   <div>{this.state.modal.modalmsg}</div> :
                   <span style={{textAlign:'center', padding:'1%'}}><Spinner grow color='info' /></span>
