@@ -160,7 +160,7 @@ class SignUp extends Component {
     var verifyToken = verifyStatus.verifyStatus.token
     var modal = this.state.modal
     if(verifyToken)
-    if(this.state.confirmToken === this.decode(verifyToken))
+    if(this.state.confirmToken === this.decode(this.props.verifyMailStatus.verifyStatus.token))
     {
       modal.show = false
       modal.loadForm = false
@@ -172,7 +172,7 @@ class SignUp extends Component {
       var age = Math.abs(ageDate.getUTCFullYear()-1970)
       var ph= this.state.Code+" "+this.state.PhoneNo
       await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
-      console.log(this.props.register)
+      // console.log(this.props.register)
       if( this.props.register.isRegistered){
         // alert('Registered Successfully')
         // this.props.onClick();
@@ -239,13 +239,15 @@ class SignUp extends Component {
   resendOtp = async () =>{
     var modal = this.state.modal
     modal.show = false
+    modal.modalmsg = ''
     this.setState({
-      modal: modal
+      modal: modal,
+      confirmToken: ''
     })
     await this.props.verifyMail({email: this.state.EmailId})
     // console.log(this.props.verifyMailStatus)
     const verifyStatus = this.props.verifyMailStatus
-    // console.log(verifyStatus)
+    console.log(verifyStatus)
     if(verifyStatus.isLoading)
     modal.show= false
     else
@@ -543,9 +545,14 @@ class SignUp extends Component {
                   <div style={{display:'inline-flex'}}>
                     <div>
                   Confirm your Email</div>   
-                  <div className='my-auto' style={{marginLeft:'100px'}}>
-                  <OtpTimer seconds= {15} minutes={3} resend={this.resendOtp} ButtonText='Resend Otp' background={'red'} />
-                </div></div>
+                  {
+                    this.state.modal.show && this.state.modal.loadForm ?
+                    <div className='my-auto' style={{marginLeft:'100px'}}>
+                      <OtpTimer seconds= {15} minutes={3} resend={this.resendOtp} ButtonText='Resend Otp' background={'red'} />
+                    </div> :
+                    null
+                  }
+                </div>
                 </ModalHeader>
                 <ModalBody onSubmit={this.handletokenSubmit} >
                   {
@@ -559,7 +566,7 @@ class SignUp extends Component {
                       name="confirmToken"
                       id="Confirm-Email"
                       value={this.state.confirmToken}
-                      onChange={this.handleInputChange} 
+                      onChange={(event) => this.setState({confirmToken : event.target.value})} 
                       // valid={errors.DOB === ''} invalid={errors.DOB !==''}  onBlur={this.handleBlur('DOB')}
                       placeholder="Enter OTP"
                       required

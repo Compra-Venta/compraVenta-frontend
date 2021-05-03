@@ -64,11 +64,11 @@ class LandingPage extends Component {
                     </div>
                 </div>
                
-        <div className='container' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>
+        <div className='container' style={{display: "flex",fontFamily:'Roboto' ,justifyContent: "center", alignItems: "center", width:'100%'}}>
         <div className='container-fluid col-12 text-center'>
                 <h1 >Why Compra Venta?</h1>
                
-                <p className="content container-fluid" style={{color:'black'}}>
+                <p className="content container-fluid" style={{color:'black', fontFamily:'Roboto', fontSize:'135%'}}>
                 Today’s world has advanced a lot in terms of cryptocurrency exchange or digital
 currency exchange and the main reason that these digital currencies are overtaking
 physical currency is that it is not governed by any one single authority and is totally
