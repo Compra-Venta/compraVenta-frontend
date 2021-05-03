@@ -51,6 +51,7 @@ export class Buy_Market extends Component {
         this.setState({
           showmsg:true,
         })
+        setTimeout(() => this.setState({showmsg:false}),30000)
 
      /*  const status = this.props.marketOrder
       //console.log('bs',status)

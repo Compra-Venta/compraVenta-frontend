@@ -50,6 +50,7 @@ export class Sell_Market extends Component {
         this.setState({
           showmsg: true
         })
+        setTimeout(() => this.setState({showmsg:false}),30000)
       /* const status = this.props.marketOrder
       if (status.errMess){
         if (status.errMess.message=="Cannot read property 'json' of undefined"){
