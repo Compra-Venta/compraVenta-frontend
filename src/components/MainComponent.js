@@ -11,6 +11,7 @@ import  Learn  from "./Learn";
 import Collaborators from './Collaborators';
 import RouteGuard from "./RouteGaurd";
 import { registerUser, fetchWatchlist, addToWatchlist, removeFromWatchlist, loginUser, logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder, verifyMail } from "../redux/actionCreaters";
+import AboutUs from './AboutCompraVenta';
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
@@ -121,6 +122,9 @@ class MainComponent extends Component {
                         />
                     <Route path='/learn'>
                         <Learn/>
+                    </Route>
+                    <Route path='/AboutUs'>
+                        <AboutUs />
                     </Route>
                     <Route path='/collaborators'>
                         <Collaborators auth={this.props.auth} />

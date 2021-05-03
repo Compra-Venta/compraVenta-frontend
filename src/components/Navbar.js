@@ -26,6 +26,9 @@ const NavComp = (props) => {
         <Collapse  isOpen={!collapsed} navbar>
           <Nav className='ml-auto mr-2 col-sm-6' navbar style={{fontFamily:'Roboto', fontSize:'1.8rem'}} >
             <NavItem>
+              <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="/AboutUs">About Us </NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="mailto:teamcompraventa@gmail.com">Contact Us </NavLink>
             </NavItem>
             <NavItem>

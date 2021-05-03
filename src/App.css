@@ -118,6 +118,7 @@ url(./images/ezgif.com-gif-maker.jpg); /* url(./images/ezgif.com-gif-maker.jpg) 
 html{
   height: 100%;
   width:100%;
+  overflow-x: hidden;
 }
 /*html{
   background: url(./images/ezgif.com-gif-maker.jpg) no-repeat center center fixed; 

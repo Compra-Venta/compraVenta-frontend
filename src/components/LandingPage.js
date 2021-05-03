@@ -64,7 +64,7 @@ class LandingPage extends Component {
                     </div>
                 </div>
                
-        <div className='container' style={{display: "flex",fontFamily:'Roboto' ,justifyContent: "center", alignItems: "center", width:'100%'}}>
+        {/* <div className='container' style={{display: "flex",fontFamily:'Roboto' ,justifyContent: "center", alignItems: "center", width:'100%'}}>
         <div className='container-fluid col-12 text-center'>
                 <h1 >Why Compra Venta?</h1>
                
@@ -84,7 +84,7 @@ having any fear of losing anything.
             
               
             </div>
-            
+             */}
             </div>
         );
     }
