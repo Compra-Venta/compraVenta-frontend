@@ -122,8 +122,8 @@ function AboutUs() {
                         <hr/>
                         <h1>Features:-</h1>
                         <div className='row justify-content-md-center' style={{padding:10}}>
-                        <div className='col-md-4 offset-1'>
-                        <Toast style={{width:'100%'}}>
+                        <div className='col-md-4 offset-md-1'>
+                        <Toast style={{width:'100%',height:'100%'}}>
           <ToastHeader icon='info'>
            <h3> Virtual Trading</h3>
           </ToastHeader>
@@ -135,9 +135,10 @@ the help of which a user can trade into the choice of his own cryptocurrency
 which will help a user well versed with cryptocurrency trading gradually.
 </p>
           </ToastBody>
-        </Toast>
+        </Toast >
                             </div>
-                    <div className='col-md-4'><Toast>
+                    <div className='col-md-4'>
+                        <Toast style={{width:'100%',height:'100%'}}>
           <ToastHeader icon='warning'>
           <h4> Market and Stoploss Orders</h4>
           </ToastHeader>
@@ -152,7 +153,8 @@ which will help a user well versed with cryptocurrency trading gradually.
                             </div>
                             </div>
                     <div className='row justify-content-md-center' style={{padding:10}}>
-                    <div className='col-md-4 offset-1'><Toast>
+                    <div className='col-md-4 offset-md-1'>
+                        <Toast style={{width:'100%',height:'100%'}}>
           <ToastHeader icon='warning'>
           <h3> Prediction</h3>
           </ToastHeader>
@@ -168,7 +170,8 @@ market.
           </ToastBody>
         </Toast>
                             </div>
-                    <div className='col-md-4'><Toast>
+                    <div className='col-md-4'>
+                        <Toast style={{width:'100%',height:'100%'}}>
           <ToastHeader icon='info'>
           <h3> Rating System</h3>
           </ToastHeader>
@@ -182,7 +185,8 @@ market.
                             </div>
                     </div>
                     <div className='row justify-content-md-center' style={{padding:10}}>
-                    <div className='col-md-4 offset-1'><Toast>
+                    <div className='col-md-4 offset-md-1'>
+                        <Toast style={{width:'100%',height:'100%'}}>
           <ToastHeader icon='info'>
             <h3>Live News</h3>
           </ToastHeader>
@@ -195,7 +199,7 @@ environment.</p>
         </Toast>
                             </div>
                             <div className='col-md-4'>
-                            <Toast>
+                            <Toast style={{width:'100%',height:'100%'}}>
           <ToastHeader icon='warning'>
               <h3>Watchlist</h3>
             
