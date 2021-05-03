@@ -76,7 +76,18 @@ class SignUp extends Component {
     })
   }
 
-  decode = (verifyToken) => {
+  encode =(userToken) =>{
+    const cipherI = {'a': '5', 'b': 'A', 'c': '*', 'd': 'B', 'e': 'C', 'f': 'f', 'g': '&', 'h': 'D', 'i': 'E', 'j': '^', 'k': 'l', 'l': 'n', 'm': '1', 'n': '6', 'o': 'z', 'p': '%', 'q': 'F', 'r': 'k', 's': 'm', 't': 'o', 'u': 'g', 'v': 'G', 'w': 'j', 'x': 'a', 'y': 'H', 'z': '7', 'A': 'h', 'B': 'I', 'C': 'J', 'D': 'i', 'E': 'b', 'F': '3', 'G': 'K', 'H': 'L', 'I': '2', 'J': '4', 'K': 'M', 'L': 'p', 'M': 'N', 'N': '8', 'O': 'O', 'P': 'P', 'Q': 'e', 'R': 'c', 'S': 'q', 'T': '0', 'U': '$', 'V': 't', 'W': 'Q', 'X': 'y', 'Y': 's', 'Z': 'v', '0': 'R', '9': 'S', '8': 'u', '7': '7', '6': 'r', '5': '9', '4': 'T', '3': 'd', '2': 'U', '1': 'V', '@': '@', '$': 'Q', '%': 'w', '^': 'X', '&': 'Y', '*': 'x'}
+    let token = ''
+    for (let i in userToken)
+    {
+      token = token + cipherI[userToken[i]]
+    }
+    //console.log('t',token)
+    return token
+  }
+
+ /*  decode = (verifyToken) => {
 
     const cipher = {'0': 'T',
     '1': 'm',
@@ -149,10 +160,10 @@ class SignUp extends Component {
     {
       token = token + cipher[verifyToken[i]]
     }
-
+    console.log('t',token)
     return token
 
-  }
+  } */
 
   handletokenSubmit = async (event) => {
     event.preventDefault()
@@ -160,8 +171,9 @@ class SignUp extends Component {
     var verifyToken = verifyStatus.verifyStatus.token
     var modal = this.state.modal
     if(verifyToken)
-    if(this.state.confirmToken === this.decode(this.props.verifyMailStatus.verifyStatus.token))
+    if(this.encode(this.state.confirmToken) === this.props.verifyMailStatus.verifyStatus.token)
     {
+      //console.log('yes')
       modal.show = false
       modal.loadForm = false
       this.setState({
