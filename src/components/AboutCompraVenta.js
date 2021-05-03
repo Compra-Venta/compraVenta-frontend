@@ -122,37 +122,38 @@ function AboutUs() {
                         <hr/>
                         <h1>Features:-</h1>
                         <div className='row justify-content-md-center' style={{padding:10}}>
-                        <div className='col-md-4 offset-1'>
-                        <Toast style={{width:'100%'}}>
-          <ToastHeader icon='info'>
-           <h3> Virtual Trading</h3>
-          </ToastHeader>
-          <ToastBody>
-              <p style={{fontSize:20}}>
-            <img src='assets/images/aboutus/candles.jpg' style={{height:'170px', width:'170px', float:'left'}}/>
-            Each user will be provided with virtual money of $50,000 with
-the help of which a user can trade into the choice of his own cryptocurrency
-which will help a user well versed with cryptocurrency trading gradually.
-</p>
-          </ToastBody>
-        </Toast>
-                            </div>
-                    <div className='col-md-4'><Toast>
-          <ToastHeader icon='warning'>
-          <h4> Market and Stoploss Orders</h4>
-          </ToastHeader>
-          <ToastBody >
-          <p style={{fontSize:20}}>
-            <img src='assets/images/aboutus/trade.jpg' style={{height:'170px', width:'170px', float:'left'}}/>
-            Our platform tries to resemble the working of market and stop orders.Market orders do not require the price at which you need to sell/buy.
-            Stop Orders are traded when a certain price value hits.Compra Venta provides user a feature to cancel any open order if the order is not placed yet.
-            </p>
-          </ToastBody>
-        </Toast>
+                        <div className='col' style={{paddingLeft:'15%'}}>
+                        <Toast style={{width:'500px', height:'420px'}}>
+                            <ToastHeader icon='info'>
+                                <h3> Virtual Trading</h3>
+                            </ToastHeader>
+                        <ToastBody>
+                            <p style={{fontSize:20}}>
+                                <img src='assets/images/aboutus/candles.jpg' style={{height:'170px', width:'170px', float:'left'}}/>
+                                    Each user will be provided with virtual money of $50,000 with
+                                    the help of which a user can trade into the choice of his own cryptocurrency which will help a user well versed with cryptocurrency trading gradually.
+                            </p>
+                        </ToastBody>
+                        </Toast>
+                        </div>
+                        <div className='col' style={{paddingRight:'10%'}}>
+                        <Toast style={{width:'550px', height:'420px'}}>
+                        <ToastHeader icon='warning'>
+                        <h4> Market and Stoploss Orders</h4>
+                        </ToastHeader>
+                        <ToastBody >
+                            <p style={{fontSize:20}}>
+                            <img src='assets/images/aboutus/trade.jpg' style={{height:'170px', width:'170px', float:'left'}}/>
+                            Our platform tries to resemble the working of market and stop orders.Market orders do not require the price at which you need to sell/buy.
+                            Stop Orders are traded when a certain price value hits.Compra Venta provides user a feature to cancel any open order if the order is not placed yet.
+                            </p>
+                        </ToastBody>
+                        </Toast>
                             </div>
                             </div>
                     <div className='row justify-content-md-center' style={{padding:10}}>
-                    <div className='col-md-4 offset-1'><Toast>
+                    <div className='col' style={{paddingLeft:'15%'}}>
+                        <Toast style={{width:'500px', height:'420px'}}>
           <ToastHeader icon='warning'>
           <h3> Prediction</h3>
           </ToastHeader>
@@ -168,7 +169,8 @@ market.
           </ToastBody>
         </Toast>
                             </div>
-                    <div className='col-md-4'><Toast>
+                            <div className='col' style={{paddingRight:'10%'}}>
+                        <Toast style={{width:'500px', height:'420px'}}>
           <ToastHeader icon='info'>
           <h3> Rating System</h3>
           </ToastHeader>
@@ -182,7 +184,8 @@ market.
                             </div>
                     </div>
                     <div className='row justify-content-md-center' style={{padding:10}}>
-                    <div className='col-md-4 offset-1'><Toast>
+                    <div className='col' style={{paddingLeft:'15%'}}>
+                        <Toast style={{width:'500px', height:'420px'}}>
           <ToastHeader icon='info'>
             <h3>Live News</h3>
           </ToastHeader>
@@ -194,8 +197,8 @@ environment.</p>
           </ToastBody>
         </Toast>
                             </div>
-                            <div className='col-md-4'>
-                            <Toast>
+                            <div className='col' style={{paddingRight:'10%'}}>
+                        <Toast style={{width:'500px', height:'420px'}}>
           <ToastHeader icon='warning'>
               <h3>Watchlist</h3>
             
