@@ -19,16 +19,19 @@ const ProfileNav = (props) => {
         <Collapse  isOpen={!collapsed} navbar>
           <Nav className='ml-auto col-md-7 justify-content-end' navbar style={{paddingRight:'0px',justifyItems:'right'}} >
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/dashboard"><span  >Dashboard</span></NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/dashboard"><span  >Dashboard</span></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/collaborators"> Collaborators </NavLink>
+              <NavLink style={{color:'deepskyblue',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/AboutUs">About Us </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/learn">Learn </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/collaborators"> Collaborators </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} className='logoutt' onClick={handleLogoutClick} >Logout </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/learn">Learn </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink style={{color:'red',fontSize:'1.4rem',paddingRight:'1vw'}} className='logoutt' onClick={handleLogoutClick} >Logout </NavLink>
             </NavItem>
           </Nav>
         </Collapse>

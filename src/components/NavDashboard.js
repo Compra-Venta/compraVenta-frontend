@@ -22,7 +22,7 @@ const NavDash = (props) => {
               <NavLink style={{color:'blue',fontSize:'1.4rem',paddingRight:'2vw'}} className='me' href="/profile"><span color='violet' >My Profile</span></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="/AboutUs">About Us </NavLink>
+              <NavLink style={{color:'deepskyblue',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/AboutUs">About Us </NavLink>
             </NavItem>
             <NavItem>
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}}  href="/learn"> Learn </NavLink>
