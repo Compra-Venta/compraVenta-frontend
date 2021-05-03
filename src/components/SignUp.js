@@ -78,7 +78,72 @@ class SignUp extends Component {
 
   decode = (verifyToken) => {
 
-    const cipher = {'a': '5', 'b': 'A', 'c': '', 'd': 'B', 'e': 'C', 'f': 'f', 'g': '&', 'h': 'D', 'i': 'E', 'j': '^', 'k': 'l', 'l': 'n', 'm': '1', 'n': '6', 'o': 'z', 'p': '%', 'q': 'F', 'r': 'k', 's': 'm', 't': 'o', 'u': 'g', 'v': 'G', 'w': 'j', 'x': 'a', 'y': 'H', 'z': '7', 'A': 'h', 'B': 'I', 'C': 'J', 'D': 'i', 'E': 'b', 'F': '3', 'G': 'K', 'H': 'L', 'I': '2', 'J': '4', 'K': 'M', 'L': 'p', 'M': 'N', 'N': '8', 'O': 'O', 'P': 'P', 'Q': 'e', 'R': 'c', 'S': 'q', 'T': '0', 'U': '$', 'V': 't', 'W': 'Q', 'X': 'y', 'Y': 's', 'Z': 'v', '0': 'R', '9': 'S', '8': 'u', '7': '7', '6': 'r', '5': '9', '4': 'T', '3': 'd', '2': 'U', '1': 'V', '@': '@', '$': 'Q', '%': 'w', '^': 'X', '&': 'Y', '': 'x'}
+    const cipher = {'0': 'T',
+    '1': 'm',
+    '2': 'I',
+    '3': 'F',
+    '4': 'J',
+    '5': 'a',
+    '6': 'n',
+    '7': 'z',
+    '8': 'N',
+    '9': '5',
+    'R': '0',
+    'V': '1',
+    'U': '2',
+    'd': '3',
+    'T': '4',
+    'r': '6',
+    'u': '8',
+    'S': '9',
+    'A': 'b',
+    '*': 'c',
+    'B': 'd',
+    'C': 'e',
+    'f': 'f',
+    '&': 'g',
+    'D': 'h',
+    'E': 'i',
+    '^': 'j',
+    'l': 'k',
+    'n': 'l',
+    'z': 'o',
+    '%': 'p',
+    'F': 'q',
+    'k': 'r',
+    'm': 's',
+    'o': 't',
+    'g': 'u',
+    'G': 'v',
+    'j': 'w',
+    'a': 'x',
+    'H': 'y',
+    'h': 'A',
+    'I': 'B',
+    'J': 'C',
+    'i': 'D',
+    'b': 'E',
+    'K': 'G',
+    'L': 'H',
+    'M': 'K',
+    'p': 'L',
+    'N': 'M',
+    'O': 'O',
+    'P': 'P',
+    'e': 'Q',
+    'c': 'R',
+    'q': 'S',
+    '$': 'U',
+    't': 'V',
+    'Q': '$',
+    'y': 'X',
+    's': 'Y',
+    'v': 'Z',
+    '@': '@',
+    'w': '%',
+    'X': '^',
+    'Y': '&',
+    'x': '*'}
     let token = ''
     for (let i in verifyToken)
     {
@@ -124,7 +189,7 @@ class SignUp extends Component {
     }
     else
     {
-      modal.modalmsg = <Alert color='danger'>Token Didn't Matched, Try Again</Alert>
+      modal.modalmsg = <Alert color='danger'>OTP Didn't Match, Try Again</Alert>
       modal.loadForm = true
       this.setState({
         modal:modal
