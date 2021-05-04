@@ -19,7 +19,7 @@ const AboutDash = (props) => {
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} href="/learn">Learn</NavLink>
             </NavItem>
             <NavItem className='my-auto'>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} href="/collaborators">Collaborators</NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'2vw'}} href="/collaborators">Developers</NavLink>
             </NavItem>
             
             <div className='getStarted'>

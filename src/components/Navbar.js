@@ -32,7 +32,7 @@ const NavComp = (props) => {
               <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="mailto:teamcompraventa@gmail.com">Contact Us</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="/Collaborators">Collaborators</NavLink>
+              <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="/Collaborators">Developers</NavLink>
             </NavItem>
             <NavItem>
               <NavLink style={{color:'deepskyblue',paddingRight:'1vw'}}  href="/learn">Learn</NavLink>

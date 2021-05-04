@@ -25,7 +25,7 @@ const ProfileNav = (props) => {
               <NavLink style={{color:'deepskyblue',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/AboutUs">About Us </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/collaborators"> Collaborators </NavLink>
+              <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/collaborators"> Developers </NavLink>
             </NavItem>
             <NavItem>
               <NavLink style={{color:'black',fontSize:'1.4rem',paddingRight:'1vw'}}  href="/learn">Learn </NavLink>
