@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import { Nav, NavItem, NavLink, TabContent, TabPane, Button } from 'reactstrap';
-import Account from './Account'
+import { Nav, NavItem, NavLink, TabContent, TabPane, Button, Modal, ModalHeader, ModalBody, ModalFooter, Spinner } from 'reactstrap';
 import Personal_Info from './Personal_Info'
 import ProfileNav from './ProfileNav'
 import Wallet from './Wallet'
@@ -9,7 +8,7 @@ import Footer from '../Footer'
 import OpenTransaction from './OpenTransaction';
 import ClosedTransaction from './ClosedTransaction';
 import { connect } from "react-redux";
-import {  fetchWatchlist, addToWatchlist, removeFromWatchlist, loginUser, logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder } from "../../redux/actionCreaters";
+import { logoutUser, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, resetAccount} from "../../redux/actionCreaters";
 
 const mapDispatchToProps = (dispatch) => ({
     
@@ -39,9 +38,17 @@ const mapStateToProps = (state) => {
 
 function Profile(props) {
     const [activeTab, setActiveTab] = useState('1');
+    const [modal, setModal] = useState(false);
+    const [hasSubmit, setSubmit] = useState(false)
+    const toggle = () =>{ 
+        setModal(!modal);
+      };
 
     const resetAccount = async () => {
+        setSubmit(true)
         await props.resetAccount()
+        toggle()
+        setSubmit(false)
     }
 
     return (
@@ -64,9 +71,26 @@ function Profile(props) {
                <h3>Account</h3>
                 <hr/>
                 </div>
-                <Account/>
                 <div>
-                <Button onClick={() => resetAccount()} color="danger" size='md' style={{marginLeft:'30px'}}>Reset Account Details</Button>{' '}
+                <Button onClick={toggle} color="danger" size='md' style={{marginLeft:'30px'}}>Reset Account Details</Button>{' '}
+                    <Modal isOpen={modal} toggle={toggle} style={{fontSize:'160%',fontFamily:'Roboto', textAlign:'center'}} >
+                        <ModalHeader toggle={toggle}>
+                            Reset Account
+                        </ModalHeader>
+                        <ModalBody >
+                              {
+                                  ! hasSubmit ?
+                                  <span >
+                                  All Account Details will be Deleted!
+                                  </span> :
+                                  <Spinner grow color='success' />
+                              }
+                        </ModalBody>
+                        <ModalFooter className='col'>
+                        <Button color='danger' block onClick={() => resetAccount()} >Yes, Reset my Account</Button>
+                        </ModalFooter>
+                    </Modal>
+                
                 </div>
             </div>
 

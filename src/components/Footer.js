@@ -8,7 +8,7 @@ function Footer() {
 
                     <a href="mailto:teamcompraventa@gmail.com" style={{color:'white'}} target="_blank" rel="noopener noreferrer">Contact Us</a>
 
-                    <a href="/collaborators" style={{color:'white'}} target="_blank" rel="noopener noreferrer">Meet the Collaborators</a>
+                    <a href="/collaborators" style={{color:'white'}} target="_blank" rel="noopener noreferrer">Meet the Developers</a>
 
                 </div>
             </div>

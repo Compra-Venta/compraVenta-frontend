@@ -26,7 +26,7 @@ export class Wallet extends Component {
     }
     
     setWallet = (wallet_info) => {
-        console.log('wallet info',wallet_info)
+        //console.log('wallet info',wallet_info)
         var wallet = this.state.wallet
         if(wallet_info.errMess ==null && wallet_info.isLoading==false) {
         for ( let i in wallet)
@@ -62,7 +62,7 @@ export class Wallet extends Component {
             this.setWallet(this.props.wallet)
         } */
         const state = this.state;
-        console.log(state);
+        //console.log(state);
         const wallet = state.wallet;
         // const wallet=this.setWallet(Wallet)
         let wallet_info = Object.keys(wallet).map( (label, value) =>{

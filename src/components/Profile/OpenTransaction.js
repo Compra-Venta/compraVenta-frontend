@@ -49,7 +49,7 @@ class OpenTransaction extends Component {
         const state = this.state;
         const orderData = this.props.openTransaction_info.openTransaction_info;
         let size = orderData.length;
-        console.log('Total Open Orders: ',size)
+        //console.log('Total Open Orders: ',size)
         const orderTable = orderData.map(order => {
             return(
                 <tr>

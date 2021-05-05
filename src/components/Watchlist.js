@@ -21,7 +21,7 @@ export class Watchlist extends Component {
     
     createwatchlist = (symbol) => {
         
-        console.log('CoinPair',symbol)
+        //console.log('CoinPair',symbol)
         var checkP = this.state.prices
         //var newP = Object.keys(checkP).filter(symb => symbol.indexOf(symb)!==-1);
         for (const item of Object.keys(checkP)){
@@ -70,7 +70,7 @@ export class Watchlist extends Component {
     check = () => {
         const ws  = this.state.ws;
         if (ws || ws.readyState === WebSocket.OPEN) {
-            console.log('connection check');
+            //console.log('connection check');
         } 
     };
 

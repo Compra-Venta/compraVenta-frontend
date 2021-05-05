@@ -13,6 +13,8 @@ import { ClosedTransaction } from './closedTransaction';
 import { MarketOrder } from './marketOrder';
 import { StopOrder } from './stopOrder';
 import { Register } from './register';
+import { VerifyMail } from './verifyMail';
+
 
 
 
@@ -31,6 +33,7 @@ export const ConfigureStore = () => {
             closedTransaction_info: ClosedTransaction,
             marketOrder: MarketOrder,
             stopOrder: StopOrder,
+            verifyMailStatus: VerifyMail,
         }),
         composeWithDevTools( applyMiddleware(thunk))
     );

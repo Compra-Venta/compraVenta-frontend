@@ -40,7 +40,7 @@ class ClosedTransaction extends Component {
         const state = this.state;
         const orderData = this.props.closedTransaction_info.closedTransaction_info;
         let size = orderData.length;
-        console.log('Total Closed Orders: ',size)
+        //console.log('Total Closed Orders: ',size)
         const orderTable = orderData.map(order => {
             return(
                 <tr>

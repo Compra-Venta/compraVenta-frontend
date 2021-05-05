@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import {
   Container, Col, Row, Form,
   FormGroup, Label, Input,
-  Button, FormFeedback,Spinner,Alert
+  Button, FormFeedback,Spinner,Alert, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 //import countryList from "react-select-country-list";
+import OtpTimer  from "otp-timer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { withRouter } from 'react-router';
@@ -15,6 +16,13 @@ class SignUp extends Component {
     super(props)
   
     this.state = {
+       modal: {
+          open: false,
+          loadForm: false,
+          show: false,
+          modalmsg: ''
+       },
+       confirmToken: '',
        FullName: '',
        EmailId: '',
        PhoneNo: '',
@@ -58,36 +66,224 @@ class SignUp extends Component {
 
   }
 
+  toogle = () => {
+    var modal = this.state.modal
+    modal.open = !modal.open
+    modal.modalmsg = ''
+    modal.loadForm = true
+    this.setState({
+      modal: modal
+    })
+  }
+
+  encode =(userToken) =>{
+    const cipherI = {'a': '5', 'b': 'A', 'c': '*', 'd': 'B', 'e': 'C', 'f': 'f', 'g': '&', 'h': 'D', 'i': 'E', 'j': '^', 'k': 'l', 'l': 'n', 'm': '1', 'n': '6', 'o': 'z', 'p': '%', 'q': 'F', 'r': 'k', 's': 'm', 't': 'o', 'u': 'g', 'v': 'G', 'w': 'j', 'x': 'a', 'y': 'H', 'z': '7', 'A': 'h', 'B': 'I', 'C': 'J', 'D': 'i', 'E': 'b', 'F': '3', 'G': 'K', 'H': 'L', 'I': '2', 'J': '4', 'K': 'M', 'L': 'p', 'M': 'N', 'N': '8', 'O': 'O', 'P': 'P', 'Q': 'e', 'R': 'c', 'S': 'q', 'T': '0', 'U': '$', 'V': 't', 'W': 'Q', 'X': 'y', 'Y': 's', 'Z': 'v', '0': 'R', '9': 'S', '8': 'u', '7': '7', '6': 'r', '5': '9', '4': 'T', '3': 'd', '2': 'U', '1': 'V', '@': '@', '$': 'Q', '%': 'w', '^': 'X', '&': 'Y', '*': 'x'}
+    let token = ''
+    for (let i in userToken)
+    {
+      token = token + cipherI[userToken[i]]
+    }
+    //console.log('t',token)
+    return token
+  }
+
+ /*  decode = (verifyToken) => {
+
+    const cipher = {'0': 'T',
+    '1': 'm',
+    '2': 'I',
+    '3': 'F',
+    '4': 'J',
+    '5': 'a',
+    '6': 'n',
+    '7': 'z',
+    '8': 'N',
+    '9': '5',
+    'R': '0',
+    'V': '1',
+    'U': '2',
+    'd': '3',
+    'T': '4',
+    'r': '6',
+    'u': '8',
+    'S': '9',
+    'A': 'b',
+    '*': 'c',
+    'B': 'd',
+    'C': 'e',
+    'f': 'f',
+    '&': 'g',
+    'D': 'h',
+    'E': 'i',
+    '^': 'j',
+    'l': 'k',
+    'n': 'l',
+    'z': 'o',
+    '%': 'p',
+    'F': 'q',
+    'k': 'r',
+    'm': 's',
+    'o': 't',
+    'g': 'u',
+    'G': 'v',
+    'j': 'w',
+    'a': 'x',
+    'H': 'y',
+    'h': 'A',
+    'I': 'B',
+    'J': 'C',
+    'i': 'D',
+    'b': 'E',
+    'K': 'G',
+    'L': 'H',
+    'M': 'K',
+    'p': 'L',
+    'N': 'M',
+    'O': 'O',
+    'P': 'P',
+    'e': 'Q',
+    'c': 'R',
+    'q': 'S',
+    '$': 'U',
+    't': 'V',
+    'Q': '$',
+    'y': 'X',
+    's': 'Y',
+    'v': 'Z',
+    '@': '@',
+    'w': '%',
+    'X': '^',
+    'Y': '&',
+    'x': '*'}
+    let token = ''
+    for (let i in verifyToken)
+    {
+      token = token + cipher[verifyToken[i]]
+    }
+    console.log('t',token)
+    return token
+
+  } */
+
+  handletokenSubmit = async (event) => {
+    event.preventDefault()
+    const verifyStatus = this.props.verifyMailStatus
+    var verifyToken = verifyStatus.verifyStatus.token
+    var modal = this.state.modal
+    if(verifyToken)
+    if(this.encode(this.state.confirmToken) === this.props.verifyMailStatus.verifyStatus.token)
+    {
+      //console.log('yes')
+      modal.show = false
+      modal.loadForm = false
+      this.setState({
+        modal:modal
+      })
+      var diff = Date.now()-new Date(this.state.DOB)
+      var ageDate = new Date(diff);
+      var age = Math.abs(ageDate.getUTCFullYear()-1970)
+      var ph= this.state.Code+" "+this.state.PhoneNo
+      await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
+      // console.log(this.props.register)
+      if( this.props.register.isRegistered){
+        // alert('Registered Successfully')
+        // this.props.onClick();
+        modal.modalmsg = <Alert color='success'>Successfully Registered!</Alert>
+        modal.show = true
+      }
+       else if(this.props.register.errMess){
+        modal.modalmsg = <Alert color='Danger'>{this.props.register.errMess.message}</Alert>
+        modal.show = true
+      }
+      this.setState({
+        modal: modal
+      })
+    }
+    else
+    {
+      modal.modalmsg = <Alert color='danger'>OTP Didn't Match, Try Again</Alert>
+      modal.loadForm = true
+      this.setState({
+        modal:modal
+      })
+    }
+  }
+
   handleSubmit = async (event) => {
     event.preventDefault();
+    var modal = this.state.modal
+    modal.open = true
+    this.setState({
+      modal: modal
+    })
+    await this.props.verifyMail({email: this.state.EmailId})
+    // console.log(this.props.verifyMailStatus)
+    const verifyStatus = this.props.verifyMailStatus
+    console.log(verifyStatus)
+    if(verifyStatus.isLoading)
+    modal.show= false
+    else
+    {
+      modal.show = true
+      if(verifyStatus.errMess == null)
+      modal.loadForm = true
+      else
+      {
+        modal.loadForm = false
+        const err=JSON.parse(verifyStatus.errMess.message)
+        modal.modalmsg = <Alert color='danger'>{err.error}</Alert>
+      }
+    }
+    this.setState({
+      modal: modal
+    })
     /* alert(`
     UserData:
     Name: ${this.state.FullName}
     EmailId: ${this.state.EmailId}
     PhoneNo: ${this.state.PhoneNo}
     `) */
-    var td= new Date().getFullYear()
-    var dob= new Date(this.state.DOB).getFullYear()
-    var age = td - dob
-    var ph= this.state.Code+" "+this.state.PhoneNo
-    await this.props.registerUser({ name: this.state.FullName, password: this.state.Password, email:this.state.EmailId ,age : age ,country: this.state.Country ,PhoneNo: ph });
-    console.log(this.props.register)
-    if( this.props.register.isRegistered){
-      alert('Registered Successfully')
-      this.props.onClick();
-    }
-     else{
-      this.setState({
-        showmsg:true
-      })
-    }
+    /* var td= new Date().getFullYear()
+    var dob= new Date(this.state.DOB).getFullYear() */
     
+    
+  }
+  resendOtp = async () =>{
+    var modal = this.state.modal
+    modal.show = false
+    modal.modalmsg = ''
+    this.setState({
+      modal: modal,
+      confirmToken: ''
+    })
+    await this.props.verifyMail({email: this.state.EmailId})
+    // console.log(this.props.verifyMailStatus)
+    const verifyStatus = this.props.verifyMailStatus
+    console.log(verifyStatus)
+    if(verifyStatus.isLoading)
+    modal.show= false
+    else
+    {
+      modal.show = true
+      if(verifyStatus.errMess == null)
+      modal.loadForm = true
+      else
+      {
+        modal.loadForm = false
+        const err=JSON.parse(verifyStatus.errMess.message)
+        modal.modalmsg = <Alert color='danger'>{err.error}</Alert>
+      }
+    }
+    this.setState({
+      modal: modal
+    })
   }
   dismissAlert = () =>{
     this.setState({
       showmsg:false
     })
   }
+ 
   handleBlur = (field) => (event) => {
     this.setState({
       touched: {...this.state.touched, [field]: true}
@@ -115,7 +311,7 @@ class SignUp extends Component {
        ConfirmPassword: '',
     }
     
-    const reg_num = /^[0-9]{1}\s*[0-9]{9}/ ;
+    const reg_num = /^[1-9]{1}\s*[0-9]{9}/ ;
     const reg_dob = /^[0-9]{2}[-][0-9]{2}[-][0-9]{4}/ ;
     const reg_password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
@@ -142,16 +338,16 @@ class SignUp extends Component {
   render() {
     //console.log(this.state.cValues)
     const CV=this.state.infoC.filter((ele) => !(ele.name.length>40))
-    console.log(CV)
+    //console.log(CV)
     const codes=this.state.infoC.map(value => parseInt(value.dial_code.substr(1)))
-    console.log(codes)
+    //console.log(codes)
     var CS=codes.sort()
-    console.log(codes.sort())
+    //console.log(codes.sort())
     const final_codes = CS.map(code => "+"+code.toString())
     
-    console.log(final_codes)
+    //console.log(final_codes)
     const FC=[...new Set(final_codes)]
-    console.log(FC)
+    //console.log(FC)
     const countries = CV.map((c) => {
       return (
       <option key={c.name} value={c.name}>{c.name}</option>
@@ -174,16 +370,16 @@ class SignUp extends Component {
     );
     const shouldSubmit = errors.ConfirmPassword || errors.Country || errors.DOB || errors.EmailId || errors.FullName || errors.Password || errors.Password || errors.PhoneNo  ;
    const showPassword = this.state.showPassword;
-   const view= !(this.props.register.isRegistered)?
-              this.props.register.isLoading ?
-              <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
-              this.props.register.errMess ?
-              <div style={{ textAlign:'center'}}>
-              <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-              <h5>{this.props.register.errMess.message}</h5>
-              </Alert>
-              </div>:
-              null:null
+  //  const view= !(this.props.register.isRegistered)?
+  //             this.props.register.isLoading ?
+  //             <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
+  //             this.props.register.errMess ?
+  //             <div style={{ textAlign:'center'}}>
+  //             <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
+  //             <h5>{this.props.register.errMess.message}</h5>
+  //             </Alert>
+  //             </div>:
+  //             null:null
 
     return (
       
@@ -244,7 +440,7 @@ class SignUp extends Component {
                     id="User-Phone"
                     value={this.state.PhoneNo}
                     onChange={this.handleInputChange} valid={errors.PhoneNo === ''} invalid={errors.PhoneNo !==''} onBlur={this.handleBlur('PhoneNo')}
-                    placeholder="+91 9999999999"
+                    placeholder="9999999999"
                     maxLength="10"
                     // pattern="[+][0-9]{2}(| )[0-9]{10}"
                     required
@@ -354,8 +550,53 @@ class SignUp extends Component {
               </Col>
               <Button disabled={shouldSubmit} type="submit" color="primary" >Submit</Button>
               <div style={{textAlign:'center'}}>Already Registered?&nbsp;&nbsp;&nbsp; <button className='regB' type='button' onClick={this.props.onClick}  style={{color:'blue',borderColor:'transparent',backgroundColor:'transparent'}}>Sign In </button></div>
-              <Col>{view}</Col>
+              {/* <Col>{view}</Col> */}
             </Form>
+              <Modal isOpen={this.state.modal.open} toggle={this.toogle} style={{textAlign:'center', fontFamily:'Roboto', fontSize:'160%'}} >
+                <ModalHeader toggle={this.toogle} >
+                  <div style={{display:'inline-flex'}}>
+                    <div>
+                  Confirm your Email</div>   
+                  {
+                    this.state.modal.show && this.state.modal.loadForm ?
+                    <div className='my-auto' style={{marginLeft:'100px'}}>
+                      <OtpTimer seconds= {15} minutes={3} resend={this.resendOtp} ButtonText='Resend Otp' background={'red'} />
+                    </div> :
+                    null
+                  }
+                </div>
+                </ModalHeader>
+                <ModalBody onSubmit={this.handletokenSubmit} >
+                  {
+                    this.state.modal.show ?
+                    this.state.modal.loadForm ?
+                    <Form>
+                      <div style={{fontSize:'65%', textAlign:'left'}}>An OTP has been sent to you mail for confirmation<br/> Please enter your OTP here.</div>
+                    <Label>Confirm OTP</Label>
+                    <Input
+                      type="text"
+                      name="confirmToken"
+                      id="Confirm-Email"
+                      value={this.state.confirmToken}
+                      onChange={(event) => this.setState({confirmToken : event.target.value})} 
+                      // valid={errors.DOB === ''} invalid={errors.DOB !==''}  onBlur={this.handleBlur('DOB')}
+                      placeholder="Enter OTP"
+                      required
+                    />
+                    {/* <FormFeedback>{errors.DOB}</FormFeedback> */}
+                    <div>{this.state.modal.modalmsg}</div>
+                    <Button style={{margin:'2%'}} color='primary' type='submit'>Submit</Button>
+                  </Form> :
+                  <div>{this.state.modal.modalmsg}</div> :
+                  <span style={{textAlign:'center', padding:'1%'}}><Spinner grow color='info' /></span>
+                  }
+                
+                </ModalBody>
+                <ModalFooter>
+                  <Button color='info' onClick={this.toogle} >Cancel</Button>
+                </ModalFooter>
+              </Modal>
+            
           </Container>
       
     )

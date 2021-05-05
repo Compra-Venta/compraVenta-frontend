@@ -51,6 +51,7 @@ export class Buy_Stoploss extends Component {
         this.setState({
           showmsg:true
         }) 
+        setTimeout(() => this.setState({showmsg:false}),30000)
      /*  const status = this.props.stopOrder
       if (status.errMess){
         if (status.errMess.message=="Cannot read property 'json' of undefined"){
@@ -86,7 +87,7 @@ export class Buy_Stoploss extends Component {
       </div> :*/this.props.stopOrder.errMess.message?
       <div style={{ textAlign:'center'}}>
       <Alert color='danger' isOpen={this.state.showmsg} toggle={this.dismissAlert}>
-       <h5> {this.props.stopOrder.errMess.message}</h5>
+       <h5> {JSON.parse(this.props.stopOrder.errMess.message).message}</h5>
        </Alert> </div>:null:null
         return (
             

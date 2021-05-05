@@ -25,7 +25,7 @@ function SignIn(props) {
    
    const history = useHistory();
   useEffect(() => {
-    console.log('auth',props.auth.isAuthenticated)
+    //console.log('auth',props.auth.isAuthenticated)
       if (props.auth.isAuthenticated) history.push('/dashboard');
      
    })
@@ -70,14 +70,19 @@ function SignIn(props) {
           initialState.EmailId,
           initialState.Password,
         );
-
+        var err
+        if(props.auth.errMess){
+            err =JSON.parse(props.auth.errMess.message)}
+            else{
+              err={error:''}
+            }
         const view= !(props.auth.isAuthenticated)?
               props.auth.isLoading ?
               <div style={{textAlign:'center'}}><Spinner color='primary' /></div>:
               props.auth.errMess ?
               <div style={{ textAlign:'center'}}>
               <Alert color='danger' isOpen={showmsg} toggle={dismissAlert}>
-              <h5>{props.auth.errMess.message}</h5>
+              <h5>{err.error}</h5>
               </Alert>
               </div>:
               null:null

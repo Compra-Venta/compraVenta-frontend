@@ -10,14 +10,15 @@ import LearnCrypto from './LearnCrypto';
 import  Learn  from "./Learn";
 import Collaborators from './Collaborators';
 import RouteGuard from "./RouteGaurd";
-import { registerUser, fetchWatchlist, addToWatchlist, removeFromWatchlist, loginUser, logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder } from "../redux/actionCreaters";
+import { registerUser, fetchWatchlist, addToWatchlist, removeFromWatchlist, loginUser, logoutUser, getPrediction, newPassword, changePassword, fetchProfile, fetchWallet, fetchOpenTransaction, fetchClosedTransaction, cancelOrder, placeMarketOrder, resetAccount, placeStopOrder, verifyMail } from "../redux/actionCreaters";
+import AboutUs from './AboutCompraVenta';
 
 const mapDispatchToProps = (dispatch) => ({
     registerUser: (creds) => dispatch(registerUser(creds)),
     loginUser: (creds) => dispatch(loginUser(creds)),
     newPassword: (Email) => dispatch(newPassword(Email)),
-    fetchWatchlist: () => dispatch(fetchWatchlist())
-    
+    fetchWatchlist: () => dispatch(fetchWatchlist()),
+    verifyMail: (Email) => dispatch(verifyMail(Email))
 
 })
 
@@ -26,7 +27,8 @@ const mapStateToProps = (state) => {
         watchlist: state.watchlist,
         auth: state.auth,
         newPassword_status: state.newPassword_status,
-        register: state.register
+        register: state.register,
+        verifyMailStatus: state.verifyMailStatus
         
     }
 }
@@ -65,7 +67,7 @@ class MainComponent extends Component {
             )} />
         ); */
 
-        console.log('m', this.props.watchlist)
+        //console.log('m', this.props.watchlist)
         return (
             <div className="container-full-bg" >
                 <Switch>
@@ -76,6 +78,7 @@ class MainComponent extends Component {
                         <Header />
                         <LandingPage
                             auth={this.props.auth} registerUser={this.props.registerUser} loginUser={this.props.loginUser}
+                            verifyMail={this.props.verifyMail} verifyMailStatus={this.props.verifyMailStatus}
                             newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status} register={this.props.register} />
                         <Footer />
                     </Route>
@@ -119,6 +122,9 @@ class MainComponent extends Component {
                         />
                     <Route path='/learn'>
                         <Learn/>
+                    </Route>
+                    <Route path='/AboutUs'>
+                        <AboutUs />
                     </Route>
                     <Route path='/collaborators'>
                         <Collaborators auth={this.props.auth} />

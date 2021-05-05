@@ -142,7 +142,7 @@ class DashboardComponent extends Component {
         var symbol = category.toLowerCase();
          
         var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@ticker"
-        console.log(socketUrl);
+        //console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage = (event) => {
             //console.log('message')
@@ -169,11 +169,11 @@ class DashboardComponent extends Component {
     check = () => {
         const ws  = this.state.ws;
         if (ws || ws.readyState == WebSocket.OPEN) {
-            console.log('connection check',ws);
+            //console.log('connection check',ws);
 
             ws.close();
         if(!ws|| ws.readyState == WebSocket.CLOSED){
-            console.log('connection close',ws);
+            //console.log('connection close',ws);
         }
         } 
     };

@@ -19,7 +19,7 @@ class LandingPage extends Component {
             isLogging: !this.state.isLogging,
             isSigning: !this.state.isSigning
         })
-        console.log(this.state.isSigning,this.state.isLogging)
+        //console.log(this.state.isSigning,this.state.isLogging)
        
     }
     handleSignIn (){
@@ -27,7 +27,7 @@ class LandingPage extends Component {
             isLogging: !this.state.isLogging,
             isSigning: !this.state.isSigning
         })
-        console.log(this.state.isSigning,this.state.isLogging)
+        //console.log(this.state.isSigning,this.state.isLogging)
     }
     
     render() {
@@ -54,16 +54,21 @@ class LandingPage extends Component {
                         
                     </div>
                     <div className='col-sm-6 text-center' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>
-                        {OpenSignup ? <SignUp onClick={this.handleSignIn} registerUser={this.props.registerUser} register={this.props.register}/> :
-                         <SignIn onClick={this.handleRegister} loginUser={this.props.loginUser} auth={this.props.auth}
-                         newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status}/>}</div>
+                        { OpenSignup ? 
+                        <SignUp 
+                        onClick={this.handleSignIn} registerUser={this.props.registerUser} register={this.props.register}
+                        verifyMail={this.props.verifyMail} verifyMailStatus={this.props.verifyMailStatus}/> :
+                         <SignIn
+                         onClick={this.handleRegister} loginUser={this.props.loginUser} auth={this.props.auth}
+                         newPassword={this.props.newPassword} newPassword_status={this.props.newPassword_status}/>}
+                    </div>
                 </div>
                
-        <div className='container' style={{display: "flex", justifyContent: "center", alignItems: "center", width:'100%'}}>
+        {/* <div className='container' style={{display: "flex",fontFamily:'Roboto' ,justifyContent: "center", alignItems: "center", width:'100%'}}>
         <div className='container-fluid col-12 text-center'>
                 <h1 >Why Compra Venta?</h1>
                
-                <p className="content container-fluid" style={{color:'black'}}>
+                <p className="content container-fluid" style={{color:'black', fontFamily:'Roboto', fontSize:'135%'}}>
                 Today’s world has advanced a lot in terms of cryptocurrency exchange or digital
 currency exchange and the main reason that these digital currencies are overtaking
 physical currency is that it is not governed by any one single authority and is totally
@@ -79,7 +84,7 @@ having any fear of losing anything.
             
               
             </div>
-            
+             */}
             </div>
         );
     }

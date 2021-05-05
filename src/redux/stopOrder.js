@@ -7,15 +7,15 @@ export const StopOrder = (state = {
 },action) => {
     switch (action.type) {
         case ActionTypes.STOP_ORDER_SUCCESS:
-            console.log('StopOrder Success')
+            //console.log('StopOrder Success')
             return {...state, isLoading: false, errMess: null, orderStatus: action.payload};
 
         case ActionTypes.STOP_ORDER_FAILED:
-            console.log('StopOrder Failed')
+            //console.log('StopOrder Failed')
             return {...state, isLoading: false, errMess: action.payload, orderStatus: {}};
 
         case ActionTypes.STOP_ORDER_LOADING:
-            console.log('StopOrder Loading')
+            //console.log('StopOrder Loading')
             return {...state, isLoading: true, errMess: null, orderStatus: {}};
         
         default:
