@@ -16,7 +16,7 @@ class MarketTrades extends Component {
              color: 'red'
             },
         ] ,
-        ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@trade')
+        ws:new WebSocket('wss://stream.binance.com:443/ws/btcusdt@trade')
         }
         // this.selectValue=this.selectValue.bind(this);
         // this.priceChange=this.priceChange.bind(this);
@@ -42,7 +42,7 @@ class MarketTrades extends Component {
         //this.check();
         var symbol = category.toLowerCase();
         //console.log('Category',category);
-        var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@trade";
+        var socketUrl = "wss://stream.binance.com:443/ws/" + `${symbol}` + "@trade";
         //console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage =(event) =>{

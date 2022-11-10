@@ -12,7 +12,7 @@ export class Watchlist extends Component {
                  color: 'red',
              }
              },
-             ws: new WebSocket('wss://stream.binance.com:9443/ws/!miniTicker@arr'),
+             ws: new WebSocket('wss://stream.binance.com:443/ws/!miniTicker@arr'),
              //symbol : ['ETHUSDT', 'BTCUSDT', 'ETHBTC', 'DOGEBTC', 'LTCBTC']
         }
         this.createwatchlist = this.createwatchlist.bind(this);
@@ -36,7 +36,7 @@ export class Watchlist extends Component {
         })
         //console.log('checkP',checkP);
         this.check();
-       /* var socketUrl = 'wss://stream.binance.com:9443/ws/!miniTicker@arr';
+       /* var socketUrl = 'wss://stream.binance.com:443/ws/!miniTicker@arr';
         console.log(socketUrl)*/
         var binanceSocket=this.state.ws;
 	    binanceSocket.onmessage = (event)=>{

@@ -8,7 +8,7 @@ export class LightweightChart extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ws: new WebSocket(`wss://stream.binance.com:9443/ws/BTCUSDT@kline_15m`)
+			ws: new WebSocket(`wss://stream.binance.com:443/ws/BTCUSDT@kline_15m`)
 		}
 		this.makeChart=this.makeChart.bind(this);
 	}
@@ -385,7 +385,7 @@ histogramSeries.setData(data)
 	var prevEma = emaData[emaData.length -1 ].value;
 	var prevSma = smaData[n-1].value
 	//var category= symbol.toLowerCase()
-	var ws = new WebSocket(`wss://stream.binance.com:9443/ws/${symbol.toLowerCase()}@kline_${interval}`)
+	var ws = new WebSocket(`wss://stream.binance.com:443/ws/${symbol.toLowerCase()}@kline_${interval}`)
 	//console.log(ws)
 	ws.onmessage = (event)=>{
 		

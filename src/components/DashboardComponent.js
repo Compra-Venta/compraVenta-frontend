@@ -51,7 +51,7 @@ class DashboardComponent extends Component {
             change: '0.00',
             change_color: 'red',
             prev_val : '3334',
-            ws:new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@ticker'),
+            ws:new WebSocket('wss://stream.binance.com:443/ws/btcusdt@ticker'),
             watchArray: (typeof this.props.watchlist !=='undefined') ? this.props.watchlist.watchlist : [],
             interval: ['15m', '1h', '12h', '1d', '1w'],
             activeTab: '1',
@@ -71,10 +71,10 @@ class DashboardComponent extends Component {
         this.removeFromWatcharray=this.removeFromWatcharray.bind(this);
 
     }
-    /*socketUrl = 'wss://stream.binance.com:9443/ws/btcusdt@ticker';
+    /*socketUrl = 'wss://stream.binance.com:443/ws/btcusdt@ticker';
 
          
-    /*socketUrl = "wss://stream.binance.com:9443/ws/" + `${this.state.selectedValue.toLowerCase()}` + "@ticker"
+    /*socketUrl = "wss://stream.binance.com:443/ws/" + `${this.state.selectedValue.toLowerCase()}` + "@ticker"
        
     binanceSocket = new WebSocket(this.socketUrl);*/
     addToWatcharray = () => {
@@ -141,7 +141,7 @@ class DashboardComponent extends Component {
        /* var category = this.state.selectedValue;*/
         var symbol = category.toLowerCase();
          
-        var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@ticker"
+        var socketUrl = "wss://stream.binance.com:443/ws/" + `${symbol}` + "@ticker"
         //console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage = (event) => {
@@ -182,7 +182,7 @@ class DashboardComponent extends Component {
         var category = this.state.selectedValue;
         var symbol = category.toLowerCase();
          
-        var socketUrl = "wss://stream.binance.com:9443/ws/" + `${symbol}` + "@ticker"
+        var socketUrl = "wss://stream.binance.com:443/ws/" + `${symbol}` + "@ticker"
         console.log(socketUrl);
         var binanceSocket = new WebSocket(socketUrl);
         binanceSocket.onmessage = (event) => {

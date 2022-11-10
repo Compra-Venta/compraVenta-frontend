@@ -31,7 +31,7 @@ class LandingPage extends Component {
     }
     
     render() {
-        /*var binanceSocket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade");
+        /*var binanceSocket = new WebSocket("wss://stream.binance.com:443/ws/btcusdt@trade");
         binanceSocket.onmessage = function (event) {
             console.log(event.data);
         }*/

@@ -52,13 +52,13 @@ or want to furnish their knowledge, we have a provided a platform to learn
 ```
 ***   
 # Web Sockets
- * **24h ticker**- wss://stream.binance.com:9443/ws/{symbol}@ticker
+ * **24h ticker**- wss://stream.binance.com:443/ws/{symbol}@ticker
  
- * **kline CandleStick Data**- wss://stream.binance.com:9443/ws/{symbol}@kline_{interval}
+ * **kline CandleStick Data**- wss://stream.binance.com:443/ws/{symbol}@kline_{interval}
  
- * **Market Trades**- wss://stream.binance.com:9443/ws/{symbol}@trade
+ * **Market Trades**- wss://stream.binance.com:443/ws/{symbol}@trade
 
- * **WatchList**-wss://stream.binance.com:9443/ws/!miniTicker@arr
+ * **WatchList**-wss://stream.binance.com:443/ws/!miniTicker@arr
 
 ***
 
